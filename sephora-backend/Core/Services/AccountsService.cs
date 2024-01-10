@@ -1,10 +1,5 @@
 ﻿using System.Net;
 using AutoMapper;
-using Core.Dtos.User;
-using Core.Entities;
-using Core.Helpers;
-using Core.Interfaces;
-using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

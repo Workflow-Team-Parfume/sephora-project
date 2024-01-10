@@ -1,12 +1,4 @@
 ﻿using AutoMapper;
-using Core.Dtos.Amount;
-using Core.Dtos.Brand;
-using Core.Dtos.Category;
-using Core.Dtos.Parfume;
-using Core.Dtos.ParfumePiece;
-using Core.Dtos.Perfume;
-using Core.Dtos.Product;
-using Core.Dtos.User;
 using Core.Entities;
 
 namespace Core.MapperProfiles;

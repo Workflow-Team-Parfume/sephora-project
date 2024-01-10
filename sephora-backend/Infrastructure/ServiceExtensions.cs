@@ -1,6 +1,6 @@
-﻿using Core.Entities;
-using Core.Interfaces;
+﻿using CleanArchitecture.Domain.Entities;
 using Infrastructure.Data;
+using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,5 +1,6 @@
-﻿using Core.Dtos.User;
-using Core.Interfaces;
+﻿using CleanArchitecture.Application.Dtos.User;
+using CleanArchitecture.Application.Interfaces;
+using Infrastructure.Interfaces.Account;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;

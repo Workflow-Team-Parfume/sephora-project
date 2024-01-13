@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       # - "80:80"
-      - "443:443"
+      - "5000:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     volumes:
@@ -20,10 +20,10 @@ services:
       dockerfile: Dockerfile
     ports:
       # - "80:80"
-      - "443:443"
+      - "3000:3000"
     # environment:
       
-    volumes:
+    # volumes:
       # - /etc/letsencrypt/:/etc/letsencrypt/
     restart: always
 

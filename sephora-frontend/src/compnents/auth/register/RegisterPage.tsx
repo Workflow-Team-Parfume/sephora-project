@@ -102,7 +102,7 @@ const RegisterPage = () => {
         const { data } = result;
         const token = data.token;
         localStorage.token = token;
-        var user = jwtDecode(token) as IUser;
+        const user: IUser = jwtDecode(token);
         dispatch({
           type: AuthUserActionType.LOGIN_USER,
           payload: {
@@ -127,7 +127,7 @@ const RegisterPage = () => {
     onSubmit: onHandleSubmit,
   });
 
-  const { values, handleChange, handleSubmit, touched, errors } = formik;
+  const { values, handleChange, handleSubmit, /*touched, errors*/ } = formik;
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

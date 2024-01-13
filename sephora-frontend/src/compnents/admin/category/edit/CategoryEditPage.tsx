@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
-import axios from "axios";
 import http_common from "../../../../http_common";
 import { ICategoryItem } from "../list/types";
 import defaultImage from "../../../../assets/default.jpg";
 import { APP_ENV } from "../../../../env";
+import onChangeFileHandler from "../fileHnd.ts";
 
 interface ICategoryEdit {
   id: number;
@@ -52,8 +52,9 @@ const CategoryEditPage = () => {
     initialValues: init,
     onSubmit: onFormikSubmit,
   });
-
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
+  const fileHnd = (e: ChangeEvent<HTMLInputElement>) => onChangeFileHandler(e, setFieldValue);
+  const imgView = oldImage ? oldImage : defaultImage;
 
   useEffect(() => {
     http_common.get<ICategoryItem>(`api/category/${id}`).then((resp) => {
@@ -62,24 +63,7 @@ const CategoryEditPage = () => {
       setOldImage(`${APP_ENV.BASE_URL}/uploads/300_${data.image}`);
       setFieldValue("description", data.description);
     });
-  }, [id]);
-
-  const onChangeFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const file = files[0];
-      if (file) {
-        const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
-        if (!allowedTypes.includes(file.type)) {
-          alert("Не допустимий тип файлу");
-          return;
-        }
-        setFieldValue(e.target.name, file);
-      }
-    }
-  };
-
-  const imgView = oldImage ? oldImage : defaultImage;
+  }, [id, setFieldValue]);
 
   return (
     <>
@@ -111,7 +95,7 @@ const CategoryEditPage = () => {
               type="file"
               className="form-control d-none"
               id="image"
-              onChange={onChangeFileHandler}
+              onChange={fileHnd}
               name="image"
             />
           </div>

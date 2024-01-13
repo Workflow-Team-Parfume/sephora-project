@@ -1,7 +1,5 @@
 import axios from "axios";
 import { APP_ENV } from "./env";
-import { IsLoadingActionTypes, IsLoadingTypes } from "./store/reducers/IsLoadingReducer";
-import { store } from "./store/store";
 
 
 const http_common = axios.create({

@@ -7,14 +7,14 @@ import "./style.scss";
 import { ICropperModal } from "./types";
 
 const CropperModal: FC<ICropperModal> = ({
-  onChange,
-  field,
+  // onChange,
+  // field,
   error,
-  touched,
+  // touched,
   value,
-  aspectRatio = 1 / 1,
+  aspectRatio = 1,
 }) => {
-  const modalRef = useRef(null);
+  // const modalRef = useRef(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const imgPrevRef = useRef<HTMLImageElement>(null);
   const [image, setImage] = useState<string>("");

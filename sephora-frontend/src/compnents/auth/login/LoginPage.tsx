@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,12 +11,10 @@ import {
   Container,
   CssBaseline,
   FormControlLabel,
-  Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useGoogleLogin } from "@react-oauth/google";
 import { AuthUserActionType, IUser, ILogin } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
@@ -63,11 +60,12 @@ const LoginPage = () => {
       await loginSchema.validate(values);
 
       const result = await http_common.post("api/Account/login", values);
-
       const { data } = result;
+
       const token = data.token;
       localStorage.token = token;
-      var user = jwtDecode(token) as IUser;
+      const user = jwtDecode(token) as IUser;
+
       dispatch({
         type: AuthUserActionType.LOGIN_USER,
         payload: {

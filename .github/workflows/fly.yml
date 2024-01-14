@@ -4,15 +4,24 @@ on:
     branches:
       - main # deployment branch
 jobs:
-  deploy:
-    name: Deploy app
+  deploy_back:
+    name: Deploy backend
+    runs-on: ubuntu-latest
+    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only ./sephora-backend
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_BACK }}
+  deploy_front:
+    name: Deploy frontend
     runs-on: ubuntu-latest
     concurrency: deploy-group    # optional: ensure only one action runs at a time
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only ./sephora-frontend
-      - run: flyctl deploy --remote-only ./sephora-backend
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_FRONT }}
           

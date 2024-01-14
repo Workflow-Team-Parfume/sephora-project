@@ -4,20 +4,17 @@ import CategoryListPage from "./compnents/admin/category/list/CategoryListPage";
 import CategoryCreatePage from "./compnents/admin/category/create/CategoryCreatePage";
 import CategoryEditPage from "./compnents/admin/category/edit/CategoryEditPage";
 import AdminLayout from "./compnents/admin/container/AdminLayout";
-import AdminDashboard from "./compnents/admin/dashboard/AdminDashboard";
 import HomePage from "./compnents/home/HomePage";
 import LoginPage from "./compnents/auth/login/LoginPage";
 import RegisterPage from "./compnents/auth/register/RegisterPage";
 import Loader from "./compnents/common/loader/Loader";
-import { AuthUserActionType, IAuthUser, IUser } from "./compnents/auth/types";
-import { useSelector } from "react-redux";
+// import { IAuthUser } from "./compnents/auth/types";
+// import { useSelector } from "react-redux";
 import DefaultLayout from "./compnents/admin/container/default/DefaultLayout";
-import { store } from "./store/store";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import AdminDashboard from "./compnents/admin/dashboard/AdminDashboard"
 
 function App() {
-  const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
   React.useEffect(() => {
 

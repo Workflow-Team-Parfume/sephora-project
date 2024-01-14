@@ -25,11 +25,10 @@ const pages = [
 ];
 
 const settings = ["Profile", "Account", "Dashboard"];
-
 const HomeHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  const { /*user,*/ isAuth } = useSelector((store: any) => store.auth as IAuthUser);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );

@@ -1,10 +1,10 @@
-import React from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { ChangeEvent } from "react";
 import defaultImage from "../../../../assets/default.jpg";
 import http_common from "../../../../http_common";
+import onChangeFileHandler from "../fileHnd.ts";
 
 interface ICategoryCreate {
   name: string;
@@ -45,23 +45,8 @@ const CategoryCreatePage = () => {
     initialValues: init,
     onSubmit: onFormikSubmit,
   });
-
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
-
-  const onChangeFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      const file = files[0];
-      if (file) {
-        const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
-        if (!allowedTypes.includes(file.type)) {
-          alert("Не допустимий тип файлу");
-          return;
-        }
-        setFieldValue(e.target.name, file);
-      }
-    }
-  };
+  const fileHnd = (e: ChangeEvent<HTMLInputElement>) => onChangeFileHandler(e, setFieldValue);
 
   return (
     <>
@@ -93,7 +78,7 @@ const CategoryCreatePage = () => {
               type="file"
               className="form-control d-none"
               id="image"
-              onChange={onChangeFileHandler}
+              onChange={fileHnd}
               name="image"
             />
           </div>

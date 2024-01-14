@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import { Container, Grid } from "@mui/material";
 import AdminSidebar from "./AdminSidebar";

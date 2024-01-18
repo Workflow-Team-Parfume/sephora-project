@@ -1,5 +1,4 @@
-﻿using Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Interfaces;
 

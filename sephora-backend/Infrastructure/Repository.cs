@@ -9,30 +9,29 @@ namespace Infrastructure;
 public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity>
     where TEntity : class
 {
-    internal PerfumeDbContext context = context;
-    internal DbSet<TEntity> dbSet = context.Set<TEntity>();
+    private DbSet<TEntity> dbSet = context.Set<TEntity>();
 
     public async Task Save()
     {
         await context.SaveChangesAsync();
     }
 
-    public async virtual Task<IEnumerable<TEntity>> GetAll()
+    public virtual async Task<IEnumerable<TEntity>> GetAll()
     {
         return await dbSet.ToListAsync();
     }
 
-    public async virtual Task<TEntity?> GetById(object id)
+    public virtual async Task<TEntity?> GetById(object id)
     {
         return await dbSet.FindAsync(id);
     }
 
-    public async virtual Task Insert(TEntity entity)
+    public virtual async Task Insert(TEntity entity)
     {
         await dbSet.AddAsync(entity);
     }
 
-    public async virtual Task Delete(object id)
+    public virtual async Task Delete(object id)
     {
         TEntity? entityToDelete = await dbSet.FindAsync(id);
         if (entityToDelete != null)

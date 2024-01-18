@@ -2,7 +2,6 @@
 using CleanArchitecture.Application.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitecture.Application.Helpers;

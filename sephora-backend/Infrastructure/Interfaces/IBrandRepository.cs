@@ -1,5 +1,4 @@
 ﻿using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
 
 namespace Infrastructure.Interfaces;
 

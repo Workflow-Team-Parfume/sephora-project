@@ -1,6 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos.Parfume;
 using CleanArchitecture.Application.Interfaces;
-using Infrastructure.Interfaces.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;
@@ -28,7 +27,6 @@ public class ProductsController(IProductService productService) : Controller
         if (!ModelState.IsValid) return BadRequest();
 
         await productService.Create(product);
-
         return Ok();
     }
 
@@ -36,7 +34,6 @@ public class ProductsController(IProductService productService) : Controller
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await productService.Delete(id);
-
         return Ok();
     }
 
@@ -46,7 +43,6 @@ public class ProductsController(IProductService productService) : Controller
         if (!ModelState.IsValid) return BadRequest();
 
         await productService.Edit(product);
-
         return Ok();
     }
 }

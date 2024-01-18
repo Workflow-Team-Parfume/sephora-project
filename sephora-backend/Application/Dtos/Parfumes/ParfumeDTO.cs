@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Parfume;
-using CleanArchitecture.Application.Dtos.ParfumePiece;
+﻿using CleanArchitecture.Application.Dtos.ParfumePiece;
 
 namespace CleanArchitecture.Application.Dtos.Parfume;
 

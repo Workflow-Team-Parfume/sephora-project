@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Parfume;
+﻿using CleanArchitecture.Application.Dtos.Product;
 using CleanArchitecture.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

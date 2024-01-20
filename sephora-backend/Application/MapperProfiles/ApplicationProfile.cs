@@ -3,8 +3,8 @@ using CleanArchitecture.Application.Dtos.Amount;
 using CleanArchitecture.Application.Dtos.Brand;
 using CleanArchitecture.Application.Dtos.Cart;
 using CleanArchitecture.Application.Dtos.Category;
-using CleanArchitecture.Application.Dtos.Parfume;
 using CleanArchitecture.Application.Dtos.ParfumePiece;
+using CleanArchitecture.Application.Dtos.Parfumes;
 using CleanArchitecture.Application.Dtos.Product;
 using CleanArchitecture.Application.Dtos.User;
 using CleanArchitecture.Domain.Entities;
@@ -24,16 +24,16 @@ public class ApplicationProfile : Profile
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
 
-        CreateMap<ProductDTO, ProductEntity>().ReverseMap();
+        CreateMap<ProductDto, ProductEntity>().ReverseMap();
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
         CreateMap<ProductEntity, CreateProductParfumeDto>()
             .ForMember(dest => dest.ParfumePieces, opt => opt.Ignore());
         CreateMap<CreateProductParfumeDto, ProductEntity>();
-        CreateMap<EditProductParfumeDTO, ProductEntity>().ReverseMap();
+        CreateMap<EditProductParfumeDto, ProductEntity>().ReverseMap();
 
         CreateMap<CreateParfumePieceDto, ParfumePiece>().ReverseMap();
-        CreateMap<ParfumePieceDTO, ParfumePiece>().ReverseMap();
+        CreateMap<ParfumePieceDto, ParfumePiece>().ReverseMap();
         CreateMap<EditParfumePieceDto, ParfumePiece>().ReverseMap();
 
         CreateMap<CreateParfumeDto, Parfume>().ReverseMap();
@@ -43,7 +43,7 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture != null ? Path.GetRandomFileName() : null));
         CreateMap<UserEntity, GetUserDto>();
 
-        CreateMap<CartItem, CartDTO>()
+        CreateMap<CartItem, CartDto>()
             .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
             .ForMember(dest => dest.ProductDescription, opt => opt.MapFrom(src => src.Product.Description))
             .ForMember(dest => dest.ProductImage, opt => opt.MapFrom(src => src.Product.ImgPath))
@@ -51,6 +51,6 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Product.Category.Name))
             .ReverseMap();
 
-        CreateMap<CreateCartDTO, CartItem>();
+        CreateMap<CreateCartDto, CartItem>();
     }
 }

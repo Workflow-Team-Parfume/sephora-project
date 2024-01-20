@@ -1,6 +1,6 @@
 namespace CleanArchitecture.Application.Dtos.Cart;
 
-public class CreateCartDTO
+public class CreateCartDto
 {
     public int ProductId { get; set; }
     public int Quantity { get; set; }

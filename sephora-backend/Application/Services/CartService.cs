@@ -5,17 +5,17 @@ namespace CleanArchitecture.Application.Services;
 
 public class CartService : ICartService
 {
-    public Task<IEnumerable<CartDTO>> Get()
+    public Task<IEnumerable<CartDto>> Get()
     {
         throw new NotImplementedException();
     }
 
-    public Task<CartDTO?> GetById(int id)
+    public Task<CartDto?> GetById(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task Create(CreateCartDTO cartDTO)
+    public Task Create(CreateCartDto cartDto)
     {
         throw new NotImplementedException();
     }

@@ -12,9 +12,9 @@ public class AmountService(
     IMapper mapper) 
     : IAmountService
 {
-    public async Task Create(CreateAmountDto amountDTO)
+    public async Task Create(CreateAmountDto amountDto)
     {
-        await amountRepository.Insert(mapper.Map<Amount>(amountDTO));
+        await amountRepository.Insert(mapper.Map<Amount>(amountDto));
         await amountRepository.Save();
     }
 
@@ -27,9 +27,9 @@ public class AmountService(
         await amountRepository.Save();
     }
 
-    public async Task Edit(AmountDto amountDTO)
+    public async Task Edit(AmountDto amountDto)
     {
-        await amountRepository.Update(mapper.Map<Amount>(amountDTO));
+        await amountRepository.Update(mapper.Map<Amount>(amountDto));
         await amountRepository.Save();
     }
 

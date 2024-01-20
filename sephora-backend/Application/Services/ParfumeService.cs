@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Parfume;
+using CleanArchitecture.Application.Dtos.Parfumes;
 using CleanArchitecture.Application.Dtos.Product;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Specifications;
@@ -15,9 +15,9 @@ public class ParfumeService(
     IRepository<Parfume> parfumeRepository)
     : IParfumeService
 {
-    public async Task Create(CreateProductParfumeDto createProductParfumeDTO)
+    public async Task Create(CreateProductParfumeDto createProductParfumeDto)
     {
-        ProductEntity productEntity = mapper.Map<ProductEntity>(createProductParfumeDTO);
+        ProductEntity productEntity = mapper.Map<ProductEntity>(createProductParfumeDto);
 
         await productRepository.Insert(productEntity);
         await productRepository.Save();
@@ -30,7 +30,7 @@ public class ParfumeService(
         await parfumeRepository.Insert(parfume);
         await parfumeRepository.Save();
 
-        foreach (var item in createProductParfumeDTO.ParfumePieces)
+        foreach (var item in createProductParfumeDto.ParfumePieces)
         {
             ParfumePiece parfumePiece = mapper.Map<ParfumePiece>(item);
 
@@ -50,9 +50,9 @@ public class ParfumeService(
         await parfumeRepository.Save();
     }
 
-    public async Task Edit(EditProductParfumeDTO editProductDTO)
+    public async Task Edit(EditProductParfumeDto editProductDto)
     {
-        await productRepository.Update(mapper.Map<ProductEntity>(editProductDTO));
+        await productRepository.Update(mapper.Map<ProductEntity>(editProductDto));
         await productRepository.Save();
     }
 

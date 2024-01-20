@@ -12,9 +12,9 @@ public class BrandService(
     IMapper mapper) 
     : IBrandService
 {
-    public async Task Create(CreateBrandDto brandDTO)
+    public async Task Create(CreateBrandDto brandDto)
     {
-        await brandRepository.Insert(mapper.Map<Brand>(brandDTO));
+        await brandRepository.Insert(mapper.Map<Brand>(brandDto));
         await brandRepository.Save();
     }
 
@@ -27,9 +27,9 @@ public class BrandService(
         await brandRepository.Save();
     }
 
-    public async Task Edit(BrandDto brandDTO)
+    public async Task Edit(BrandDto brandDto)
     {
-        await brandRepository.Update(mapper.Map<Brand>(brandDTO));
+        await brandRepository.Update(mapper.Map<Brand>(brandDto));
         await brandRepository.Save();
     }
 

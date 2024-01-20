@@ -31,7 +31,7 @@ public class ParfumeController(IParfumeService parfumeService) : Controller
     }
 
     [HttpPut]
-    public async Task<IActionResult> Edit([FromBody] EditProductParfumeDTO product)
+    public async Task<IActionResult> Edit([FromBody] EditProductParfumeDto product)
     {
         if (!ModelState.IsValid) return BadRequest();
         

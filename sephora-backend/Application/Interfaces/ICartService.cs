@@ -4,8 +4,8 @@ namespace CleanArchitecture.Application.Interfaces;
 
 public interface ICartService
 {
-    Task<IEnumerable<CartDTO>> Get();
-    Task<CartDTO?> GetById(int id);
-    Task Create(CreateCartDTO cartDTO);
+    Task<IEnumerable<CartDto>> Get();
+    Task<CartDto?> GetById(int id);
+    Task Create(CreateCartDto cartDto);
     Task Delete(int id);
 }

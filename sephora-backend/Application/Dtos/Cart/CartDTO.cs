@@ -2,7 +2,7 @@ namespace CleanArchitecture.Application.Dtos.Cart;
 
 // TODO: Change id to UUID
 
-public class CartDTO
+public class CartDto
 {
     public int Id { get; set; }
     public int Quantity { get; set; }

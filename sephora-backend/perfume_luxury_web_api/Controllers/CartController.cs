@@ -24,7 +24,7 @@ public class CartController(ICartService cartService) : ControllerBase
     }
     
     [HttpPut]
-    public async Task<IActionResult> Add([FromBody] CreateCartDTO cartItem)
+    public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
         await cartService.Create(cartItem);
         return Ok();

@@ -6,7 +6,7 @@ public interface IBrandService
 {
     Task<IEnumerable<BrandDto>> Get();
     Task<BrandDto?> GetById(int id);
-    Task Create(CreateBrandDto brandDTO);
-    Task Edit(BrandDto brandDTO);
+    Task Create(CreateBrandDto brandDto);
+    Task Edit(BrandDto brandDto);
     Task Delete(int id);
 }

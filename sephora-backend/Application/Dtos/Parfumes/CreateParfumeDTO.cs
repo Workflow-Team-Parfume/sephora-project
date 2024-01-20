@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Dtos.Parfume;
+﻿namespace CleanArchitecture.Application.Dtos.Parfumes;
 
 public class CreateParfumeDto
 {

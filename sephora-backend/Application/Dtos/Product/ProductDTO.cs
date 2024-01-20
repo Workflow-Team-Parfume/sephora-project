@@ -1,9 +1,9 @@
 ﻿using CleanArchitecture.Application.Dtos.Brand;
 using CleanArchitecture.Application.Dtos.Category;
 
-namespace CleanArchitecture.Application.Dtos.Parfume;
+namespace CleanArchitecture.Application.Dtos.Product;
 
-public class ProductDTO
+public class ProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = String.Empty;

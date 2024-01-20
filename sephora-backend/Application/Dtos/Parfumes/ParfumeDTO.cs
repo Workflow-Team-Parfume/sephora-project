@@ -1,10 +1,11 @@
 ﻿using CleanArchitecture.Application.Dtos.ParfumePiece;
+using CleanArchitecture.Application.Dtos.Product;
 
-namespace CleanArchitecture.Application.Dtos.Parfume;
+namespace CleanArchitecture.Application.Dtos.Parfumes;
 
 public class ParfumeDto
 {
     public int Id { get; set; }
-    public ProductDTO Product { get; set; }
-    public List<ParfumePieceDTO> ParfumePieces { get; set; }
+    public ProductDto Product { get; set; }
+    public List<ParfumePieceDto> ParfumePieces { get; set; }
 }

@@ -12,9 +12,9 @@ public class CategoryService(
     IMapper mapper) 
     : ICategoryService
 {
-    public async Task Create(CreateCategoryDto categoryDTO)
+    public async Task Create(CreateCategoryDto categoryDto)
     {
-        await categoryRepository.Insert(mapper.Map<Category>(categoryDTO));
+        await categoryRepository.Insert(mapper.Map<Category>(categoryDto));
         await categoryRepository.Save();
     }
 
@@ -28,9 +28,9 @@ public class CategoryService(
 
     }
 
-    public async Task Edit(CategoryDto categoryDTO)
+    public async Task Edit(CategoryDto categoryDto)
     {
-        await categoryRepository.Update(mapper.Map<Category>(categoryDTO));
+        await categoryRepository.Update(mapper.Map<Category>(categoryDto));
         await categoryRepository.Save();
     }
 

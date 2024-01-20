@@ -1,9 +1,9 @@
 ﻿using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Dtos.Parfume;
+using CleanArchitecture.Application.Dtos.Parfumes;
 
 namespace CleanArchitecture.Application.Dtos.ParfumePiece;
 
-public class ParfumePieceDTO
+public class ParfumePieceDto
 {
     public int Id { get; set; }
 

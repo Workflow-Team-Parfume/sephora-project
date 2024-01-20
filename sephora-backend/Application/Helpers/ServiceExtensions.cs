@@ -1,4 +1,5 @@
 ﻿using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.MapperProfiles;
 using CleanArchitecture.Application.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -10,7 +11,7 @@ public static class ServiceExtensions
 {
     public static void AddAutoMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddAutoMapper(typeof(ApplicationProfile));
     }
 
     public static void AddCustomServices(this IServiceCollection services)

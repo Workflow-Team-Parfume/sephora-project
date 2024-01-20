@@ -31,11 +31,11 @@ public class JwtService(IConfiguration configuration) : IJwtService
     {
         var claims = new List<Claim>
         {
-            new Claim(CustomClaimTypes.id, user.Id),
-            new Claim(CustomClaimTypes.userName, user.UserName),
-            new Claim(CustomClaimTypes.email, user.Email),
-            new Claim(CustomClaimTypes.profilePicture, user.ProfilePicture ?? ""),
-            new Claim(CustomClaimTypes.registrationDate, user.RegistrationDate.ToString())
+            new Claim(CustomClaimTypes.Id, user.Id),
+            new Claim(CustomClaimTypes.UserName, user.UserName),
+            new Claim(CustomClaimTypes.Email, user.Email),
+            new Claim(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
+            new Claim(CustomClaimTypes.RegistrationDate, user.RegistrationDate.ToString())
         };
 
         //var roles = userManager.GetRolesAsync(user).Result;
@@ -46,10 +46,10 @@ public class JwtService(IConfiguration configuration) : IJwtService
 }
 public static class CustomClaimTypes
 {
-    public const string id = "id";
-    public const string userName = "userName";
-    public const string email = "email";
-    public const string roles = "roles";
-    public const string profilePicture = "profilePicture";
-    public const string registrationDate = "registrationDate";
+    public const string Id = "id";
+    public const string UserName = "userName";
+    public const string Email = "email";
+    public const string Roles = "roles";
+    public const string ProfilePicture = "profilePicture";
+    public const string RegistrationDate = "registrationDate";
 }

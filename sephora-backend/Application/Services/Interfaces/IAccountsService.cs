@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Application.Dtos.User;
 
-namespace CleanArchitecture.Application.Interfaces;
+namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IAccountsService
 {

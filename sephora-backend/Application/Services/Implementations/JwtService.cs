@@ -1,13 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Helpers;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class JwtService(IConfiguration configuration) : IJwtService
 {
@@ -31,19 +32,20 @@ public class JwtService(IConfiguration configuration) : IJwtService
     {
         var claims = new List<Claim>
         {
-            new Claim(CustomClaimTypes.Id, user.Id),
-            new Claim(CustomClaimTypes.UserName, user.UserName),
-            new Claim(CustomClaimTypes.Email, user.Email),
-            new Claim(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
-            new Claim(CustomClaimTypes.RegistrationDate, user.RegistrationDate.ToString())
+            new(CustomClaimTypes.Id, user.Id),
+            new(CustomClaimTypes.UserName, user.UserName),
+            new(CustomClaimTypes.Email, user.Email),
+            new(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
+            new(CustomClaimTypes.RegistrationDate, user.RegistrationDate.ToString(CultureInfo.InvariantCulture))
         };
 
-        //var roles = userManager.GetRolesAsync(user).Result;
-        //claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+        // var roles = userManager.GetRolesAsync(user).Result;
+        // claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
         return claims;
     }
 }
+
 public static class CustomClaimTypes
 {
     public const string Id = "id";

@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Application.Dtos.Parfumes;
 
-public class CreateParfumeDto
+public class CreatePerfumeDto
 {
     public int ProductId { get; set; }
 }

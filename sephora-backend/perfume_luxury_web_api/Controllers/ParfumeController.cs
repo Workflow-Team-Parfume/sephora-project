@@ -1,32 +1,32 @@
 ﻿using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ParfumeController(IParfumeService parfumeService) : Controller
+public class ParfumeController(IPerfumeService perfumeService) : Controller
 {
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductParfumeDto product)
     {
         if (!ModelState.IsValid) return BadRequest();
         
-        await parfumeService.Create(product);
+        await perfumeService.Create(product);
         return Ok();
     }
 
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        return Ok(await parfumeService.Get());
+        return Ok(await perfumeService.Get());
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
     {
-        var item = await parfumeService.GetById(id);
+        var item = await perfumeService.GetById(id);
         return Ok(item);
     }
 
@@ -35,7 +35,7 @@ public class ParfumeController(IParfumeService parfumeService) : Controller
     {
         if (!ModelState.IsValid) return BadRequest();
         
-        await parfumeService.Edit(product);
+        await perfumeService.Edit(product);
         return Ok();
     }
 }

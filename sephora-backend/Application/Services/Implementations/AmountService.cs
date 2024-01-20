@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AmountService(
     IRepository<Amount> amountRepository, 

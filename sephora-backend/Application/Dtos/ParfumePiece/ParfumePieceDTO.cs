@@ -13,5 +13,5 @@ public class ParfumePieceDto
 
     public AmountDto Amount { get; set; }
 
-    public ParfumeDto Parfume { get; set; }
+    public PerfumeDto Parfume { get; set; }
 }

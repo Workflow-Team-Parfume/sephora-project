@@ -1,7 +1,7 @@
 ﻿
 using CleanArchitecture.Application.Dtos.Amount;
 
-namespace CleanArchitecture.Application.Interfaces;
+namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IAmountService
 {

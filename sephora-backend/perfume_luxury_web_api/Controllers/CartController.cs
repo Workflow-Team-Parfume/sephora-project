@@ -1,5 +1,5 @@
 using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

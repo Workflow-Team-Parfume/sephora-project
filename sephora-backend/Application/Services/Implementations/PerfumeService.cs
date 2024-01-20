@@ -1,19 +1,19 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.Dtos.Parfumes;
 using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
-public class ParfumeService(
+public class PerfumeService(
     IRepository<ProductEntity> productRepository,
     IMapper mapper,
     IRepository<ParfumePiece> parfumePieceRepository,
     IRepository<Parfume> parfumeRepository)
-    : IParfumeService
+    : IPerfumeService
 {
     public async Task Create(CreateProductParfumeDto createProductParfumeDto)
     {
@@ -56,20 +56,20 @@ public class ParfumeService(
         await productRepository.Save();
     }
 
-    public async Task<IEnumerable<ParfumeDto>> Get()
+    public async Task<IEnumerable<PerfumeDto>> Get()
     {
         var result = await parfumeRepository.GetListBySpec(new Parfumes.GetAll());
 
-        return mapper.Map<IEnumerable<ParfumeDto>>(result);
+        return mapper.Map<IEnumerable<PerfumeDto>>(result);
     }
 
-    public async Task<ParfumeDto?> GetById(int id)
+    public async Task<PerfumeDto?> GetById(int id)
     {
         Parfume? parfume = await parfumeRepository.GetItemBySpec(new Parfumes.GetById(id));
 
         if (parfume == null)
             throw new Exception();
 
-        return mapper.Map<ParfumeDto>(parfume);
+        return mapper.Map<PerfumeDto>(parfume);
     }
 }

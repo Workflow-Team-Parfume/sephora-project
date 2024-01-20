@@ -1,6 +1,7 @@
-﻿using CleanArchitecture.Application.Interfaces;
-using CleanArchitecture.Application.MapperProfiles;
+﻿using CleanArchitecture.Application.MapperProfiles;
 using CleanArchitecture.Application.Services;
+using CleanArchitecture.Application.Services.Implementations;
+using CleanArchitecture.Application.Services.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;

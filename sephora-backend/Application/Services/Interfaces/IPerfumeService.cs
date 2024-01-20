@@ -1,12 +1,12 @@
 ﻿using CleanArchitecture.Application.Dtos.Parfumes;
 using CleanArchitecture.Application.Dtos.Product;
 
-namespace CleanArchitecture.Application.Interfaces;
+namespace CleanArchitecture.Application.Services.Interfaces;
 
-public interface IParfumeService
+public interface IPerfumeService
 {
-    Task<IEnumerable<ParfumeDto>> Get();
-    Task<ParfumeDto?> GetById(int id);
+    Task<IEnumerable<PerfumeDto>> Get();
+    Task<PerfumeDto?> GetById(int id);
     Task Create(CreateProductParfumeDto createProductParfumeDto);
     Task Edit(EditProductParfumeDto editProductDto);
     Task Delete(int id);

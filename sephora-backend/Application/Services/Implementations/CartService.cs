@@ -1,12 +1,13 @@
 using System.Security.Claims;
 using AutoMapper;
 using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Resources;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CartService(
     IRepository<CartItem> cartRepository,
@@ -18,7 +19,7 @@ public class CartService(
         => await userManager.GetUserAsync(user);
 
     private async Task<UserEntity> GetUserOrThrow(ClaimsPrincipal user)
-        => await GetUser(user) ?? throw new ArgumentException("User is not found", nameof(user));
+        => await GetUser(user) ?? throw new ArgumentException(ErrorMessages.UserNotFound, nameof(user));
 
     public async Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user)
     {

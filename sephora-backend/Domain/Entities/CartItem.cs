@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CleanArchitecture.Domain.Entities;
 
-
 /**
  * CartItem is a join table between UserEntity and ProductEntity. <br/>
  * It is used to store the products that a user has in their cart

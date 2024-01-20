@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Dtos.Cart;
 using CleanArchitecture.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ public class CartController(ICartService cartService) : ControllerBase
     }
     
     [HttpPut]
-    public async Task<IActionResult> Add([FromBody] CartDto cartItem)
+    public async Task<IActionResult> Add([FromBody] CreateCartDTO cartItem)
     {
         await cartService.Create(cartItem);
         return Ok();

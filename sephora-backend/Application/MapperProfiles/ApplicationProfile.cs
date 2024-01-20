@@ -36,8 +36,8 @@ public class ApplicationProfile : Profile
         CreateMap<ParfumePieceDto, ParfumePiece>().ReverseMap();
         CreateMap<EditParfumePieceDto, ParfumePiece>().ReverseMap();
 
-        CreateMap<CreateParfumeDto, Parfume>().ReverseMap();
-        CreateMap<ParfumeDto, Parfume>().ReverseMap();
+        CreateMap<CreatePerfumeDto, Parfume>().ReverseMap();
+        CreateMap<PerfumeDto, Parfume>().ReverseMap();
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture != null ? Path.GetRandomFileName() : null));

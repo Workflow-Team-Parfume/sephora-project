@@ -23,7 +23,8 @@ public static class ServiceExtensions
         services.AddScoped<IAmountService, AmountService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IParfumeService, ParfumeService>();
+        services.AddScoped<IPerfumeService, PerfumeService>();
+        services.AddScoped<ICartService, CartService>();
     }
 
     public static void AddValidators(this IServiceCollection services)

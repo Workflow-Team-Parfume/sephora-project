@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-public class PerfumeDbContext(DbContextOptions options) : IdentityDbContext<UserEntity>(options)
+public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options) 
+    : IdentityDbContext<UserEntity>(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -17,20 +18,22 @@ public class PerfumeDbContext(DbContextOptions options) : IdentityDbContext<User
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{
     //    base.OnConfiguring(optionsBuilder);
-    //    string connStr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ParfumeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+    //    string connStr = @"";
     //    optionsBuilder.UseSqlServer(connStr);
     //}
 
     // ---------------- Data Collections ----------------
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Amount> Amounts { get; set; }
-    public DbSet<Brand> Brands { get; set; }
-    public DbSet<Rating> Ratings { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<ProductEntity> Products { get; set; }
-    public DbSet<Care> Cares { get; set; }
-    public DbSet<CarePiece> CarePieces { get; set; }
-    public DbSet<Parfume> Parfumes { get; set; }
-    public DbSet<ParfumePiece> ParfumePieces { get; set; }
-    public DbSet<ParfumeBottled> ParfumeBottleds { get; set; }
+    // ReSharper disable PropertyCanBeMadeInitOnly.Global
+    public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<Amount> Amounts { get; set; } = null!;
+    public DbSet<Brand> Brands { get; set; } = null!;
+    public DbSet<Rating> Ratings { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<ProductEntity> Products { get; set; } = null!;
+    public DbSet<Care> Cares { get; set; } = null!;
+    public DbSet<CarePiece> CarePieces { get; set; } = null!;
+    public DbSet<Parfume> Parfumes { get; set; } = null!;
+    public DbSet<ParfumePiece> ParfumePieces { get; set; } = null!;
+    public DbSet<ParfumeBottled> ParfumeBottles { get; set; } = null!;
+    public DbSet<CartItem> CartItems { get; set; } = null!;
 }

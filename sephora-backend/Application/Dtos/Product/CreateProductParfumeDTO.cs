@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.ParfumePiece;
+﻿using CleanArchitecture.Application.Dtos.ProductPiece;
 
 namespace CleanArchitecture.Application.Dtos.Product;
 
@@ -10,5 +10,5 @@ public class CreateProductParfumeDto
     public bool Active { get; set; }
     public int BrandId { get; set; }
     public int CategoryId { get; set; }
-    public List<CreateParfumePieceDto>? ParfumePieces { get; set; }
+    public List<CreateProductPieceDto> ParfumePieces { get; set; }
 }

@@ -24,10 +24,8 @@ public class ProductEntity
 
     public Category Category { get; set; }
 
-    public Care? Care { get; set; }
-
-    public Parfume? Parfume { get; set; }
-
+    public ICollection<ProductPiece>? ProductPieces { get; set; }
+    
     public ParfumeBottled? ParfumeBottled { get; set; }
 
 }

@@ -1,5 +1,4 @@
 ﻿using CleanArchitecture.Application.MapperProfiles;
-using CleanArchitecture.Application.Services;
 using CleanArchitecture.Application.Services.Implementations;
 using CleanArchitecture.Application.Services.Interfaces;
 using FluentValidation;
@@ -24,7 +23,6 @@ public static class ServiceExtensions
         services.AddScoped<IAmountService, AmountService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IPerfumeService, PerfumeService>();
         services.AddScoped<ICartService, CartService>();
     }
 

@@ -24,16 +24,12 @@ public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
 
     // ---------------- Data Collections ----------------
     // ReSharper disable PropertyCanBeMadeInitOnly.Global
-    public DbSet<Category> Categories { get; set; } = null!;
-    public DbSet<Amount> Amounts { get; set; } = null!;
-    public DbSet<Brand> Brands { get; set; } = null!;
-    public DbSet<Rating> Ratings { get; set; } = null!;
-    public DbSet<Order> Orders { get; set; } = null!;
-    public DbSet<ProductEntity> Products { get; set; } = null!;
-    public DbSet<Care> Cares { get; set; } = null!;
-    public DbSet<CarePiece> CarePieces { get; set; } = null!;
-    public DbSet<Parfume> Parfumes { get; set; } = null!;
-    public DbSet<ParfumePiece> ParfumePieces { get; set; } = null!;
-    public DbSet<ParfumeBottled> ParfumeBottles { get; set; } = null!;
-    public DbSet<CartItem> CartItems { get; set; } = null!;
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Amount> Amounts { get; set; }
+    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<ProductEntity> Products { get; set; }
+    public DbSet<ProductPiece> ProductPieces { get; set; }
+    public DbSet<ParfumeBottled> ParfumeBottles { get; set; }
 }

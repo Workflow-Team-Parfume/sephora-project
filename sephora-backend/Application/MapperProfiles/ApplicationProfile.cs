@@ -2,9 +2,8 @@
 using CleanArchitecture.Application.Dtos.Amount;
 using CleanArchitecture.Application.Dtos.Brand;
 using CleanArchitecture.Application.Dtos.Category;
-using CleanArchitecture.Application.Dtos.Parfume;
-using CleanArchitecture.Application.Dtos.ParfumePiece;
 using CleanArchitecture.Application.Dtos.Product;
+using CleanArchitecture.Application.Dtos.ProductPiece;
 using CleanArchitecture.Application.Dtos.User;
 using CleanArchitecture.Domain.Entities;
 
@@ -32,12 +31,9 @@ public class ApplicationProfile : Profile
         CreateMap<EditProductParfumeDTO, ProductEntity>().ReverseMap();
 
 
-        CreateMap<CreateParfumePieceDto, ParfumePiece>().ReverseMap();
-        CreateMap<ParfumePieceDTO, ParfumePiece>().ReverseMap();
-        CreateMap<EditParfumePieceDto, ParfumePiece>().ReverseMap();
-
-        CreateMap<CreateParfumeDto, Parfume>().ReverseMap();
-        CreateMap<ParfumeDto, Parfume>().ReverseMap();
+        CreateMap<CreateProductPieceDto, ProductPiece>().ReverseMap();
+        CreateMap<ProductPieceDTO, ProductPiece>().ReverseMap();
+        CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture != null ? Path.GetRandomFileName() : null));

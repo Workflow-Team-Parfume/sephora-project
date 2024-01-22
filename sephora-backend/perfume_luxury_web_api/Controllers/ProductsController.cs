@@ -1,6 +1,5 @@
-﻿using CleanArchitecture.Application.Dtos.Parfume;
+﻿using CleanArchitecture.Application.Dtos.Product;
 using CleanArchitecture.Application.Interfaces;
-using Infrastructure.Interfaces.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;

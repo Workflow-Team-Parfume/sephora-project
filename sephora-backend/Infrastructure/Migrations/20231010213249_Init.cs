@@ -293,7 +293,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParfumeBottleds",
+                name: "ParfumeBottles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -479,7 +479,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParfumeBottleds_ProductId",
-                table: "ParfumeBottleds",
+                table: "ParfumeBottles",
                 column: "ProductId",
                 unique: true);
 
@@ -545,7 +545,7 @@ namespace Infrastructure.Migrations
                 name: "OrderProductEntity");
 
             migrationBuilder.DropTable(
-                name: "ParfumeBottleds");
+                name: "ParfumeBottles");
 
             migrationBuilder.DropTable(
                 name: "ParfumePieces");

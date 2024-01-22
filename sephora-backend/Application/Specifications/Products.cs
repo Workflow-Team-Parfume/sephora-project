@@ -11,7 +11,8 @@ public static class Products
         {
             Query
                 .Include(x => x.Brand)
-                .Include(x => x.Category);
+                .Include(x => x.Category)
+                .Include(x => x.ProductPieces);
         }
     }
     public class GetById : Specification<ProductEntity>
@@ -21,7 +22,8 @@ public static class Products
             Query
                 .Where(x => x.Id == id)
                 .Include(x => x.Brand)
-                .Include(x => x.Category);
+                .Include(x => x.Category)
+                .Include(x => x.ProductPieces);
         }
     }
 }

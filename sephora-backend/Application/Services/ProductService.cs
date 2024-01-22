@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Parfume;
+using CleanArchitecture.Application.Dtos.Product;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;

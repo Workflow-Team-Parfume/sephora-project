@@ -1,0 +1,80 @@
+#mainContainer{
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
+    padding: 12px 10px;
+    border-radius: 0;
+    position:relative;
+    overflow:visible; 
+}
+
+#productName{                
+    font-family: 'Lato', sans-serif;                               
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+}
+
+#productPrice{
+    font-weight: 700;
+    font-family: 'Lato' sans-serif;                      
+    font-size: 18px;
+}
+
+#productCategory{
+    
+    height: 40px;
+    color: #9D9D9D;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Lato' sans-serif;
+}
+
+
+#title{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+#link{
+    margin: 0 auto;
+    text-transform: none;
+    line-height: normal;
+    display: flex;
+    padding: 10px 100px;
+    border: 1px solid #FFF;
+    background: #000;
+    font-family: 'Lato', sans-serif;         
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFF;
+}
+
+.new{
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: -9px;
+    top: 50px;
+    background-color: #000;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+
+#categories{
+    width: 100%;
+    padding: 30px 25px;
+    border-radius: 30px;
+    border: 1px solid #000;
+    color: #000;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: none;
+    line-height: normal;
+}

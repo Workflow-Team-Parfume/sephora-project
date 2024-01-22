@@ -1,9 +1,6 @@
 import { Container, Grid, Stack, Typography } from "@mui/material";
 import { IReviews } from "../../types";
 import "./reviews.scss"
-
-import Star1 from "../image/reviews/Star 1.png"
-import Star5 from "../image/reviews/Star 5.png"
 import { Stars } from "../../Stars";
 
 export function Reviews (title:string, reviews:IReviews[]) {
@@ -20,7 +17,7 @@ export function Reviews (title:string, reviews:IReviews[]) {
                         <img className="userImage" src={review.userImage} alt={review.userName}/>
                         <Stack spacing={1}>
                             <div className="userName">{review.userName}</div>
-                            {Stars(review.rating,Star1,Star5)}
+                            {Stars(review.rating)}
                         </Stack>
                     </Stack>    
                     <div className="review">

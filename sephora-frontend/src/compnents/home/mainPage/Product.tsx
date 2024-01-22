@@ -1,9 +1,7 @@
-import {  Card, CardContent, CardMedia, Grid, Stack, Typography } from "@mui/material";
+import {  Card, CardMedia, Grid, Stack, Typography } from "@mui/material";
 import { IProduct } from "../types";
 import "./products.scss"
 import { Stars } from "../Stars";
-import star1 from "./image/stars/star1.png";
-import star2 from "./image/stars/star2.png";
 
 function IsNew(isNew:boolean){
   if(isNew){
@@ -40,7 +38,7 @@ export function Product (product:IProduct,isNew:boolean=false) {
               {product.categoryName} {product.volume != null ? <span>&#8211;</span> : ''} {product.volume}
           </Typography>
           <Stack spacing={2}>
-            {Stars(product.rating, star1, star2)}
+            {Stars(product.rating)}
             <Typography id="productPrice">
                 <span style={{textWrap:"nowrap"}}>
                 {product.price} грн

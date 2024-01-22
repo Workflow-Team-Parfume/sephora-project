@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Domain.Entities;
 
-public class CarePiece
+public class ProductPiece
 {
     public int Id { get; set; }
 
@@ -12,7 +12,7 @@ public class CarePiece
 
     public Amount? Amount { get; set; }
 
-    public int CareId { get; set; }
+    public int ProductId { get; set; }
 
-    public Care Care { get; set; }
+    public ProductEntity Product { get; set; }
 }

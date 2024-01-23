@@ -8,7 +8,8 @@ export function Stars (rating:number) {
     value={rating}
     precision={0.5}
     readOnly
-    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+    icon={<StarIcon style={{ color: 'black' }} />}
+    emptyIcon={<StarIcon style={{ color: '#9D9D9D' }} fontSize="inherit" />}
   />
     );
 }

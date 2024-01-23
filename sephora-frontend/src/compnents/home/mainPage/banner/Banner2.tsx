@@ -1,8 +1,10 @@
 import { Button, Container } from "@mui/material";
 import "./banner.scss"
 import { IBanner_2 } from "../../types";
+import React from "react";
 
-export function Banner_2 (banner:IBanner_2) {
+const Banner_2 : React.FC<{banner: IBanner_2}> 
+= ({ banner }) => {
   return (
         <Container style={{maxWidth:"100%", 
         position:"relative"}} >
@@ -10,4 +12,6 @@ export function Banner_2 (banner:IBanner_2) {
            <Button id='butBanner' variant="outlined" href={banner.link}>Переглянути</Button>
         </Container>
     );
-}
+};
+
+export default Banner_2;

@@ -1,9 +1,11 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import { Container, Grid, Rating, Stack, Typography } from "@mui/material";
 import { IReviews } from "../../types";
 import "./reviews.scss"
-import { Stars } from "../../Stars";
+import StarIcon from "@mui/icons-material/Star";
 
-export function Reviews (title:string, reviews:IReviews[]) {
+
+const Reviews : React.FC<{title:string, reviews:IReviews[]}> 
+= ({title, reviews}) => {
   return (
     <Container style={{maxWidth:"100%"}} >
           <Typography id="title">{title}</Typography>
@@ -17,7 +19,14 @@ export function Reviews (title:string, reviews:IReviews[]) {
                         <img className="userImage" src={review.userImage} alt={review.userName}/>
                         <Stack spacing={1}>
                             <div className="userName">{review.userName}</div>
-                            {Stars(review.rating)}
+                            <Rating
+                              name="hover-feedback"
+                              value={review.rating}
+                              precision={0.5}
+                              readOnly
+                              icon={<StarIcon style={{ color: '#808080', fontSize:'29px' }} />}
+                              emptyIcon={<StarIcon style={{ color: '#D9D9D9', fontSize:'29px' }} fontSize="inherit" />}
+                            />
                         </Stack>
                     </Stack>    
                     <div className="review">
@@ -39,3 +48,5 @@ export function Reviews (title:string, reviews:IReviews[]) {
         </Container>
     );
 }
+
+export default Reviews;

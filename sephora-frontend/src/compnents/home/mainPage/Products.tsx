@@ -1,9 +1,10 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { IProduct } from "../types";
 import "./products.scss"
-import { Product } from "./Product";
+import Product from "./Product";
 
-export function Products (title:string, products:IProduct[],link:string,isNew:boolean=false) {
+const Products : React.FC<{title:string, products:IProduct[], link:string, isNew?:boolean}>
+= ({ title, products, link, isNew = false }) => {
   return (
     <Container style={{ maxWidth:"100%", justifyContent:"center"}}>
           <Typography id="title">{title}</Typography>
@@ -11,7 +12,7 @@ export function Products (title:string, products:IProduct[],link:string,isNew:bo
           <Container sx={{ pt: 5, pb: 4, m:0}} style={{maxWidth:"100%"}} >
             <Grid container spacing={2} >
             {products.map((product) => (
-             Product(product, isNew)
+             <Product product={product} isNew={isNew}/>
             ))}
             </Grid>
           </Container>
@@ -20,3 +21,5 @@ export function Products (title:string, products:IProduct[],link:string,isNew:bo
         </Container>
     );
 }
+
+export default Products;

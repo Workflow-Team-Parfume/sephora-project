@@ -1,8 +1,10 @@
 import { Button, Container, Grid, Stack } from "@mui/material";
 import "./banner.scss"
 import { IBanner } from "../../types";
+import React from "react";
 
-export function Banner (banner:IBanner, color:string, isLeft:boolean=false) {
+const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}> 
+= ({ banner, color, isLeft=false}) => {
   return (
         <Container style={{maxWidth:"100%"}} >
              <Grid container spacing={2.5} direction={isLeft ? "row-reverse" : "row"}>
@@ -25,3 +27,4 @@ export function Banner (banner:IBanner, color:string, isLeft:boolean=false) {
           </Container>
     );
 }
+export default Banner;

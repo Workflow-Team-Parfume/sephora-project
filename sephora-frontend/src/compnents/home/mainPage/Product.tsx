@@ -1,7 +1,7 @@
-import {  Card, CardMedia, Grid, Stack, Typography } from "@mui/material";
+import {  Card, CardMedia, Grid, Rating, Stack, Typography } from "@mui/material";
 import { IProduct } from "../types";
 import "./products.scss"
-import { Stars } from "../Stars";
+import StarIcon from "@mui/icons-material/Star";
 
 function IsNew(isNew:boolean){
   if(isNew){
@@ -13,7 +13,8 @@ function IsNew(isNew:boolean){
   }
 }
 
-export function Product (product:IProduct,isNew:boolean=false) {
+const Product : React.FC<{product:IProduct,isNew:boolean}>
+= ({ product, isNew = false }) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} >
     <Card id="mainContainer"
@@ -38,7 +39,14 @@ export function Product (product:IProduct,isNew:boolean=false) {
               {product.categoryName} {product.volume != null ? <span>&#8211;</span> : ''} {product.volume}
           </Typography>
           <Stack spacing={2}>
-            {Stars(product.rating)}
+          <Rating
+            name="hover-feedback"
+            value={product.rating}
+            precision={0.5}
+            readOnly
+            icon={<StarIcon style={{ color: 'black' }} />}
+            emptyIcon={<StarIcon style={{ color: '#9D9D9D' }} fontSize="inherit" />}
+          />
             <Typography id="productPrice">
                 <span style={{textWrap:"nowrap"}}>
                 {product.price} грн
@@ -52,3 +60,5 @@ export function Product (product:IProduct,isNew:boolean=false) {
     </Grid>
     );
 }
+
+export default Product;

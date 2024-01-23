@@ -1,4 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Parfume;
+﻿using CleanArchitecture.Application.Dtos.Product;
 
 namespace CleanArchitecture.Application.Interfaces;
 

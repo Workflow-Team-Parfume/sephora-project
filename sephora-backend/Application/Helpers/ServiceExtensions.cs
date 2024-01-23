@@ -2,7 +2,6 @@
 using CleanArchitecture.Application.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Infrastructure.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitecture.Application.Helpers;
@@ -23,7 +22,6 @@ public static class ServiceExtensions
         services.AddScoped<IAmountService, AmountService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IParfumeService, ParfumeService>();
     }
 
     public static void AddValidators(this IServiceCollection services)

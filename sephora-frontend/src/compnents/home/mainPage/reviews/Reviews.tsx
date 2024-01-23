@@ -2,7 +2,7 @@ import { Container, Grid, Rating, Stack, Typography } from "@mui/material";
 import { IReviews } from "../../types";
 import "./reviews.scss"
 import StarIcon from "@mui/icons-material/Star";
-
+        
 
 const Reviews : React.FC<{title:string, reviews:IReviews[]}> 
 = ({title, reviews}) => {

@@ -5,7 +5,6 @@ using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Resources;
 using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

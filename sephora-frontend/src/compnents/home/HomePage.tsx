@@ -41,6 +41,7 @@ const HomePage = () => {
         {/* {RecCategories("Рекомендовані категорії",recCategories)} */}
         <Banner_2 banner={Banner3}/>
         <Reviews title="Відгуки наших покупців про кометику та догляд" reviews={[Reviews1,Reviews2,Reviews3]}/>
+
         </Stack>
        </Container>
       );

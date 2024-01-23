@@ -1,0 +1,37 @@
+.header {
+  background: #fff;
+  display: flex;
+  width: 1482px;
+  align-items: center;
+  gap: 176px;
+}
+
+.div1 {
+}
+
+.div2 {
+  display: flex;
+  width: 605px;
+  height: 50px;
+  padding: 3px 0px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  border: 1px solid #000;
+  background: #fff;
+}
+.svg1 {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 15px;
+  bottom: 9px;
+}
+
+.div3{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}

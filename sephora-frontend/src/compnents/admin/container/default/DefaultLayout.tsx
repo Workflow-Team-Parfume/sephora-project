@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 import { Container } from "@mui/material";
-import HomeHeader from "../../../home/HomeHeader";
+import HomeHeader from "../../../home/homeHeader/HomeHeader";
 
 const DefaultLayout = () => {
     return (

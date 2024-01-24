@@ -1,64 +1,11 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AuthUserActionType, IAuthUser } from "../../auth/types";
+import { Link } from "react-router-dom";
 import "./homeHeader.scss";
-import { Button, Input, Toolbar, Typography } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import logo from '../../../assets/images/Group.svg';
 
-// interface State {
-//   amount: string;
-//   password: string;
-//   weight: string;
-//   weightRange: string;
-//   showPassword: boolean;
-// }
-
-// const pages = [
-//   { title: "Парфуми", route: "/productlist" },
-//   { title: "Розлив", route: "/about" },
-//   { title: "Догляд", route: "/about" },
-// ];
-
-// const settings = ["Profile", "Account", "Dashboard"];
 const HomeHeader = () => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const { /*user,*/ isAuth } = useSelector(
-  //   (store: any) => store.auth as IAuthUser
-  // );
-  // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-  //   null
-  // );
-  // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-  //   null
-  // );
-  // const [anchorElLogin, setAnchorElLogin] = React.useState<null | HTMLElement>(
-  //   null
-  // );
-
-  // const [values, setValues] = React.useState<State>({
-  //   amount: "",
-  //   password: "",
-  //   weight: "",
-  //   weightRange: "",
-  //   showPassword: false,
-  // });
-
-  // const handleChange =
-  //   (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  //   };
-
-  // const handleClickShowPassword = () => {
-  //   setValues({
-  //     ...values,
-  //     showPassword: !values.showPassword,
-  //   });
-  // };
 
   return (
     <>

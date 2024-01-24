@@ -10,5 +10,28 @@
   border-radius: 14px;
   border: 1px solid #000;
   background: #fff;
-//   outline: none;
+  //   outline: none;
+}
+
+.div3{
+  background: var(--green, #688f74);
+  padding: 10px;
+  color: #fff;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.div3 button{
+    font-size: 10px;
+}
+
+.link1{
+    color: #808080;
+    text-decoration: none;
+}
+.link2{
+    text-decoration: none;
+    color: #000;
 }

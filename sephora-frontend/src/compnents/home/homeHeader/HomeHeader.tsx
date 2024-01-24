@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthUserActionType, IAuthUser } from "../../auth/types";
 import "./homeHeader.scss";
-import { Input } from "@mui/material";
+import { Button, Input, Toolbar, Typography } from "@mui/material";
 
 // interface State {
 //   amount: string;
@@ -66,7 +66,8 @@ const HomeHeader = () => {
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
         alignItems: { xs: "center"},
-        justifyContent: {xs: "center"}
+        justifyContent: {xs: "center"},
+        marginBottom: 6
       }}
       >
       <Box
@@ -159,7 +160,7 @@ const HomeHeader = () => {
             gap: 1,
           }}>
  
-          <Link
+          <Link className="link1"
             component="button"
             variant="body2"
             onClick={() => {
@@ -168,7 +169,7 @@ const HomeHeader = () => {
           >
             ENG
           </Link>
-          <Link
+          <Link className="link2"
             component="button"
             variant="body2"
             onClick={() => {
@@ -203,7 +204,27 @@ const HomeHeader = () => {
         </Box>
       </Box>
       </Box>
-      
+      <div className="div3">
+      <Box
+        sx={{ 
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: { xs: "center"},
+          justifyContent: {xs: "center"},
+          gap: 10,
+          
+        }}>
+            <Button color="inherit">Повнорозмірні флакони</Button>
+            <Button color="inherit">Розпив парфумерії</Button>
+            <Button color="inherit">Догляд</Button>
+            <Button color="inherit">NEW</Button>
+            <Button color="inherit">Каталог</Button>
+            <Button color="inherit">Про нас</Button>
+            <Button color="inherit">Оплата і доставка</Button>
+            <Button color="inherit">Контакти</Button>
+      </Box>
+      </div>
     </>
   );
 };

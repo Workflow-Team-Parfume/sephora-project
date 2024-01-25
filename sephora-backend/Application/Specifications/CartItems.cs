@@ -12,7 +12,9 @@ public static class CartItems
             Query
                 .Where(x => x.UserId == userId)
                 .Include(x => x.User)
-                .Include(x => x.Product);
+                .Include(x => x.ProductPiece)
+                .Include(x => x.ProductPiece.Product)
+                .Include(x => x.ProductPiece.Amount);
         }
     }
 }

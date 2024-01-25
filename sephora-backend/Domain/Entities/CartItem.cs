@@ -19,9 +19,9 @@ public class CartItem
     [ForeignKey("Users"), Column(Order = 0)]
     public string UserId { get; set; } = String.Empty;
     [ForeignKey("Products"), Column(Order = 1)]
-    public int ProductId { get; set; }
+    public int ProductPieceId { get; set; }
     
     // navigation properties
     public UserEntity User { get; set; } = default!;
-    public ProductEntity Product { get; set; } = default!;
+    public ProductPiece ProductPiece { get; set; } = default!;
 }

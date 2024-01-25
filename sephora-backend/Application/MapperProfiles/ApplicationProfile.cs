@@ -36,15 +36,35 @@ public class ApplicationProfile : Profile
         CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
 
         CreateMap<EditUserDto, UserEntity>()
-            .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => src.ProfilePicture != null ? Path.GetRandomFileName() : null));
+            .ForMember(
+                dest => dest.ProfilePicture,
+                opt => opt.MapFrom(src => src.ProfilePicture != null
+                    ? Path.GetRandomFileName()
+                    : null
+                ));
         CreateMap<UserEntity, GetUserDto>();
 
         CreateMap<CartItem, CartDto>()
-            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
-            .ForMember(dest => dest.ProductDescription, opt => opt.MapFrom(src => src.Product.Description))
-            .ForMember(dest => dest.ProductImage, opt => opt.MapFrom(src => src.Product.ImgPath))
-            .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Product.Brand.Name))
-            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Product.Category.Name))
+            .ForMember(
+                dest => dest.ProductName,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Name)
+            )
+            .ForMember(
+                dest => dest.ProductDescription,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Description)
+            )
+            .ForMember(
+                dest => dest.ProductImage,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.ImgPath)
+            )
+            .ForMember(
+                dest => dest.BrandName,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Brand.Name)
+            )
+            .ForMember(
+                dest => dest.CategoryName,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();

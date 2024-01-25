@@ -19,5 +19,7 @@ public interface IRepository<TEntity> where TEntity : class
     Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification);
     Task<IEnumerable<TEntity>> GetListBySpec(ISpecification<TEntity> specification);
 
+    Task<int> DeleteBySpec(ISpecification<TEntity> specification);
+    
     Task Save();
 }

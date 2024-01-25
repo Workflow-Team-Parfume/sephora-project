@@ -3,6 +3,7 @@ using AutoMapper;
 using CleanArchitecture.Application.Dtos.Cart;
 using CleanArchitecture.Application.Resources;
 using CleanArchitecture.Application.Services.Interfaces;
+using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -19,15 +20,20 @@ public class CartService(
         => await userManager.GetUserAsync(user);
 
     private async Task<UserEntity> GetUserOrThrow(ClaimsPrincipal user)
-        => await GetUser(user) ?? throw new ArgumentException(ErrorMessages.UserNotFound, nameof(user));
+        => await GetUser(user)
+           ?? throw new ArgumentException(
+               ErrorMessages.UserNotFound,
+               nameof(user)
+           );
 
     public async Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user)
     {
         UserEntity userEntity = await GetUserOrThrow(user);
+        var specification = new CartItems.GetByUserId(userEntity.Id);
+
         return mapper.Map<IEnumerable<CartDto>>(
-            (await cartRepository.GetAll())
-            .Where(x => x.User.Id == userEntity.Id)
-            .ToList());
+            await cartRepository.GetListBySpec(specification)
+        );
     }
 
     public async Task<CartDto?> GetById(int id)
@@ -56,10 +62,8 @@ public class CartService(
     public async Task DeleteAll(ClaimsPrincipal user)
     {
         UserEntity userEntity = await GetUserOrThrow(user);
+        var specification = new CartItems.GetByUserId(userEntity.Id);
 
-        await cartRepository.Delete((await cartRepository.GetAll())
-            .Where(x => x.User.Id == userEntity.Id)
-            .Select(x => x.Id)
-            .ToList());
+        await cartRepository.DeleteBySpec(specification);
     }
 }

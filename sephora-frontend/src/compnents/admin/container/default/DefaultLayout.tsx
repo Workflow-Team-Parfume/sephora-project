@@ -6,7 +6,7 @@ const DefaultLayout = () => {
     return (
         <main>
             <HomeHeader />
-            <Container style={{margin: 0, maxWidth:"100%"}}>
+            <Container style={{padding: 0, maxWidth:"100%"}}>
                 <Outlet/>
             </Container>
             

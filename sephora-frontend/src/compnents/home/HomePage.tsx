@@ -6,6 +6,7 @@ import Reviews from "./mainPage/reviews/Reviews";
 import Banner from "./mainPage/banner/Banner";
 import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
 import RecCategories from './mainPage/recCategories/RecCategories';
+import MainBanner from './mainPage/banner/MainBanner';
 
 
 // function Copyright() {
@@ -28,8 +29,9 @@ import RecCategories from './mainPage/recCategories/RecCategories';
 
 const HomePage = () => {
     return (
-       <Container style={{maxWidth: '100%'}}>
-        <Stack spacing={25} style={{width: "100%"}}>
+       <Container style={{padding: '0', maxWidth: '100%'}}>
+        <MainBanner/>
+        <Stack spacing={19} style={{margin: '0 100px'}}>
 
         <Products title='Новинки' products={newProducts} link='' isNew={true}/>
         <Products title='Популярне' products={Populars} link=''/>

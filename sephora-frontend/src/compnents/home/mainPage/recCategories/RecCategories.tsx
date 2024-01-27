@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Grid, Typography } from "@mui/material";
-import { IRecCategory } from "../types";
-import "./products.scss";
+import { IRecCategory } from "./types";
+import "./recCategories.scss";
 
 const RecCategories: React.FC<{title: string; categories: IRecCategory[]}> 
                               = ({ title, categories }) => {

@@ -1,10 +1,10 @@
 import { Container, Grid, Rating, Stack, Typography } from "@mui/material";
-import { IReviews } from "../../types";
+import { IReview } from "./types";
 import "./reviews.scss"
 import StarIcon from "@mui/icons-material/Star";
         
 
-const Reviews : React.FC<{title:string, reviews:IReviews[]}> 
+const Reviews : React.FC<{title:string, reviews:IReview[]}> 
 = ({title, reviews}) => {
   return (
     <Container style={{maxWidth:"100%"}} >
@@ -30,7 +30,7 @@ const Reviews : React.FC<{title:string, reviews:IReviews[]}>
                         </Stack>
                     </Stack>    
                     <div className="review">
-                        {review.reviews}
+                        {review.review}
                     </div>
                 </Stack>
 

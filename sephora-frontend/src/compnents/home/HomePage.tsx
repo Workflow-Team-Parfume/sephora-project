@@ -1,12 +1,11 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Products from "./mainPage/Products";
+import Products from "./products/Products";
 import {newProducts, Populars, Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3, recCategories, Perfume } from "./mainPage/data";
 import Reviews from "./mainPage/reviews/Reviews";
 import Banner from "./mainPage/banner/Banner";
-import Banner_2 from "./mainPage/banner/Banner2";
-import RecCategories from './mainPage/RecCategories';
-// import { RecCategories } from "./mainPage/RecCategories";
+import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
+import RecCategories from './mainPage/recCategories/RecCategories';
 
 
 // function Copyright() {
@@ -38,8 +37,7 @@ const HomePage = () => {
         <Products title="Парфуми" products={Perfume} link=''/>
         <Banner banner={Banner2} color="#820000" isLeft={true}/>
         <RecCategories title="Рекомендовані категорії" categories={recCategories}/>
-        {/* {RecCategories("Рекомендовані категорії",recCategories)} */}
-        <Banner_2 banner={Banner3}/>
+        <FullSizeBanner banner={Banner3}/>
         <Reviews title="Відгуки наших покупців про кометику та догляд" reviews={[Reviews1,Reviews2,Reviews3]}/>
 
         </Stack>

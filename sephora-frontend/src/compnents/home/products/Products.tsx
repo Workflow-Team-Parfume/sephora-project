@@ -1,5 +1,5 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import { IProduct } from "../types";
+import { IProduct } from "./types";
 import "./products.scss"
 import Product from "./Product";
 

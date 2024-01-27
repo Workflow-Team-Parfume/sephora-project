@@ -1,9 +1,9 @@
 import { Button, Container } from "@mui/material";
 import "./banner.scss"
-import { IBanner_2 } from "../../types";
+import { IFullSizeBanner } from "./types";
 import React from "react";
 
-const Banner_2 : React.FC<{banner: IBanner_2}> 
+const FullSizeBanner : React.FC<{banner: IFullSizeBanner}> 
 = ({ banner }) => {
   return (
         <Container style={{maxWidth:"100%", 
@@ -14,4 +14,4 @@ const Banner_2 : React.FC<{banner: IBanner_2}>
     );
 };
 
-export default Banner_2;
+export default FullSizeBanner;

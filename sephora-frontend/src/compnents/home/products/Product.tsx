@@ -1,5 +1,5 @@
 import {  Card, CardMedia, Grid, Rating, Stack, Typography } from "@mui/material";
-import { IProduct } from "../types";
+import { IProduct } from "./types";
 import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
 

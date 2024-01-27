@@ -1,6 +1,6 @@
 import { Button, Container, Grid, Stack } from "@mui/material";
 import "./banner.scss"
-import { IBanner } from "../../types";
+import { IBanner } from "./types";
 import React from "react";
 
 const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}> 

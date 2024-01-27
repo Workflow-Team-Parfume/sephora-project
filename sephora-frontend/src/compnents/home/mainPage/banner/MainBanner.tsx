@@ -1,6 +1,6 @@
 import { Button, Container, Grid } from "@mui/material";
 import "./banner.scss"
-import { IMainBanner } from "../../types";
+import { IMainBanner } from "./types";
 
 export function MainBanner (banners:IMainBanner[]) {
   return (

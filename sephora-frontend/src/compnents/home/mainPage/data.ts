@@ -43,7 +43,7 @@ import uriage from "./image/reviews/uriage.png"
 export const Reviews1 = (
     {userName:"Анна",
     rating:4,
-    reviews:"Все прийшло швидко та добре упаковано. Аромат приємний, веселий та легкий. На літо те, що треба",
+    review:"Все прийшло швидко та добре упаковано. Аромат приємний, веселий та легкий. На літо те, що треба",
     userImage:Anna,
     productImage:moschino,
     productName:"Moschino Funny",
@@ -52,7 +52,7 @@ export const Reviews1 = (
 export const Reviews2 = (
     {userName:"Наталія",
     rating:5,
-    reviews:"Супер тональний! Наноситься рівномірно, має матовий фініш, гарне перекриття недоліків. Я брала тон 1N2 Ecru",
+    review:"Супер тональний! Наноситься рівномірно, має матовий фініш, гарне перекриття недоліків. Я брала тон 1N2 Ecru",
     userImage:Natalia,
     productImage:estee,
     productName:"Estée Lauder Double Wear",
@@ -62,7 +62,7 @@ export const Reviews2 = (
 export const Reviews3 = (
     {userName:"Дарья",
     rating:4,
-    reviews:"Найкращий бальзам для губ з тих що я купувала. Відновлює пошкоджену і суху шкіру губ за 1 день",
+    review:"Найкращий бальзам для губ з тих що я купувала. Відновлює пошкоджену і суху шкіру губ за 1 день",
     userImage:Dariia,
     productImage:uriage,
     productName:"Uriage",

@@ -1,8 +1,3 @@
-using CleanArchitecture.Application.Helpers;
-using Infrastructure;
-using Newtonsoft.Json;
-using perfume_luxury_web_api;
-
 var builder = WebApplication.CreateBuilder(args);
 
 string connStr = builder.Environment.IsDevelopment()

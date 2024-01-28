@@ -1,6 +1,3 @@
-using System.Security.Claims;
-using CleanArchitecture.Application.Dtos.Cart;
-
 namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface ICartService

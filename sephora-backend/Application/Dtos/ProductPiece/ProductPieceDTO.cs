@@ -1,6 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Dtos.Product;
-namespace CleanArchitecture.Application.Dtos.ProductPiece;
+﻿namespace CleanArchitecture.Application.Dtos.ProductPiece;
 public class ProductPieceDTO
 {
     public int Id { get; set; }

@@ -1,13 +1,3 @@
-using System.Security.Claims;
-using AutoMapper;
-using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Resources;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Application.Specifications;
-using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Identity;
-
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CartService(

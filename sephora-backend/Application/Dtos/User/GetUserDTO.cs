@@ -1,7 +1,5 @@
 ﻿
 
-using CleanArchitecture.Domain.Entities;
-
 namespace CleanArchitecture.Application.Dtos.User;
 
 public class GetUserDto

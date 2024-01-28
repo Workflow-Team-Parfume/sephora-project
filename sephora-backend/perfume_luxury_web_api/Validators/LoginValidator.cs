@@ -1,7 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.User;
-using FluentValidation;
-
-namespace perfume_luxury_web_api.Validators;
+﻿namespace perfume_luxury_web_api.Validators;
 
 public class LoginValidators : AbstractValidator<LoginDto>
 {

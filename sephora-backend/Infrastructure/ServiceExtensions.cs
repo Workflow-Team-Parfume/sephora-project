@@ -1,11 +1,4 @@
-﻿using CleanArchitecture.Domain.Entities;
-using Infrastructure.Data;
-using Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Infrastructure;
+﻿namespace Infrastructure;
 
 public static class ServiceExtensions
 {

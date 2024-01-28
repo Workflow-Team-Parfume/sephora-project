@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace CleanArchitecture.Domain.Entities;
 
 /*
@@ -9,8 +6,7 @@ namespace CleanArchitecture.Domain.Entities;
  */
 public class DeliveryEntity
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
     public string Address { get; set; } = String.Empty;
     public string Provider { get; set; } = String.Empty;

@@ -1,6 +1,4 @@
-﻿using Ardalis.Specification;
-
-namespace Infrastructure.Interfaces;
+﻿namespace Infrastructure.Interfaces;
 
 public interface IRepository<TEntity> where TEntity : class
 {

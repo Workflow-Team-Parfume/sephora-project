@@ -1,12 +1,12 @@
 ﻿using CleanArchitecture.Application.Dtos.Brand;
 
-namespace CleanArchitecture.Application.Interfaces;
+namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IBrandService
 {
     Task<IEnumerable<BrandDto>> Get();
     Task<BrandDto?> GetById(int id);
-    Task Create(CreateBrandDto brandDTO);
-    Task Edit(BrandDto brandDTO);
+    Task Create(CreateBrandDto brandDto);
+    Task Edit(BrandDto brandDto);
     Task Delete(int id);
 }

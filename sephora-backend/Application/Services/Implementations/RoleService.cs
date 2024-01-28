@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
-using CleanArchitecture.Domain.Entities;
-using CleanArchitecture.Application.Interfaces;
+﻿using System.Net;
 using CleanArchitecture.Application.Helpers;
 using CleanArchitecture.Application.Resources;
+using CleanArchitecture.Application.Services.Interfaces;
+using CleanArchitecture.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class RoleService(
     RoleManager<IdentityRole> roleManager, 

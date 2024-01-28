@@ -2,13 +2,13 @@
 using AutoMapper;
 using CleanArchitecture.Application.Dtos.User;
 using CleanArchitecture.Application.Helpers;
-using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Resources;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,
@@ -22,6 +22,7 @@ public class AccountsService(
         var users = await userManager.Users.ToListAsync();
         return mapper.Map<IEnumerable<GetUserDto>>(users);
     }
+
     public async Task<GetUserDto> Get(string id)
     {
         var user = await userManager.FindByIdAsync(id);
@@ -35,6 +36,7 @@ public class AccountsService(
 
         return userDto;
     }
+
     public async Task Edit(string userId, EditUserDto userDto)
     {
         var user = await userManager.FindByIdAsync(userId);
@@ -47,13 +49,14 @@ public class AccountsService(
             user.ProfilePicture = oldFileName;
         await userManager.UpdateAsync(user);
     }
+
     public async Task Delete(string id)
     {
         var user = await userManager.FindByIdAsync(id);
         if (user == null)
             throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
 
-        //Add image delete!!!
+        // TODO: Add image delete!!!
 
         var result = await userManager.DeleteAsync(user);
         if (!result.Succeeded)
@@ -62,7 +65,6 @@ public class AccountsService(
             throw new HttpException(message, HttpStatusCode.BadRequest);
         }
     }
-
 
     public async Task<LoginResponseDto> Login(LoginDto dto)
     {
@@ -102,8 +104,10 @@ public class AccountsService(
 
             throw new HttpException(message, HttpStatusCode.BadRequest);
         }
+
         await userManager.AddToRoleAsync(user, "user");
     }
+
     public async Task<bool> CheckEmailExists(string email)
     {
         var user = await userManager.FindByEmailAsync(email);

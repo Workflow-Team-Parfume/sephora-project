@@ -293,7 +293,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParfumeBottles",
+                name: "ParfumeBottleds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -464,7 +464,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cares_ProductId",
                 table: "Cares",
-                column: "ProductId",
+                column: "ProductPieceId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -479,8 +479,8 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ParfumeBottleds_ProductId",
-                table: "ParfumeBottles",
-                column: "ProductId",
+                table: "ParfumeBottleds",
+                column: "ProductPieceId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -496,7 +496,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Parfumes_ProductId",
                 table: "Parfumes",
-                column: "ProductId",
+                column: "ProductPieceId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -512,7 +512,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_ProductId",
                 table: "Ratings",
-                column: "ProductId");
+                column: "ProductPieceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_UserId",
@@ -545,7 +545,7 @@ namespace Infrastructure.Migrations
                 name: "OrderProductEntity");
 
             migrationBuilder.DropTable(
-                name: "ParfumeBottles");
+                name: "ParfumeBottleds");
 
             migrationBuilder.DropTable(
                 name: "ParfumePieces");

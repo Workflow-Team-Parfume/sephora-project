@@ -5,17 +5,20 @@ using perfume_luxury_web_api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = (builder.Environment.IsDevelopment()
+string connStr = builder.Environment.IsDevelopment()
     ? builder.Configuration.GetConnectionString("RemoteDb")
-    : Environment.GetEnvironmentVariable("RemoteDb"))
-    ?? throw new ApplicationException("RemoteDb connection string not found");
+    : Environment.GetEnvironmentVariable("RemoteDb");
+
+if (connStr is null)
+    throw new ApplicationException("Connection string is null");
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        options.SerializerSettings.ReferenceLoopHandling
+            = ReferenceLoopHandling.Ignore
     );
 
 // Add JWT tokens
@@ -25,7 +28,9 @@ JwtOptions opts = builder.Environment.IsDevelopment()
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
         Key = Environment.GetEnvironmentVariable("JwtKey"),
-        Lifetime = Convert.ToInt32(Environment.GetEnvironmentVariable("JwtLifetime"))
+        Lifetime = Convert.ToInt32(
+            Environment.GetEnvironmentVariable("JwtLifetime")
+        )
     };
 builder.Services.AddJwt(opts);
 
@@ -39,7 +44,6 @@ builder.Services.AddDbContext(connStr);
 builder.Services.AddIdentity();
 
 builder.Services.AddRepository();
-builder.Services.AddCustomServices();
 
 // add custom services
 builder.Services.AddCustomServices();

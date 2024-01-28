@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class ProductService(
     IRepository<ProductEntity> productRepository, 
     IMapper mapper)
     : IProductService
 {
-    public async Task Create(CreateProductDto createProductDTO)
+    public async Task Create(CreateProductDto createProductDto)
     {
-        await productRepository.Insert(mapper.Map<ProductEntity>(createProductDTO));
+        await productRepository.Insert(mapper.Map<ProductEntity>(createProductDto));
         await productRepository.Save();
     }
 
@@ -27,26 +27,26 @@ public class ProductService(
         await productRepository.Save();
     }
 
-    public async Task Edit(EditProductDto editProductDTO)
+    public async Task Edit(EditProductDto editProductDto)
     {
-        await productRepository.Update(mapper.Map<ProductEntity>(editProductDTO));
+        await productRepository.Update(mapper.Map<ProductEntity>(editProductDto));
         await productRepository.Save();
     }
 
-    public async Task<IEnumerable<ProductDTO>> Get()
+    public async Task<IEnumerable<ProductDto>> Get()
     {
         var result = await productRepository.GetListBySpec(new Products.GetAll());
 
-        return mapper.Map<IEnumerable<ProductDTO>>(result);
+        return mapper.Map<IEnumerable<ProductDto>>(result);
     }
 
-    public async Task<ProductDTO?> GetById(int id)
+    public async Task<ProductDto?> GetById(int id)
     {
-        ProductEntity? productDTO = await productRepository.GetItemBySpec(new Products.GetById(id));
+        ProductEntity? productDto = await productRepository.GetItemBySpec(new Products.GetById(id));
 
-        if (productDTO == null)
+        if (productDto == null)
             throw new Exception();
 
-        return mapper.Map<ProductDTO>(productDTO);
+        return mapper.Map<ProductDto>(productDto);
     }
 }

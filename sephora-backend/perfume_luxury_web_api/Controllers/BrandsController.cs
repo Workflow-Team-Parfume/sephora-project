@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos.Brand;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;
@@ -25,8 +25,8 @@ public class BrandsController(IBrandService brandService) : Controller
     public async Task<IActionResult> Create([FromForm] CreateBrandDto brand)
     {
         if (!ModelState.IsValid) return BadRequest();
-        await brandService.Create(brand);
 
+        await brandService.Create(brand);
         return Ok();
     }
 
@@ -34,7 +34,6 @@ public class BrandsController(IBrandService brandService) : Controller
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await brandService.Delete(id);
-
         return Ok();
     }
 
@@ -44,7 +43,6 @@ public class BrandsController(IBrandService brandService) : Controller
         if (!ModelState.IsValid) return BadRequest();
 
         await brandService.Edit(brand);
-
         return Ok();
     }
 }

@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Application.Specifications;
 using CleanArchitecture.Domain.Entities;
 using Infrastructure.Interfaces;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AmountService(
     IRepository<Amount> amountRepository, 
     IMapper mapper) 
     : IAmountService
 {
-    public async Task Create(CreateAmountDto amountDTO)
+    public async Task Create(CreateAmountDto amountDto)
     {
-        await amountRepository.Insert(mapper.Map<Amount>(amountDTO));
+        await amountRepository.Insert(mapper.Map<Amount>(amountDto));
         await amountRepository.Save();
     }
 
@@ -27,9 +27,9 @@ public class AmountService(
         await amountRepository.Save();
     }
 
-    public async Task Edit(AmountDto amountDTO)
+    public async Task Edit(AmountDto amountDto)
     {
-        await amountRepository.Update(mapper.Map<Amount>(amountDTO));
+        await amountRepository.Update(mapper.Map<Amount>(amountDto));
         await amountRepository.Save();
     }
 

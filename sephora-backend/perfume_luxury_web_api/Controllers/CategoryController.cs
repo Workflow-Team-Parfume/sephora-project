@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos.Category;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;
@@ -24,16 +24,15 @@ public class CategoryController(ICategoryService categoryService) : Controller
     public async Task<IActionResult> Create([FromForm] CreateCategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
-        await categoryService.Create(category);
 
+        await categoryService.Create(category);
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await categoryService.Delete(id);
-
         return Ok();
     }
 
@@ -41,7 +40,6 @@ public class CategoryController(ICategoryService categoryService) : Controller
     public async Task<IActionResult> Edit([FromBody] CategoryDto category)
     {
         if (!ModelState.IsValid) return BadRequest();
-
         await categoryService.Edit(category);
 
         return Ok();

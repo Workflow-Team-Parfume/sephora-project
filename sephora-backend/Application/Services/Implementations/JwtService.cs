@@ -1,13 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Helpers;
+using CleanArchitecture.Application.Services.Interfaces;
 using CleanArchitecture.Domain.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
-namespace CleanArchitecture.Application.Services;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class JwtService(IConfiguration configuration) : IJwtService
 {
@@ -31,25 +32,26 @@ public class JwtService(IConfiguration configuration) : IJwtService
     {
         var claims = new List<Claim>
         {
-            new Claim(CustomClaimTypes.id, user.Id),
-            new Claim(CustomClaimTypes.userName, user.UserName),
-            new Claim(CustomClaimTypes.email, user.Email),
-            new Claim(CustomClaimTypes.profilePicture, user.ProfilePicture ?? ""),
-            new Claim(CustomClaimTypes.registrationDate, user.RegistrationDate.ToString())
+            new(CustomClaimTypes.Id, user.Id),
+            new(CustomClaimTypes.UserName, user.UserName),
+            new(CustomClaimTypes.Email, user.Email),
+            new(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
+            new(CustomClaimTypes.RegistrationDate, user.RegistrationDate.ToString(CultureInfo.InvariantCulture))
         };
 
-        //var roles = userManager.GetRolesAsync(user).Result;
-        //claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+        // var roles = userManager.GetRolesAsync(user).Result;
+        // claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
         return claims;
     }
 }
+
 public static class CustomClaimTypes
 {
-    public const string id = "id";
-    public const string userName = "userName";
-    public const string email = "email";
-    public const string roles = "roles";
-    public const string profilePicture = "profilePicture";
-    public const string registrationDate = "registrationDate";
+    public const string Id = "id";
+    public const string UserName = "userName";
+    public const string Email = "email";
+    public const string Roles = "roles";
+    public const string ProfilePicture = "profilePicture";
+    public const string RegistrationDate = "registrationDate";
 }

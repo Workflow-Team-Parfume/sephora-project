@@ -59,7 +59,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ProductPieces_ProductId",
                 table: "ProductPieces",
-                column: "ProductId");
+                column: "ProductPieceId");
         }
 
         /// <inheritdoc />
@@ -175,7 +175,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cares_ProductId",
                 table: "Cares",
-                column: "ProductId",
+                column: "ProductPieceId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -191,7 +191,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Parfumes_ProductId",
                 table: "Parfumes",
-                column: "ProductId",
+                column: "ProductPieceId",
                 unique: true);
         }
     }

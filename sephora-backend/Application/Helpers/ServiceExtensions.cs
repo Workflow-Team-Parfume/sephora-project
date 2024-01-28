@@ -1,5 +1,6 @@
-﻿using CleanArchitecture.Application.Interfaces;
-using CleanArchitecture.Application.Services;
+﻿using CleanArchitecture.Application.MapperProfiles;
+using CleanArchitecture.Application.Services.Implementations;
+using CleanArchitecture.Application.Services.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ public static class ServiceExtensions
 {
     public static void AddAutoMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddAutoMapper(typeof(ApplicationProfile));
     }
 
     public static void AddCustomServices(this IServiceCollection services)
@@ -22,6 +23,7 @@ public static class ServiceExtensions
         services.AddScoped<IAmountService, AmountService>();
         services.AddScoped<IRoleService, RoleService>();
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICartService, CartService>();
     }
 
     public static void AddValidators(this IServiceCollection services)

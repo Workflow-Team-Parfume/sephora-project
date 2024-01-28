@@ -1,4 +1,6 @@
-﻿namespace CleanArchitecture.Domain.Entities;
+﻿using CleanArchitecture.Domain.Enums;
+
+namespace CleanArchitecture.Domain.Entities;
 
 public class Order
 {
@@ -7,7 +9,7 @@ public class Order
     
     public DateTime Date { get; set; }
     
-    public decimal Total { get; set; }
+    public OrderStatus Status { get; set; }
     
     public int? DeliveryId { get; set; }
     

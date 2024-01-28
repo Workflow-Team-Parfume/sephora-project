@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace CleanArchitecture.Application.Dtos.User;
+﻿namespace CleanArchitecture.Application.Dtos.User;
 
 public class EditUserDto
 {

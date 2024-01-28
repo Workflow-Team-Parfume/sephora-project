@@ -1,6 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.ProductPiece;
-
-namespace CleanArchitecture.Application.Dtos.Product;
+﻿namespace CleanArchitecture.Application.Dtos.Product;
 
 public class EditProductParfumeDto
 {

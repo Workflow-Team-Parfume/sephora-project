@@ -1,8 +1,3 @@
-using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace perfume_luxury_web_api.Controllers;
 
 // TODO: Add logging

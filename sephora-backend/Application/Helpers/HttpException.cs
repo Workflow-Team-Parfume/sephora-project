@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace CleanArchitecture.Application.Helpers;
+﻿namespace CleanArchitecture.Application.Helpers;
 
 [Serializable]
 public class HttpException : Exception

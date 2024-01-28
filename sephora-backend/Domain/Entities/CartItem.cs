@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace CleanArchitecture.Domain.Entities;
 
 /**
@@ -12,8 +9,7 @@ namespace CleanArchitecture.Domain.Entities;
  */
 public class CartItem
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
     public int Quantity { get; set; }
     

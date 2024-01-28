@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace CleanArchitecture.Application.Services.Interfaces;
+﻿namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IRoleService
 {

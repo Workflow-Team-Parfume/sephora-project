@@ -1,9 +1,4 @@
-﻿using CleanArchitecture.Domain.Entities;
-using Infrastructure.Configurations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 
 public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
     : IdentityDbContext<UserEntity>(options)

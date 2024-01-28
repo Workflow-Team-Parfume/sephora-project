@@ -1,14 +1,4 @@
-﻿using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using CleanArchitecture.Application.Helpers;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Domain.Entities;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class JwtService(IConfiguration configuration) : IJwtService
 {

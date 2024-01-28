@@ -1,10 +1,4 @@
-﻿using Ardalis.Specification;
-using Ardalis.Specification.EntityFrameworkCore;
-using Infrastructure.Data;
-using Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
-namespace Infrastructure;
+﻿namespace Infrastructure;
 
 public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity>
     where TEntity : class

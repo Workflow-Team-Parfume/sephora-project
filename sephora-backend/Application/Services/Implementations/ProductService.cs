@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Application.Specifications;
-using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class ProductService(
     IRepository<ProductEntity> productRepository, 

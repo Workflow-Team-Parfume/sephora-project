@@ -1,14 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
-using CleanArchitecture.Application.Dtos.User;
-using CleanArchitecture.Application.Helpers;
-using CleanArchitecture.Application.Resources;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,

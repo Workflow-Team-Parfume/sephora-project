@@ -1,8 +1,4 @@
-﻿using CleanArchitecture.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Infrastructure.Configurations;
+﻿namespace Infrastructure.Configurations;
 
 public class UserConfigurations : IEntityTypeConfiguration<UserEntity>
 {

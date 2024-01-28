@@ -13,7 +13,8 @@ namespace CleanArchitecture.Domain.Entities;
 public class CartItem
 {
     [Key]
-    public int Id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long Id { get; set; }
     public int Quantity { get; set; }
     
     [ForeignKey("Users"), Column(Order = 0)]

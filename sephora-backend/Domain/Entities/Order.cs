@@ -1,17 +1,20 @@
-﻿namespace CleanArchitecture.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CleanArchitecture.Domain.Entities;
 
 public class Order
 {
-    
-    public int Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long Id { get; set; }
     
     public DateTime Date { get; set; }
     
     public decimal Total { get; set; }
     
-    public string UserId { get; set; } = String.Empty;
+    public int? DeliveryId { get; set; }
     
-    public UserEntity User { get; set; }
-    
+    public DeliveryEntity? DeliveryData { get; set; }
     public ICollection<ProductEntity>? Products { get; set; }
 }

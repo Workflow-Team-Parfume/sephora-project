@@ -27,9 +27,5 @@ public class ProductConfigurations : IEntityTypeConfiguration<ProductEntity>
             .HasMany(p => p.ProductPieces)
             .WithOne(pp => pp.Product)
             .HasForeignKey(pp => pp.ProductId);
-        builder
-            .HasOne(p => p.ParfumeBottled)
-            .WithOne(par => par.Product)
-            .HasForeignKey<ParfumeBottled>(par => par.ProductId);
     }
 }

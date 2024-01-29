@@ -4,8 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
  * CartItem is a join table between UserEntity and ProductEntity. <br/>
  * It is used to store the products that a user has in their cart
  * and their quantities <br/><br/>
- *
- * <b>TODO: change primary ID to UUID string if needed</b>
  */
 public class CartItem
 {

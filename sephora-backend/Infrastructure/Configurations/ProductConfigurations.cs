@@ -5,9 +5,6 @@ public class ProductConfigurations : IEntityTypeConfiguration<ProductEntity>
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {
         builder
-            .HasMany(p => p.Orders)
-            .WithMany(o => o.Products);
-        builder
             .HasMany(p => p.Ratings)
             .WithOne(rat => rat.Product)
             .HasForeignKey(a => a.ProductId);

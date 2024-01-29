@@ -11,8 +11,8 @@ public class Order
     
     public OrderStatus Status { get; set; }
     
-    public int? DeliveryId { get; set; }
+    public int DeliveryId { get; set; }
     
-    public DeliveryEntity? DeliveryData { get; set; }
-    public ICollection<ProductEntity>? Products { get; set; }
+    public DeliveryEntity DeliveryData { get; set; }
+    public ICollection<OrderItem>? Products { get; set; }
 }

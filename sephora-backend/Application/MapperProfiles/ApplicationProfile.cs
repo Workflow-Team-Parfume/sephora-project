@@ -1,4 +1,6 @@
-﻿namespace CleanArchitecture.Application.MapperProfiles;
+﻿using CleanArchitecture.Application.Dtos.Delivery;
+
+namespace CleanArchitecture.Application.MapperProfiles;
 
 public class ApplicationProfile : Profile
 {
@@ -58,5 +60,8 @@ public class ApplicationProfile : Profile
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
+        
+        CreateMap<CreateDeliveryDto, DeliveryEntity>();  
+        // TODO: Add other delivery mappings
     }
 }

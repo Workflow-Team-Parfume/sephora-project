@@ -30,7 +30,9 @@ public class AccountsService(
     public async Task Edit(string userId, EditUserDto userDto)
     {
         var user = await userManager.FindByIdAsync(userId);
-        string oldFileName = user.ProfilePicture;
+        if (user is null)
+            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+        string? oldFileName = user.ProfilePicture;
         mapper.Map(userDto, user);
         if (userDto.ProfilePicture != null)
             //Add File Edit!!!

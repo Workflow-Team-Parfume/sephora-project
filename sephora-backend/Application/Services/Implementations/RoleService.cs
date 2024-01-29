@@ -1,7 +1,7 @@
 ﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class RoleService(
-    RoleManager<IdentityRole> roleManager, 
+    RoleManager<IdentityRole> roleManager,
     UserManager<UserEntity> userManager)
     : IRoleService
 {
@@ -13,13 +13,17 @@ public class RoleService(
             await roleManager.CreateAsync(role);
         }
     }
+
     public async Task Delete(string roleName)
     {
         var role = await roleManager.FindByNameAsync(roleName);
 
         if (role != null)
         {
-            var usersInRole = await userManager.GetUsersInRoleAsync(role.Name);
+            var usersInRole = await userManager.GetUsersInRoleAsync(
+                role.Name ?? throw new HttpException(
+                    "Role not found", HttpStatusCode.NotFound)
+            );
             foreach (var user in usersInRole)
             {
                 await userManager.RemoveFromRoleAsync(user, role.Name);
@@ -28,6 +32,7 @@ public class RoleService(
             await roleManager.DeleteAsync(role);
         }
     }
+
     public async Task AddToRole(string userId, string roleName)
     {
         var user = await userManager.FindByIdAsync(userId);
@@ -37,6 +42,7 @@ public class RoleService(
             await userManager.AddToRoleAsync(user, roleName);
         }
     }
+
     public async Task RemoveFromRole(string userId, string roleName)
     {
         var user = await userManager.FindByIdAsync(userId);
@@ -46,11 +52,13 @@ public class RoleService(
             await userManager.RemoveFromRoleAsync(user, roleName);
         }
     }
+
     public async Task<IEnumerable<IdentityRole>> GetAll()
     {
         var roles = await roleManager.Roles.ToListAsync();
         return roles;
     }
+
     public async Task<IEnumerable<string>> GetByUserId(string userId)
     {
         var user = await userManager.FindByIdAsync(userId);

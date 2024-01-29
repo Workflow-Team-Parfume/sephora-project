@@ -1,17 +1,17 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import CategoryListPage from "./compnents/admin/category/list/CategoryListPage";
-import CategoryCreatePage from "./compnents/admin/category/create/CategoryCreatePage";
-import CategoryEditPage from "./compnents/admin/category/edit/CategoryEditPage";
-import AdminLayout from "./compnents/admin/container/AdminLayout";
-import HomePage from "./compnents/home/HomePage";
-import LoginPage from "./compnents/auth/login/LoginPage";
-import RegisterPage from "./compnents/auth/register/RegisterPage";
-import Loader from "./compnents/common/loader/Loader";
-// import { IAuthUser } from "./compnents/auth/types";
+import CategoryListPage from "./components/admin/category/list/CategoryListPage";
+import CategoryCreatePage from "./components/admin/category/create/CategoryCreatePage";
+import CategoryEditPage from "./components/admin/category/edit/CategoryEditPage";
+import AdminLayout from "./components/admin/container/AdminLayout";
+import HomePage from "./components/home/HomePage";
+import LoginPage from "./components/auth/login/LoginPage";
+import RegisterPage from "./components/auth/register/RegisterPage";
+import Loader from "./components/common/loader/Loader";
+// import { IAuthUser } from "./components/auth/types";
 // import { useSelector } from "react-redux";
-import DefaultLayout from "./compnents/admin/container/default/DefaultLayout";
-import AdminDashboard from "./compnents/admin/dashboard/AdminDashboard"
+import DefaultLayout from "./components/admin/container/default/DefaultLayout";
+import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 
 function App() {
   // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);

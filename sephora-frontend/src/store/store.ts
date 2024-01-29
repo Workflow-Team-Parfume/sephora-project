@@ -12,7 +12,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, IsLoadingReducer);
 
-
 export const store = configureStore({
   devTools: true,
   reducer: {
@@ -23,8 +22,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(thunk),
 });
 
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
-export { persistor };
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -1,3 +1,5 @@
+using CleanArchitecture.Domain.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 string connStr = builder.Environment.IsDevelopment()

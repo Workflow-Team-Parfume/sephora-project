@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import CategoryListPage from "./components/admin/category/list/CategoryListPage";
 import CategoryCreatePage from "./components/admin/category/create/CategoryCreatePage";
 import CategoryEditPage from "./components/admin/category/edit/CategoryEditPage";
@@ -17,7 +17,6 @@ function App() {
   // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
   React.useEffect(() => {
-
     console.log(localStorage.token);
 
     // if (localStorage.token) {

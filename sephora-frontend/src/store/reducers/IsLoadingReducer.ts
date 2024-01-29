@@ -24,6 +24,7 @@ export const IsLoadingReducer = (
     switch (action.type) {
         case IsLoadingActionTypes.SET_LOADING:
             return <IsLoadingState>{...state, isLoading: action.payload};
+        default:
+            return state;
     }
-    return state;
 };

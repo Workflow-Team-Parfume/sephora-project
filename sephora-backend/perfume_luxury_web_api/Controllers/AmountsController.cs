@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace perfume_luxury_web_api.Controllers;
@@ -25,8 +25,8 @@ public class AmountsController(IAmountService amountService) : Controller
     public async Task<IActionResult> Create([FromForm] CreateAmountDto amount)
     {
         if (!ModelState.IsValid) return BadRequest();
-        await amountService.Create(amount);
 
+        await amountService.Create(amount);
         return Ok();
     }
 
@@ -34,7 +34,6 @@ public class AmountsController(IAmountService amountService) : Controller
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await amountService.Delete(id);
-
         return Ok();
     }
 
@@ -44,7 +43,6 @@ public class AmountsController(IAmountService amountService) : Controller
         if (!ModelState.IsValid) return BadRequest();
 
         await amountService.Edit(amount);
-
         return Ok();
     }
 }

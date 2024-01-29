@@ -126,4 +126,7 @@
   <data name="UserByIDNotFound" xml:space="preserve">
     <value>User with requested id not found!</value>
   </data>
+  <data name="UserIsNotFound" xml:space="preserve">
+    <value>User is not found</value>
+  </data>
 </root>

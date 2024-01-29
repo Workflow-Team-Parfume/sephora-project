@@ -9,9 +9,9 @@ public class Order
     
     public decimal Total { get; set; }
     
-    public string UserId { get; set; }
+    public string UserId { get; set; } = String.Empty;
     
     public UserEntity User { get; set; }
     
-    public ICollection<ProductEntity> Products { get; set; }
+    public ICollection<ProductEntity>? Products { get; set; }
 }

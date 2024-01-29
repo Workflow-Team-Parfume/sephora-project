@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-public class PerfumeDbContext(DbContextOptions options) : IdentityDbContext<UserEntity>(options)
+public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
+    : IdentityDbContext<UserEntity>(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -14,20 +15,16 @@ public class PerfumeDbContext(DbContextOptions options) : IdentityDbContext<User
         // ----------- Set Configurations -----------
         modelBuilder.ApplyConfiguration(new UserConfigurations());
     }
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    base.OnConfiguring(optionsBuilder);
-    //    string connStr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ParfumeDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-    //    optionsBuilder.UseSqlServer(connStr);
-    //}
 
     // ---------------- Data Collections ----------------
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Amount> Amounts { get; set; }
-    public DbSet<Brand> Brands { get; set; }
-    public DbSet<Rating> Ratings { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<ProductEntity> Products { get; set; }
-    public DbSet<ProductPiece> ProductPieces { get; set; }
-    public DbSet<ParfumeBottled> ParfumeBottles { get; set; }
+    // ReSharper disable PropertyCanBeMadeInitOnly.Global
+    public DbSet<Category> Categories { get; set; } = default!;
+    public DbSet<Amount> Amounts { get; set; } = default!;
+    public DbSet<Brand> Brands { get; set; } = default!;
+    public DbSet<Rating> Ratings { get; set; } = default!;
+    public DbSet<Order> Orders { get; set; } = default!;
+    public DbSet<ProductEntity> Products { get; set; } = default!;
+    public DbSet<ProductPiece> ProductPieces { get; set; } = default!;
+    public DbSet<ParfumeBottled> ParfumeBottles { get; set; } = default!;
+    public DbSet<CartItem> CartItems { get; set; } = default!;
 }

@@ -55,6 +55,35 @@ namespace Infrastructure.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductPieceId")
+                        .HasColumnType("integer")
+                        .HasColumnOrder(1);
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnOrder(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductPieceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -432,6 +461,25 @@ namespace Infrastructure.Migrations
                     b.ToTable("OrderProductEntity");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.CartItem", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.ProductPiece", "ProductPiece")
+                        .WithMany()
+                        .HasForeignKey("ProductPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
+                        .WithMany("CartItems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductPiece");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
@@ -601,6 +649,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
                 {
+                    b.Navigation("CartItems");
+
                     b.Navigation("Orders");
 
                     b.Navigation("Ratings");

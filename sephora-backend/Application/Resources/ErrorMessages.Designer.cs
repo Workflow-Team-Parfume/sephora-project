@@ -81,5 +81,11 @@ namespace CleanArchitecture.Application.Resources {
                 return ResourceManager.GetString("UserByIDNotFound", resourceCulture);
             }
         }
+        
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
     }
 }

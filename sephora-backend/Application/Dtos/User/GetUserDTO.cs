@@ -4,7 +4,7 @@ namespace CleanArchitecture.Application.Dtos.User;
 
 public class GetUserDto
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = String.Empty;
     public string UserName { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
     public string ProfilePicture { get; set; } = String.Empty;

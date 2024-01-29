@@ -4,10 +4,19 @@ public class JwtService(IConfiguration configuration) : IJwtService
 {
     public string CreateToken(IEnumerable<Claim> claims)
     {
-        var jwtOpts = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
+        var jwtOpts = configuration
+            .GetSection(nameof(JwtOptions))
+            .Get<JwtOptions>();
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOpts.Key));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        var keyBytes = Encoding.UTF8.GetBytes(
+            jwtOpts?.Key ?? 
+            throw new InvalidOperationException()
+            );
+        var securityKey = new SymmetricSecurityKey(keyBytes);
+        var credentials = new SigningCredentials(
+            securityKey, 
+            SecurityAlgorithms.HmacSha256
+            );
 
         var token = new JwtSecurityToken(
             issuer: jwtOpts.Issuer,
@@ -23,10 +32,13 @@ public class JwtService(IConfiguration configuration) : IJwtService
         var claims = new List<Claim>
         {
             new(CustomClaimTypes.Id, user.Id),
-            new(CustomClaimTypes.UserName, user.UserName),
-            new(CustomClaimTypes.Email, user.Email),
+            new(CustomClaimTypes.UserName, user.UserName ?? ""),
+            new(CustomClaimTypes.Email, user.Email ?? ""),
             new(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
-            new(CustomClaimTypes.RegistrationDate, user.RegistrationDate.ToString(CultureInfo.InvariantCulture))
+            new(
+                CustomClaimTypes.RegistrationDate, 
+                user.RegistrationDate.ToString(CultureInfo.InvariantCulture)
+                )
         };
 
         // var roles = userManager.GetRolesAsync(user).Result;

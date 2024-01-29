@@ -50,3 +50,24 @@ export const CartReducer = (
             return state;
     }
 }
+
+export const addToCart = (items: CartItemDto[]) => ({
+    type: CartActionTypes.ADD_TO_CART,
+    payload: items,
+});
+
+export const clearCart = () => ({
+    type: CartActionTypes.CLEAR_CART,
+    payload: undefined,
+});
+
+export const setCart = (items: CartItemDto[]) => ({
+    type: CartActionTypes.SET_CART,
+    payload: items,
+});
+
+export const removeFromCart = (items: CartItemDto[]) => ({
+    type: CartActionTypes.REMOVE_FROM_CART,
+    payload: items,
+});
+

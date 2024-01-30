@@ -13,6 +13,8 @@ import Loader from "./compnents/common/loader/Loader";
 import DefaultLayout from "./compnents/admin/container/default/DefaultLayout";
 import AdminDashboard from "./compnents/admin/dashboard/AdminDashboard"
 
+import routes from './common/routes';
+
 function App() {
   // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
@@ -73,26 +75,24 @@ function App() {
     <>
       <Loader />
       <Routes>
-        <Route path="/" element={<DefaultLayout />}>
+        <Route path={routes.home} element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-
-          {/* {user?.role === "admin" && isAuth ? ( */}
-          <Route path={"/admin"} element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="category">
-              <Route index element={<CategoryListPage />} />
-              <Route path="create" element={<CategoryCreatePage />} />
-              <Route path="edit">
-                <Route path=":id" element={<CategoryEditPage />} />
-              </Route>
-            </Route>
-          </Route>
-          {/* ) : (
-            <Route path="admin" element={<LoginPage />} />
-          )} */}
+          <Route path={routes.login} element={<LoginPage />} />
+          <Route path={routes.register} element={<RegisterPage />} />
         </Route>
+
+        {/* {user?.role === "admin" && isAuth ? ( */}
+        <Route path={routes.admin} element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path={routes.adminCategoriesList}>
+            <Route index element={<CategoryListPage />} />
+            <Route path={routes.createCategory} element={<CategoryCreatePage />} />
+            <Route path={routes.editCategory} element={<CategoryEditPage />} />
+          </Route>
+        </Route>
+        {/* ) : (
+          <Route path="admin" element={<LoginPage />} />
+        )} */}
       </Routes>
     </>
   );

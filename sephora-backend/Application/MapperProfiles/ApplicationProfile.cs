@@ -1,6 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Delivery;
-
-namespace CleanArchitecture.Application.MapperProfiles;
+﻿namespace CleanArchitecture.Application.MapperProfiles;
 
 public class ApplicationProfile : Profile
 {

@@ -1,5 +1,3 @@
-using CleanArchitecture.Application.Dtos.Delivery;
-
 namespace perfume_luxury_web_api.Controllers;
 
 public class CheckoutController(

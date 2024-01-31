@@ -1,6 +1,4 @@
-﻿using CleanArchitecture.Domain.Enums;
-
-namespace CleanArchitecture.Domain.Entities;
+﻿namespace CleanArchitecture.Domain.Entities;
 
 public class Order
 {

@@ -1,8 +1,8 @@
 namespace CleanArchitecture.Application.Dtos.Delivery;
 
+// TODO: Add phone number and email
 public class CreateDeliveryDto
 {
-    public long Id { get; set; }
     public string Address { get; set; } = String.Empty;
     public string Provider { get; set; } = String.Empty;
     

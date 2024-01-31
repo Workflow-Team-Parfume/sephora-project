@@ -1,13 +1,9 @@
-using System.Security;
-using CleanArchitecture.Application.Dtos.Delivery;
-using CleanArchitecture.Domain.Enums;
-
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CheckoutService(
     IRepository<Order> orderRepository,
     IRepository<CartItem> cartItemRepository,
-    IRepository<DeliveryEntity> deliveryRepository,
+    IDeliveryService deliveryService,
     UserManager<UserEntity> userManager,
     IMapper mapper
 ) : ICheckoutService
@@ -17,12 +13,10 @@ public class CheckoutService(
         CreateDeliveryDto deliveryDto
     )
     {
-        var items = cartItems.ToArray();
-
         var delivery = mapper.Map<DeliveryEntity>(deliveryDto);
-        await deliveryRepository.Insert(delivery);
-        await deliveryRepository.Save();
+        await deliveryService.Create(deliveryDto);
 
+        var items = cartItems.ToArray();
         await PlaceOrder(mapper.Map<CartItem[]>(items), delivery.Id);
     }
 

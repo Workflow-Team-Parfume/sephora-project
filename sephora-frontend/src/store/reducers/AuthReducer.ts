@@ -1,4 +1,5 @@
-import { IAuthUser, AuthUserActionType, IUser } from "../../compnents/auth/types";
+import { IAuthUser, AuthUserActionType, IUser } from "../../components/auth/types";
+import {UnknownAction} from "@reduxjs/toolkit";
 
 const initState: IAuthUser = {
   isAuth: false,
@@ -6,7 +7,7 @@ const initState: IAuthUser = {
   user: undefined,
 };
 
-export const AuthReducer = (state = initState, action: any): IAuthUser => {
+export const AuthReducer = (state = initState, action: UnknownAction): IAuthUser => {
   switch (action.type) {
     case AuthUserActionType.LOGIN_GOOGLE_USER: {
       const user = action.payload as IUser;
@@ -25,11 +26,7 @@ export const AuthReducer = (state = initState, action: any): IAuthUser => {
       };
     }
     case AuthUserActionType.LOGOUT_USER: {
-      return {
-        user: undefined,
-        isGoogle: false,
-        isAuth: false,
-      };
+      return initState;
     }
   }
   return state;

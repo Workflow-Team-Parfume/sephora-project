@@ -1,26 +1,30 @@
+import {UnknownAction} from "@reduxjs/toolkit";
+
 export interface IsLoadingState {
     isLoading: boolean;
-  }
-  export enum IsLoadingActionTypes {
+}
+
+export enum IsLoadingActionTypes {
     SET_LOADING = "SET_LOADING",
-  }
-  interface SetLoadingAction {
+}
+
+export interface SetLoadingAction {
     type: IsLoadingActionTypes.SET_LOADING;
     payload: boolean;
-  }
-  export type IsLoadingTypes = SetLoadingAction;
-  
-  const initState: IsLoadingState = {
+}
+
+const initState: IsLoadingState = {
     isLoading: false,
-  };
-  
-  export const IsLoadingReducer = (
+};
+
+export const IsLoadingReducer = (
     state: IsLoadingState = initState,
-    action: any
-  ): IsLoadingState => {
+    action: UnknownAction
+): IsLoadingState => {
     switch (action.type) {
-      case IsLoadingActionTypes.SET_LOADING:
-        return { ...state, isLoading: action.payload };
+        case IsLoadingActionTypes.SET_LOADING:
+            return <IsLoadingState>{...state, isLoading: action.payload};
+        default:
+            return state;
     }
-    return state;
-  };
+};

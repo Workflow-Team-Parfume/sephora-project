@@ -3,6 +3,8 @@ namespace CleanArchitecture.Domain.Entities;
 /*
  * TODO: Redo this class if needed, because
  * this is a placeholder for the real entity (not fully implemented yet)
+ *
+ * (Like adding a phone number and email)
  */
 public class DeliveryEntity
 {

@@ -4,6 +4,7 @@ global using CleanArchitecture.Application.Dtos.Amount;
 global using CleanArchitecture.Application.Dtos.Brand;
 global using CleanArchitecture.Application.Dtos.Cart;
 global using CleanArchitecture.Application.Dtos.Category;
+global using CleanArchitecture.Application.Dtos.Delivery;
 global using CleanArchitecture.Application.Dtos.Product;
 global using CleanArchitecture.Application.Dtos.User;
 global using CleanArchitecture.Application.Helpers;

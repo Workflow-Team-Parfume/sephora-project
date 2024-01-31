@@ -1,5 +1,3 @@
-using CleanArchitecture.Application.Dtos.Delivery;
-
 namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface ICheckoutService

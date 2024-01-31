@@ -18,6 +18,7 @@ public static class ServiceExtensions
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<ICheckoutService, CheckoutService>();
+        services.AddScoped<IDeliveryService, DeliveryService>();
     }
 
     public static void AddValidators(this IServiceCollection services)

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 const HomeFooter = () => {
   return (
     <>
-      <div className="div22">
+      <div className="footer-container">
         <Box
           sx={{
             flexGrow: 1,

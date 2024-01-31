@@ -1,4 +1,4 @@
-.div1 {
+.main-input {
   display: flex;
   width: 605px;
   height: 50px;
@@ -13,7 +13,7 @@
   //   outline: none;
 }
 
-.div2{
+.header-container{
   background: var(--green, #688f74);
   padding: 10px;
   color: #fff;
@@ -23,15 +23,15 @@
   line-height: normal;
 }
 
-.div2 button{
+.header-container button{
     font-size: 10px;
 }
 
-.link1{
-    color: #808080;
-    text-decoration: none;
+.eng-link {
+  color: #808080;
+  text-decoration: none;  
 }
-.link2{
-    text-decoration: none;
-    color: #000;
+.ukr-link {
+  text-decoration: none;
+  color: #000;
 }

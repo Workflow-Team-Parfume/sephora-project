@@ -1,3 +1,4 @@
+using System.Security;
 using CleanArchitecture.Application.Dtos.Delivery;
 using CleanArchitecture.Domain.Enums;
 
@@ -25,19 +26,17 @@ public class CheckoutService(
         await PlaceOrder(mapper.Map<CartItem[]>(items), delivery.Id);
     }
 
-    public async Task CheckoutAuthed(
-        IEnumerable<CartItem> cartItems,
-        ClaimsPrincipal user
-    )
+    public async Task CheckoutAuthed(ClaimsPrincipal user)
     {
-        var deliveryId = (await userManager.GetUserAsync(user))?.DeliveryDataId;
-        if (deliveryId == null)
-            throw new ArgumentException(
-                "User has no delivery data",
-                nameof(user));
+        UserEntity? userEntity = await userManager.GetUserAsync(user);
+        if (userEntity is null)
+            throw new SecurityException("The specified user is not found");
 
-        var items = cartItems.ToArray();
-        await PlaceOrder(items, deliveryId.Value);
+        var spec = new CartItems.GetByUserId(userEntity.Id);
+        CartItem[] items
+            = (await cartItemRepository.GetListBySpec(spec)).ToArray();
+
+        await PlaceOrder(items, userEntity.DeliveryDataId);
 
         foreach (var item in items)
             await cartItemRepository.Delete(item.Id);
@@ -46,6 +45,12 @@ public class CheckoutService(
 
     private async Task PlaceOrder(CartItem[] items, long deliveryId)
     {
+        if (items.Length == 0)
+            throw new ArgumentException(
+                "The cart is empty",
+                nameof(items)
+            );
+        
         var order = new Order
         {
             Date = DateTime.Now,

@@ -1,5 +1,3 @@
-using CleanArchitecture.Application.Dtos.Checkout;
-
 namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface ICheckoutService
@@ -32,31 +30,38 @@ public interface ICheckoutService
      * (Sets the status to CANCELLED)
      * </summary>
      * <param name="orderId">The ID of an order that will be cancelled</param>
+     * <param name="user">The user who cancels the order</param>
      */
-    Task CancelOrder(long orderId);
+    Task CancelOrder(long orderId, ClaimsPrincipal user);
+    
+    /**
+     * <summary>Changes the status of the order with the specified ID.</summary>
+     * <param name="dto">The order which status will be changed</param>
+     */
+    Task ChangeStatus(ChangeStatusDto dto);
 
     /**
      * <summary>Gets all orders.</summary>
      * <returns>A list of all orders.</returns>
      */
-    Task<IEnumerable<CheckoutDto>> Get();
+    Task<IEnumerable<OrderDto>> Get();
 
     /**
      * <summary>Gets the order with the specified ID.</summary>
      * <param name="id">The ID of an order that will be returned</param>
      * <returns>The order with the specified ID.</returns>
      */
-    Task<CategoryDto?> GetById(int id);
+    Task<CategoryDto?> GetById(long id);
 
     /**
      * <summary>Creates a new order.</summary>
-     * <param name="checkoutDto">The data of the new order</param>
+     * <param name="orderDto">The data of the new order</param>
      */
-    Task Edit(CheckoutDto checkoutDto);
+    Task Edit(OrderDto orderDto);
 
     /**
      * <summary>Deletes the order with the specified ID.</summary>
      * <param name="id">The ID of an order that will be deleted</param>
      */
-    Task Delete(int id);
+    Task Delete(long id);
 }

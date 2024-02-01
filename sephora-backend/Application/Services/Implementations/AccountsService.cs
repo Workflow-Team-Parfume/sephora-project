@@ -97,7 +97,7 @@ public class AccountsService(
             throw new HttpException(message, HttpStatusCode.BadRequest);
         }
 
-        await userManager.AddToRoleAsync(user, "user");
+        await userManager.AddToRoleAsync(user, nameof(user));
     }
 
     public async Task<bool> CheckEmailExists(string email)

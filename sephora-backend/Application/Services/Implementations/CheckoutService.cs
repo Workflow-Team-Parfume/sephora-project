@@ -1,5 +1,3 @@
-using CleanArchitecture.Application.Dtos.Checkout;
-
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CheckoutService(
@@ -39,29 +37,66 @@ public class CheckoutService(
         await cartService.DeleteAll(user);
     }
 
-    public async Task CancelOrder(long orderId)
+    public async Task ChangeStatus(ChangeStatusDto dto)
     {
-        throw new NotImplementedException();
+        Order? order = await orderRepository.GetById(dto.Id);
+        if (order is null)
+            throw new ArgumentException(
+                "The specified order is not found",
+                nameof(dto.Id)
+            );
+
+        order.Status = dto.Status;
+        
+        await orderRepository.Update(order);
+        await orderRepository.Save();
     }
 
-    public async Task<IEnumerable<CheckoutDto>> Get()
+    public async Task CancelOrder(long orderId, ClaimsPrincipal user)
     {
-        throw new NotImplementedException();
+        UserEntity? userEntity = await userManager.GetUserAsync(user);
+        if (userEntity is null)
+            throw new SecurityException("The specified user is not found");
+        
+        Order? order = await orderRepository.GetById(orderId);
+        if (order is null)
+            throw new ArgumentException(
+                "The specified order is not found",
+                nameof(orderId)
+            );
+        if (order.Delivery.UserId != userEntity.Id)
+            throw new NotSupportedException(
+                "The specified user is not the owner of the order"
+            );
+
+        order.Status = OrderStatus.CANCELLED_BY_USER;
+        
+        await orderRepository.Update(order);
+        await orderRepository.Save();
     }
 
-    public async Task<CategoryDto?> GetById(int id)
+    public async Task<IEnumerable<OrderDto>> Get()
+        => mapper.Map<IEnumerable<OrderDto>>(
+            await orderRepository.GetAll()
+        );
+
+    public async Task<CategoryDto?> GetById(long id)
     {
-        throw new NotImplementedException();
+        Order? order = await orderRepository.GetById(id);
+        return order is null ? null : mapper.Map<CategoryDto>(order);
     }
 
-    public async Task Edit(CheckoutDto checkoutDto)
+    public async Task Edit(OrderDto orderDto)
     {
-        throw new NotImplementedException();
+        Order order = mapper.Map<Order>(orderDto);
+        await orderRepository.Update(order);
+        await orderRepository.Save();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(long id)
     {
-        throw new NotImplementedException();
+        await orderRepository.Delete(id);
+        await orderRepository.Save();
     }
 
     /**

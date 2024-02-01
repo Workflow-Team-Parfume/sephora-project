@@ -25,7 +25,7 @@ public class AmountsController(IAmountService amountService) : Controller
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await amountService.Delete(id);

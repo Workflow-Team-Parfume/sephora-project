@@ -18,7 +18,7 @@ builder.Services.AddControllersWithViews()
 
 // Add JWT tokens
 JwtOptions opts = builder.Environment.IsDevelopment()
-    ? builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>()
+    ? builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>()
     : new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),

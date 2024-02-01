@@ -1,3 +1,5 @@
+using CleanArchitecture.Application.Dtos.Checkout;
+
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CheckoutService(
@@ -5,6 +7,7 @@ public class CheckoutService(
     IRepository<CartItem> cartItemRepository,
     IDeliveryService deliveryService,
     UserManager<UserEntity> userManager,
+    ICartService cartService,
     IMapper mapper
 ) : ICheckoutService
 {
@@ -19,7 +22,7 @@ public class CheckoutService(
         var items = cartItems.ToArray();
         await PlaceOrder(mapper.Map<CartItem[]>(items), delivery.Id);
     }
-
+    
     public async Task CheckoutAuthed(ClaimsPrincipal user)
     {
         UserEntity? userEntity = await userManager.GetUserAsync(user);
@@ -27,16 +30,48 @@ public class CheckoutService(
             throw new SecurityException("The specified user is not found");
 
         var spec = new CartItems.GetByUserId(userEntity.Id);
+        
         CartItem[] items
             = (await cartItemRepository.GetListBySpec(spec)).ToArray();
 
         await PlaceOrder(items, userEntity.DeliveryDataId);
 
-        foreach (var item in items)
-            await cartItemRepository.Delete(item.Id);
-        await cartItemRepository.Save();
+        await cartService.DeleteAll(user);
     }
 
+    public async Task CancelOrder(long orderId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<CheckoutDto>> Get()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<CategoryDto?> GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task Edit(CheckoutDto checkoutDto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    /**
+     * <summary>
+     * Places an order with the specified items and delivery ID. <br/>
+     * (Core logic of the checkout process)
+     * </summary>
+     * <param name="items">The items that will be added to the order</param>
+     * <param name="deliveryId">The ID of the delivery</param>
+     */
     private async Task PlaceOrder(CartItem[] items, long deliveryId)
     {
         if (items.Length == 0)

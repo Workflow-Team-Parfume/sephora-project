@@ -13,6 +13,7 @@ global using CleanArchitecture.Application.Dtos.Brand;
 global using CleanArchitecture.Application.Dtos.Cart;
 global using CleanArchitecture.Application.Dtos.Category;
 global using CleanArchitecture.Application.Dtos.Delivery;
+global using CleanArchitecture.Application.Dtos.Order;
 global using CleanArchitecture.Application.Dtos.Product;
 global using CleanArchitecture.Application.Dtos.ProductPiece;
 global using CleanArchitecture.Application.Dtos.User;

@@ -52,7 +52,7 @@ i18n
         'header.perfumesOnTap': 'Perfumes on tap',
         'header.care': 'Care',
         'header.new': 'NEW',
-        'header.catelog': 'Catelog',
+        'header.catalog': 'Catalog',
         'header.aboutUs': 'About us',
         'header.paymentAndDelivery': 'Payment and delivery',
         'header.contact': 'Contact',

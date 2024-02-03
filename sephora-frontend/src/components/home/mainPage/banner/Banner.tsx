@@ -2,9 +2,13 @@ import { Button, Container, Grid, Stack } from "@mui/material";
 import "./banner.scss"
 import { IBanner } from "./types";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}> 
 = ({ banner, color, isLeft=false}) => {
+
+    const { t } = useTranslation();
+
   return (
         <Container style={{maxWidth:"100%"}} >
              <Grid container spacing={2.5} direction={isLeft ? "row-reverse" : "row"}>
@@ -15,7 +19,7 @@ const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}>
                         <div className="bannerDescription">{banner.description}</div>
                     </Stack>
 
-                    <Button id="bannerLink" variant="outlined" href={banner.link}>Переглянути</Button>
+                    <Button id="bannerLink" variant="outlined" href={banner.link}>{t('common.button.view')}</Button>
                 </Stack>
                 </Grid>
 

@@ -1,7 +1,7 @@
 using CleanArchitecture.Application.Helpers;
 using Infrastructure;
 using Newtonsoft.Json;
-using perfume_luxury_web_api;
+using perfume_luxury_web_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +54,9 @@ builder.Services.AddAutoMapper();
 // add fluent validators
 builder.Services.AddValidators();
 
+// add file service
+builder.Services.AddFileService(builder.Environment.IsDevelopment());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHsts();
 app.UseHttpsRedirection();
 
 app.UseCors(options =>
@@ -78,4 +82,7 @@ app.UseAuthentication();
 
 app.MapControllers();
 
+app.UseFiles(app.Environment.IsDevelopment());
+
 app.Run();
+

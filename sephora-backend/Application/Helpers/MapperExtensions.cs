@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitecture.Application.Helpers;
 
-public static class ServiceExtensions
+public static class MapperExtensions
 {
     public static void AddAutoMapper(this IServiceCollection services)
     {

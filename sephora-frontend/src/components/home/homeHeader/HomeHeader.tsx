@@ -8,30 +8,31 @@ import icon1 from '../../../assets/images/icon1.svg';
 import icon2 from '../../../assets/images/icon2.svg';
 
 const HomeHeader = () => {
-  const boxStyles = {
-    display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
-    alignItems: "center",
-  };
+
   return (
     <>
       <Box
-      
       sx={{
-        boxStyles,
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        alignItems: { xs: "center"},
         justifyContent: {xs: "center"},
         marginBottom: 6
       }}
       >
       <Box
       sx={{
-        boxStyles,
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        alignItems: { xs: "center"},
         gap: 10,
       }}
       >
         <Box
       sx={{
-        boxStyles,
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        alignItems: { xs: "center"},
         gap: 2,
       }}
       >
@@ -39,9 +40,13 @@ const HomeHeader = () => {
       </Box>
 
         <Input
-          className="div1"
+          className="main_input"
           id="outlined-adornment-password"
           type={"text"}
+          sx={{
+            ':before': { borderBottomColor: 'white' },
+            ':after': { borderBottomColor: 'white' },
+          }}
           endAdornment={
             <IconButton size="small" aria-label="toggle password visibility">
               <img src={input_main_icon} alt="" />
@@ -51,28 +56,36 @@ const HomeHeader = () => {
 
         <Box
           sx={{
-            boxStyles,
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "center"},
             gap: 4,
           }}>
- 
+
         <Box
           sx={{
-            boxStyles,
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "center"},
             gap: 1,
           }}>
- 
-          <Link className="eng-link"
+
+          <Link
             component="button"
             variant="body2"
+            color={ '#808080' }
+            underline="none"
             onClick={() => {
               console.info("I'm a button.");
             }}
           >
             ENG
           </Link>
-          <Link className="ukr-link"
+          <Link
             component="button"
             variant="body2"
+            color={ '#000' }  
+            underline="none"
             onClick={() => {
               console.info("I'm a button.");
             }}
@@ -83,10 +96,12 @@ const HomeHeader = () => {
         </Box>
         <Box
           sx={{
-            boxStyles,
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "center"},
             gap: 2,
           }}>
- 
+
           <img src={icon1} alt="" />
           <img src={icon2} alt="" />
 
@@ -95,14 +110,16 @@ const HomeHeader = () => {
         </Box>
       </Box>
       </Box>
-      <div className="header-container">
+      <div className="mainNav">
       <Box
         sx={{ 
-          boxStyles,
           flexGrow: 1,
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: { xs: "center"},
           justifyContent: {xs: "center"},
-          gap: 10,
-          
+          gap: 9.5,
+
         }}>
             <Button color="inherit">Повнорозмірні флакони</Button>
             <Button color="inherit">Розпив парфумерії</Button>

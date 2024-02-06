@@ -6,7 +6,7 @@
   line-height: normal;
 }
 
-.footer-container {
+.main_footer {
   background: var(--green, #688f74);
   padding: 10px;
   color: #fff;
@@ -15,8 +15,10 @@
   font-weight: 500;
   line-height: normal;
   height: 300px;
+  text-align: left;
 }
 
-.footer-container button {
+.main_footer button {
   font-size: 10px;
+  margin-left: -7px;
 }

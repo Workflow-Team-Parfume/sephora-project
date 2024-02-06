@@ -4,18 +4,15 @@ import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 const HomeFooter = () => {
-  const boxStyles = {
-    flexGrow: 1,
-    display: "flex",
-    flexDirection: { xs: "row", sm: "column" },
-    alignItems: { xs: "flex-start" },
-  };
   return (
     <>
-      <div className="footer-container">
+      <div className="main_footer">
         <Box
           sx={{
-            boxStyles,
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            alignItems: { xs: "flex-start" },
             justifyContent: { xs: "center" },
             gap: 3,
             paddingLeft: 18,
@@ -24,7 +21,10 @@ const HomeFooter = () => {
         >
           <Box
             sx={{
-              boxStyles,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: { xs: "row", sm: "column" },
+              alignItems: { xs: "flex-start" },
               gap: 0,
               width: 156,
             }}
@@ -37,7 +37,10 @@ const HomeFooter = () => {
           </Box>
           <Box
             sx={{
-              boxStyles,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: { xs: "row", sm: "column" },
+              alignItems: { xs: "flex-start" },
               justifyContent: { xs: "center" },
               gap: 0,
               width: 178,
@@ -51,7 +54,10 @@ const HomeFooter = () => {
           </Box>
           <Box
             sx={{
-              boxStyles,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: { xs: "row", sm: "column" },
+              alignItems: { xs: "flex-start" },
               justifyContent: { xs: "center" },
               gap: 0,
               width: 190,
@@ -66,7 +72,10 @@ const HomeFooter = () => {
           </Box>
           <Box
             sx={{
-              boxStyles,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: { xs: "row", sm: "column" },
+              alignItems: { xs: "flex-start" },
               justifyContent: { xs: "center" },
               gap: 0,
               width: 87,
@@ -79,7 +88,10 @@ const HomeFooter = () => {
           </Box>
           <Box
             sx={{
-              boxStyles,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: { xs: "row", sm: "column" },
+              alignItems: { xs: "flex-start" },
               justifyContent: { xs: "center" },
               gap: 0,
               width: 481,

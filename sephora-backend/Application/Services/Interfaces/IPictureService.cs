@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Dtos.Picture;
 using Microsoft.AspNetCore.Http;
 
 namespace CleanArchitecture.Application.Services.Interfaces;
@@ -33,6 +34,17 @@ public interface IPictureService
      * <returns>The file stream</returns>
      */
     Stream GetFile(string name);
+    
+    /**
+     * <summary>
+     * Get a picture file stream (for a specific picture size)
+     * from the file system
+     * </summary>
+     * <param name="name">The name of a picture</param>
+     * <param name="size">The size of a picture</param>
+     * <returns>The file stream</returns>
+     */
+    Stream GetFile(string name, string size);
 
     /**
      * <summary>
@@ -42,6 +54,17 @@ public interface IPictureService
      * <returns>The picture bytes</returns>
      */
     byte[] GetFileBytes(string name);
+    
+    /**
+     * <summary>
+     * Get a picture as bytes (for a specific picture size)
+     * from the file system
+     * </summary>
+     * <param name="name">The name of a picture</param>
+     * <param name="size">The size of a picture</param>
+     * <returns>The picture bytes</returns>
+     */
+    byte[] GetFileBytes(string name, string size);
 
     /**
      * <summary>Delete a picture from the file system</summary>
@@ -55,4 +78,13 @@ public interface IPictureService
      * <returns>Whether the file exists</returns>
      */
     bool FileExists(string name);
+    
+    /**
+     * <summary>Get the DTO of a file</summary>
+     * <param name="name">The name of a file</param>
+     * <returns>
+     * The object that contains all the data related to a picture
+     * </returns>
+     */
+    PictureDto? CreatePicDto(string name);
 }

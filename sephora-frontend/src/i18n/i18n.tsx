@@ -15,7 +15,7 @@ i18n
         'header.aboutUs': 'Про нас',
         'header.paymentAndDelivery': 'Оплата та доставка',
         'header.contact': 'Контакти',
-
+          
         'common.button.details': 'Детальніше',
         'common.button.moreProducts': 'Більше товарів',
         'common.button.view': 'Переглянути',
@@ -27,7 +27,7 @@ i18n
         'common.title.reviews': 'Відгуки',
         'common.title.similarProducts': 'Схожі товари',
         'common.title.especiallyForYou': 'Спеціально для вас',
-
+          
         'recCategories.showerAndBath': 'Душ та ванна',
         'recCategories.accessories': 'Аксесуари',
         'recCategories.vitamins': 'Вітамини',

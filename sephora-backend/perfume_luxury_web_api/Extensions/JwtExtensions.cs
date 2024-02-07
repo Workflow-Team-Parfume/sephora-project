@@ -1,6 +1,6 @@
-﻿namespace perfume_luxury_web_api;
+﻿namespace perfume_luxury_web_api.Extensions;
 
-public static class ServiceExtensions
+public static class JwtExtensions
 {
     public static void AddJwt(
         this IServiceCollection services,

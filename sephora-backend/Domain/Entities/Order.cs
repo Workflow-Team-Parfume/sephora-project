@@ -2,16 +2,16 @@
 
 public class Order
 {
-    
-    public int Id { get; set; }
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long Id { get; set; }
     
     public DateTime Date { get; set; }
     
-    public decimal Total { get; set; }
+    public OrderStatus Status { get; set; }
     
-    public string UserId { get; set; } = String.Empty;
+    [ForeignKey("DeliveryDataSet"), Column(Order = 0)]
+    public long DeliveryId { get; set; }
     
-    public UserEntity User { get; set; }
-    
-    public ICollection<ProductEntity>? Products { get; set; }
+    public DeliveryEntity Delivery { get; set; }
+    public ICollection<OrderItem>? Products { get; set; }
 }

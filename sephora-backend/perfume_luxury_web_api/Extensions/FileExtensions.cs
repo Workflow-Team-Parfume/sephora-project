@@ -1,7 +1,3 @@
-using CleanArchitecture.Application.Services.Implementations;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.Extensions.FileProviders;
-
 namespace perfume_luxury_web_api.Extensions;
 
 public static class FileExtensions

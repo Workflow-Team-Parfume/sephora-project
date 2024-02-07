@@ -1,7 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Brand;
-using CleanArchitecture.Application.Dtos.Category;
-
-namespace CleanArchitecture.Application.Dtos.Product;
+﻿namespace CleanArchitecture.Application.Dtos.Product;
 
 public class ProductDto
 {

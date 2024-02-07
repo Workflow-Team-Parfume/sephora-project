@@ -1,6 +1,4 @@
-﻿using CleanArchitecture.Application.Dtos.Category;
-
-namespace CleanArchitecture.Application.Services.Interfaces;
+﻿namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface ICategoryService
 {

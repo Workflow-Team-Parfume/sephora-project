@@ -100,9 +100,3 @@ export const mainBanner = ([
 ])
 
 
-export const recCategories = ([
-    {name:"Душ та ванна", link:""},
-    {name:"Аксесуари", link:""},
-    {name:"Вітаміни", link:""},
-    {name:"Обличчя", link:""},
-])

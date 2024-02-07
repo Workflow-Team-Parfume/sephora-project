@@ -1,9 +1,4 @@
-﻿using CleanArchitecture.Domain.Entities;
-using Infrastructure.Configurations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 
 public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
     : IdentityDbContext<UserEntity>(options)
@@ -25,6 +20,7 @@ public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
     public DbSet<Order> Orders { get; set; } = default!;
     public DbSet<ProductEntity> Products { get; set; } = default!;
     public DbSet<ProductPiece> ProductPieces { get; set; } = default!;
-    public DbSet<ParfumeBottled> ParfumeBottles { get; set; } = default!;
     public DbSet<CartItem> CartItems { get; set; } = default!;
+    public DbSet<DeliveryEntity> DeliveryDataSet { get; set; } = default!;
+    public DbSet<OrderItem> OrderItems { get; set; } = default!;
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace CleanArchitecture.Domain.Entities;
+﻿namespace CleanArchitecture.Domain.Entities;
 
 public class UserEntity : IdentityUser
 {
@@ -8,6 +6,9 @@ public class UserEntity : IdentityUser
 
     public DateTime RegistrationDate { get; set; }
 
+    public long DeliveryDataId { get; set; }
+    public DeliveryEntity DeliveryData { get; set; } = default!;
+    
     public ICollection<Rating>? Ratings { get; set; }
 
     public ICollection<Order>? Orders { get; set; }

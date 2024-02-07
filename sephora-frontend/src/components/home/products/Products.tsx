@@ -2,9 +2,13 @@ import { Button, Container, Grid, Typography } from "@mui/material";
 import { IProduct } from "./types";
 import "./products.scss"
 import Product from "./Product";
+import { useTranslation } from "react-i18next";
 
 const Products : React.FC<{title:string, products:IProduct[], link:string, isNew?:boolean}>
 = ({ title, products, link, isNew = false }) => {
+  
+  const { t } = useTranslation();
+
   return (
     <Container style={{ maxWidth:"100%", justifyContent:"center"}}>
           <Typography id="title">{title}</Typography>
@@ -17,7 +21,7 @@ const Products : React.FC<{title:string, products:IProduct[], link:string, isNew
             </Grid>
           </Container>
 
-          <Button id="link" variant="outlined" href={link}>Більше товарів</Button>
+          <Button id="link" variant="outlined" href={link}>{t('common.button.moreProducts')}</Button>
         </Container>
     );
 }

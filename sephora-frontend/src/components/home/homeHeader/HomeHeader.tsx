@@ -74,9 +74,6 @@ const HomeHeader = () => {
                 variant="body2"
                 color={"#808080"}
                 underline="none"
-                onClick={() => {
-                  console.info("I'm a button.");
-                }}
                 onClick={() => changeLanguage("en")}
               >
                 ENG
@@ -86,9 +83,6 @@ const HomeHeader = () => {
                 variant="body2"
                 color={"#000"}
                 underline="none"
-                onClick={() => {
-                  console.info("I'm a button.");
-                }}
                 onClick={() => changeLanguage("uk")}
               >
                 УКР

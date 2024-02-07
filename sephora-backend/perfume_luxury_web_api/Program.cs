@@ -9,12 +9,14 @@ if (connStr is null)
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling
-            = ReferenceLoopHandling.Ignore
-    );
+builder.Services.AddControllers().AddNewtonsoftJson(opts => 
+        opts.SerializerSettings.Formatting = Formatting.Indented);
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(opts =>
+{
+    opts.SerializerSettings.ReferenceLoopHandling 
+        = ReferenceLoopHandling.Ignore;
+    opts.SerializerSettings.Formatting = Formatting.Indented;
+});
 
 // Add JWT tokens
 JwtOptions opts = builder.Environment.IsDevelopment()

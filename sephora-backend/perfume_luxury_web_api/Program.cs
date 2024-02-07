@@ -77,7 +77,4 @@ app.UseAuthentication();
 
 app.MapControllers();
 
-app.UseFiles(app.Environment.IsDevelopment());
-
 app.Run();
-

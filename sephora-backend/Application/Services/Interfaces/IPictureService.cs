@@ -1,6 +1,3 @@
-using CleanArchitecture.Application.Dtos.Picture;
-using Microsoft.AspNetCore.Http;
-
 namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IPictureService
@@ -80,11 +77,9 @@ public interface IPictureService
     bool FileExists(string name);
     
     /**
-     * <summary>Get the DTO of a file</summary>
-     * <param name="name">The name of a file</param>
-     * <returns>
-     * The object that contains all the data related to a picture
-     * </returns>
+     * <summary>Check if a size parameter is valid</summary>
+     * <param name="size">The size of a picture</param>
+     * <returns>Whether the size exists</returns>
      */
-    PictureDto? CreatePicDto(string name);
+    bool SizeExists(string size);
 }

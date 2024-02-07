@@ -1,9 +1,3 @@
-using CleanArchitecture.Application.Dtos.Picture;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class PhysicalPictureService : IPictureService
@@ -22,12 +16,10 @@ public class PhysicalPictureService : IPictureService
     ];
 
     private string ContentPath { get; }
-    private bool IsDevelopment { get; }
 
-    public PhysicalPictureService(string contentPath, bool isDevelopment)
+    public PhysicalPictureService(string contentPath)
     {
         ContentPath = contentPath + "/img";
-        IsDevelopment = isDevelopment;
 
         // Ensure subdirectories for different sizes exist
         foreach (string s in SizesPaths)
@@ -106,25 +98,8 @@ public class PhysicalPictureService : IPictureService
     public bool FileExists(string name)
         => File.Exists(Path.Combine(ContentPath, SizesPaths[0], name));
 
-    // TODO: Move to a separate service/DTO constructor
-    public PictureDto? CreatePicDto(string name)
-    {
-        if (!FileExists(name)) return null;
-
-        string domain = IsDevelopment
-            ? "http://localhost:5156/assets/img"
-            : "https://api.luxuryhub.tech/assets/img";
-
-        return new PictureDto
-        {
-            Name = name,
-            Url = $"{domain}/{SizesPaths[0]}/{name}",
-            UrlLg = $"{domain}/{SizesPaths[1]}/{name}",
-            UrlMd = $"{domain}/{SizesPaths[2]}/{name}",
-            UrlSm = $"{domain}/{SizesPaths[3]}/{name}",
-            UrlXs = $"{domain}/{SizesPaths[4]}/{name}",
-        };
-    }
+    public bool SizeExists(string size)
+        => SizesPaths.Contains(size);
 
     /**
      * <summary>Generate a unique file name</summary>

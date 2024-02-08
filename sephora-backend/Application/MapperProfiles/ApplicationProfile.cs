@@ -16,15 +16,21 @@ public class ApplicationProfile : Profile
         CreateMap<ProductDto, ProductEntity>().ReverseMap();
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
-        CreateMap<ProductEntity, CreateProductParfumeDto>()
-            .ForMember(dest => dest.ParfumePieces, opt => opt.Ignore());
-        CreateMap<CreateProductParfumeDto, ProductEntity>();
-        CreateMap<EditProductParfumeDto, ProductEntity>().ReverseMap();
 
         CreateMap<CreateProductPieceDto, ProductPiece>().ReverseMap();
-        CreateMap<ProductPieceDTO, ProductPiece>().ReverseMap();
+        // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
+        CreateMap<ProductPiece, ProductPieceDTO>()
+            .ForMember(
+                dest => dest.Milliliters,
+                opts => opts.MapFrom(src => src.Amount!.Milliliters)
+            )
+            .ForMember(
+                dest => dest.Product,
+                opts => opts.MapFrom(src => src.Product)
+            );
         CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
 
+        // TODO
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(
                 dest => dest.ProfilePicture,
@@ -58,8 +64,8 @@ public class ApplicationProfile : Profile
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
-        
-        CreateMap<CreateDeliveryDto, DeliveryEntity>();  
-        // TODO: Add other delivery mappings
+
+        CreateMap<CreateDeliveryDto, DeliveryEntity>();
+        CreateMap<DeliveryEntity, DeliveryDto>().ReverseMap();
     }
 }

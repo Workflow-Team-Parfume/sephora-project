@@ -2,7 +2,7 @@
 
 public class ProductPiece
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public int? InStock { get; set; }
 
@@ -14,7 +14,7 @@ public class ProductPiece
 
     public bool IsBottledParfume { get; set; }
 
-    public int ProductId { get; set; }
+    public long ProductId { get; set; }
 
     public ProductEntity Product { get; set; }
 }

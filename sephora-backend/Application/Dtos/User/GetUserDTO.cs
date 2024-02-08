@@ -1,5 +1,6 @@
 ﻿namespace CleanArchitecture.Application.Dtos.User;
 
+// TODO: CREATE RATINGS DTOs
 public class GetUserDto
 {
     public string Id { get; set; } = String.Empty;
@@ -10,5 +11,5 @@ public class GetUserDto
     public List<string> Roles { get; set; }
     public DateTime RegistrationDate { get; set; }
     public ICollection<Rating>? Ratings { get; set; }
-    public ICollection<Domain.Entities.Order>? Orders { get; set; }
+    public ICollection<OrderDto>? Orders { get; set; }
 }

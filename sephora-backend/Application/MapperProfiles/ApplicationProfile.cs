@@ -50,10 +50,6 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Description)
             )
             .ForMember(
-                dest => dest.ProductImage,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.ImgPath)
-            )
-            .ForMember(
                 dest => dest.BrandName,
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Brand.Name)
             )

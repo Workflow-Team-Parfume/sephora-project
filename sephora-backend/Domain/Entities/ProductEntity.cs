@@ -8,8 +8,6 @@ public class ProductEntity
 
     public string? Description { get; set; }
 
-    public string ImgPath { get; set; } = String.Empty;
-
     public bool Active { get; set; }
 
     public int BrandId { get; set; }

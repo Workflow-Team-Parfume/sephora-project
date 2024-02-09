@@ -2,7 +2,10 @@
 
 public class ApplicationProfile : Profile
 {
-    public ApplicationProfile(IHostEnvironment env)
+    private static string? EnvName => 
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    
+    public ApplicationProfile()
     {
         CreateMap<Brand, BrandDto>().ReverseMap();
         CreateMap<Brand, CreateBrandDto>().ReverseMap();
@@ -21,15 +24,14 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
         // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
         CreateMap<ProductPiece, ProductPieceDTO>().ForMember(
-                dest => dest.Milliliters,
-                opts => opts.MapFrom(src => src.Amount!.Milliliters)
-            )
-            .ForMember(dest => dest.ProductPictures, opts => opts.Ignore());
+            dest => dest.Milliliters,
+            opts => opts.MapFrom(src => src.Amount!.Milliliters)
+        );
         CreateMap<EditProductPieceDTO, ProductPiece>();
 
         CreateMap<ProductPicture, PictureDto>()
             .ConstructUsing(x =>
-                new PictureDto(x.PicturePath, env.IsDevelopment())
+                new PictureDto(x.PicturePath, EnvName == "Development")
             );
 
         // TODO

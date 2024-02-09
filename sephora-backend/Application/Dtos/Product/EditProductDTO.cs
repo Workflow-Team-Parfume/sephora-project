@@ -8,6 +8,4 @@ public class EditProductDto
     public bool Active { get; set; }
     public int BrandId { get; set; }
     public int CategoryId { get; set; }
-    
-    
 }

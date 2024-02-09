@@ -8,9 +8,11 @@ public class ProductPiece
 
     public decimal Price { get; set; }
 
-    public int AmountId { get; set; }
+    public int? AmountId { get; set; }
 
     public Amount? Amount { get; set; }
+
+    public bool IsBottledParfume { get; set; }
 
     public int ProductId { get; set; }
 

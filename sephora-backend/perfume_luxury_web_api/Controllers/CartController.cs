@@ -1,8 +1,3 @@
-using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace perfume_luxury_web_api.Controllers;
 
 // TODO: Add logging
@@ -16,7 +11,7 @@ public class CartController(ICartService cartService) : ControllerBase
         return Ok(await cartService.Get(User));
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get([FromRoute] int id)
     {
         var item = await cartService.GetById(id);

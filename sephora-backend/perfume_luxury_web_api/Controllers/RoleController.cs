@@ -1,10 +1,6 @@
-﻿using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace perfume_luxury_web_api.Controllers;
 
-namespace perfume_luxury_web_api.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
+[Route("api/[controller]"), ApiController]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
     [HttpPost]

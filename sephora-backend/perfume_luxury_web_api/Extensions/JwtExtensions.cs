@@ -1,12 +1,6 @@
-﻿using System.Security;
-using System.Text;
-using CleanArchitecture.Application.Helpers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿namespace perfume_luxury_web_api.Extensions;
 
-namespace perfume_luxury_web_api;
-
-public static class ServiceExtensions
+public static class JwtExtensions
 {
     public static void AddJwt(
         this IServiceCollection services,

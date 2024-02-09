@@ -1,10 +1,8 @@
 namespace CleanArchitecture.Application.Dtos.Cart;
 
-// TODO: Change id to UUID
-
 public class CartDto
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
     public int Quantity { get; set; }
     
     // public string UserId { get; set; } = String.Empty;

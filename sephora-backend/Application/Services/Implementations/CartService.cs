@@ -1,13 +1,3 @@
-using System.Security.Claims;
-using AutoMapper;
-using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Resources;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Application.Specifications;
-using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Identity;
-
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CartService(
@@ -36,7 +26,7 @@ public class CartService(
         );
     }
 
-    public async Task<CartDto?> GetById(int id)
+    public async Task<CartDto?> GetById(long id)
     {
         CartItem? entry = await cartRepository.GetById(id);
         return entry is null ? null : mapper.Map<CartDto>(entry);
@@ -53,7 +43,7 @@ public class CartService(
         await cartRepository.Save();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(long id)
     {
         await cartRepository.Delete(id);
         await cartRepository.Save();

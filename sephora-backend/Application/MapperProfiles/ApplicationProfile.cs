@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Dtos.Brand;
-using CleanArchitecture.Application.Dtos.Cart;
-using CleanArchitecture.Application.Dtos.Category;
-using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Dtos.ProductPiece;
-using CleanArchitecture.Application.Dtos.User;
-using CleanArchitecture.Domain.Entities;
-
-namespace CleanArchitecture.Application.MapperProfiles;
+﻿namespace CleanArchitecture.Application.MapperProfiles;
 
 public class ApplicationProfile : Profile
 {
@@ -68,5 +58,8 @@ public class ApplicationProfile : Profile
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
+        
+        CreateMap<CreateDeliveryDto, DeliveryEntity>();  
+        // TODO: Add other delivery mappings
     }
 }

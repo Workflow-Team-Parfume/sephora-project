@@ -7,7 +7,7 @@ public class EditProductPieceDTO
     public decimal Price { get; set; }
     public int AmountId { get; set; }
     public bool IsBottledParfume { get; set; }
-    
+
     /*
      * NewPhotos encapsulate photos that should be added to database
      * DeletePhotos encapsulate photos that will be deleted

@@ -79,7 +79,6 @@ public class CheckoutController(
         }
         catch (NotSupportedException) // 403
         {
-            
             return Forbid();
         }
         catch (Exception ex) // 400

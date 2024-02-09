@@ -15,11 +15,11 @@ public class PicturesController(
 
     [HttpGet("{name}")]
     public IActionResult GetImage(
-        [FromRoute] string name, 
+        [FromRoute] string name,
         [FromQuery] string size = "original"
-            )
+    )
     {
-        if (!pictureService.SizeExists(size)) 
+        if (!pictureService.SizeExists(size))
             return NotFound(new
             {
                 Status = "404 Not Found",
@@ -31,10 +31,10 @@ public class PicturesController(
                 Status = "404 Not Found",
                 Error = "Image not found"
             });
-        
+
         return File(pictureService.GetFile(name, size), "image/webp");
     }
-    
+
     // may be FromBody|FromQuery
     [HttpDelete("{name}")]
     public IActionResult DeleteImage([FromRoute] string name)

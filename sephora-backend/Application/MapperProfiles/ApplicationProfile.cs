@@ -23,10 +23,6 @@ public class ApplicationProfile : Profile
             .ForMember(
                 dest => dest.Milliliters,
                 opts => opts.MapFrom(src => src.Amount!.Milliliters)
-            )
-            .ForMember(
-                dest => dest.Product,
-                opts => opts.MapFrom(src => src.Product)
             );
         CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
 

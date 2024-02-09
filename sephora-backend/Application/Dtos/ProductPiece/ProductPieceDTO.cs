@@ -6,6 +6,6 @@ public class ProductPieceDTO
     public int? InStock { get; set; }
     public decimal Price { get; set; }
     public int Milliliters { get; set; }
-    public ProductDto Product { get; set; }
     public bool IsBottledParfume { get; set; }
+    public long ProductId { get; set; }
 }

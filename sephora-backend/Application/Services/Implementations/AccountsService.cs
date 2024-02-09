@@ -66,16 +66,14 @@ public class AccountsService(
             throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
 
         await signInManager.SignInAsync(user, true);
-        return new LoginResponseDto()
+        return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))
         };
     }
 
     public async Task Logout()
-    {
-        await signInManager.SignOutAsync();
-    }
+        => await signInManager.SignOutAsync();
 
     public async Task Register(RegisterDto dto)
     {

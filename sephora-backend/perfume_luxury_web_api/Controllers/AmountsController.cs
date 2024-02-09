@@ -5,16 +5,11 @@ public class AmountsController(IAmountService amountService) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await amountService.Get());
-    }
+        => Ok(await amountService.Get());
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
-    {
-        var item = await amountService.GetById(id);
-        return Ok(item);
-    }
+        => Ok(await amountService.GetById(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateAmountDto amount)

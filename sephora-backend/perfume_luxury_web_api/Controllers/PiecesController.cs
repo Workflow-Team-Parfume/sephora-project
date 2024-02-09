@@ -1,7 +1,8 @@
 namespace perfume_luxury_web_api.Controllers;
 
-// Authorize admins and mods only on the whole controller
-public class PieceController(
+// TODO: Authorize admins and mods only on the whole controller
+[ApiController, Route("api/[controller]")]
+public class PiecesController(
     IPieceService pieceService
 ) : ControllerBase
 {
@@ -15,7 +16,7 @@ public class PieceController(
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        [FromBody] CreateProductPieceDto dto
+        [FromForm] CreateProductPieceDto dto
     )
     {
         if (!ModelState.IsValid) return BadRequest();

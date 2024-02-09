@@ -7,22 +7,47 @@ public class CartController(ICartService cartService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await cartService.Get(User));
-    }
+        => Ok(await cartService.Get(User));
 
     [HttpGet("{id:long}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get([FromRoute] long id)
-    {
-        var item = await cartService.GetById(id);
-        return Ok(item);
-    }
+        => Ok(await cartService.GetById(id));
 
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
+        if (!ModelState.IsValid) return BadRequest();
+
         await cartService.Create(cartItem, User);
         return Ok();
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] CartDto cartItem)
+    {
+        try
+        {
+            if (!ModelState.IsValid) throw new Exception();
+
+            await cartService.Update(cartItem, User);
+            return Ok();
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return Unauthorized(new
+            {
+                Status = "400 Bad Request",
+                Message = ex.Message
+            });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new
+            {
+                Status = "400 Bad Request",
+                Message = ex.Message
+            });
+        }
     }
 
     [HttpDelete("{id:long}")]

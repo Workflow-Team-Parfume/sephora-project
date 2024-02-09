@@ -1,8 +1,8 @@
 ﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class BrandService(
-    IRepository<Brand> brandRepository, 
-    IMapper mapper) 
+    IRepository<Brand> brandRepository,
+    IMapper mapper)
     : IBrandService
 {
     public async Task Create(CreateBrandDto brandDto)
@@ -27,9 +27,7 @@ public class BrandService(
     }
 
     public async Task<IEnumerable<BrandDto>> Get()
-    {
-        return mapper.Map<IEnumerable<BrandDto>>(await brandRepository.GetAll());
-    }
+        => mapper.Map<IEnumerable<BrandDto>>(await brandRepository.GetAll());
 
     public async Task<BrandDto?> GetById(int id)
     {

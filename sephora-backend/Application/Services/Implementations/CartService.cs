@@ -49,6 +49,22 @@ public class CartService(
         await cartRepository.Save();
     }
 
+    public async Task Update(CartDto dto, ClaimsPrincipal user)
+    {
+        var entity = await cartRepository.GetById(dto.Id);
+        var userEntity = await GetUserOrThrow(user);
+
+        if (entity?.UserId != userEntity.Id)
+            throw new UnauthorizedAccessException(
+                "This user doesn't owns this record"
+            );
+
+        mapper.Map(dto, entity);
+
+        await cartRepository.Update(entity);
+        await cartRepository.Save();
+    }
+
     public async Task DeleteAll(ClaimsPrincipal user)
     {
         UserEntity userEntity = await GetUserOrThrow(user);

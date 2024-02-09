@@ -5,16 +5,11 @@ public class BrandsController(IBrandService brandService) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await brandService.Get());
-    }
+        => Ok(await brandService.Get());
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
-    {
-        var item = await brandService.GetById(id);
-        return Ok(item);
-    }
+        => Ok(await brandService.GetById(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateBrandDto brand)

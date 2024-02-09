@@ -22,6 +22,13 @@ public interface ICartService
      * <param name="user">The user to create the cart item for</param>
      */
     Task Create(CreateCartDto cartDto, ClaimsPrincipal user);
+
+    /**
+     * <summary>Updates a cart item</summary>
+     * <param name="dto">The cart item to update</param>
+     * <param name="user">The owner of a cart item</param>
+     */
+    public Task Update(CartDto dto, ClaimsPrincipal user);
     
     /**
      * <summary>Edits the specified cart item</summary>

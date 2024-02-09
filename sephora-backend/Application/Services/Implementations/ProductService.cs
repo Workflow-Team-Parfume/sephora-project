@@ -3,8 +3,7 @@
 public class ProductService(
     IRepository<ProductEntity> productRepository,
     IMapper mapper
-)
-    : IProductService
+) : IProductService
 {
     public async Task Create(CreateProductDto createProductDto)
     {
@@ -29,12 +28,9 @@ public class ProductService(
     }
 
     public async Task<IEnumerable<ProductDto>> Get()
-    {
-        var result = mapper.Map<IEnumerable<ProductDto>>(
+        => mapper.Map<IEnumerable<ProductDto>>(
             await productRepository.GetListBySpec(new Products.GetAll())
         );
-        return result;
-    }
 
     public async Task<ProductDto?> GetById(long id)
     {

@@ -11,8 +11,8 @@ public class CartController(ICartService cartService) : ControllerBase
         return Ok(await cartService.Get(User));
     }
 
-    [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Get([FromRoute] int id)
+    [HttpGet("{id:long}"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Get([FromRoute] long id)
     {
         var item = await cartService.GetById(id);
         return Ok(item);
@@ -25,8 +25,8 @@ public class CartController(ICartService cartService) : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Remove([FromRoute] int id)
+    [HttpDelete("{id:long}")]
+    public async Task<IActionResult> Remove([FromRoute] long id)
     {
         await cartService.Delete(id);
         return Ok();

@@ -25,7 +25,7 @@ public class BrandsController(IBrandService brandService) : Controller
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await brandService.Delete(id);

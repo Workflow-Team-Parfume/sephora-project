@@ -7,4 +7,5 @@ public class CreateProductPieceDto
     public int AmountId { get; set; }
     public bool IsBottledParfume { get; set; }
     public long ProductId { get; set; }
+    public IEnumerable<IFormFile> ProductPictures { get; set; }
 }

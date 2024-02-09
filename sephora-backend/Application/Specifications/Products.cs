@@ -7,9 +7,10 @@ public static class Products
         public GetAll()
         {
             Query
-                .Include(x => x.Brand)
-                .Include(x => x.Category)
-                .Include(x => x.ProductPieces);
+                .Include(prod => prod.Brand)
+                .Include(prod => prod.Category)
+                .Include(prod => prod.ProductPieces)
+                .ThenInclude(piece => piece.ProductPictures);
         }
     }
     public class GetById : Specification<ProductEntity>

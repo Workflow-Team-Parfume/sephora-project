@@ -1,6 +1,6 @@
 namespace CleanArchitecture.Application.Dtos.Picture;
 
-public class PictureDto(string name, bool isDevelopment = false)
+public class PictureDto(string name, bool isDevelopment = true)
 {
     private static readonly string[] SizesPaths
         = ["original", "1000x1000", "500x500", "150x150", "50x50"];

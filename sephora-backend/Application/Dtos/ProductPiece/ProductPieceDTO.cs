@@ -8,4 +8,5 @@ public class ProductPieceDTO
     public int Milliliters { get; set; }
     public bool IsBottledParfume { get; set; }
     public long ProductId { get; set; }
+    public IEnumerable<PictureDto> ProductPictures { get; set; }
 }

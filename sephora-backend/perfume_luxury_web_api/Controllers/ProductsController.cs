@@ -4,10 +4,8 @@
 public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        return Ok(await productService.Get());
-    }
+    public async Task<IActionResult> GetAll()
+        => Ok(await productService.Get());
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)

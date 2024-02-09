@@ -2,7 +2,7 @@
 
 public class ApplicationProfile : Profile
 {
-    public ApplicationProfile()
+    public ApplicationProfile(IHostEnvironment env)
     {
         CreateMap<Brand, BrandDto>().ReverseMap();
         CreateMap<Brand, CreateBrandDto>().ReverseMap();
@@ -17,14 +17,21 @@ public class ApplicationProfile : Profile
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
 
-        CreateMap<CreateProductPieceDto, ProductPiece>().ReverseMap();
+        CreateMap<CreateProductPieceDto, ProductPiece>()
+            .ForMember(dest => dest.ProductPictures, opt => opt.Ignore())
+            .ReverseMap();
         // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
-        CreateMap<ProductPiece, ProductPieceDTO>()
-            .ForMember(
+        CreateMap<ProductPiece, ProductPieceDTO>().ForMember(
                 dest => dest.Milliliters,
                 opts => opts.MapFrom(src => src.Amount!.Milliliters)
-            );
+            )
+            .ForMember(dest => dest.ProductPictures, opts => opts.Ignore());
         CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
+
+        CreateMap<ProductPicture, PictureDto>()
+            .ConstructUsing(x =>
+                new PictureDto(x.PicturePath, env.IsDevelopment())
+            );
 
         // TODO
         CreateMap<EditUserDto, UserEntity>()

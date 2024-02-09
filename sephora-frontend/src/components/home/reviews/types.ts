@@ -1,4 +1,4 @@
-export interface IReview{
+export interface IMPReview{
     userName:string;
     rating:number;    
     review:string;

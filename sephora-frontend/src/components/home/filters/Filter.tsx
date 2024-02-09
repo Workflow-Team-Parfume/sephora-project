@@ -28,11 +28,11 @@ const Filter : React.FC<{expanded:string | false, handleChange:any, filter:IFilt
         setChecked(newChecked);
       };
   return (
-      <Accordion id='filter' expanded={expanded === filter.name} onChange={handleChange(filter.name)} sx={{boxShadow:'none'}}>
+      <Accordion className='filter' expanded={expanded === filter.name} onChange={handleChange(filter.name)} sx={{boxShadow:'none'}}>
         <AccordionSummary
           expandIcon={expanded === filter.name ? <RemoveIcon /> : <AddIcon />}
         >
-          <Typography id='filterName'>
+          <Typography className='filterName'>
             {filter.name}
           </Typography>
         </AccordionSummary>
@@ -53,7 +53,7 @@ const Filter : React.FC<{expanded:string | false, handleChange:any, filter:IFilt
                   disableRipple
                 />
               </ListItemIcon>
-              <Typography id='listText'>{value}</Typography>
+              <Typography className='listText'>{value}</Typography>
             </ListItemButton>
             ))}
         </List>

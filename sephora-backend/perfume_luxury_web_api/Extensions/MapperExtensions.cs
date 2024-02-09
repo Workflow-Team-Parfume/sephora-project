@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Helpers;
+﻿namespace perfume_luxury_web_api.Extensions;
 
 public static class MapperExtensions
 {
@@ -19,6 +19,7 @@ public static class MapperExtensions
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<ICheckoutService, CheckoutService>();
         services.AddScoped<IDeliveryService, DeliveryService>();
+        services.AddScoped<IPieceService, PieceService>();
     }
 
     public static void AddValidators(this IServiceCollection services)

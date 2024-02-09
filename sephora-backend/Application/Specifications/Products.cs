@@ -15,7 +15,7 @@ public static class Products
     }
     public class GetById : Specification<ProductEntity>
     {
-        public GetById(int id)
+        public GetById(long id)
         {
             Query
                 .Where(x => x.Id == id)

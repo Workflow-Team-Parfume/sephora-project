@@ -1,14 +1,14 @@
-import { Container, Grid, Rating, Stack, Typography } from "@mui/material";
-import { IReview } from "./types";
+import { Avatar, Container, Grid, Rating, Stack, Typography } from "@mui/material";
+import { IMPReview } from "./types";
 import "./reviews.scss"
 import StarIcon from "@mui/icons-material/Star";
         
 
-const Reviews : React.FC<{title:string, reviews:IReview[]}> 
+const Reviews : React.FC<{title:string, reviews:IMPReview[]}> 
 = ({title, reviews}) => {
   return (
-    <Container style={{maxWidth:"100%"}} >
-          <Typography id="title">{title}</Typography>
+    <Container className='reviewsMP' style={{maxWidth:"100%"}} >
+          <Typography className="title">{title}</Typography>
 
           <Container sx={{ py: 8 }} style={{maxWidth:"100%"}} >
             <Grid container spacing={2.5} >
@@ -16,9 +16,12 @@ const Reviews : React.FC<{title:string, reviews:IReview[]}>
               <Grid item xs={12} sm={6} md={4} spacing={1.5}>
                 <Stack spacing={3.5}>
                     <Stack spacing={4} direction="row">
-                        <img className="userImage" src={review.userImage} alt={review.userName}/>
+                    {review.userImage != null ?
+                    <Avatar sx={{ width: '96px', height: '96px' }} alt={review.userName} src={review.userImage} /> 
+                        : <Avatar sx={{ width: '96px', height: '96px', bgcolor: '#D9D9D9' }}> </Avatar>
+                    }
                         <Stack spacing={1}>
-                            <div className="userName">{review.userName}</div>
+                            <Typography className="userName">{review.userName}</Typography>
                             <Rating
                               name="hover-feedback"
                               value={review.rating}
@@ -29,16 +32,16 @@ const Reviews : React.FC<{title:string, reviews:IReview[]}>
                             />
                         </Stack>
                     </Stack>    
-                    <div className="review">
+                    <Typography className="review">
                         {review.review}
-                    </div>
+                    </Typography>
                 </Stack>
 
                 <Stack direction="row" spacing={4}>
                     <img className="productImage" src={review.productImage} alt={review.productName}/>
                     <Stack style={{margin:"48px 37px"}}>
-                        <div className="productName">{review.productName}</div>
-                        <div className="productCategory">{review.productCategory}</div>
+                        <Typography className="productName">{review.productName}</Typography>
+                        <Typography className="productCategory">{review.productCategory}</Typography>
                     </Stack>
                 </Stack>
               </Grid>

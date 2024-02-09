@@ -5,4 +5,5 @@ export interface IProduct{
     price:string;
     image:string;
     rating:number;
+    isNew:boolean;
 }

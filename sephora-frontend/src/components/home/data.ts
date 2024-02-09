@@ -12,24 +12,24 @@ import burberry from "./image/products/burberry.png";
 import gucci from "./image/products/gucci.png";
 
 export const newProducts = ([
-    {name: "SkinTra — C The Light",price: "850",image: skinTra1, categoryName: "Сироватка з вітаміном С Tetra 10%", volume: "30мл", rating: 2},
-    {name: "LANEIGE Cica Sleeping Mask",price: "1307",image: laneige, categoryName: "Нічна маска для чутливої та подразненої шкіри обличчя", volume: "60мл", rating: 2},
-    {name: "SkinTra — Wash It Off",price: "515",image: skinTra2, categoryName: "Гель для вмивання обличчя з глюкозидами", volume: "200мл", rating: 5},
-    {name:"Innisfree Super Volcanic Pore Clay Mask",price:"720",image:innisfree, categoryName: "Інтенсивна маска з вулканічною глиною", volume: "100мл", rating: 5}
+    {name: "SkinTra — C The Light",price: "850",image: skinTra1, categoryName: "Сироватка з вітаміном С Tetra 10%", volume: "30мл", rating: 2, isNew: true},
+    {name: "LANEIGE Cica Sleeping Mask",price: "1307",image: laneige, categoryName: "Нічна маска для чутливої та подразненої шкіри обличчя", volume: "60мл", rating: 2, isNew: true},
+    {name: "SkinTra — Wash It Off",price: "515",image: skinTra2, categoryName: "Гель для вмивання обличчя з глюкозидами", volume: "200мл", rating: 5, isNew: true},
+    {name:"Innisfree Super Volcanic Pore Clay Mask",price:"720",image:innisfree, categoryName: "Інтенсивна маска з вулканічною глиною", volume: "100мл", rating: 5, isNew: true}
 ]);
 
 export const Populars = ([
-    {name:"Honey Infused Lip Oil",price:"1 720",image:gisou, categoryName: "Олія для губ", rating: 3, volume: null},
-    {name:"LANEIGE Lip Sleeping Mask 3 г",price:"315",image:laneige2, categoryName: "Ягідна маска для губ", rating: 2, volume: null},
-    {name:"The Ordinary — Niacinamide 10% + Zinc 1%",price:"350",image:ordinary, categoryName: "Сироватка з ніацинамідом та цинком", volume: "60мл", rating: 5},
-    {name:"Find Comfort Body & Hair Fragrance Mist",price:"1 050",image:rare, categoryName: "Міст для тіла та волосся", rating: 5, volume: null}
+    {name:"Honey Infused Lip Oil",price:"1 720",image:gisou, categoryName: "Олія для губ", rating: 3, volume: null, isNew: false},
+    {name:"LANEIGE Lip Sleeping Mask 3 г",price:"315",image:laneige2, categoryName: "Ягідна маска для губ", rating: 2, volume: null, isNew: false},
+    {name:"The Ordinary — Niacinamide 10% + Zinc 1%",price:"350",image:ordinary, categoryName: "Сироватка з ніацинамідом та цинком", volume: "60мл", rating: 5, isNew: false},
+    {name:"Find Comfort Body & Hair Fragrance Mist",price:"1 050",image:rare, categoryName: "Міст для тіла та волосся", rating: 5, volume: null, isNew: false}
 ]);
 
 export const Perfume = ([
-    {name:"Valentino Donna Born In Roma Intense",price:"4 500",image:valentino, categoryName: "Парфумована вода", rating: 5, volume: null},
-    {name:"Marc Jacobs Daisy",price:"3 270",image:marc, categoryName: "Парфумована вода", rating: 4, volume: null},
-    {name:"Tom Ford Lost Cherry 30 мл",price:"3 750",image:burberry, categoryName: "Парфумована вода унісекс", rating: 5, volume: null},
-    {name:"Gucci Flora Gorgeous Gardenia",price:"7 325",image:gucci, categoryName: "Парфюмированная вода жіноча", rating: 4, volume: null}
+    {name:"Valentino Donna Born In Roma Intense",price:"4 500",image:valentino, categoryName: "Парфумована вода", rating: 5, volume: null, isNew: false},
+    {name:"Marc Jacobs Daisy",price:"3 270",image:marc, categoryName: "Парфумована вода", rating: 4, volume: null, isNew: false},
+    {name:"Tom Ford Lost Cherry 30 мл",price:"3 750",image:burberry, categoryName: "Парфумована вода унісекс", rating: 5, volume: null, isNew: false},
+    {name:"Gucci Flora Gorgeous Gardenia",price:"7 325",image:gucci, categoryName: "Парфюмированная вода жіноча", rating: 4, volume: null, isNew: false}
 ]);
 
 

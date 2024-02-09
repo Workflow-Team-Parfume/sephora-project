@@ -18,15 +18,14 @@ public class ApplicationProfile : Profile
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
-            .ForMember(dest => dest.ProductPictures, opt => opt.Ignore())
-            .ReverseMap();
+            .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
         // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
         CreateMap<ProductPiece, ProductPieceDTO>().ForMember(
                 dest => dest.Milliliters,
                 opts => opts.MapFrom(src => src.Amount!.Milliliters)
             )
             .ForMember(dest => dest.ProductPictures, opts => opts.Ignore());
-        CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
+        CreateMap<EditProductPieceDTO, ProductPiece>();
 
         CreateMap<ProductPicture, PictureDto>()
             .ConstructUsing(x =>

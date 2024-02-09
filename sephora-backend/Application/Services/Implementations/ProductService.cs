@@ -14,7 +14,7 @@ public class ProductService(
         await productRepository.Save();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(long id)
     {
         await productRepository.Delete(id);
         await productRepository.Save();
@@ -36,7 +36,7 @@ public class ProductService(
         return result;
     }
 
-    public async Task<ProductDto?> GetById(int id)
+    public async Task<ProductDto?> GetById(long id)
     {
         ProductEntity? productDto = await productRepository.GetItemBySpec(
             new Products.GetById(id)

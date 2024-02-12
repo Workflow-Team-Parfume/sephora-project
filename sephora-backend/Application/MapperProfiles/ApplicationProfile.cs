@@ -23,18 +23,25 @@ public class ApplicationProfile : Profile
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
         // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
-        CreateMap<ProductPiece, ProductPieceDTO>().ForMember(
+        CreateMap<ProductPiece, ProductPieceDto>().ForMember(
             dest => dest.Milliliters,
             opts => opts.MapFrom(src => src.Amount!.Milliliters)
         );
-        CreateMap<EditProductPieceDTO, ProductPiece>();
+        CreateMap<EditProductPieceDto, ProductPiece>();
 
         CreateMap<ProductPicture, PictureDto>()
             .ConstructUsing(x =>
                 new PictureDto(x.PicturePath, EnvName == "Development")
             );
 
-        // TODO
+        CreateMap<CreateRatingDto, Rating>();
+        CreateMap<EditRatingDto, Rating>();
+        CreateMap<Rating, RatingDto>();
+
+        /*
+         * TODO: Ignore profile pic mapping at all, but
+         * make an appropriate service to store the user PFPs
+         */
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(
                 dest => dest.ProfilePicture,

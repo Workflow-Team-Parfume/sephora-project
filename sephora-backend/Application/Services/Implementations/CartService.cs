@@ -6,11 +6,8 @@ public class CartService(
     IMapper mapper
 ) : ICartService
 {
-    private async Task<UserEntity?> GetUser(ClaimsPrincipal user)
-        => await userManager.GetUserAsync(user);
-
-    private async Task<UserEntity> GetUserOrThrow(ClaimsPrincipal user)
-        => await GetUser(user)
+    private string GetUserIdOrThrow(ClaimsPrincipal user)
+        => userManager.GetUserId(user)
            ?? throw new ArgumentException(
                ErrorMessages.UserNotFound,
                nameof(user)
@@ -18,8 +15,8 @@ public class CartService(
 
     public async Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user)
     {
-        UserEntity userEntity = await GetUserOrThrow(user);
-        var specification = new CartItems.GetByUserId(userEntity.Id);
+        string userId = GetUserIdOrThrow(user);
+        var specification = new CartItems.GetByUserId(userId);
 
         return mapper.Map<IEnumerable<CartDto>>(
             await cartRepository.GetListBySpec(specification)
@@ -34,10 +31,10 @@ public class CartService(
 
     public async Task Create(CreateCartDto cartDto, ClaimsPrincipal user)
     {
-        UserEntity userEntity = await GetUserOrThrow(user);
+        string userId = GetUserIdOrThrow(user);
 
         CartItem dbEntry = mapper.Map<CartItem>(cartDto);
-        dbEntry.UserId = userEntity.Id;
+        dbEntry.UserId = userId;
 
         await cartRepository.Insert(dbEntry);
         await cartRepository.Save();
@@ -52,9 +49,8 @@ public class CartService(
     public async Task Update(CartDto dto, ClaimsPrincipal user)
     {
         var entity = await cartRepository.GetById(dto.Id);
-        var userEntity = await GetUserOrThrow(user);
-
-        if (entity?.UserId != userEntity.Id)
+        string userId = GetUserIdOrThrow(user);
+        if (entity?.UserId != userId)
             throw new UnauthorizedAccessException(
                 "This user doesn't owns this record"
             );
@@ -67,8 +63,8 @@ public class CartService(
 
     public async Task DeleteAll(ClaimsPrincipal user)
     {
-        UserEntity userEntity = await GetUserOrThrow(user);
-        var specification = new CartItems.GetByUserId(userEntity.Id);
+        string userId = GetUserIdOrThrow(user);
+        var specification = new CartItems.GetByUserId(userId);
 
         await cartRepository.DeleteBySpec(specification);
     }

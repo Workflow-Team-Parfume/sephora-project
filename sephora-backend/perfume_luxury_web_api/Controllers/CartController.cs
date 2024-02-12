@@ -9,7 +9,7 @@ public class CartController(ICartService cartService) : ControllerBase
     public async Task<IActionResult> Get()
         => Ok(await cartService.Get(User));
 
-    [HttpGet("{id:long}"), Authorize(Roles = "Admin")]
+    [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Get([FromRoute] long id)
         => Ok(await cartService.GetById(id));
 

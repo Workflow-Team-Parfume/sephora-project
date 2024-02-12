@@ -2,7 +2,7 @@
 
 public class Rating
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public string UserId { get; set; } = String.Empty;
     public UserEntity User { get; set; } = default!;

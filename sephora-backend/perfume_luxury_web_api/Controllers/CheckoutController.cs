@@ -30,27 +30,27 @@ public class CheckoutController(
             await checkoutService.CancelOrder(orderId, User)
         );
 
-    [HttpPut("admin/status"), Authorize(Roles = "Admin")]
+    [HttpPut("admin/status"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> ChangeStatus(
         [FromBody] ChangeStatusDto dto
     ) => await CheckoutCore(async () =>
         await checkoutService.ChangeStatus(dto)
     );
 
-    [HttpGet("admin/{orderId:long}"), Authorize(Roles = "Admin")]
+    [HttpGet("admin/{orderId:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> GetById(long orderId)
         => await CheckoutCore(async () =>
             Ok(await checkoutService.GetById(orderId))
         );
 
-    [HttpGet("admin/all"), Authorize(Roles = "Admin")]
+    [HttpGet("admin/all"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> GetAll()
         => await CheckoutCore(async () =>
             Ok(await checkoutService.Get())
         );
 
     // Manipulate status of orders via this method in admin panel
-    [HttpPut("admin"), Authorize(Roles = "Admin")]
+    [HttpPut("admin"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Edit([FromBody] OrderDto orderDto)
         => await CheckoutCore(async () =>
         {
@@ -60,7 +60,7 @@ public class CheckoutController(
             await checkoutService.Edit(orderDto);
         });
 
-    [HttpDelete("admin/{orderId:long}"), Authorize(Roles = "Admin")]
+    [HttpDelete("admin/{orderId:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Delete(long orderId)
         => await CheckoutCore(async () =>
             await checkoutService.Delete(orderId)

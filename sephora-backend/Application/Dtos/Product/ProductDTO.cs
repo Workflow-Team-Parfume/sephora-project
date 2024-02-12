@@ -8,5 +8,9 @@ public class ProductDto
     public bool Active { get; set; }
     public BrandDto Brand { get; set; }
     public CategoryDto Category { get; set; }
-    public IEnumerable<ProductPieceDTO> ProductPieces { get; set; }
+    public IEnumerable<ProductPieceDto>? ProductPieces { get; set; }
+    public IEnumerable<RatingDto>? Ratings { get; set; }
+    
+    // TODO
+    public decimal AverageRating { get; set; } = 0;
 }

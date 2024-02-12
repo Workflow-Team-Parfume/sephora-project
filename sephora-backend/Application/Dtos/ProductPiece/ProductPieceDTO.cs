@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Application.Dtos.ProductPiece;
 
-public class ProductPieceDTO
+public class ProductPieceDto
 {
     public long Id { get; set; }
     public int? InStock { get; set; }

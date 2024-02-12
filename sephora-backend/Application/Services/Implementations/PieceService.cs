@@ -7,13 +7,13 @@ public class PieceService(
     IMapper mapper
 ) : IPieceService
 {
-    public async Task<IEnumerable<ProductPieceDTO>> Get()
-        => mapper.Map<IEnumerable<ProductPieceDTO>>(
+    public async Task<IEnumerable<ProductPieceDto>> Get()
+        => mapper.Map<IEnumerable<ProductPieceDto>>(
             await repository.GetListBySpec(new ProductPieces.GetAll())
         );
 
-    public async Task<ProductPieceDTO?> GetById(long id)
-        => mapper.Map<ProductPieceDTO?>(
+    public async Task<ProductPieceDto?> GetById(long id)
+        => mapper.Map<ProductPieceDto?>(
             await repository.GetItemBySpec(new ProductPieces.GetById(id))
         );
 
@@ -28,7 +28,7 @@ public class PieceService(
         await SavePictures(pieceDto.ProductPictures, entity.Id);
     }
 
-    public async Task Edit(EditProductPieceDTO pieceDto)
+    public async Task Edit(EditProductPieceDto pieceDto)
     {
         // update entity
         var entity = mapper.Map<ProductPiece>(pieceDto);

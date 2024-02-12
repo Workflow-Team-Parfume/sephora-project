@@ -27,7 +27,7 @@ public class PiecesController(
 
     [HttpPut]
     public async Task<IActionResult> Update(
-        [FromBody] EditProductPieceDTO dto
+        [FromBody] EditProductPieceDto dto
     )
     {
         if (!ModelState.IsValid) return BadRequest();

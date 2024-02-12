@@ -9,6 +9,7 @@ global using CleanArchitecture.Application.Dtos.Order;
 global using CleanArchitecture.Application.Dtos.Picture;
 global using CleanArchitecture.Application.Dtos.Product;
 global using CleanArchitecture.Application.Dtos.ProductPiece;
+global using CleanArchitecture.Application.Dtos.Rating;
 global using CleanArchitecture.Application.Dtos.User;
 global using CleanArchitecture.Application.Helpers;
 global using CleanArchitecture.Application.MapperProfiles;

@@ -8,10 +8,12 @@ public class RatingService(
 {
     private string GetUserIdOrThrow(ClaimsPrincipal user)
         => userManager.GetUserId(user)
-           ?? throw new ArgumentException(
-               ErrorMessages.UserNotFound,
-               nameof(user)
+           ?? throw new UnauthorizedAccessException(
+               ErrorMessages.UserNotFound
            );
+    
+    private bool IsUserOwner(Rating rating, ClaimsPrincipal user)
+        => rating.UserId == GetUserIdOrThrow(user);
 
     public async Task<IEnumerable<RatingDto>> Get()
         => mapper.Map<IEnumerable<RatingDto>>(await repository.GetAll());

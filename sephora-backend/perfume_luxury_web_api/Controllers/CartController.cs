@@ -14,7 +14,8 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await cartService.Create(cartItem, User);
         return Ok();
@@ -23,29 +24,11 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] CartDto cartItem)
     {
-        try
-        {
-            if (!ModelState.IsValid) throw new Exception();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
-            await cartService.Update(cartItem, User);
-            return Ok();
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new
-            {
-                Status = "400 Bad Request",
-                Message = ex.Message
-            });
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new
-            {
-                Status = "400 Bad Request",
-                Message = ex.Message
-            });
-        }
+        await cartService.Update(cartItem, User);
+        return Ok();
     }
 
     [HttpDelete("{id:long}")]

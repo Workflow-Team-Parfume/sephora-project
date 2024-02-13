@@ -14,22 +14,19 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     public async Task<ActionResult<RatingDto>> GetById(long id)
     {
         var rating = await ratingService.GetById(id);
-        return rating is null
-            ? NotFound(new ErrorStatus(
-                "404 Not Found",
-                $"The rating with ID={{{id}}} was not found"
-            ))
-            : Ok(rating);
+        if (rating is null)
+            throw new HttpException(
+                $"The rating with ID={{{id}}} was not found", 
+                HttpStatusCode.NotFound
+                );
+        return Ok(rating);
     }
 
     [HttpPost, Authorize]
     public async Task<ActionResult> Create(CreateRatingDto createRatingDto)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ErrorStatus(
-                "400 Bad Request",
-                "The model is invalid"
-            ));
+            throw new ArgumentException("The model is not valid.");
 
         await ratingService.Create(createRatingDto, User);
         return Ok();
@@ -39,33 +36,16 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     public async Task<ActionResult> Edit(long id, EditRatingDto editRatingDto)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ErrorStatus(
-                "400 Bad Request",
-                "The model is invalid"
-                ));
+            throw new ArgumentException("The model is not valid.");
 
-        try
-        {
-            await ratingService.Edit(editRatingDto, User);
-            return Ok();
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new ErrorStatus("401 Unauthorized", ex.Message));
-        }
+        await ratingService.Edit(editRatingDto, User);
+        return Ok();
     }
 
     [HttpDelete("{id:long}"), Authorize]
     public async Task<ActionResult> Delete(long id)
     {
-        try
-        {
-            await ratingService.Delete(id, User);
-            return Ok();
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new ErrorStatus("401 Unauthorized", ex.Message));
-        }
+        await ratingService.Delete(id, User);
+        return Ok();
     }
 }

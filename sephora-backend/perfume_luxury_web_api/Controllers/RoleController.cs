@@ -1,6 +1,6 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
     [HttpPost]

@@ -1,6 +1,6 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class CategoryController(ICategoryService categoryService) : Controller
 {
     [HttpGet]
@@ -14,7 +14,8 @@ public class CategoryController(ICategoryService categoryService) : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateCategoryDto category)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await categoryService.Create(category);
         return Ok();
@@ -30,7 +31,8 @@ public class CategoryController(ICategoryService categoryService) : Controller
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] CategoryDto category)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
         await categoryService.Edit(category);
 
         return Ok();

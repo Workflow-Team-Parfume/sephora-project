@@ -1,6 +1,6 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class AccountController(IAccountsService accountsService)
     : ControllerBase
 {
@@ -15,7 +15,8 @@ public class AccountController(IAccountsService accountsService)
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await accountsService.Register(dto);
         return Ok();
@@ -24,7 +25,8 @@ public class AccountController(IAccountsService accountsService)
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         var response = await accountsService.Login(dto);
         return Ok(response);
@@ -50,7 +52,8 @@ public class AccountController(IAccountsService accountsService)
         [FromForm] EditUserDto user
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await accountsService.Edit(userId, user);
         return Ok();

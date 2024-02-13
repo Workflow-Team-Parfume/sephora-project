@@ -1,6 +1,6 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet]
@@ -15,7 +15,8 @@ public class ProductsController(IProductService productService) : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateProductDto product)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await productService.Create(product);
         return Ok();
@@ -33,7 +34,8 @@ public class ProductsController(IProductService productService) : Controller
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] EditProductDto product)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await productService.Edit(product);
         return Ok();

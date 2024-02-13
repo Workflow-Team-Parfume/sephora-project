@@ -1,3 +1,6 @@
+using System.Data.Common;
+using Npgsql;
+
 namespace perfume_luxury_web_api.Extensions;
 
 // TODO: Add logging
@@ -14,7 +17,7 @@ public class PerfumeExceptionHandler : IExceptionHandler
             Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) }
         };
 
-    private string ToJson(in ProblemDetails problemDetails)
+    private static string ToJson(in ProblemDetails problemDetails)
     {
         try
         {
@@ -43,6 +46,9 @@ public class PerfumeExceptionHandler : IExceptionHandler
             UnauthorizedAccessException _ => (int)HttpStatusCode.Unauthorized,
             NotSupportedException _ => (int)HttpStatusCode.Forbidden,
             ArgumentException _ => (int)HttpStatusCode.BadRequest,
+            IOException _ => (int)HttpStatusCode.BadRequest,
+            DbUpdateException _ => (int)HttpStatusCode.BadRequest,
+            DbException _ => (int)HttpStatusCode.BadRequest,
             _ => (int)HttpStatusCode.InternalServerError
         };
 
@@ -53,7 +59,7 @@ public class PerfumeExceptionHandler : IExceptionHandler
         var details = ToJson(new ProblemDetails
         {
             Status = statusCode,
-            Title = reasonPhrase,
+            Title = $"{statusCode} {reasonPhrase}",
             Detail = exception.Message,
         });
         

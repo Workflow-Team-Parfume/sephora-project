@@ -7,3 +7,11 @@ export interface IMPReview{
     productName:string;
     productCategory:string;
 }
+
+export interface IReview{
+    userName:string;
+    rating:number;    
+    review:string;
+    userImage:string|null;
+    date:string|null;
+}

@@ -4,8 +4,8 @@ import "./products.scss"
 import Product from "./Product";
 import { useTranslation } from "react-i18next";
 
-const Products : React.FC<{title:string, products:IProduct[], link:string}>
-= ({ title, products, link }) => {
+const Products : React.FC<{title:string, products:IProduct[], link?:string|null}>
+= ({ title, products, link=null }) => {
   
   const { t } = useTranslation();
 
@@ -21,7 +21,10 @@ const Products : React.FC<{title:string, products:IProduct[], link:string}>
             </Grid>
           </Container>
 
+          {link!=null ? 
           <Button className="link" href={link}>{t('common.button.moreProducts')}</Button>
+          :<></>
+        }
         </Container>
     );
 }

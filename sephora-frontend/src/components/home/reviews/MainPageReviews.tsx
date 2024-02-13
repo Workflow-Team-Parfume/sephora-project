@@ -7,7 +7,7 @@ import StarIcon from "@mui/icons-material/Star";
 const Reviews : React.FC<{title:string, reviews:IMPReview[]}> 
 = ({title, reviews}) => {
   return (
-    <Container className='reviewsMP' style={{maxWidth:"100%"}} >
+    <Container className='reviews' style={{maxWidth:"100%"}} >
           <Typography className="title">{title}</Typography>
 
           <Container sx={{ py: 8 }} style={{maxWidth:"100%"}} >

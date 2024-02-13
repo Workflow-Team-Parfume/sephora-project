@@ -12,24 +12,24 @@ import burberry from "./image/products/burberry.png";
 import gucci from "./image/products/gucci.png";
 
 export const newProducts = ([
-    {name: "SkinTra — C The Light",price: "850",image: skinTra1, categoryName: "Сироватка з вітаміном С Tetra 10%", volume: "30мл", rating: 2, isNew: true},
-    {name: "LANEIGE Cica Sleeping Mask",price: "1307",image: laneige, categoryName: "Нічна маска для чутливої та подразненої шкіри обличчя", volume: "60мл", rating: 2, isNew: true},
-    {name: "SkinTra — Wash It Off",price: "515",image: skinTra2, categoryName: "Гель для вмивання обличчя з глюкозидами", volume: "200мл", rating: 5, isNew: true},
-    {name:"Innisfree Super Volcanic Pore Clay Mask",price:"720",image:innisfree, categoryName: "Інтенсивна маска з вулканічною глиною", volume: "100мл", rating: 5, isNew: true}
+    {id: 0, name: "SkinTra — C The Light",images: [skinTra1], categoryName: "Сироватка з вітаміном С Tetra 10%", volume: [{volume:"30мл", price:'850'}], rating: 2, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "LANEIGE Cica Sleeping Mask",images: [laneige], categoryName: "Нічна маска для чутливої та подразненої шкіри обличчя", volume: [{volume:"60мл",price:'1 307'}], rating: 2, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "SkinTra — Wash It Off",images: [skinTra2], categoryName: "Гель для вмивання обличчя з глюкозидами", volume: [{volume:"200мл", price:'515'}], rating: 5, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"Innisfree Super Volcanic Pore Clay Mask", images:[innisfree], categoryName: "Інтенсивна маска з вулканічною глиною", volume: [{volume: "100мл", price:'720'}], rating: 5, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]}
 ]);
 
 export const Populars = ([
-    {name:"Honey Infused Lip Oil",price:"1 720",image:gisou, categoryName: "Олія для губ", rating: 3, volume: null, isNew: false},
-    {name:"LANEIGE Lip Sleeping Mask 3 г",price:"315",image:laneige2, categoryName: "Ягідна маска для губ", rating: 2, volume: null, isNew: false},
-    {name:"The Ordinary — Niacinamide 10% + Zinc 1%",price:"350",image:ordinary, categoryName: "Сироватка з ніацинамідом та цинком", volume: "60мл", rating: 5, isNew: false},
-    {name:"Find Comfort Body & Hair Fragrance Mist",price:"1 050",image:rare, categoryName: "Міст для тіла та волосся", rating: 5, volume: null, isNew: false}
+    {id: 0, name:"Honey Infused Lip Oil",images:[gisou], categoryName: "Олія для губ", rating: 3, volume: [{volume:'', price:'1 720'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"LANEIGE Lip Sleeping Mask 3 г",images:[laneige2], categoryName: "Ягідна маска для губ", rating: 2, volume: [{volume:'', price:'315'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"The Ordinary — Niacinamide 10% + Zinc 1%",images:[ordinary], categoryName: "Сироватка з ніацинамідом та цинком", volume: [{volume:'60мл', price:'350'}], rating: 5, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"Find Comfort Body & Hair Fragrance Mist", images:[rare], categoryName: "Міст для тіла та волосся", rating: 5, volume: [{volume:'', price:'1 050'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]}
 ]);
 
 export const Perfume = ([
-    {name:"Valentino Donna Born In Roma Intense",price:"4 500",image:valentino, categoryName: "Парфумована вода", rating: 5, volume: null, isNew: false},
-    {name:"Marc Jacobs Daisy",price:"3 270",image:marc, categoryName: "Парфумована вода", rating: 4, volume: null, isNew: false},
-    {name:"Tom Ford Lost Cherry 30 мл",price:"3 750",image:burberry, categoryName: "Парфумована вода унісекс", rating: 5, volume: null, isNew: false},
-    {name:"Gucci Flora Gorgeous Gardenia",price:"7 325",image:gucci, categoryName: "Парфюмированная вода жіноча", rating: 4, volume: null, isNew: false}
+    {id: 0, name:"Valentino Donna Born In Roma Intense", images:[valentino], categoryName: "Парфумована вода", rating: 5, volume: [{volume:'', price:'4 500'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"Marc Jacobs Daisy", images:[marc], categoryName: "Парфумована вода", rating: 4, volume: [{volume:'', price:'3270'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"Tom Ford Lost Cherry" ,images:[burberry], categoryName: "Парфумована вода унісекс", rating: 5, volume: [{volume:'30ml', price:'3 750'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name:"Gucci Flora Gorgeous Gardenia",images:[gucci], categoryName: "Парфюмированная вода жіноча", rating: 4, volume: [{volume:'', price:'7 325'}], isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]}
 ]);
 
 
@@ -100,3 +100,92 @@ export const mainBanner = ([
 ])
 
 
+
+export const Reviews = ([
+    {userName:"Дарья",
+    rating:2,
+    review:"Аромат непоганий, мені нагадує солодкі цукерки, але на жаль зовсім не стійкі. Подарунок хлопця, другий раз не візьму.",
+    userImage:null,
+    date:'28.01.24'},
+    {userName:"Ангеліна",
+    rating:5,
+    review:"Кохання з першого пшику ,неймовірний ,компліментарний ,легендарний ! Мабуть єдиний аромат (а в мене велика колекція) ,який настільки запав у душу ! Але перед покупкою краще зробити затест ,тому що вони досить важкі і не всім підійдуть",
+    userImage:null,
+    date:'04.01.24'},
+    {userName:"Ганна",
+    rating:5,
+    review:"Дуже стійкий,витончений аромат",
+    userImage:null,
+    date:'23.01.24'},
+    {userName:"Вікторія",
+    rating:5,
+    review:"Сумнівалась що прийде оригінал, замовляла 30мл з Європи, також пульверизатор не такий як в 80мл",
+    userImage:null,
+    date:'18.01.24'},
+    {userName:"Марта",
+    rating:5,
+    review:"Довго не могла знайти справді \"свій\" аромат. Парфуми, справді варті уваги.",
+    userImage:null,
+    date:'18.01.24'},
+    {userName:"Ольга",
+    rating:5,
+    review:"Моя любов любовна! Надзвичайно приємний , густий, насичений аромат. Стійкий та шлейфовий. Користувалась взимку та холодною весною. Не дивлячись на те що зараз літо - рука тягнеться до них, але я себе стримую (думаю про оточуючих). Для більшості цей аромат для літа буде дуже тяжкий.",
+    userImage:null,
+    date:'04.01.24'},
+]);
+
+export const Characteristics = ([
+    {name:"Прем'єра аромату", characteristics:["2016"]},
+    {name:"Країна ТМ", characteristics:["США"]},
+    {name:"Зроблено в", characteristics:["Іспанія"]},
+    {name:"Стать", characteristics:["для жінок"]},
+    {name:"Класифікація", characteristics:["елітна"]},
+    {name:"Тип аромату", characteristics:["квіткові","східні"]},
+    {name:"Початкова нота", characteristics:["Бергамот","Кава","Лимон","Мигдаль"]},
+    {name:"Нота серця", characteristics:["Болгарська троянда","Жасмин самбак","Квітка апельсина","Корінь іриса","Тубероза"]},
+    {name:"Кінцева нота", characteristics:["Амбра","Боби тонка","Ваніль","Какао","Кващемірове дерево","Кедр", "Кориця","Мускус","Пачулі","Праліне","Сандал"]},
+]);
+
+
+import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
+import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
+import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
+import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
+import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
+export const DetailsProduct = ({
+    id:1,
+    name:"Carolina Herrera Good Girl",
+    categoryName:"Парфумована вода",
+    volume:[{volume: "50ml", price: "2 660"},{volume: "30ml", price: "1 900"}],
+    images:[goodGirl1, goodGirl2, goodGirl3, goodGirl4, goodGirl5],
+    rating:5,
+    description:"Загадковий і вабливий східний аромат Carolina Herrera Good Girl стане прекрасним доповненням до образу справжньої спокусниці. Перші ноти представленого шедевра звучать ароматною чорною кавою й терпким мигдалем. За ними слідує серцевий акорд - це поєднання жасмину самбака і туберози. Завершує цей пряний шедевр легкий шлейф із бобів тонка та какао. Композиція Carolina Herrera Good Girl обов'язково сподобається витонченій представниці прекрасної статі, адже її ноти, які розбурхують уяву, нікого не залишають байдужим. Парфуми, немов прозорою вуаллю, огортають тіло і чудово доповнюють і без того неймовірно привабливий образ своєї власниці. Carolina Herrera Good Girl - це ароматне втілення жіночності та флірту в одному флаконі.",
+    characteristics:Characteristics,
+    codeProduct:283295,
+    reviews:Reviews,
+    isNew: false
+});
+
+import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png'; 
+import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png'; 
+import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png'; 
+import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png'; 
+
+export const similarProducts = ([
+    {id: 0, name: "Prada Paradoxe", images: [pradaParadoxe], categoryName: "Парфумована вода", volume: [{volume: '90ml', price: '4 171'}], rating: 4, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "Yves Saint Laurent Libre", images: [yves], categoryName: "Парфумована вода", volume: [{volume: '', price: '2 028'}], rating: 4, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "DIOR — Sauvage Parfum", images: [dior1], categoryName: "Парфумована вода", volume: [{volume: '100ml', price: '6 430'}], rating: 3, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "DIOR — Miss Dior", images: [dior2], categoryName: "Парфумована вода", volume: [{volume: '30ml', price: '3 614'}], rating: 3, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]}, 
+])
+
+import apieu from './products/detailsProduct/images/A\'pieu  Milk.png'; 
+import bielenda from './products/detailsProduct/images/Bielenda.png'; 
+import byredo from './products/detailsProduct/images/Byredo.png'; 
+import burberry2 from './products/detailsProduct/images/burberry.png'; 
+
+export const especiallyForYou = ([
+    {id: 0, name: "A'pieu  Milk One Pack Mask — Banana", images: [apieu], categoryName: "Живильна тканинна маска", volume: [{volume: '21g', price: '100'}], rating: 4, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "Bielenda Professional — Satin Face Tonic in Gel", images: [bielenda], categoryName: "Гелевий тонік для обличчя", volume: [{volume: '500ml', price: '515'}], rating: 4, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "Byredo Bal d'Afrique", images: [byredo], categoryName: "Парфумована вода", volume: [{volume: '', price: '144'}], rating: 4, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
+    {id: 0, name: "BURBERRY — Hero", images: [burberry2], categoryName: "Парфумована вода", volume: [{volume: '50ml', price: '1 853'}], rating: 3, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
+]) 

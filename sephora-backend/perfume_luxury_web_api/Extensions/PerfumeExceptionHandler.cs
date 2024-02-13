@@ -1,6 +1,3 @@
-using System.Data.Common;
-using Npgsql;
-
 namespace perfume_luxury_web_api.Extensions;
 
 // TODO: Add logging
@@ -29,7 +26,13 @@ public class PerfumeExceptionHandler : IExceptionHandler
         catch (Exception ex)
         {
             const string msg = "An exception has occurred while serializing error to JSON";
-            return $"{{\"title\":\"{msg}\",\"detail\":\"{ex.Message}\"}}";
+            return $$"""
+                     {
+                     	"status": 500,
+                     	"title":"{{msg}}",
+                     	"detail":"{{ex.Message}}"
+                     }
+                     """;
         }
     }
 
@@ -53,7 +56,7 @@ public class PerfumeExceptionHandler : IExceptionHandler
         };
 
         string reasonPhrase = ReasonPhrases.GetReasonPhrase(statusCode);
-        if (string.IsNullOrEmpty(reasonPhrase))
+        if (string.IsNullOrWhiteSpace(reasonPhrase))
             reasonPhrase = UnhandledExceptionMsg;
 
         var details = ToJson(new ProblemDetails
@@ -62,11 +65,11 @@ public class PerfumeExceptionHandler : IExceptionHandler
             Title = $"{statusCode} {reasonPhrase}",
             Detail = exception.Message,
         });
-        
+
         httpContext.Response.ContentType = ContentType;
         httpContext.Response.StatusCode = statusCode;
         await httpContext.Response.WriteAsync(details, cancellationToken);
-        
+
         return true;
     }
 }

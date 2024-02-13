@@ -30,7 +30,6 @@ global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
-global using Microsoft.Extensions.Hosting;
 global using Microsoft.IdentityModel.Tokens;
 global using SixLabors.ImageSharp;
 global using SixLabors.ImageSharp.Processing;

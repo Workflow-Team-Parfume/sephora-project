@@ -1,7 +1,5 @@
 namespace perfume_luxury_web_api.Controllers;
 
-// TODO: Add logging
-
 [Authorize, ApiController, Route("api/[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {

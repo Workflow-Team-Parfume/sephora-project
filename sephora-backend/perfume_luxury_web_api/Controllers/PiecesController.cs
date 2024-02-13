@@ -19,7 +19,8 @@ public class PiecesController(
         [FromForm] CreateProductPieceDto dto
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await pieceService.Create(dto);
         return Ok();
@@ -30,7 +31,8 @@ public class PiecesController(
         [FromBody] EditProductPieceDto dto
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await pieceService.Edit(dto);
         return Ok();

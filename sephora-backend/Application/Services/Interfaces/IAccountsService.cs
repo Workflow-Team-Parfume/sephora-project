@@ -3,6 +3,13 @@
 public interface IAccountsService
 {
     Task<IEnumerable<GetUserDto>> GetAll();
+
+    async Task<PagedListInfo<GetUserDto>> Get(
+        int pageNumber,
+        int pageSize,
+        bool fromStart = true
+    ) => (await GetAll()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+
     Task<GetUserDto> Get(string id);
     Task<LoginResponseDto> Login(LoginDto dto);
     Task Register(RegisterDto dto);
@@ -11,5 +18,4 @@ public interface IAccountsService
     Task Edit(string userId, EditUserDto userDto);
     Task<bool> CheckUsernameExists(string userName);
     Task<bool> CheckEmailExists(string email);
-
 }

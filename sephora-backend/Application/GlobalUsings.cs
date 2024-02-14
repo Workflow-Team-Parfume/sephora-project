@@ -25,6 +25,7 @@ global using CleanArchitecture.Application.Services.Interfaces;
 global using CleanArchitecture.Application.Specifications;
 global using CleanArchitecture.Domain.Entities;
 global using CleanArchitecture.Domain.Enums;
+global using Infrastructure.Collections;
 global using Infrastructure.Interfaces;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;

@@ -15,8 +15,10 @@ const Products : React.FC<{title:string, products:IProduct[], link:string, isNew
 
           <Container sx={{ pt: 5, pb: 4, m:0}} style={{maxWidth:"100%"}} >
             <Grid container spacing={2} >
-            {products.map((product) => (
-             <Product product={product} isNew={isNew}/>
+            {products.map((product) => ( 
+            <Grid item xs={12} sm={6} md={4} lg={3} >
+              <Product product={product} isNew={isNew}/>
+            </Grid>
             ))}
             </Grid>
           </Container>

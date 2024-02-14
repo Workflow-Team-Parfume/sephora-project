@@ -12,6 +12,8 @@ import Loader from "./components/common/loader/Loader";
 // import { useSelector } from "react-redux";
 import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
+import ProductsPage from "./components/home/productsPage/ProductsPage";
+import { Perfume, Filter, Filters } from "./components/home/mainPage/data";
 
 import routes from './common/routes';
 
@@ -78,6 +80,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path={routes.login} element={<LoginPage />} />
           <Route path={routes.register} element={<RegisterPage />} />
+          <Route path={routes.productsPage} element={<ProductsPage title="Новинки" products={Perfume} filters={Filters} mainFilter={Filter}/>} />
         </Route>
 
         {/* {user?.role === "admin" && isAuth ? ( */}

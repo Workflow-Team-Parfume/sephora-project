@@ -100,3 +100,14 @@ export const mainBanner = ([
 ])
 
 
+export const Filters = ([
+    {name: 'Група товару', filters: ['Гель для вмивання','Крем для обличчя']},
+    {name: 'Бренд', filters: ['La Roche-Posay','Sane']},
+    {name: 'Вартість', filters: ['500 - 750грн','750 - 1000 грн']},
+    {name: 'Вік', filters: ['18+','25+']},
+])
+
+export const Filter = ({
+    name: 'Новинки',
+    filters: ['Макіяж','Догляд за обличчям','Волосся']
+})

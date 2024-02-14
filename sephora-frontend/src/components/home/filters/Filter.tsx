@@ -53,7 +53,7 @@ const Filter : React.FC<{expanded:string | false, handleChange:any, filter:IFilt
                   disableRipple
                 />
               </ListItemIcon>
-              <Typography id='listText'>{value}</Typography>
+              <Typography id='filterText'>{value}</Typography>
             </ListItemButton>
             ))}
         </List>

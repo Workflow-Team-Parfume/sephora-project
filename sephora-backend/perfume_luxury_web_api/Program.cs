@@ -1,8 +1,3 @@
-using CleanArchitecture.Application.Helpers;
-using Infrastructure;
-using Newtonsoft.Json;
-using perfume_luxury_web_api;
-
 var builder = WebApplication.CreateBuilder(args);
 
 string connStr = builder.Environment.IsDevelopment()
@@ -14,16 +9,18 @@ if (connStr is null)
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling
-            = ReferenceLoopHandling.Ignore
-    );
+builder.Services.AddControllers().AddNewtonsoftJson(opts => 
+        opts.SerializerSettings.Formatting = Formatting.Indented);
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(opts =>
+{
+    opts.SerializerSettings.ReferenceLoopHandling 
+        = ReferenceLoopHandling.Ignore;
+    opts.SerializerSettings.Formatting = Formatting.Indented;
+});
 
 // Add JWT tokens
 JwtOptions opts = builder.Environment.IsDevelopment()
-    ? builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>()
+    ? builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>()
     : new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
@@ -54,6 +51,9 @@ builder.Services.AddAutoMapper();
 // add fluent validators
 builder.Services.AddValidators();
 
+// add file service
+builder.Services.AddFileService(builder.Environment.IsDevelopment());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +63,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHsts();
 app.UseHttpsRedirection();
 
 app.UseCors(options =>

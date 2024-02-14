@@ -1,7 +1,4 @@
-﻿using System.Security.Claims;
-using CleanArchitecture.Domain.Entities;
-
-namespace CleanArchitecture.Application.Services.Interfaces;
+﻿namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IJwtService
 {

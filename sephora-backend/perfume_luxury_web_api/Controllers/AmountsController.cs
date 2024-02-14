@@ -1,25 +1,15 @@
-﻿using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace perfume_luxury_web_api.Controllers;
 
-namespace perfume_luxury_web_api.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
+[Route("api/[controller]"), ApiController]
 public class AmountsController(IAmountService amountService) : Controller
 {
     [HttpGet]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await amountService.Get());
-    }
+        => Ok(await amountService.Get());
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
-    {
-        var item = await amountService.GetById(id);
-        return Ok(item);
-    }
+        => Ok(await amountService.GetById(id));
 
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateAmountDto amount)
@@ -30,7 +20,7 @@ public class AmountsController(IAmountService amountService) : Controller
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         await amountService.Delete(id);

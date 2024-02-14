@@ -30,7 +30,7 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Mililitters")
+                    b.Property<int>("Milliliters")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -57,14 +57,14 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.CartItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("ProductPieceId")
-                        .HasColumnType("integer")
+                    b.Property<long>("ProductPieceId")
+                        .HasColumnType("bigint")
                         .HasColumnOrder(1);
 
                     b.Property<int>("Quantity")
@@ -101,63 +101,95 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.DeliveryEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.ToTable("DeliveryDataSet");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("DeliveryId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserEntityId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryId");
+
+                    b.HasIndex("UserEntityId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ParfumeBottled", b =>
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.OrderItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("LeftMl")
-                        .HasColumnType("integer");
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
 
-                    b.Property<decimal>("PricePerMl")
-                        .HasColumnType("numeric");
+                    b.Property<long>("ProductPieceId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("ParfumeBottles");
+                    b.HasIndex("ProductPieceId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
@@ -169,10 +201,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImgPath")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -188,25 +216,50 @@ namespace Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductPicture", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("PicturePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("ProductPieceId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductPieceId");
+
+                    b.ToTable("ProductPicture");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductPiece", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("AmountId")
+                    b.Property<int?>("AmountId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("InStock")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("IsBottledParfume")
+                        .HasColumnType("boolean");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -219,14 +272,17 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Rating", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("numeric");
@@ -255,6 +311,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
+
+                    b.Property<long>("DeliveryDataId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -303,6 +362,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeliveryDataId")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -446,21 +508,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OrderProductEntity", b =>
-                {
-                    b.Property<int>("OrdersId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("OrdersId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("OrderProductEntity");
-                });
-
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.CartItem", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.ProductPiece", "ProductPiece")
@@ -482,24 +529,36 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
+                    b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "Delivery")
+                        .WithMany()
+                        .HasForeignKey("DeliveryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("UserEntityId");
+
+                    b.Navigation("Delivery");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ParfumeBottled", b =>
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
-                        .WithOne("ParfumeBottled")
-                        .HasForeignKey("CleanArchitecture.Domain.Entities.ParfumeBottled", "ProductId")
+                    b.HasOne("CleanArchitecture.Domain.Entities.Order", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.HasOne("CleanArchitecture.Domain.Entities.ProductPiece", "ProductPiece")
+                        .WithMany()
+                        .HasForeignKey("ProductPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ProductPiece");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductEntity", b =>
@@ -521,13 +580,22 @@ namespace Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductPicture", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.ProductPiece", "ProductPiece")
+                        .WithMany("ProductPictures")
+                        .HasForeignKey("ProductPieceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductPiece");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductPiece", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.Amount", "Amount")
                         .WithMany("ProductPieces")
-                        .HasForeignKey("AmountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AmountId");
 
                     b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
                         .WithMany("ProductPieces")
@@ -544,7 +612,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
                         .WithMany("Ratings")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
                         .WithMany("Ratings")
@@ -555,6 +625,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "DeliveryData")
+                        .WithOne("User")
+                        .HasForeignKey("CleanArchitecture.Domain.Entities.UserEntity", "DeliveryDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DeliveryData");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -608,21 +689,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OrderProductEntity", b =>
-                {
-                    b.HasOne("CleanArchitecture.Domain.Entities.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Amount", b =>
                 {
                     b.Navigation("ProductPieces");
@@ -638,13 +704,26 @@ namespace Infrastructure.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.DeliveryEntity", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductEntity", b =>
                 {
-                    b.Navigation("ParfumeBottled");
-
                     b.Navigation("ProductPieces");
 
                     b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductPiece", b =>
+                {
+                    b.Navigation("ProductPictures");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>

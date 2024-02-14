@@ -1,15 +1,8 @@
-﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Application.Specifications;
-using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AmountService(
-    IRepository<Amount> amountRepository, 
-    IMapper mapper) 
+    IRepository<Amount> amountRepository,
+    IMapper mapper)
     : IAmountService
 {
     public async Task Create(CreateAmountDto amountDto)
@@ -34,13 +27,13 @@ public class AmountService(
     }
 
     public async Task<IEnumerable<AmountDto>> Get()
-    {
-        return mapper.Map<IEnumerable<AmountDto>>(await amountRepository.GetAll());
-    }
+        => mapper.Map<IEnumerable<AmountDto>>(await amountRepository.GetAll());
 
     public async Task<AmountDto?> GetById(int id)
     {
-        Amount? amount = await amountRepository.GetItemBySpec(new Amounts.GetById(id));
+        Amount? amount = await amountRepository.GetItemBySpec(
+            new Amounts.GetById(id)
+        );
 
         if (amount == null)
             throw new Exception();

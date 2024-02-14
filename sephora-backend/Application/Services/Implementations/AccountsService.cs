@@ -1,14 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
-using CleanArchitecture.Application.Dtos.User;
-using CleanArchitecture.Application.Helpers;
-using CleanArchitecture.Application.Resources;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,
@@ -40,7 +30,9 @@ public class AccountsService(
     public async Task Edit(string userId, EditUserDto userDto)
     {
         var user = await userManager.FindByIdAsync(userId);
-        string oldFileName = user.ProfilePicture;
+        if (user is null)
+            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+        string? oldFileName = user.ProfilePicture;
         mapper.Map(userDto, user);
         if (userDto.ProfilePicture != null)
             //Add File Edit!!!
@@ -74,16 +66,14 @@ public class AccountsService(
             throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
 
         await signInManager.SignInAsync(user, true);
-        return new LoginResponseDto()
+        return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))
         };
     }
 
     public async Task Logout()
-    {
-        await signInManager.SignOutAsync();
-    }
+        => await signInManager.SignOutAsync();
 
     public async Task Register(RegisterDto dto)
     {
@@ -105,7 +95,7 @@ public class AccountsService(
             throw new HttpException(message, HttpStatusCode.BadRequest);
         }
 
-        await userManager.AddToRoleAsync(user, "user");
+        await userManager.AddToRoleAsync(user, nameof(user));
     }
 
     public async Task<bool> CheckEmailExists(string email)

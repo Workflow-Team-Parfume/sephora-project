@@ -1,15 +1,12 @@
-﻿using CleanArchitecture.Application.Dtos.Amount;
-using CleanArchitecture.Application.Dtos.Product;
-namespace CleanArchitecture.Application.Dtos.ProductPiece;
-public class ProductPieceDTO
+﻿namespace CleanArchitecture.Application.Dtos.ProductPiece;
+
+public class ProductPieceDto
 {
-    public int Id { get; set; }
-
+    public long Id { get; set; }
     public int? InStock { get; set; }
-
     public decimal Price { get; set; }
-
-    public AmountDto Amount { get; set; }
-
-    public ProductDto Product { get; set; }
+    public int Milliliters { get; set; }
+    public bool IsBottledParfume { get; set; }
+    public long ProductId { get; set; }
+    public IEnumerable<PictureDto> ProductPictures { get; set; }
 }

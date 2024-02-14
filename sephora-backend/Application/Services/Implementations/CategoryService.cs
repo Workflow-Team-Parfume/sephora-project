@@ -1,15 +1,8 @@
-﻿using AutoMapper;
-using CleanArchitecture.Application.Dtos.Category;
-using CleanArchitecture.Application.Services.Interfaces;
-using CleanArchitecture.Application.Specifications;
-using CleanArchitecture.Domain.Entities;
-using Infrastructure.Interfaces;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class CategoryService(
-    IRepository<Category> categoryRepository, 
-    IMapper mapper) 
+    IRepository<Category> categoryRepository,
+    IMapper mapper)
     : ICategoryService
 {
     public async Task Create(CreateCategoryDto categoryDto)
@@ -25,7 +18,6 @@ public class CategoryService(
 
         await categoryRepository.Delete(id);
         await categoryRepository.Save();
-
     }
 
     public async Task Edit(CategoryDto categoryDto)
@@ -35,13 +27,13 @@ public class CategoryService(
     }
 
     public async Task<IEnumerable<CategoryDto>> Get()
-    {
-        return mapper.Map<IEnumerable<CategoryDto>>(await categoryRepository.GetAll());
-    }
+        => mapper.Map<IEnumerable<CategoryDto>>(await categoryRepository.GetAll());
 
     public async Task<CategoryDto?> GetById(int id)
     {
-        Category? category = await categoryRepository.GetItemBySpec(new Categories.GetById(id));
+        Category? category = await categoryRepository.GetItemBySpec(
+            new Categories.GetById(id)
+        );
 
         if (category == null)
             throw new Exception();

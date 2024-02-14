@@ -1,29 +1,22 @@
-﻿using CleanArchitecture.Application.Dtos.User;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace perfume_luxury_web_api.Controllers;
 
-namespace perfume_luxury_web_api.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
+[Route("api/[controller]"), ApiController]
 public class AccountController(IAccountsService accountsService)
     : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await accountsService.GetAll());
-    }
+        => Ok(await accountsService.GetAll());
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(string id)
-    {
-        return Ok(await accountsService.Get(id));
-    }
+        => Ok(await accountsService.Get(id));
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
+        if (!ModelState.IsValid) return BadRequest();
+
         await accountsService.Register(dto);
         return Ok();
     }
@@ -31,6 +24,8 @@ public class AccountController(IAccountsService accountsService)
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
+        if (!ModelState.IsValid) return BadRequest();
+
         var response = await accountsService.Login(dto);
         return Ok(response);
     }
@@ -50,21 +45,23 @@ public class AccountController(IAccountsService accountsService)
     }
 
     [HttpPut("{userId}")]
-    public async Task<IActionResult> Edit(string userId, [FromForm] EditUserDto user)
+    public async Task<IActionResult> Edit(
+        string userId,
+        [FromForm] EditUserDto user
+    )
     {
+        if (!ModelState.IsValid) return BadRequest();
+
         await accountsService.Edit(userId, user);
         return Ok();
     }
 
     [HttpGet("checkUsernameExists/{userName}")]
-    public async Task<IActionResult> CheckUsernameExists([FromRoute] string userName)
-    {
-        return Ok(await accountsService.CheckUsernameExists(userName));
-    }
+    public async Task<IActionResult> CheckUsernameExists(
+        [FromRoute] string userName
+    ) => Ok(await accountsService.CheckUsernameExists(userName));
 
     [HttpGet("checkEmailExists/{email}")]
     public async Task<IActionResult> CheckEmailExists([FromRoute] string email)
-    {
-        return Ok(await accountsService.CheckEmailExists(email));
-    }
+        => Ok(await accountsService.CheckEmailExists(email));
 }

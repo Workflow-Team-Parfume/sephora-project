@@ -1,26 +1,17 @@
-﻿using CleanArchitecture.Application.Dtos.Product;
-using CleanArchitecture.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace perfume_luxury_web_api.Controllers;
 
-namespace perfume_luxury_web_api.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
+[Route("api/[controller]"), ApiController]
 public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        return Ok(await productService.Get());
-    }
+    public async Task<IActionResult> GetAll()
+        => Ok(await productService.Get());
 
-    [HttpGet("{id:int}")]
-    public async Task<IActionResult> Get([FromRoute] int id)
-    {
-        var item = await productService.GetById(id);
-        return Ok(item);
-    }
+    [HttpGet("{id:long}")]
+    public async Task<IActionResult> Get([FromRoute] long id)
+        => Ok(await productService.GetById(id));
 
+    // Authorize admins and mods only
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateProductDto product)
     {
@@ -30,13 +21,15 @@ public class ProductsController(IProductService productService) : Controller
         return Ok();
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] int id)
+    // Authorize admins and mods only
+    [HttpDelete("{id:long}")]
+    public async Task<IActionResult> Delete([FromRoute] long id)
     {
         await productService.Delete(id);
         return Ok();
     }
 
+    // Authorize admins and mods only
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] EditProductDto product)
     {

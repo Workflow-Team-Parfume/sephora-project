@@ -14,7 +14,7 @@ i18n
         'header.catalogue': 'Каталог',
         'header.aboutUs': 'Про нас',
         'header.paymentAndDelivery': 'Оплата та доставка',
-
+          
         'common.button.moreDetails': 'Детальніше',
         'common.button.moreProducts': 'Більше товарів',
         'common.button.review': 'Переглянути',
@@ -23,7 +23,10 @@ i18n
         'common.title.perfumes': 'Парфуми',
         'common.title.recommendedCategories': 'Рекомендовані категорії',
         'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Відгуки наших покупців про кометику та догляд',
-
+        'common.title.reviews': 'Відгуки',
+        'common.title.similarProducts': 'Схожі товари',
+        'common.title.especiallyForYou': 'Спеціально для вас',
+          
         'recCategories.showerAndBath': 'Душ та ванна',
         'recCategories.accessories': 'Аксесуари',
         'recCategories.vitamins': 'Вітамини',
@@ -43,6 +46,17 @@ i18n
         'footer.news': 'Новини',
         'footer.supportService': 'Служба підтримки',
         'footer.information': 'Ви можете написати нам лист або зателефонувати за номерами щоденно з 8:00 до 18:00',
+
+        'details.description': 'Опис',
+        'details.characteristics': 'Характеристики',
+        'details.paymentAndDelivery': 'Оплата та доставка',
+        'details.paymentAndDelivery.1': 'Готівкова оплата при отриманні замовлення ',
+        'details.paymentAndDelivery.2': 'Безготівкова оплата при оформленні замовлення',
+        'details.paymentAndDelivery.3': 'Оплата готівкою на нункті самовивозу',
+        'details.paymentAndDelivery.4': 'Оплата готівкою при отриманні на поштових відділеннях і пунктах видачі посилок',
+        'details.productCode': 'код товару: ',
+        'details.addToFavorites': 'Додати до улюблених',
+        'details.buy': 'Купити',
         }
     },
 
@@ -64,12 +78,14 @@ i18n
         'common.title.perfumes': 'Perfumes',
         'common.title.recommendedCategories': 'Recommended categories',
         'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Reviews of out customers about cosmeticts and care',
+        'common.title.reviews': 'Reviews',
+        'common.title.similarProducts': 'Similar products',
+        'common.title.especiallyForYou': 'Especially for you',
 
         'recCategories.showerAndBath': 'Shower & bath',
         'recCategories.accessories': 'Accessories',
         'recCategories.vitamins': 'Vitamins',
         'recCategories.face': 'Face',
-
         
         'footer.aboutDelivery': 'About delivery',
         'footer.paymentMethods': 'Payment methods',
@@ -85,6 +101,17 @@ i18n
         'footer.news': 'News',
         'footer.supportService': 'Support service',
         'footer.information': 'You can write us a letter or call us on the numbers every day from 8:00 a.m. to 6:00 p.m.',
+
+        'details.description': 'Description',
+        'details.characteristics': 'Characteristics',
+        'details.paymentAndDelivery': 'Payment and delivery',
+        'details.paymentAndDelivery.1': 'Cash payment upon receipt of order',
+        'details.paymentAndDelivery.2': 'Cashless payment at checkout',
+        'details.paymentAndDelivery.3': 'Payment in cash at the pick-up point',
+        'details.paymentAndDelivery.4': 'Payment in cash upon receipt at post offices and parcel delivery points',
+        'details.productCode': 'product code',
+        'details.addToFavorites': 'Add to favorites',
+        'details.buy': 'Buy',
         }
     }
 },

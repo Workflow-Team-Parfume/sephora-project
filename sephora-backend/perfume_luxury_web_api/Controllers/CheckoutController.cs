@@ -1,6 +1,6 @@
 namespace perfume_luxury_web_api.Controllers;
 
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public class CheckoutController(
     ICheckoutService checkoutService
 ) : ControllerBase

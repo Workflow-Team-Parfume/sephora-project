@@ -1,6 +1,6 @@
 namespace perfume_luxury_web_api.Controllers;
 
-[Authorize, ApiController, Route("api/[controller]")]
+[Authorize, ApiController, Route("[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {
     [HttpGet]

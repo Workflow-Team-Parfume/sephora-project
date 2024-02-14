@@ -1,7 +1,7 @@
 namespace perfume_luxury_web_api.Controllers;
 
 // TODO: Authorize admins and mods only on the whole controller
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public class PiecesController(
     IPieceService pieceService
 ) : ControllerBase

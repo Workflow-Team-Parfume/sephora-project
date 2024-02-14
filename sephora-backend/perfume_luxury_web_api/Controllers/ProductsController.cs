@@ -3,9 +3,15 @@
 [Route("[controller]"), ApiController]
 public class ProductsController(IProductService productService) : Controller
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> GetAll()
         => Ok(await productService.Get());
+
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    ) => Ok((await productService.Get()).ToPagedListInfo(pageNumber, pageSize, false));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)
@@ -15,7 +21,7 @@ public class ProductsController(IProductService productService) : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateProductDto product)
     {
-        if (!ModelState.IsValid) 
+        if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
 
         await productService.Create(product);
@@ -34,7 +40,7 @@ public class ProductsController(IProductService productService) : Controller
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] EditProductDto product)
     {
-        if (!ModelState.IsValid) 
+        if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
 
         await productService.Edit(product);

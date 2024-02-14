@@ -23,6 +23,7 @@ global using CleanArchitecture.Domain.Entities;
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
 global using Infrastructure;
+global using Infrastructure.Collections;
 global using Infrastructure.Data;
 global using Infrastructure.Interfaces;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;

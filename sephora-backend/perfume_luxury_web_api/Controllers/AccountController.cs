@@ -1,12 +1,17 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
 [Route("[controller]"), ApiController]
-public class AccountController(IAccountsService accountsService)
-    : ControllerBase
+public class AccountController(IAccountsService accountsService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
         => Ok(await accountsService.GetAll());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    ) => Ok(await accountsService.Get(pageNumber, pageSize, false));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(string id)

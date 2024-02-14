@@ -35,7 +35,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
     public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         => Ok(await roleService.GetByUserId(userId));
     
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await roleService.GetAll());
 }

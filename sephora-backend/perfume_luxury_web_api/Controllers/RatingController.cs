@@ -3,15 +3,26 @@ namespace perfume_luxury_web_api.Controllers;
 [ApiController, Route("[controller]")]
 public class RatingController(IRatingService ratingService) : ControllerBase
 {
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<RatingDto>>> Get()
+    [HttpGet("all")]
+    public async Task<IActionResult> Get()
     {
         var ratings = await ratingService.Get();
         return Ok(ratings);
     }
+    
+    // TODO: Add filtering by product ID
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    )
+    {
+        var ratings = await ratingService.Get(pageNumber, pageSize, false);
+        return Ok(ratings);
+    }
 
     [HttpGet("{id:long}")]
-    public async Task<ActionResult<RatingDto>> GetById(long id)
+    public async Task<IActionResult> GetById(long id)
     {
         var rating = await ratingService.GetById(id);
         if (rating is null)
@@ -23,7 +34,7 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult> Create(CreateRatingDto createRatingDto)
+    public async Task<IActionResult> Create(CreateRatingDto createRatingDto)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
@@ -33,7 +44,7 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     }
 
     [HttpPut("{id:long}"), Authorize]
-    public async Task<ActionResult> Edit(long id, EditRatingDto editRatingDto)
+    public async Task<IActionResult> Edit(long id, EditRatingDto editRatingDto)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
@@ -43,7 +54,7 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     }
 
     [HttpDelete("{id:long}"), Authorize]
-    public async Task<ActionResult> Delete(long id)
+    public async Task<IActionResult> Delete(long id)
     {
         await ratingService.Delete(id, User);
         return Ok();

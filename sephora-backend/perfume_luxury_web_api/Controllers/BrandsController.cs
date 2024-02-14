@@ -3,9 +3,15 @@
 [Route("[controller]"), ApiController]
 public class BrandsController(IBrandService brandService) : Controller
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await brandService.Get());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    ) => Ok(await brandService.Get(pageNumber, pageSize, false));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)

@@ -3,9 +3,15 @@ namespace perfume_luxury_web_api.Controllers;
 [Authorize, ApiController, Route("[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await cartService.Get(User));
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    ) => Ok(await cartService.Get(User, pageNumber, pageSize));
 
     [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Get([FromRoute] long id)

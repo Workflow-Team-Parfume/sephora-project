@@ -6,9 +6,15 @@ public class PiecesController(
     IPieceService pieceService
 ) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> GetAll()
         => Ok(await pieceService.Get());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    ) => Ok(await pieceService.Get(pageNumber, pageSize, false));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)

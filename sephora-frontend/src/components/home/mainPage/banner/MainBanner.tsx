@@ -31,7 +31,7 @@ const MainBanner = () => {
             <Grid item lg={6} style={{position:"relative"}}>
                 <img style={{ width: "100%", height:"100%" }}  src={banner1.image}/>
                 <Typography id='bannerTitle1'>{banner1.title}</Typography>
-                <Button id='butMainBanner' variant="outlined" href={banner1.link}>{t('common.button.detail')}</Button>
+                <Button id='butMainBanner' variant="outlined" href={banner1.link}>{t('common.button.moreDetails')}</Button>
             </Grid>
 
             <Grid item lg={6} style={{position:"relative"}}>

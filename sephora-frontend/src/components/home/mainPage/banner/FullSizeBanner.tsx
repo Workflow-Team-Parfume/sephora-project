@@ -13,7 +13,7 @@ const FullSizeBanner : React.FC<{banner: IFullSizeBanner}>
         <Container style={{maxWidth:"100%", 
         position:"relative"}} >
            <img style={{width:'100%'}} src={banner.image}/>
-           <Button id='butBanner' variant="outlined" href={banner.link}>{t('common.button.view')}</Button>
+           <Button id='butBanner' variant="outlined" href={banner.link}>{t('common.button.review')}</Button>
         </Container>
     );
 };

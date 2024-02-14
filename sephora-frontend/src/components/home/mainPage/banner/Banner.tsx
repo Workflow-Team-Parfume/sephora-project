@@ -19,7 +19,7 @@ const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}>
                         <div className="bannerDescription">{banner.description}</div>
                     </Stack>
 
-                    <Button id="bannerLink" variant="outlined" href={banner.link}>{t('common.button.view')}</Button>
+                    <Button id="bannerLink" variant="outlined" href={banner.link}>{t('common.button.review')}</Button>
                 </Stack>
                 </Grid>
 

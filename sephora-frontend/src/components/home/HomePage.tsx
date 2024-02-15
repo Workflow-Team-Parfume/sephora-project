@@ -1,14 +1,16 @@
+import React from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
-import {newProducts, Populars, Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3, Perfume } from "./data";
+import {Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3} from "./data";
 import Reviews from "./reviews/MainPageReviews";
 import Banner from "./mainPage/banner/Banner";
 import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
 import RecCategories from './mainPage/recCategories/RecCategories';
 import MainBanner from './mainPage/banner/MainBanner';
-import { useTranslation } from 'react-i18next';
-
+import {useTranslation} from 'react-i18next';
+import http_common from "../../http_common.ts";
+import ProductPiece from "../../models/product/ProductPiece.ts";
 
 // function Copyright() {
 //   return (
@@ -30,31 +32,38 @@ import { useTranslation } from 'react-i18next';
 
 
 const HomePage = () => {
+    const [products, setProducts] = React.useState<ProductPiece[]>([]);
+    React.useEffect(() => {
+        http_common.get("pieces/all")
+            .then(res => setProducts(res.data))
+            .catch(err => console.log(err));
+    }, []);
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const recCategories = ([
-        {name:t('recCategories.showerAndBath'), link:""},
-        {name:t('recCategories.accessories'), link:""},
-        {name:t('recCategories.vitamins'), link:""},
-        {name:t('recCategories.face'), link:""},
+        {name: t('recCategories.showerAndBath'), link: ""},
+        {name: t('recCategories.accessories'), link: ""},
+        {name: t('recCategories.vitamins'), link: ""},
+        {name: t('recCategories.face'), link: ""},
     ])
-    
+
     return (
-       <Container style={{padding: '0', maxWidth: '100%'}}>
-        <MainBanner/>
-        <Stack spacing={19} style={{margin: '0 100px'}}>
+        <Container style={{padding: '0', maxWidth: '100%'}}>
+            <MainBanner/>
+            <Stack spacing={19} style={{margin: '0 100px'}}>
 
-        <Products title={t('common.title.novelty')} products={newProducts} link=''/>
-        <Products title={t('common.title.popular')} products={Populars} link=''/>
-        <Banner banner={Banner1} color="#688F74"/>
-        <Products title={t('common.title.perfumes')} products={Perfume} link=''/>
-        <Banner banner={Banner2} color="#820000" isLeft={true}/>
-        <RecCategories title={t('common.title.recommendedCategories')} categories={recCategories}/>
-        <FullSizeBanner banner={Banner3}/>
-        <Reviews title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')} reviews={[Reviews1,Reviews2,Reviews3]}/>
+                <Products title={t('common.title.newItems')} products={products} link=''/>
+                <Products title={t('common.title.populars')} products={products} link=''/>
+                <Banner banner={Banner1} color="#688F74"/>
+                <Products title={t('common.title.perfumes')} products={products} link=''/>
+                <Banner banner={Banner2} color="#820000" isLeft={true}/>
+                <RecCategories title={t('common.title.recommendedCategories')} categories={recCategories}/>
+                <FullSizeBanner banner={Banner3}/>
+                <Reviews title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
+                         reviews={[Reviews1, Reviews2, Reviews3]}/>
 
-        </Stack>
-       </Container>
-      );
+            </Stack>
+        </Container>
+    );
 }
 export default HomePage;

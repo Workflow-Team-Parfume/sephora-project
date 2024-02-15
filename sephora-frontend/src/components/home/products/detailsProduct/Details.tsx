@@ -76,10 +76,10 @@ const Details : React.FC<{product:IProduct}>
     setPrice(product.volume.find(v => v.volume==event.target.value)?.price)
   };
   
-  const [image, setImage] = useState(product.images.at(0));
+  const [image, setImage] = useState(product.pictures.at(0));
 
   const handleChangeImage = (image: string) => {
-    setImage(product.images.find(i => i==image));
+    setImage(product.pictures.find(i => i==image));
   };
 
   return (
@@ -88,7 +88,7 @@ const Details : React.FC<{product:IProduct}>
 
       <Stack direction='row' spacing={2.5}>
         <Stack style={{width: '100px'}} spacing={2.5}>
-          {product.images.map((img) => (
+          {product.pictures.map((img) => (
             <Button onClick={() => handleChangeImage(img)} >
               <img className={img==image ? 'imageClick' : 'image'} alt={product.name} src={img}/>
             </Button>

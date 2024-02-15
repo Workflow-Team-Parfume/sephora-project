@@ -1,7 +1,8 @@
-import { Card, CardMedia, Grid, Link, Rating, Stack, Typography } from "@mui/material";
+import { Card, CardMedia, Link, Rating, Stack, Typography } from "@mui/material";
 import { IProduct } from "./types";
 import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function IsNew(isNew:boolean){
   if(isNew){
@@ -16,13 +17,13 @@ function IsNew(isNew:boolean){
 const Product : React.FC<{product:IProduct}>
 = ({ product }) => {
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} >
       <Link href={'/details/'+product.id} underline="none">
 
-    <Card className="productsMainContainer"
+    <Card className="productMainContainer"
         sx={{height:'95%'}}
         >
         {IsNew(product.isNew)}
+        <FavoriteBorderIcon className="favorite"/>
         <Stack spacing={2} direction='column'>
 
         <CardMedia
@@ -58,9 +59,7 @@ const Product : React.FC<{product:IProduct}>
         </Stack>
         </Stack>
     </Card>
-            </Link>
-
-    </Grid>
+    </Link>
     );
 }
 

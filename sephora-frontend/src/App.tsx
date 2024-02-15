@@ -12,10 +12,10 @@ import Loader from "./components/common/loader/Loader";
 // import { useSelector } from "react-redux";
 import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
-
-import routes from './common/routes';
+import ProductsPage from "./components/home/productsPage/ProductsPage";
 import Details from "./components/home/products/detailsProduct/Details";
-import { DetailsProduct } from "./components/home/data";
+import { DetailsProduct, Perfume, Filter, Filters } from "./components/home/data";
+import routes from './common/routes';
 
 function App() {
   // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -81,6 +81,7 @@ function App() {
           <Route path={routes.login} element={<LoginPage />} />
           <Route path={routes.register} element={<RegisterPage />} />
           <Route path={routes.productDetails} element={<Details product={DetailsProduct} />} />
+          <Route path={routes.productsPage} element={<ProductsPage title="Новинки" products={Perfume} filters={Filters} mainFilter={Filter}/>} />
         </Route>
 
         {/* {user?.role === "admin" && isAuth ? ( */}

@@ -9,9 +9,9 @@ public class CartController(ICartService cartService) : ControllerBase
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await cartService.Get(User, pageNumber, pageSize));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await cartService.Get(User, page, size));
 
     [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Get([FromRoute] long id)

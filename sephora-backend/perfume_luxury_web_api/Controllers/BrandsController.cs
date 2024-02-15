@@ -9,9 +9,9 @@ public class BrandsController(IBrandService brandService) : Controller
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await brandService.Get(pageNumber, pageSize, false));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await brandService.Get(page, size, false));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)

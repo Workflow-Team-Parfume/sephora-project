@@ -12,9 +12,9 @@ public class PiecesController(
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await pieceService.Get(pageNumber, pageSize, false));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await pieceService.Get(page, size, false));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)

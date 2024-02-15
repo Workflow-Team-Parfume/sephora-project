@@ -1,97 +1,79 @@
 import Box from "@mui/material/Box";
 import "./homeFooter.scss";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 const HomeFooter = () => {
   const boxStyle = {
-            flexGrow: 1,
             display: "flex",
             alignItems: { xs: "flex-start" },
             flexDirection: { xs: "row", sm: "column" },
-            justifyContent: { xs: "center" },
-            gap: 0,
-
   }
+
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="main_footer">
-        <Box
-          sx={{
-            ...boxStyle,
-            flexDirection: { xs: "column", sm: "row" },
-            gap: 3,
-            paddingLeft: 18,
-            paddingTop: 10,
-          }}
-        >
+        <Stack spacing={12.5} style={{padding:'100px 0'}} justifyContent='center' direction='row'>
           <Box
             sx={{
               ...boxStyle,
-              gap: 0,
-              width: 156,
             }}
           >
             <Typography variant="h3" gutterBottom id="links" paddingBottom={2}>
-              Про доставку
+             {t('footer.aboutDelivery')}
             </Typography>
-            <Button color="inherit">Способи оплати</Button>
-            <Button color="inherit">Про продукцію</Button>
+            <Button>{t('footer.paymentMethods')}</Button>
+            <Button>{t('footer.aboutProducts')}</Button>
           </Box>
           <Box
             sx={{
               ...boxStyle,
-              gap: 0,
-              width: 178,
             }}
           >
             <Typography variant="h3" gutterBottom id="links" paddingBottom={2}>
-              Beauty Club
+            {t('footer.beautyClub')}
             </Typography>
-            <Button color="inherit">Умови використання</Button>
-            <Button color="inherit">Повернення та обмін</Button>
+            <Button>{t('footer.termsOfUse')}</Button>
+            <Button>{t('footer.returnsAndExchanges')}</Button>
           </Box>
           <Box
             sx={{
               ...boxStyle,
-              width: 190,
             }}
           >
             <Typography variant="h3" gutterBottom id="links" paddingBottom={2}>
-              Про нас
+            {t('footer.aboutUs')}
             </Typography>
-            <Button color="inherit">Контакти</Button>
-            <Button color="inherit">Додаток</Button>
-            <Button color="inherit">Партнерська програма</Button>
+            <Button>{t('footer.addition')}</Button>
+            <Button>{t('footer.contacts')}</Button>
+            <Button>{t('footer.partnerProgram')}</Button>
           </Box>
           <Box
             sx={{
               ...boxStyle,
-              width: 87,
             }}
           >
             <Typography variant="h3" gutterBottom id="links" paddingBottom={2}>
-              Статті
+            {t('footer.articles')}
             </Typography>
-            <Button color="inherit">Новини</Button>
+            <Button>{t('footer.news')}</Button>
           </Box>
           <Box
             sx={{
               ...boxStyle,
-              width: 481,
             }}
           >
             <Typography variant="h3" gutterBottom id="links" paddingBottom={2}>
-              Служба підтримки
+            {t('footer.supportService')}
             </Typography>
-            <Button color="inherit">(068) 753 32 89</Button>
-            <Button color="inherit">(098) 316 67 50</Button>
-            <Button color="inherit">
-              Ви можете написати нам лист або залелефонувати за <br />
-              номерами щоденно з 8:00 до 18:00
-            </Button>
+            <Button>(068) 753 32 89</Button>
+            <Button>(098) 316 67 50</Button>
+            <Button style={{textWrap:'wrap', maxWidth:'480px'}}>{t('footer.information')}</Button>
           </Box>
-        </Box>
+        </Stack>
       </div>
     </>
   );

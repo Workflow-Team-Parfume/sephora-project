@@ -44,8 +44,8 @@ const HomePage = () => {
         <MainBanner/>
         <Stack spacing={19} style={{margin: '0 100px'}}>
 
-        <Products title={t('common.title.newItems')} products={newProducts} link=''/>
-        <Products title={t('common.title.populars')} products={Populars} link=''/>
+        <Products title={t('common.title.novelty')} products={newProducts} link=''/>
+        <Products title={t('common.title.popular')} products={Populars} link=''/>
         <Banner banner={Banner1} color="#688F74"/>
         <Products title={t('common.title.perfumes')} products={Perfume} link=''/>
         <Banner banner={Banner2} color="#820000" isLeft={true}/>

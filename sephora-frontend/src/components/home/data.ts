@@ -163,7 +163,8 @@ export const DetailsProduct = ({
     characteristics:Characteristics,
     codeProduct:283295,
     reviews:Reviews,
-    isNew: false
+    isNew: false,
+    pictures:[]
 });
 
 import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png'; 

@@ -3,8 +3,8 @@ import "./details.scss"
 import StarIcon from "@mui/icons-material/Star";
 import Reviews from "../../reviews/ReviewsProduct";
 import { useTranslation } from "react-i18next";
-import Products from "../Products";
-import { especiallyForYou, similarProducts } from "../../data";
+// import Products from "../Products";
+// import { especiallyForYou, similarProducts } from "../../data";
 // import { useEffect, useState } from "react";
 import { useState } from "react";
 
@@ -151,9 +151,9 @@ const Details : React.FC<{product:IProduct}>
 
 
       <Stack spacing={7} style={{alignItems:'center'}}>
-          <Products title={t('common.title.similarProducts')} products={similarProducts}/>
+          {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
           <Reviews title={t('common.title.reviews')} reviews={product.reviews}></Reviews>
-          <Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>
+          {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
       </Stack>
     </Container>
     );

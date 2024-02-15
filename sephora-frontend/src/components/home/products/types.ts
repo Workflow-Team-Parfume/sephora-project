@@ -22,6 +22,7 @@ export interface IProduct{
     characteristics:ICharasteristic[];
     codeProduct:number;
     reviews:IReview[];
+    pictures:string[];
 }
 
 export interface ICharasteristic{

@@ -9,9 +9,9 @@ public class CategoryController(ICategoryService categoryService) : Controller
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await categoryService.Get(pageNumber, pageSize, false));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await categoryService.Get(page, size, false));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)

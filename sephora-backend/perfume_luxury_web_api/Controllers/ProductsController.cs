@@ -9,9 +9,9 @@ public class ProductsController(IProductService productService) : Controller
 
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await productService.Get(pageNumber, pageSize, false));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await productService.Get(page, size, false));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)

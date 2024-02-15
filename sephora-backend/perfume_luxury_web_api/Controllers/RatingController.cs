@@ -13,11 +13,11 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     // TODO: Add filtering by product ID
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
     )
     {
-        var ratings = await ratingService.Get(pageNumber, pageSize, false);
+        var ratings = await ratingService.Get(page, size, false);
         return Ok(ratings);
     }
 

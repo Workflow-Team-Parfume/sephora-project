@@ -9,9 +9,9 @@ public class AccountController(IAccountsService accountsService) : ControllerBas
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    ) => Ok(await accountsService.Get(pageNumber, pageSize, false));
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await accountsService.Get(page, size, false));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(string id)

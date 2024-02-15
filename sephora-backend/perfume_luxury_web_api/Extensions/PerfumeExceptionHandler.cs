@@ -42,6 +42,12 @@ public class PerfumeExceptionHandler : IExceptionHandler
         CancellationToken cancellationToken
     )
     {
+        Console.WriteLine($"""
+                           Exception occurred:
+                           {exception.Message}
+                           {exception.StackTrace}
+                           """);
+        
         int statusCode = exception switch
         {
             HttpException httpException => (int)httpException.StatusCode,

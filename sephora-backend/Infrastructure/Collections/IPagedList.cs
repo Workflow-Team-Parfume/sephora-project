@@ -11,7 +11,4 @@ public interface IPagedList<T> : IList<T>
     
     bool HasPreviousPage => CurrentPage > 1;
     bool HasNextPage => CurrentPage < TotalPages;
-    
-    PagedListInfo<T> ToPagedListInfo()
-        => new(this, CurrentPage, PageSize, TotalPages, TotalCount);
 }

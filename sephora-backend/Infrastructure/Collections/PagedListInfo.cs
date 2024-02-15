@@ -6,5 +6,7 @@ public record PagedListInfo<T>
     int CurrentPage,
     int PageSize,
     int TotalPages,
-    int TotalCount
+    int TotalCount,
+    bool HasPreviousPage,
+    bool HasNextPage
 );

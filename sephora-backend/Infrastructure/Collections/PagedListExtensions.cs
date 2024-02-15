@@ -8,11 +8,19 @@ public static class PagedListExtensions
         int pageSize,
         bool fromStart = true
     ) => new PagedList<T>(source, pageNumber, pageSize, fromStart);
-    
+
     public static PagedListInfo<T> ToPagedListInfo<T>(
         this IPagedList<T> source
-    ) => new(source, source.CurrentPage, source.PageSize, source.TotalPages, source.Count);
-    
+    ) => new(
+        source,
+        source.CurrentPage,
+        source.PageSize,
+        source.TotalPages,
+        source.Count,
+        source.HasPreviousPage,
+        source.HasNextPage
+    );
+
     public static PagedListInfo<T> ToPagedListInfo<T>(
         this IEnumerable<T> source,
         int pageNumber,

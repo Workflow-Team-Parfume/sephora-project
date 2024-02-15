@@ -6,6 +6,9 @@ public class PagedList<T> : List<T>, IPagedList<T>
     public int PageSize { get; }
     public int TotalPages { get; }
     public int TotalCount { get; }
+    
+    public bool HasPreviousPage { get; }
+    public bool HasNextPage { get; }
 
     /**
      * <summary>
@@ -33,9 +36,14 @@ public class PagedList<T> : List<T>, IPagedList<T>
             : throw new ArgumentOutOfRangeException(nameof(pageSize));
 
         var enumerable = items.ToList();
+        
         CurrentPage = pageNumber;
         TotalCount = enumerable.Count;
         TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
+        
+        HasPreviousPage = pageNumber > 1;
+        HasNextPage = pageNumber < TotalPages;
+        
         AddRange(fromStart
             ? enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize)
             : enumerable.SkipLast((pageNumber - 1) * pageSize).TakeLast(pageSize)

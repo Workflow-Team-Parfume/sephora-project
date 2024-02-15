@@ -1,4 +1,4 @@
-import CartItem from "../../models/cart/CartItem.ts";
+import CartItem from "../../models/Cart/CartItem.ts";
 import {UnknownAction} from "@reduxjs/toolkit";
 
 export const CartActionTypes = {

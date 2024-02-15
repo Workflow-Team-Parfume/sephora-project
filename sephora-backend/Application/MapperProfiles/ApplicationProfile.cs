@@ -2,9 +2,9 @@
 
 public class ApplicationProfile : Profile
 {
-    private static string? EnvName => 
+    private static string? EnvName =>
         Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-    
+
     public ApplicationProfile()
     {
         CreateMap<Brand, BrandDto>().ReverseMap();
@@ -16,7 +16,10 @@ public class ApplicationProfile : Profile
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
 
-        CreateMap<ProductDto, ProductEntity>().ReverseMap();
+        CreateMap<ProductEntity, ProductDto>().ForMember(
+            dest => dest.Pieces,
+            opts => opts.MapFrom(src => src.ProductPieces)
+        );
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
 
@@ -26,6 +29,9 @@ public class ApplicationProfile : Profile
         CreateMap<ProductPiece, ProductPieceDto>().ForMember(
             dest => dest.Milliliters,
             opts => opts.MapFrom(src => src.Amount!.Milliliters)
+        ).ForMember(
+            dest => dest.Pictures,
+            opts => opts.MapFrom(src => src.ProductPictures)
         );
         CreateMap<EditProductPieceDto, ProductPiece>();
 

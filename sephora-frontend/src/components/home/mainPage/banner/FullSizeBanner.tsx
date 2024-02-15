@@ -10,10 +10,10 @@ const FullSizeBanner : React.FC<{banner: IFullSizeBanner}>
   const { t } = useTranslation();
 
   return (
-        <Container style={{maxWidth:"100%", 
+        <Container className="fullSizeBanner" style={{maxWidth:"100%", 
         position:"relative"}} >
            <img style={{width:'100%'}} src={banner.image}/>
-           <Button id='butBanner' variant="outlined" href={banner.link}>{t('common.button.review')}</Button>
+           <Button className='butBanner' href={banner.link}>{t('common.button.review')}</Button>
         </Container>
     );
 };

@@ -14,6 +14,8 @@ import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 
 import routes from './common/routes';
+import Details from "./components/home/products/detailsProduct/Details";
+import { DetailsProduct } from "./components/home/data";
 
 function App() {
   // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -78,6 +80,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path={routes.login} element={<LoginPage />} />
           <Route path={routes.register} element={<RegisterPage />} />
+          <Route path={routes.productDetails} element={<Details product={DetailsProduct} />} />
         </Route>
 
         {/* {user?.role === "admin" && isAuth ? ( */}

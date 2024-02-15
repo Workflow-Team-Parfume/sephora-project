@@ -7,14 +7,29 @@ public interface IRatingService
      * <returns>A list of ratings</returns>
      */
     Task<IEnumerable<RatingDto>> Get();
-    
+
+    /**
+     * <summary>Get a paged list of ratings</summary>
+     * <param name="pageNumber">The page number</param>
+     * <param name="pageSize">The size of the page</param>
+     * <param name="fromStart">
+     * Whether to start from the beginning of the list
+     * </param>
+     * <returns>A paged list of ratings</returns>
+     */
+    async Task<PagedListInfo<RatingDto>> Get(
+        int pageNumber,
+        int pageSize,
+        bool fromStart = true
+    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+
     /**
      * <summary>Get a rating by its ID</summary>
      * <param name="id">The ID of the rating</param>
      * <returns>The rating with the given ID or null</returns>
      */
     Task<RatingDto?> GetById(long id);
-    
+
     /**
      * <summary>Create a new rating</summary>
      * <param name="createRatingDto">The rating to be created</param>
@@ -22,7 +37,7 @@ public interface IRatingService
      * <exception cref="UnauthorizedAccessException">User is not found</exception>
      */
     Task Create(CreateRatingDto createRatingDto, ClaimsPrincipal user);
-    
+
     /**
      * <summary>Edit a rating</summary>
      * <param name="editRatingDto">The rating to be edited</param>
@@ -32,7 +47,7 @@ public interface IRatingService
      * </exception>
      */
     Task Edit(EditRatingDto editRatingDto, ClaimsPrincipal user);
-    
+
     /**
      * <summary>Delete a rating</summary>
      * <param name="id">The ID of the rating to be deleted</param>

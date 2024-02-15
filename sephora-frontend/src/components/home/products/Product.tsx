@@ -1,4 +1,4 @@
-import {  Card, CardMedia, Grid, Rating, Stack, Typography } from "@mui/material";
+import { Card, CardMedia, Grid, Link, Rating, Stack, Typography } from "@mui/material";
 import { IProduct } from "./types";
 import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
@@ -13,14 +13,16 @@ function IsNew(isNew:boolean){
   }
 }
 
-const Product : React.FC<{product:IProduct,isNew:boolean}>
-= ({ product, isNew = false }) => {
+const Product : React.FC<{product:IProduct}>
+= ({ product }) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} >
-    <Card id="mainContainer"
+      <Link href={'/details/'+product.id} underline="none">
+
+    <Card className="productsMainContainer"
         sx={{height:'95%'}}
         >
-        {IsNew(isNew)}
+        {IsNew(product.isNew)}
         <Stack spacing={2} direction='column'>
 
         <CardMedia
@@ -28,15 +30,15 @@ const Product : React.FC<{product:IProduct,isNew:boolean}>
         sx={{
           pt: '120%'
         }}
-        image={product.image}
+        image={product.images.at(0)}
         /> 
 
         <Stack spacing={4}>
-          <Typography id="productName">
+          <Typography className="productName">
               {product.name}
           </Typography>
-          <Typography id="productCategory">
-              {product.categoryName} {product.volume != null ? <span>&#8211;</span> : ''} {product.volume}
+          <Typography className="productCategory">
+              {product.categoryName} {product.volume.at(0)?.volume != '' ? <span>&#8211;</span> : ''} {product.volume.at(0)?.volume}
           </Typography>
           <Stack spacing={2}>
           <Rating
@@ -46,16 +48,17 @@ const Product : React.FC<{product:IProduct,isNew:boolean}>
             readOnly
             icon={<StarIcon style={{ color: 'black' }} />}
             emptyIcon={<StarIcon style={{ color: '#9D9D9D' }} fontSize="inherit" />}
-          />
-            <Typography id="productPrice">
+            />
+            <Typography className="productPrice">
                 <span style={{textWrap:"nowrap"}}>
-                {product.price} грн
+                {product.volume.at(0)?.price} грн
                 </span>
             </Typography> 
           </Stack>
         </Stack>
         </Stack>
     </Card>
+            </Link>
 
     </Grid>
     );

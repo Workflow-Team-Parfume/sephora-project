@@ -1,8 +1,8 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
-import {newProducts, Populars, Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3, Perfume } from "./mainPage/data";
-import Reviews from "./mainPage/reviews/Reviews";
+import {newProducts, Populars, Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3, Perfume } from "./data";
+import Reviews from "./reviews/MainPageReviews";
 import Banner from "./mainPage/banner/Banner";
 import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
 import RecCategories from './mainPage/recCategories/RecCategories';
@@ -44,7 +44,7 @@ const HomePage = () => {
         <MainBanner/>
         <Stack spacing={19} style={{margin: '0 100px'}}>
 
-        <Products title={t('common.title.novelty')} products={newProducts} link='' isNew={true}/>
+        <Products title={t('common.title.novelty')} products={newProducts} link=''/>
         <Products title={t('common.title.popular')} products={Populars} link=''/>
         <Banner banner={Banner1} color="#688F74"/>
         <Products title={t('common.title.perfumes')} products={Perfume} link=''/>

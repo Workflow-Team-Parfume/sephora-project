@@ -10,16 +10,15 @@ const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}>
     const { t } = useTranslation();
 
   return (
-        <Container style={{maxWidth:"100%"}} >
+        <Container className="banner" style={{maxWidth:"100%"}} >
              <Grid container spacing={2.5} direction={isLeft ? "row-reverse" : "row"}>
                 <Grid item md={6}>
-                <Stack spacing={10.25} id="bannerStack" style={{background:color}}>
+                <Stack spacing={10.25} className="bannerStack" style={{background:color}}>
                     <Stack spacing={2.5}>
                         <div className="bannerTitle">{banner.title}</div>
                         <div className="bannerDescription">{banner.description}</div>
                     </Stack>
-
-                    <Button id="bannerLink" variant="outlined" href={banner.link}>{t('common.button.review')}</Button>
+                    <Button className="bannerLink" href={banner.link}>{t('common.button.review')}</Button>
                 </Stack>
                 </Grid>
 

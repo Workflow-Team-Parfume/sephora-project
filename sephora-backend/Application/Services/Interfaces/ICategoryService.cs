@@ -3,6 +3,13 @@
 public interface ICategoryService
 {
     Task<IEnumerable<CategoryDto>> Get();
+
+    async Task<PagedListInfo<CategoryDto>> Get(
+        int pageNumber,
+        int pageSize,
+        bool fromStart = true
+    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+
     Task<CategoryDto?> GetById(int id);
     Task Create(CreateCategoryDto categoryDto);
     Task Edit(CategoryDto categoryDto);

@@ -1,6 +1,6 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
     [HttpPost]
@@ -35,7 +35,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
     public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         => Ok(await roleService.GetByUserId(userId));
     
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await roleService.GetAll());
 }

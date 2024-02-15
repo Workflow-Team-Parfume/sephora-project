@@ -1,14 +1,20 @@
 namespace perfume_luxury_web_api.Controllers;
 
 // TODO: Authorize admins and mods only on the whole controller
-[ApiController, Route("api/[controller]")]
+[ApiController, Route("[controller]")]
 public class PiecesController(
     IPieceService pieceService
 ) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> GetAll()
         => Ok(await pieceService.Get());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await pieceService.Get(page, size, false));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)
@@ -19,7 +25,8 @@ public class PiecesController(
         [FromForm] CreateProductPieceDto dto
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await pieceService.Create(dto);
         return Ok();
@@ -30,7 +37,8 @@ public class PiecesController(
         [FromBody] EditProductPieceDto dto
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await pieceService.Edit(dto);
         return Ok();

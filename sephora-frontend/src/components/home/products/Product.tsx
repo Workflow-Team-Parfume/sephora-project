@@ -4,14 +4,14 @@ import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function IsNew(isNew:boolean){
-  if(isNew){
-    return(
-      <div className="new">
-          NEW
-      </div>
-    )
-  }
+function IsNew(isNew: boolean) {
+    if (isNew) {
+        return (
+            <div className="new">
+                NEW
+            </div>
+        )
+    }
 }
 
 const Product : React.FC<{product:IProduct}>
@@ -26,13 +26,13 @@ const Product : React.FC<{product:IProduct}>
         <FavoriteBorderIcon className="favorite"/>
         <Stack spacing={2} direction='column'>
 
-        <CardMedia
-        component="div"
-        sx={{
-          pt: '120%'
-        }}
-        image={product.images.at(0)}
-        /> 
+                        <CardMedia
+                            component="div"
+                            sx={{
+                                pt: '120%'
+                            }}
+                            image={piece.pictures[0].urlMd}
+                        />
 
         <Stack spacing={4}>
           <Typography className="productName">

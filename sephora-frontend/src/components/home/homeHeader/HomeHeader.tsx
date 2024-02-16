@@ -19,7 +19,7 @@ const HomeHeader = () => {
     alignItems: { xs: "center" },
   };
   return (
-    <>
+    <div className="header">
       <Box
         sx={{
           ...boxStyleHeader,
@@ -49,6 +49,7 @@ const HomeHeader = () => {
             sx={{
               ":before": { borderBottomColor: "white" },
               ":after": { borderBottomColor: "white" },
+              ":active": { borderBottomColor: "white" },
             }}
             endAdornment={
               <IconButton size="small" aria-label="toggle password visibility">
@@ -70,19 +71,15 @@ const HomeHeader = () => {
               }}
             >
               <Link
-                component="button"
-                variant="body2"
-                color={"#808080"}
-                underline="none"
+                className="lang_link"
+                color={i18n.language=='en' ? '#000' : '#808080'}
                 onClick={() => changeLanguage("en")}
               >
                 ENG
               </Link>
               <Link
-                component="button"
-                variant="body2"
-                color={"#000"}
-                underline="none"
+                className="lang_link"
+                color={i18n.language=='uk' ? '#000' : '#808080'}
                 onClick={() => changeLanguage("uk")}
               >
                 УКР
@@ -109,17 +106,16 @@ const HomeHeader = () => {
             gap: 9.5,
           }}
         >
-          <Button color="inherit">{t("header.fullSizePerfumes")}</Button>
-          <Button color="inherit">{t("header.perfumesOnTap")}</Button>
+          <Button color="inherit">{t("header.fullSizePerfume")}</Button>
+          <Button color="inherit">{t("header.bottlingPerfumes")}</Button>
           <Button color="inherit">{t("header.care")}</Button>
           <Button color="inherit">{t("header.new")}</Button>
-          <Button color="inherit">{t("header.catalog")}</Button>
+          <Button color="inherit">{t("header.catalogue")}</Button>
           <Button color="inherit">{t("header.aboutUs")}</Button>
-          <Button color="inherit">{t("header.paymentAndDelivery")}</Button>
-          <Button color="inherit">{t("header.contact")}</Button>
+          <Button >{t("header.paymentAndDelivery")}</Button>
         </Box>
       </div>
-    </>
+    </div>
   );
 };
 

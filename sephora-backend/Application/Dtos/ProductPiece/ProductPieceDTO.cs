@@ -8,5 +8,11 @@ public class ProductPieceDto
     public int Milliliters { get; set; }
     public bool IsBottledParfume { get; set; }
     public long ProductId { get; set; }
-    public IEnumerable<PictureDto> ProductPictures { get; set; }
+    public ProductDto Product { get; set; } = default!;
+    public IEnumerable<PictureDto> Pictures { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
+    
+    // Publication was less than 14 days ago
+    public bool IsNew => Math.Abs((CreatedAt.Date - DateTime.Now.Date).Days) < 14;
 }

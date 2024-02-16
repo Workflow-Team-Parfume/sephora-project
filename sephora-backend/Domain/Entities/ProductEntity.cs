@@ -21,4 +21,7 @@ public class ProductEntity
     public Category Category { get; set; }
 
     public ICollection<ProductPiece>? ProductPieces { get; set; }
+
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

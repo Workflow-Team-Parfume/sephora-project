@@ -1,13 +1,17 @@
 namespace perfume_luxury_web_api.Controllers;
 
-// TODO: Add logging
-
-[Authorize, ApiController, Route("api/[controller]")]
+[Authorize, ApiController, Route("[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await cartService.Get(User));
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await cartService.Get(User, page, size));
 
     [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Get([FromRoute] long id)
@@ -16,7 +20,8 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await cartService.Create(cartItem, User);
         return Ok();
@@ -25,29 +30,11 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] CartDto cartItem)
     {
-        try
-        {
-            if (!ModelState.IsValid) throw new Exception();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
-            await cartService.Update(cartItem, User);
-            return Ok();
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new
-            {
-                Status = "400 Bad Request",
-                Message = ex.Message
-            });
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new
-            {
-                Status = "400 Bad Request",
-                Message = ex.Message
-            });
-        }
+        await cartService.Update(cartItem, User);
+        return Ok();
     }
 
     [HttpDelete("{id:long}")]

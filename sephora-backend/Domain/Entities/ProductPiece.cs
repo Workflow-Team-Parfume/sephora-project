@@ -19,4 +19,7 @@ public class ProductPiece
     public ProductEntity Product { get; set; }
     
     public ICollection<ProductPicture>? ProductPictures { get; set; }
+    
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

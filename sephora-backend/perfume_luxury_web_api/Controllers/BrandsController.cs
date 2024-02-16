@@ -1,11 +1,17 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class BrandsController(IBrandService brandService) : Controller
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await brandService.Get());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await brandService.Get(page, size, false));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)
@@ -14,7 +20,8 @@ public class BrandsController(IBrandService brandService) : Controller
     [HttpPost]
     public async Task<IActionResult> Create([FromForm] CreateBrandDto brand)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await brandService.Create(brand);
         return Ok();
@@ -30,7 +37,8 @@ public class BrandsController(IBrandService brandService) : Controller
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] BrandDto brand)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await brandService.Edit(brand);
         return Ok();

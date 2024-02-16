@@ -1,12 +1,17 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
-public class AccountController(IAccountsService accountsService)
-    : ControllerBase
+[Route("[controller]"), ApiController]
+public class AccountController(IAccountsService accountsService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
         => Ok(await accountsService.GetAll());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10
+    ) => Ok(await accountsService.Get(page, size, false));
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(string id)
@@ -15,7 +20,8 @@ public class AccountController(IAccountsService accountsService)
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await accountsService.Register(dto);
         return Ok();
@@ -24,7 +30,8 @@ public class AccountController(IAccountsService accountsService)
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         var response = await accountsService.Login(dto);
         return Ok(response);
@@ -50,7 +57,8 @@ public class AccountController(IAccountsService accountsService)
         [FromForm] EditUserDto user
     )
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
 
         await accountsService.Edit(userId, user);
         return Ok();

@@ -54,7 +54,13 @@ builder.Services.AddValidators();
 // add file service
 builder.Services.AddFileService(builder.Environment.IsDevelopment());
 
+// add exception handler
+builder.Services.AddExceptionHandler<PerfumeExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

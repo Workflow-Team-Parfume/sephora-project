@@ -1,4 +1,4 @@
-import {CartItemDto} from "../../models/Cart/CartItemDto.ts";
+import CartItem from "../../models/cart/CartItem.ts";
 import {UnknownAction} from "@reduxjs/toolkit";
 
 export const CartActionTypes = {
@@ -9,7 +9,7 @@ export const CartActionTypes = {
 }
 
 export interface ICartState {
-    cart: CartItemDto[];
+    cart: CartItem[];
 }
 
 export const initState: ICartState = {
@@ -20,7 +20,7 @@ export const CartReducer = (
     state: ICartState = initState,
     action: UnknownAction
 ): ICartState => {
-    const payload = action.payload as CartItemDto[] | undefined;
+    const payload = action.payload as CartItem[] | undefined;
     switch (action.type) {
         case CartActionTypes.ADD_TO_CART: {
             return {
@@ -51,7 +51,7 @@ export const CartReducer = (
     }
 }
 
-export const addToCart = (items: CartItemDto[]) => ({
+export const addToCart = (items: CartItem[]) => ({
     type: CartActionTypes.ADD_TO_CART,
     payload: items,
 });
@@ -61,12 +61,12 @@ export const clearCart = () => ({
     payload: undefined,
 });
 
-export const setCart = (items: CartItemDto[]) => ({
+export const setCart = (items: CartItem[]) => ({
     type: CartActionTypes.SET_CART,
     payload: items,
 });
 
-export const removeFromCart = (items: CartItemDto[]) => ({
+export const removeFromCart = (items: CartItem[]) => ({
     type: CartActionTypes.REMOVE_FROM_CART,
     payload: items,
 });

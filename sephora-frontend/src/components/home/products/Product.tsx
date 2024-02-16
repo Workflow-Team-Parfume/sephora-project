@@ -14,6 +14,8 @@ function IsNew(isNew: boolean) {
     }
 }
 
+const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
+
 const Product: React.FC<{ piece: ProductPiece }>
     = ({piece}) => {
     return (
@@ -28,13 +30,8 @@ const Product: React.FC<{ piece: ProductPiece }>
 
                         <CardMedia
                             component="div"
-                            sx={{
-                                pt: '120%'
-                            }}
-                            image={
-                                piece.pictures[0]?.urlLg ??
-                                'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
-                            }
+                            sx={{pt: '120%'}}
+                            image={piece.pictures[0]?.urlLg ?? imgPlaceholder}
                         />
 
                         <Stack spacing={4}>
@@ -42,8 +39,11 @@ const Product: React.FC<{ piece: ProductPiece }>
                                 {piece.product?.name}
                             </Typography>
                             <Typography className="productCategory">
-                                {piece.product.category.name} {piece.milliliters != 0 ?
-                                <span>&#8211;</span> : ''} {piece.milliliters}
+                                {piece.product.category.name}
+                                {piece.milliliters != 0
+                                    ? <span>&#8211;</span>
+                                    : ''}
+                                {piece.milliliters}
                             </Typography>
                             <Stack spacing={2}>
                                 <Rating
@@ -52,7 +52,11 @@ const Product: React.FC<{ piece: ProductPiece }>
                                     precision={0.5}
                                     readOnly
                                     icon={<StarIcon style={{color: 'black'}}/>}
-                                    emptyIcon={<StarIcon style={{color: '#9D9D9D'}} fontSize="inherit"/>}
+                                    emptyIcon={
+                                        <StarIcon
+                                            style={{color: '#9D9D9D'}}
+                                            fontSize="inherit"
+                                        />}
                                 />
                                 <Typography className="productPrice">
                                     <span style={{textWrap: "nowrap"}}>

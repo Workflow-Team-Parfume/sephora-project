@@ -7,12 +7,14 @@ public class ProductDto
     public string? Description { get; set; }
     public bool Active { get; set; }
     public BrandDto Brand { get; set; } = default!;
-    public CategoryDto Category { get; set; }   
+    public CategoryDto Category { get; set; } = default!;
     public IEnumerable<ProductPieceDto>? Pieces { get; set; }
     public IEnumerable<RatingDto>? Ratings { get; set; }
     
     // TODO
     public decimal AverageRating { get; set; }
+
+    public IEnumerable<AmountDto> Volumes { get; set; } = default!;
     
     public DateTime CreatedAt { get; set; }
     

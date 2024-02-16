@@ -1,6 +1,7 @@
 import Brand from "../Brand.ts";
 import Rating from "../Rating.ts";
 import ProductPiece from "./ProductPiece.ts";
+import Amount from "../Amount.ts";
 
 export default interface Product {
     get id(): number;
@@ -19,4 +20,6 @@ export default interface Product {
 
     get createdAt(): Date;
     get isNew(): boolean;
+
+    get volumes(): Amount[];
 }

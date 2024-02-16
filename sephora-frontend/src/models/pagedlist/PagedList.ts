@@ -10,10 +10,10 @@ export default interface PagedList<T> {
 
 export const DefaultPagedList: PagedList<never> = {
     items: [],
-    currentPage: 0,
+    currentPage: 1,
     pageSize: 0,
-    totalCount: 0,
-    totalPages: 0,
+    totalCount: 1,
+    totalPages: 1,
     hasPreviousPage: false,
     hasNextPage: false,
 }

@@ -21,7 +21,8 @@ public static class Products
                 .Where(x => x.Id == id)
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
-                .Include(x => x.ProductPieces);
+                .Include(x => x.ProductPieces)
+                .ThenInclude(piece => piece.ProductPictures);
         }
     }
 }

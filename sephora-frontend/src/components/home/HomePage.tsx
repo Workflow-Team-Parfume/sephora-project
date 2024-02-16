@@ -57,7 +57,7 @@ const HomePage = () => {
             .catch(err => console.log(err));
 
         // fetch perfumes
-        http_common.get("pieces?size=4&page=1&sort=perfume,asc")
+        http_common.get("pieces?size=4&page=1&select=perfume")
             .then(res => setProds({...prods, perfumes: res.data}))
             .catch(err => console.log(err));
     }, [prods]);
@@ -75,15 +75,29 @@ const HomePage = () => {
             <MainBanner/>
             <Stack spacing={19} style={{margin: '0 100px'}}>
 
-                <Products title={t('common.title.novelty')} products={prods.novelty} link=''/>
-                <Products title={t('common.title.popular')} products={prods.popular} link=''/>
+                <Products
+                    title={t('common.title.novelty')}
+                    products={prods.novelty} link=''
+                />
+                <Products
+                    title={t('common.title.popular')}
+                    products={prods.popular} link=''
+                />
                 <Banner banner={Banner1} color="#688F74"/>
-                <Products title={t('common.title.perfumes')} products={prods.perfumes} link=''/>
+                <Products
+                    title={t('common.title.perfumes')}
+                    products={prods.perfumes} link=''
+                />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
-                <RecCategories title={t('common.title.recommendedCategories')} categories={recCategories}/>
+                <RecCategories
+                    title={t('common.title.recommendedCategories')}
+                    categories={recCategories}
+                />
                 <FullSizeBanner banner={Banner3}/>
-                <Reviews title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
-                         reviews={[Reviews1, Reviews2, Reviews3]}/>
+                <Reviews
+                    title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
+                    reviews={[Reviews1, Reviews2, Reviews3]}
+                />
 
             </Stack>
         </Container>

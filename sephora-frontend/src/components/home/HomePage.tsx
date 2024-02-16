@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
@@ -11,6 +11,7 @@ import MainBanner from './mainPage/banner/MainBanner';
 import {useTranslation} from 'react-i18next';
 import http_common from "../../http_common.ts";
 import ProductPiece from "../../models/product/ProductPiece.ts";
+import PagedList, {DefaultPagedList} from "../../models/pagedlist/PagedList.ts";
 
 // function Copyright() {
 //   return (
@@ -30,14 +31,36 @@ import ProductPiece from "../../models/product/ProductPiece.ts";
 // // TODO remove, this demo shouldn't need to reset the theme.
 // const defaultTheme = createTheme();
 
+type HomePageProps = {
+    novelty: PagedList<ProductPiece>,
+    popular: PagedList<ProductPiece>,
+    perfumes: PagedList<ProductPiece>,
+}
+
+const defaultProps: HomePageProps = {
+    novelty: DefaultPagedList,
+    popular: DefaultPagedList,
+    perfumes: DefaultPagedList,
+}
 
 const HomePage = () => {
-    const [products, setProducts] = React.useState<ProductPiece[]>([]);
-    React.useEffect(() => {
-        http_common.get("pieces/all")
-            .then(res => setProducts(res.data))
+    const [prods, setProds] = useState<HomePageProps>(defaultProps);
+    useEffect(() => {
+        // fetch novelties
+        http_common.get("pieces?size=4&page=1&sort=createdAt,desc")
+            .then(res => setProds({...prods, novelty: res.data}))
             .catch(err => console.log(err));
-    }, []);
+
+        // fetch populars
+        http_common.get("pieces?size=4&page=1&sort=rating,desc")
+            .then(res => setProds({...prods, popular: res.data}))
+            .catch(err => console.log(err));
+
+        // fetch perfumes
+        http_common.get("pieces?size=4&page=1&sort=perfume,asc")
+            .then(res => setProds({...prods, perfumes: res.data}))
+            .catch(err => console.log(err));
+    }, [prods]);
 
     const {t} = useTranslation();
     const recCategories = ([
@@ -52,10 +75,10 @@ const HomePage = () => {
             <MainBanner/>
             <Stack spacing={19} style={{margin: '0 100px'}}>
 
-                <Products title={t('common.title.newItems')} products={products} link=''/>
-                <Products title={t('common.title.populars')} products={products} link=''/>
+                <Products title={t('common.title.novelty')} products={prods.novelty} link=''/>
+                <Products title={t('common.title.popular')} products={prods.popular} link=''/>
                 <Banner banner={Banner1} color="#688F74"/>
-                <Products title={t('common.title.perfumes')} products={products} link=''/>
+                <Products title={t('common.title.perfumes')} products={prods.perfumes} link=''/>
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
                 <RecCategories title={t('common.title.recommendedCategories')} categories={recCategories}/>
                 <FullSizeBanner banner={Banner3}/>

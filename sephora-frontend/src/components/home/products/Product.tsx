@@ -31,12 +31,15 @@ const Product: React.FC<{ piece: ProductPiece }>
                             sx={{
                                 pt: '120%'
                             }}
-                            image={piece.pictures[0].urlMd}
+                            image={
+                                piece.pictures[0]?.urlLg ??
+                                'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'
+                            }
                         />
 
                         <Stack spacing={4}>
                             <Typography className="productName">
-                                {piece.product.name}
+                                {piece.product?.name}
                             </Typography>
                             <Typography className="productCategory">
                                 {piece.product.category.name} {piece.milliliters != 0 ?

@@ -190,3 +190,15 @@ export const especiallyForYou = ([
     {id: 0, name: "Byredo Bal d'Afrique", images: [byredo], categoryName: "Парфумована вода", volume: [{volume: '', price: '144'}], rating: 4, isNew: true, description:"", characteristics:[], codeProduct:123, reviews:[]},
     {id: 0, name: "BURBERRY — Hero", images: [burberry2], categoryName: "Парфумована вода", volume: [{volume: '50ml', price: '1 853'}], rating: 3, isNew: false, description:"", characteristics:[], codeProduct:123, reviews:[]},
 ]) 
+
+export const Filters = ([
+    {name: 'Група товару', filters: ['Гель для вмивання','Крем для обличчя']},
+    {name: 'Бренд', filters: ['La Roche-Posay','Sane']},
+    {name: 'Вартість', filters: ['500 - 750грн','750 - 1000 грн']},
+    {name: 'Вік', filters: ['18+','25+']},
+])
+
+export const Filter = ({
+    name: 'Новинки',
+    filters: ['Макіяж','Догляд за обличчям','Волосся']
+})

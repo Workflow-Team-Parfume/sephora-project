@@ -57,6 +57,13 @@ i18n
         'details.productCode': 'код товару: ',
         'details.addToFavorites': 'Додати до улюблених',
         'details.buy': 'Купити',
+
+        'sortBy.title': 'Впорядкувати за: ',
+        'sortBy.price': 'вартістю',
+        'sortBy.popularity': 'популярністю',
+        'sortBy.date': 'датою',
+        'sortBy.toLow': 'за спаданням',
+        'sortBy.toHigh': 'за зростанням',
         }
     },
 
@@ -112,6 +119,13 @@ i18n
         'details.productCode': 'product code',
         'details.addToFavorites': 'Add to favorites',
         'details.buy': 'Buy',
+
+        'sortBy.title': 'Sort by: ',
+        'sortBy.price': 'price',
+        'sortBy.popularity': 'popularity',
+        'sortBy.date': 'date',
+        'sortBy.toLow': 'to low',
+        'sortBy.toHigh': 'to high',
         }
     }
 },

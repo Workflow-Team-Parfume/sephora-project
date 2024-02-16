@@ -1,4 +1,4 @@
-.productsMainContainer{
+.productMainContainer{
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10) !important;
         padding: 12px 10px !important;
         border-radius: 0 !important;
@@ -6,6 +6,14 @@
         overflow:visible !important; 
         text-decoration: none !important;
     
+    .favorite{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 30px;
+        height: 30px;
+    }
+
     .productName{                
         font-family: 'Lato', sans-serif;                         
         font-size: 16px;

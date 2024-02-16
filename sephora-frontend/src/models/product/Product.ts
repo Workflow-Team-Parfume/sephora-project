@@ -20,6 +20,5 @@ export default interface Product {
 
     get createdAt(): Date;
     get isNew(): boolean;
-
     get volumes(): Amount[];
 }

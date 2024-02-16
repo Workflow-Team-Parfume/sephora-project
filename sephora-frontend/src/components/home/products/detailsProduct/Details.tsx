@@ -215,7 +215,6 @@ const Details: React.FC<{ product: IProduct }>
                 </Stack>
             </Container>
 
-
             <Stack spacing={7} style={{alignItems: 'center'}}>
                 {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
                 <Reviews

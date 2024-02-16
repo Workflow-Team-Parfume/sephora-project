@@ -68,7 +68,6 @@ const Product: React.FC<{ piece: ProductPiece }>
                     </Stack>
                 </Card>
             </Link>
-
         </Grid>
     );
 }

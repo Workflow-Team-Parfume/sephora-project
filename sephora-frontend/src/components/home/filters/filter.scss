@@ -1,16 +1,19 @@
-.filterName{
-    font-family:  'Lato', sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 700 !important;
-}
+.filter{
 
-.listText{
-    font-family: 'Lato', sans-serif !important;
-    font-size: 15px !important;
-    font-weight: 400 !important;
-    line-height: normal !important;
+    .filterName{
+        font-family:  'Lato', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+    }
+    
+    .filterText{
+        font-family: 'Lato', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
 }
-
 .filter:before{
     height: 0 !important;
 }

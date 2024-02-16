@@ -1,9 +1,10 @@
 const routes = {
     login: '/login',
     register: '/register',
-    productDetails: '/details/:id',
     
     home: '/',
+    productsPage: '/productsPage',
+    productDetails: '/details/:id',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

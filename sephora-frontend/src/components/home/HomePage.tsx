@@ -61,7 +61,6 @@ const HomePage = () => {
             .then(res => setProds({...prods, perfumes: res.data}))
             .catch(err => console.log(err));
     }, [prods]);
-
     const {t} = useTranslation();
     const recCategories = ([
         {name: t('recCategories.showerAndBath'), link: ""},
@@ -74,7 +73,6 @@ const HomePage = () => {
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner/>
             <Stack spacing={19} style={{margin: '0 100px'}}>
-
                 <Products
                     title={t('common.title.novelty')}
                     products={prods.novelty} link=''
@@ -98,7 +96,6 @@ const HomePage = () => {
                     title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
                     reviews={[Reviews1, Reviews2, Reviews3]}
                 />
-
             </Stack>
         </Container>
     );

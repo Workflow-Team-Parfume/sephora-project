@@ -26,7 +26,7 @@ const Products: React.FC<{
                         products.items.map((product) => (
                             <Product key={product.id} piece={product}/>
                         ))
-                        /* TODO: Redo this stub */
+                        /* TODO: Redo this stub (add spinner) */
                         : <>No products were found</>
                     }
                 </Grid>

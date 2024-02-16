@@ -28,7 +28,6 @@ public class ApplicationProfile : Profile
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
-        // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
         CreateMap<ProductPiece, ProductPieceDto>().ForMember(
             dest => dest.Milliliters,
             opts => opts.MapFrom(src => src.Amount!.Milliliters)

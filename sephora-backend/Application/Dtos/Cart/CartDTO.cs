@@ -16,4 +16,9 @@ public class CartDto
     public string BrandName { get; set; } = String.Empty;
     
     public string CategoryName { get; set; } = String.Empty;
+    
+    public decimal Price { get; set; }
+    public decimal? Discount { get; set; }
+    public decimal? Tax { get; set; }
+    public decimal Total => Price * Quantity - (Discount ?? 0) * Price + (Tax ?? 0);
 }

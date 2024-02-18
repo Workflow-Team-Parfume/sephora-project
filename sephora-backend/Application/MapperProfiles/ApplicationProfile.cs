@@ -79,6 +79,10 @@ public class ApplicationProfile : Profile
                 dest => dest.CategoryName,
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
             )
+            .ForMember(
+                dest => dest.Price,
+                opt => opt.MapFrom(src => src.ProductPiece.Price)
+                )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();

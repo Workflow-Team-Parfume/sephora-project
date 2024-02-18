@@ -13,6 +13,8 @@ export default interface CartItem {
     get categoryName(): string;
 
     get quantity(): number;
-    get price(): number; // TODO: update backend to return price
-    get total(): number; // TODO: update backend to return total
+    get price(): number;
+    get discount(): number | null;
+    get tax(): number | null;
+    get total(): number;
 }

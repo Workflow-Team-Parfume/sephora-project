@@ -3,7 +3,7 @@ const routes = {
     register: '/register',
     
     home: '/',
-    productsPage: '/productsPage',
+    productsPage: '/products',
     productDetails: '/details/:id',
 
     admin: '/admin',

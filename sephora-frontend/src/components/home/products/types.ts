@@ -9,6 +9,7 @@
 // }
 
 import { IReview } from "../reviews/types";
+import ProductDto from "../../../models/product/ProductDto.ts";
 
 export interface IProduct{
     id:number;
@@ -16,13 +17,13 @@ export interface IProduct{
     categoryName:string;
     isNew:boolean;
     volume:IVolume[];
-    images:string[];
     rating:number;
     description:string;
     characteristics:ICharasteristic[];
     codeProduct:number;
     reviews:IReview[];
     pictures:string[];
+    product: ProductDto | null | undefined;
 }
 
 export interface ICharasteristic{

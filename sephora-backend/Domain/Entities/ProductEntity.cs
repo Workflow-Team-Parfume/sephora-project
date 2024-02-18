@@ -12,16 +12,16 @@ public class ProductEntity
 
     public int BrandId { get; set; }
 
-    public Brand Brand { get; set; }
+    public Brand Brand { get; set; } = default!;
 
     public ICollection<Rating>? Ratings { get; set; }
 
     public int CategoryId { get; set; }
 
-    public Category Category { get; set; }
+    public Category Category { get; set; } = default!;
 
     public ICollection<ProductPiece>? ProductPieces { get; set; }
 
     [Column("created_at")]
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

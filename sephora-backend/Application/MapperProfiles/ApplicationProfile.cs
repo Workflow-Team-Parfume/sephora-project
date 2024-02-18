@@ -19,13 +19,15 @@ public class ApplicationProfile : Profile
         CreateMap<ProductEntity, ProductDto>().ForMember(
             dest => dest.Pieces,
             opts => opts.MapFrom(src => src.ProductPieces)
+        ).ForMember(
+            dest => dest.Volumes,
+            opts => opts.MapFrom(src => src.ProductPieces!.Select(x => x.Amount))
         );
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
-        // CreateMap<ProductPieceDTO, ProductPiece>(); // is it really needed?
         CreateMap<ProductPiece, ProductPieceDto>().ForMember(
             dest => dest.Milliliters,
             opts => opts.MapFrom(src => src.Amount!.Milliliters)
@@ -34,6 +36,9 @@ public class ApplicationProfile : Profile
             opts => opts.MapFrom(src => src.ProductPictures)
         );
         CreateMap<EditProductPieceDto, ProductPiece>();
+
+        CreateMap<Order, OrderDto>();
+        CreateMap<OrderItem, OrderItemDto>();
 
         CreateMap<ProductPicture, PictureDto>()
             .ConstructUsing(x =>
@@ -74,6 +79,10 @@ public class ApplicationProfile : Profile
                 dest => dest.CategoryName,
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
             )
+            .ForMember(
+                dest => dest.Price,
+                opt => opt.MapFrom(src => src.ProductPiece.Price)
+                )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();

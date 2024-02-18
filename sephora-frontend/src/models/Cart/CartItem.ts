@@ -14,5 +14,7 @@ export default interface CartItem {
 
     get quantity(): number;
     get price(): number;
+    get discount(): number | null;
+    get tax(): number | null;
     get total(): number;
 }

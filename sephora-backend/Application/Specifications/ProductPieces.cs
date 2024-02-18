@@ -6,7 +6,11 @@ public static class ProductPieces
     {
         public GetAll()
         {
-            Query.Include(x => x.ProductPictures);
+            Query
+                .Include(x => x.ProductPictures)
+                .Include(x => x.Product)
+                .Include(x => x.Product.Brand)
+                .Include(x => x.Product.Category);
         }
     }
 
@@ -16,7 +20,10 @@ public static class ProductPieces
         {
             Query
                 .Where(x => x.Id == id)
-                .Include(x => x.ProductPictures);
+                .Include(x => x.ProductPictures)
+                .Include(x => x.Product)
+                .Include(x => x.Product.Brand)
+                .Include(x => x.Product.Category);
         }
     }
 }

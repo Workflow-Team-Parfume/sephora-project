@@ -63,12 +63,18 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<decimal?>("Discount")
+                        .HasColumnType("numeric");
+
                     b.Property<long>("ProductPieceId")
                         .HasColumnType("bigint")
                         .HasColumnOrder(1);
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
+
+                    b.Property<decimal?>("Tax")
+                        .HasColumnType("numeric");
 
                     b.Property<string>("UserId")
                         .IsRequired()

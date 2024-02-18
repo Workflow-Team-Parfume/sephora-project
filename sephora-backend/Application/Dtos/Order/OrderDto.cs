@@ -10,5 +10,5 @@ public class OrderDto
     
     public long DeliveryId { get; set; }
     
-    public ICollection<OrderDto> Products { get; set; }
+    public ICollection<OrderItemDto> Products { get; set; }
 }

@@ -1,8 +1,10 @@
 namespace CleanArchitecture.Application.Dtos.Rating;
 
-public record CreateRatingDto(
-    long ProductId,
-    int Rate, // 1 - 5
-    string? Comment
+public class CreateRatingDto
+{
+    public long ProductId { get; set; }
+    public int Rate { get; set; } // 1 to 5
+    public string? Comment { get; set; }
+    
     // The user will be registered in the backend
-);
+}

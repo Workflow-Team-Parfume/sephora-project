@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
@@ -10,7 +10,8 @@ import RecCategories from './mainPage/recCategories/RecCategories';
 import MainBanner from './mainPage/banner/MainBanner';
 import {useTranslation} from 'react-i18next';
 import http_common from "../../http_common.ts";
-import ProductPiece from "../../models/product/ProductPiece.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
+import PagedList, {DefaultPagedList} from "../../models/pagedlist/PagedList.ts";
 
 // function Copyright() {
 //   return (
@@ -30,14 +31,36 @@ import ProductPiece from "../../models/product/ProductPiece.ts";
 // // TODO remove, this demo shouldn't need to reset the theme.
 // const defaultTheme = createTheme();
 
+type HomePageProps = {
+    novelty: PagedList<ProductPieceDto>,
+    popular: PagedList<ProductPieceDto>,
+    perfumes: PagedList<ProductPieceDto>,
+}
+
+const defaultProps: HomePageProps = {
+    novelty: DefaultPagedList,
+    popular: DefaultPagedList,
+    perfumes: DefaultPagedList,
+}
+
+async function fetchAll(setCallback: (props: HomePageProps) => void) {
+    const novelty = http_common.get("pieces?size=4&page=1&sort=createdAt,desc");
+    const popular = http_common.get("pieces?size=4&page=1&sort=rating,desc");
+    const perfumes = http_common.get("pieces?size=4&page=1&select=perfume");
+    setCallback({
+        novelty: (await novelty).data,
+        popular: (await popular).data,
+        perfumes: (await perfumes).data,
+    });
+}
 
 const HomePage = () => {
-    const [products, setProducts] = React.useState<ProductPiece[]>([]);
-    React.useEffect(() => {
-        http_common.get("pieces/all")
-            .then(res => setProducts(res.data))
-            .catch(err => console.log(err));
+    const [prods, setProds] = useState<HomePageProps>(defaultProps);
+    useEffect(() => {
+        fetchAll(setProds).catch(e => console.error(e));
     }, []);
+
+    console.log(prods)
 
     const {t} = useTranslation();
     const recCategories = ([
@@ -51,17 +74,29 @@ const HomePage = () => {
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner/>
             <Stack spacing={19} style={{margin: '0 100px'}}>
-
-                <Products title={t('common.title.newItems')} products={products} link=''/>
-                <Products title={t('common.title.populars')} products={products} link=''/>
+                <Products
+                    title={t('common.title.novelty')}
+                    products={prods.novelty} link=''
+                />
+                <Products
+                    title={t('common.title.popular')}
+                    products={prods.popular} link=''
+                />
                 <Banner banner={Banner1} color="#688F74"/>
-                <Products title={t('common.title.perfumes')} products={products} link=''/>
+                <Products
+                    title={t('common.title.perfumes')}
+                    products={prods.perfumes} link=''
+                />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
-                <RecCategories title={t('common.title.recommendedCategories')} categories={recCategories}/>
+                <RecCategories
+                    title={t('common.title.recommendedCategories')}
+                    categories={recCategories}
+                />
                 <FullSizeBanner banner={Banner3}/>
-                <Reviews title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
-                         reviews={[Reviews1, Reviews2, Reviews3]}/>
-
+                <Reviews
+                    title={t('common.title.reviewsOfOurCustomersAboutCosmeticsAndCare')}
+                    reviews={[Reviews1, Reviews2, Reviews3]}
+                />
             </Stack>
         </Container>
     );

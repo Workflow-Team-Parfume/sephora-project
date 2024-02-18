@@ -79,7 +79,7 @@ public class AccountsService(
     {
         UserEntity user = new()
         {
-            UserName = dto.Username,
+            UserName = dto.UserName,
             Email = dto.Email,
             PhoneNumber = dto.PhoneNumber,
             RegistrationDate = DateTime.Now.ToUniversalTime(),

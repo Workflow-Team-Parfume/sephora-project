@@ -19,4 +19,7 @@ public class CartItem
     // navigation properties
     public UserEntity User { get; set; } = default!;
     public ProductPiece ProductPiece { get; set; } = default!;
+
+    public decimal? Discount { get; set; }
+    public decimal? Tax { get; set; }
 }

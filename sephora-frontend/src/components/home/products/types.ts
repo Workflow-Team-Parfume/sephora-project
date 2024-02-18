@@ -9,7 +9,7 @@
 // }
 
 import { IReview } from "../reviews/types";
-import Product from "../../../models/product/Product.ts";
+import ProductDto from "../../../models/product/ProductDto.ts";
 
 export interface IProduct{
     id:number;
@@ -23,7 +23,7 @@ export interface IProduct{
     codeProduct:number;
     reviews:IReview[];
     pictures:string[];
-    product: Product | null | undefined;
+    product: ProductDto | null | undefined;
 }
 
 export interface ICharasteristic{

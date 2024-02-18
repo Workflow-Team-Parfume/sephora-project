@@ -18,7 +18,7 @@ import {IFilter} from "../filters/types";
 import React, {useEffect, useState} from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './productsPage.scss'
-import ProductPiece from "../../../models/product/ProductPiece.ts";
+import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../http_common.ts";
 import PagedList from "../../../models/pagedlist/PagedList.ts";
 
@@ -28,7 +28,7 @@ const ProductsPage: React.FC<{
     filters: IFilter[]
 }> = ({title, mainFilter, filters}) => {
     const {t} = useTranslation();
-    const [products, setProducts] = useState<PagedList<ProductPiece>>();
+    const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     useEffect(() => {
         http_common.get("pieces?size=4&page=1&select=perfume")

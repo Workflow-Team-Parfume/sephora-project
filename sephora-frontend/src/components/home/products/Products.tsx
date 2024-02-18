@@ -3,12 +3,12 @@ import "./products.scss"
 import Product from "./Product";
 import {useTranslation} from "react-i18next";
 import React from "react";
-import ProductPiece from "../../../models/product/ProductPiece.ts";
+import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import PagedList from "../../../models/pagedlist/PagedList.ts";
 
 const Products: React.FC<{
     title: string,
-    products: PagedList<ProductPiece>,
+    products: PagedList<ProductPieceDto>,
     link?: string | null
 }> = ({title, products, link = null}) => {
     const {t} = useTranslation();

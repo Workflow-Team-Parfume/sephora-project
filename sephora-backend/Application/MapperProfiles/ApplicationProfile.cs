@@ -37,6 +37,9 @@ public class ApplicationProfile : Profile
         );
         CreateMap<EditProductPieceDto, ProductPiece>();
 
+        CreateMap<Order, OrderDto>();
+        CreateMap<OrderItem, OrderItemDto>();
+
         CreateMap<ProductPicture, PictureDto>()
             .ConstructUsing(x =>
                 new PictureDto(x.PicturePath, EnvName == "Development")

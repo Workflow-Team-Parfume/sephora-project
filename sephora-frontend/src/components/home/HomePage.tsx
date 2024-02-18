@@ -10,7 +10,7 @@ import RecCategories from './mainPage/recCategories/RecCategories';
 import MainBanner from './mainPage/banner/MainBanner';
 import {useTranslation} from 'react-i18next';
 import http_common from "../../http_common.ts";
-import ProductPiece from "../../models/product/ProductPiece.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
 import PagedList, {DefaultPagedList} from "../../models/pagedlist/PagedList.ts";
 
 // function Copyright() {
@@ -32,9 +32,9 @@ import PagedList, {DefaultPagedList} from "../../models/pagedlist/PagedList.ts";
 // const defaultTheme = createTheme();
 
 type HomePageProps = {
-    novelty: PagedList<ProductPiece>,
-    popular: PagedList<ProductPiece>,
-    perfumes: PagedList<ProductPiece>,
+    novelty: PagedList<ProductPieceDto>,
+    popular: PagedList<ProductPieceDto>,
+    perfumes: PagedList<ProductPieceDto>,
 }
 
 const defaultProps: HomePageProps = {

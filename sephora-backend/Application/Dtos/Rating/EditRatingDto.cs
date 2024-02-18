@@ -1,8 +1,9 @@
 namespace CleanArchitecture.Application.Dtos.Rating;
 
-public record EditRatingDto(
-    long Id,
-    int Rate, // 1 - 5
-    string? Comment
-    // The user and product id will be registered in the backend
-);
+public record EditRatingDto{
+    public long Id { get; set; }
+    public int Rate { get; set; } // 1 to 5
+    public string? Comment { get; set; }
+    
+    // The user and product will be registered in the backend
+}

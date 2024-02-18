@@ -1,4 +1,4 @@
-export default interface ProductPicture {
+export default interface PictureDto {
     get name(): string;
     get url(): string;
     get urlLg(): string;

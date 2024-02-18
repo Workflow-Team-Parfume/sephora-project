@@ -1,7 +1,7 @@
 import {Card, CardMedia, Grid, Link, Rating, Stack, Typography} from "@mui/material";
 import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
-import ProductPiece from "../../../models/product/ProductPiece.ts";
+import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import React from "react";
 
 function IsNew(isNew: boolean) {
@@ -16,7 +16,7 @@ function IsNew(isNew: boolean) {
 
 const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
-const Product: React.FC<{ piece: ProductPiece }>
+const Product: React.FC<{ piece: ProductPieceDto }>
     = ({piece}) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>

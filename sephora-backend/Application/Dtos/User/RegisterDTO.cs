@@ -1,8 +1,9 @@
 ﻿namespace CleanArchitecture.Application.Dtos.User;
 
+// TODO: consider adding a pfp here
 public class RegisterDto
 {
-    public string Username { get; set; } = String.Empty;
+    public string UserName { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
     public string? PhoneNumber { get; set; }
     public string Password { get; set; } = String.Empty; 

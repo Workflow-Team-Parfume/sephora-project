@@ -15,15 +15,26 @@ import {useTranslation} from "react-i18next";
 import Product from "../products/Product";
 import Filters from "../filters/Filters";
 import {IFilter} from "../filters/types";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './productsPage.scss'
-import {IProduct} from "../products/types.ts";
+import ProductPiece from "../../../models/product/ProductPiece.ts";
+import http_common from "../../../http_common.ts";
+import PagedList from "../../../models/pagedlist/PagedList.ts";
 
-const ProductsPage: React.FC<{ title: string, products: IProduct[], mainFilter: IFilter, filters: IFilter[] }>
-    = ({title, products, mainFilter, filters}) => {
-
+const ProductsPage: React.FC<{
+    title: string,
+    mainFilter: IFilter,
+    filters: IFilter[]
+}> = ({title, mainFilter, filters}) => {
     const {t} = useTranslation();
+    const [products, setProducts] = useState<PagedList<ProductPiece>>();
+
+    useEffect(() => {
+        http_common.get("pieces?size=4&page=1&select=perfume")
+            .then(r => setProducts(r.data))
+            .catch(e => console.error(e));
+    });
 
     const itemsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +45,7 @@ const ProductsPage: React.FC<{ title: string, products: IProduct[], mainFilter: 
     };
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentProducts = products.slice(startIndex, endIndex);
+    const currentProducts = products?.items.slice(startIndex, endIndex);
 
     const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -113,7 +124,7 @@ const ProductsPage: React.FC<{ title: string, products: IProduct[], mainFilter: 
 
                         <Container sx={{pt: 5, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                             <Grid container spacing={2}>
-                                {currentProducts.map((piece) => (
+                                {currentProducts?.map((piece) => (
                                     <Grid item xs={12} sm={6} lg={4}>
                                         <Product piece={piece}/>
                                     </Grid>
@@ -125,7 +136,7 @@ const ProductsPage: React.FC<{ title: string, products: IProduct[], mainFilter: 
                         <Stack sx={{margin: '40px', alignItems: 'center'}}>
                             <Pagination
                                 sx={{display: 'flex'}}
-                                count={Math.ceil(products.length / itemsPerPage)}
+                                count={Math.ceil(products?.items.length ?? 0 / itemsPerPage)}
                                 page={currentPage}
                                 onChange={handlePageChange}
                             />

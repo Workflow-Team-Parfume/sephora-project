@@ -14,7 +14,7 @@ import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 import ProductsPage from "./components/home/productsPage/ProductsPage";
 import Details from "./components/home/products/detailsProduct/Details";
-import { DetailsProduct, Perfume, Filter, Filters } from "./components/home/data";
+import {DetailsProduct, Filter, Filters} from "./components/home/data";
 import routes from './common/routes';
 
 function App() {
@@ -72,17 +72,19 @@ function App() {
         // }
     }, [])
 
-  return (
-    <>
-      <Loader />
-      <Routes>
-        <Route path={routes.home} element={<DefaultLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path={routes.login} element={<LoginPage />} />
-          <Route path={routes.register} element={<RegisterPage />} />
-          <Route path={routes.productDetails} element={<Details product={DetailsProduct} />} />
-          <Route path={routes.productsPage} element={<ProductsPage title="Новинки" products={Perfume} filters={Filters} mainFilter={Filter}/>} />
-        </Route>
+    return (
+        <>
+            <Loader/>
+            <Routes>
+                <Route path={routes.home} element={<DefaultLayout/>}>
+                    <Route index element={<HomePage/>}/>
+                    <Route path={routes.login} element={<LoginPage/>}/>
+                    <Route path={routes.register} element={<RegisterPage/>}/>
+                    <Route path={routes.productDetails} element={<Details product={DetailsProduct}/>}/>
+                    <Route path={routes.productsPage}
+                           element={<ProductsPage title="Новинки" filters={Filters}
+                                                  mainFilter={Filter}/>}/>
+                </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}
                 <Route path={routes.admin} element={<AdminLayout/>}>
@@ -94,8 +96,8 @@ function App() {
                     </Route>
                 </Route>
                 {/* ) : (
-          <Route path="admin" element={<LoginPage />} />
-        )} */}
+                  <Route path="admin" element={<LoginPage />} />
+                )} */}
             </Routes>
         </>
     );

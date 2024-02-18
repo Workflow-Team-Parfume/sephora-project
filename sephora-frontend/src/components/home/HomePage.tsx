@@ -43,24 +43,25 @@ const defaultProps: HomePageProps = {
     perfumes: DefaultPagedList,
 }
 
+async function fetchAll(setCallback: (props: HomePageProps) => void) {
+    const novelty = http_common.get("pieces?size=4&page=1&sort=createdAt,desc");
+    const popular = http_common.get("pieces?size=4&page=1&sort=rating,desc");
+    const perfumes = http_common.get("pieces?size=4&page=1&select=perfume");
+    setCallback({
+        novelty: (await novelty).data,
+        popular: (await popular).data,
+        perfumes: (await perfumes).data,
+    });
+}
+
 const HomePage = () => {
     const [prods, setProds] = useState<HomePageProps>(defaultProps);
     useEffect(() => {
-        // fetch novelties
-        http_common.get("pieces?size=4&page=1&sort=createdAt,desc")
-            .then(res => setProds({...prods, novelty: res.data}))
-            .catch(err => console.log(err));
+        fetchAll(setProds).catch(e => console.error(e));
+    }, []);
 
-        // fetch populars
-        http_common.get("pieces?size=4&page=1&sort=rating,desc")
-            .then(res => setProds({...prods, popular: res.data}))
-            .catch(err => console.log(err));
+    console.log(prods)
 
-        // fetch perfumes
-        http_common.get("pieces?size=4&page=1&select=perfume")
-            .then(res => setProds({...prods, perfumes: res.data}))
-            .catch(err => console.log(err));
-    }, [prods]);
     const {t} = useTranslation();
     const recCategories = ([
         {name: t('recCategories.showerAndBath'), link: ""},

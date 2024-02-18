@@ -22,7 +22,7 @@ const Product: React.FC<{ piece: ProductPiece }>
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <Link href={'/details/' + piece.id} underline="none">
 
-                <Card className="productsMainContainer"
+                <Card className="productMainContainer"
                       sx={{height: '95%'}}
                 >
                     {IsNew(piece.isNew)}

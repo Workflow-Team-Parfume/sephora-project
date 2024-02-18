@@ -325,11 +325,11 @@ export const Characteristics = ([
 ]);
 
 
-import goodGirl1 from '../home/products/detailsProduct/pictures/goodGirl1.png'
-import goodGirl2 from '../home/products/detailsProduct/pictures/goodGirl2.png'
-import goodGirl3 from '../home/products/detailsProduct/pictures/goodGirl3.png'
-import goodGirl4 from '../home/products/detailsProduct/pictures/goodGirl4.png'
-import goodGirl5 from '../home/products/detailsProduct/pictures/goodGirl5.png'
+import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
+import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
+import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
+import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
+import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
 
 export const DetailsProduct = ({
     id: 1,
@@ -346,10 +346,10 @@ export const DetailsProduct = ({
     product: null,
 });
 
-import pradaParadoxe from './products/detailsProduct/pictures/Prada Paradoxe.png';
-import yves from './products/detailsProduct/pictures/Yves Saint Laurent Libre.png';
-import dior1 from './products/detailsProduct/pictures/DIOR — Sauvage Parfum.png';
-import dior2 from './products/detailsProduct/pictures/DIOR — Miss Dior.png';
+import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png';
+import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png';
+import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png';
+import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png';
 
 export const similarProducts = ([
     {
@@ -406,10 +406,10 @@ export const similarProducts = ([
     },
 ])
 
-import apieu from './products/detailsProduct/pictures/A\'pieu  Milk.png';
-import bielenda from './products/detailsProduct/pictures/Bielenda.png';
-import byredo from './products/detailsProduct/pictures/Byredo.png';
-import burberry2 from './products/detailsProduct/pictures/burberry.png';
+import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
+import bielenda from './products/detailsProduct/images/Bielenda.png';
+import byredo from './products/detailsProduct/images/Byredo.png';
+import burberry2 from './products/detailsProduct/images/burberry.png';
 import {IProduct} from "./products/types.ts";
 
 export const especiallyForYou = ([

@@ -1,25 +1,29 @@
+import * as React from "react";
+import IconButton from "@mui/material/IconButton";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Copyright } from "@mui/icons-material";
 import http_common from "../../../http_common";
 import { AuthUserActionType, IRegister, IUser } from "../types";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
+import "./RegisterPage.scss";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -126,100 +130,176 @@ const RegisterPage = () => {
     validationSchema: registerSchema,
     onSubmit: onHandleSubmit,
   });
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  const { values, handleChange, handleSubmit, /*touched, errors*/ } = formik;
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const { values, handleChange, handleSubmit /*touched, errors*/ } = formik;
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 5,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
+        <Typography component="h1" variant="h3">
+          Реєстрація
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
               <TextField
                 required
                 fullWidth
                 id="username"
-                label="Username"
+                label="Ім'я"
                 name="username"
                 onChange={handleChange}
                 value={values.userName}
                 autoComplete="username"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
               <TextField
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
+                id="surname"
+                label="Прізвище"
+                name="surname"
                 onChange={handleChange}
-                value={values.email}
-                autoComplete="email"
+                // value={values.}
+                autoComplete="surname"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
               <TextField
                 required
                 fullWidth
                 id="phoneNumber"
-                label="Phone Number"
+                label="Номер телефону"
                 name="phoneNumber"
                 onChange={handleChange}
                 value={values.phoneNumber}
                 autoComplete="tel"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
               <TextField
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
+                name="date"
+                label=""
+                type="date" // Changed from "data" to "date"
+                id="date"
                 onChange={handleChange}
-                value={values.password}
-                autoComplete="new-password"
+                // value={values.birthdayData}
+                autoComplete="date" // Changed from "data" to "date"
               />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="E-mail"
+                name="email"
+                onChange={handleChange}
+                value={values.email}
+                autoComplete="email"
               />
-            </Grid>
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
+              <InputLabel htmlFor="outlined-adornment-password">
+                Пароль*
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onChange={handleChange}
+                      onMouseDown={handleMouseDownPassword}
+                      value={values.password}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
+              <InputLabel htmlFor="outlined-adornment-password">
+                Підтвердження пароля*
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                // value={values.password}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onChange={handleChange}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </Button>
-          <Typography variant="body2">
-            Already have an account?{" "}
-            <Link to="/login">
-              Sign in
-            </Link>
-          </Typography>
         </Box>
+        <Button
+          id="registationButton"
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Зареєструватися
+        </Button>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 };

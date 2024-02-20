@@ -5,6 +5,5 @@ export default interface RegisterDto {
     get passwordConfirmation(): string;
     get phoneNumber(): string;
 
-    // TODO: consider adding a pfp here
-    // get profilePicture(): File | null;
+    get profilePicture(): File | null;
 }

@@ -49,7 +49,10 @@ public class RoleService(
     {
         var user = await userManager.FindByIdAsync(userId);
         if (user is null)
-            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+            throw new HttpException(
+                ErrorMessages.UserByIDNotFound,
+                HttpStatusCode.NotFound
+            );
 
         var roles = await userManager.GetRolesAsync(user);
         return roles;

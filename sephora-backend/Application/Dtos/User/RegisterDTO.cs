@@ -1,6 +1,5 @@
 ﻿namespace CleanArchitecture.Application.Dtos.User;
 
-// TODO: consider adding a pfp here
 public class RegisterDto
 {
     public string UserName { get; set; } = String.Empty;
@@ -8,6 +7,8 @@ public class RegisterDto
     public string? PhoneNumber { get; set; }
     public string Password { get; set; } = String.Empty; 
     public string PasswordConfirmation { get; set; } = String.Empty;
+    
+    public IFormFile? ProfilePicture { get; set; }
 
     //[EnumDataType(typeof(Gender))]
     //public Gender Gender { get; set; }

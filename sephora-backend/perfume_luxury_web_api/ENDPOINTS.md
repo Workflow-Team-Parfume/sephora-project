@@ -1,6 +1,7 @@
 # Endpoints
 
 ## Table of Contents
+
 1. [Account controller](#accountcontroller)
 2. [Amounts controller](#amountscontroller)
 3. [Brands controller](#brandscontroller)
@@ -260,8 +261,9 @@
 **[⬆ Back to CheckoutController](#checkoutcontroller)**  
 **[⬆ Back to Table of Contents](#table-of-contents)**
 
-### PicturesController  
-#### Serves images from the server  
+### PicturesController
+
+#### Serves images from the server
 
 * **/{name}**
     * name: string

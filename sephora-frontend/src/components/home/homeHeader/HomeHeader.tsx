@@ -92,7 +92,9 @@ const HomeHeader = () => {
               }}
             >
               <img src={icon1} alt="" />
-              <img src={icon2} alt="" />
+              <Link href={'/basket'} underline="none">
+                <img src={icon2} alt="" />
+              </Link>
             </Box>
           </Box>
         </Box>

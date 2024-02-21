@@ -10,6 +10,10 @@ import {
   CssBaseline,
   FormControl,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,6 +21,9 @@ import { AuthUserActionType, IUser, ILogin } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
 import './LoginPage.scss';
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import React from "react";
+import Visibility from "@mui/icons-material/Visibility";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -124,12 +131,76 @@ const LoginPage = () => {
   //     // Add code to show an error message to the user.
   //   },
   // });
+  
+  const registerSchema = Yup.object().shape({
+    userName: Yup.string()
+      .required("Name is required")
+      .min(3, "Name must be at least 3 characters")
+      .max(16, "Name must be at most 16 characters")
+      .test("checkUsername", "Name already exists", async (value) => {
+        if (isSubmit) {
+          setIsSubmit(false);
+          try {
+            const result = await http_common.get(
+              `api/Account/checkUsernameExists/${value}`
+            );
+            const { data } = result;
+            return !data;
+          } catch (error) {
+            console.error("Error during userName validation:", error);
+            return false;
+          }
+        } else return true;
+      }),
+    email: Yup.string()
+      .required("Email is required")
+      .email("Invalid email")
+      .test("checkEmail", "Email already registered", async (value) => {
+        if (isSubmit) {
+          setIsSubmit(false);
+          try {
+            const result = await http_common.get(
+              `api/Account/checkEmailExists/${value}`
+            );
+            const { data } = result;
+            return !data;
+          } catch (error) {
+            console.error("Error during email validation:", error);
+            return false;
+          }
+        } else return true;
+      }),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters")
+      .max(16, "Password must be at most 16 characters")
+      .matches(/[a-z]/, "Password must contain at least 1 lowercase letter")
+      .matches(/[A-Z]/, "Password must contain at least 1 uppercase letter")
+      .matches(/[0-9]/, "Password must contain at least 1 number")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least 1 special character"
+      ),
+    passwordConfirmation: Yup.string()
+      .required("Password confirmation is required")
+      .oneOf([Yup.ref("password")], "Passwords must match"),
+  });
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: loginSchema,
+    validationSchema: registerSchema,
     onSubmit: onHandleSubmit,
   });
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const { values, handleChange, handleSubmit, touched, errors } = formik;
 
@@ -150,7 +221,7 @@ const LoginPage = () => {
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
             <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
+              sx={{ m: 1, width: "670px", height: "50px", mb: 5}}
               variant="outlined"
             >
               <TextField
@@ -172,19 +243,27 @@ const LoginPage = () => {
               sx={{ m: 1, width: "670px", height: "50px" }}
               variant="outlined"
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Пароль"
-                type="password"
-                id="password"
-                onChange={handleChange}
-                value={values.password}
-                autoComplete="current-password"
-                error={touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
+              <InputLabel htmlFor="outlined-adornment-password">
+                Пароль*
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onChange={handleChange}
+                      onMouseDown={handleMouseDownPassword}
+                      value={values.password}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
               />
             </FormControl>
           </Grid>

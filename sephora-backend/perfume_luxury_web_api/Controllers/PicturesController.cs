@@ -6,7 +6,7 @@ public class PicturesController(
     IHostEnvironment env
 ) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> SaveImage(IFormFile file)
     {
         string picName = await pictureService.SaveImage(file);
@@ -28,7 +28,7 @@ public class PicturesController(
     }
 
     // may be FromBody|FromQuery
-    [HttpDelete("{name}")]
+    [HttpDelete("{name}"), Authorize(Roles = "Admin,Moderator")]
     public IActionResult DeleteImage([FromRoute] string name)
     {
         if (!pictureService.FileExists(name))

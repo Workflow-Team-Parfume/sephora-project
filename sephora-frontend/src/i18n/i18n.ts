@@ -7,6 +7,8 @@ i18n
     resources: {
     uk: {
         translation: {
+        'uan': 'грн',
+
         'header.fullSizePerfume': 'Повнорозмірні парфуми',
         'header.bottlingPerfumes': 'Розпив парфумерії',
         'header.care': 'Догляд',
@@ -64,11 +66,21 @@ i18n
         'sortBy.date': 'датою',
         'sortBy.toLow': 'за спаданням',
         'sortBy.toHigh': 'за зростанням',
+
+        'basket': 'Кошик',
+        'basket.recomProducts': 'Рекомендовані товари',
+        'basket.orderAmount': 'Сума замовлення',
+        'basket.discount': 'Знижка',
+        'basket.total': 'Загальна сума',
+        'basket.toOrder': 'Оформити замовлення',
+        'order.yourOrder': 'Ваше замовлення',
         }
     },
 
     en: {
         translation: {
+        'uan': 'UAN',
+
         'header.fullSizePerfume': 'Full size perfume',
         'header.bottlingPerfumes': 'Bottling perfumes',
         'header.care': 'Care',
@@ -126,6 +138,14 @@ i18n
         'sortBy.date': 'date',
         'sortBy.toLow': 'to low',
         'sortBy.toHigh': 'to high',
+
+        'basket': 'Basket',
+        'basket.recomProducts': 'Recommended products',
+        'basket.orderAmount': 'Order amount',
+        'basket.discount': 'Discount',
+        'basket.total': 'Total',
+        'basket.toOrder': 'To order',
+        'order.yourOrder': 'Your order',
         }
     }
 },

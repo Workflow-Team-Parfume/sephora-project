@@ -40,7 +40,7 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpDelete("{id:long}")]
     public async Task<IActionResult> Remove([FromRoute] long id)
     {
-        await cartService.Delete(id);
+        await cartService.Delete(id, User);
         return Ok();
     }
 }

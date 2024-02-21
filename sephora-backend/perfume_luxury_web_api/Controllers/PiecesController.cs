@@ -1,6 +1,5 @@
 namespace perfume_luxury_web_api.Controllers;
 
-// TODO: Authorize admins and mods only on the whole controller
 [ApiController, Route("[controller]")]
 public class PiecesController(
     IPieceService pieceService
@@ -20,7 +19,7 @@ public class PiecesController(
     public async Task<IActionResult> GetById(long id)
         => Ok(await pieceService.GetById(id));
 
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Create(
         [FromForm] CreateProductPieceDto dto
     )
@@ -32,7 +31,7 @@ public class PiecesController(
         return Ok();
     }
 
-    [HttpPut]
+    [HttpPut, Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Update(
         [FromBody] EditProductPieceDto dto
     )
@@ -44,7 +43,7 @@ public class PiecesController(
         return Ok();
     }
 
-    [HttpDelete("{id:long}")]
+    [HttpDelete("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Delete(long id)
     {
         await pieceService.Delete(id);

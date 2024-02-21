@@ -53,25 +53,25 @@
         * Edit current user account
         * Request body: EditUserDto
         * Returns: 200 OK
-* */register*
+* **/register**
     * ***POST***
         * Register a new account
         * Request body: RegisterDto
         * Returns: 200 OK
-* */login*
+* **/login**
     * ***POST***
         * Login
         * Request body: LoginDto
         * Returns: LoginResponseDto
-* */logout*
+* **/logout**
     * ***POST***
     * Returns: 200 OK
-* */checkUsernameExists/{userName}*
+* **/checkUsernameExists/{userName}**
     * ***GET***
         * userName: string
         * Check if username exists
         * Returns: bool
-* */checkEmailExists/{email}*
+* **/checkEmailExists/{email}**
     * ***GET***
         * email: string
         * Check if email exists
@@ -417,7 +417,7 @@
         * Delete role by name
         * Route params: roleName
         * Returns: 200 OK
-* */getByUserId/{userId}*
+* **/getByUserId/{userId}**
     * ***GET***
         * Get roles of a user
         * Route params: userId

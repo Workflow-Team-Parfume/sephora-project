@@ -1,6 +1,7 @@
 // import {Outlet} from "react-router-dom";
 // import { Container } from "@mui/material";
-import RegisterPage from "../../../auth/register/RegisterPage";
+// import RegisterPage from "../../../auth/register/RegisterPage";
+import LoginPage from "../../../auth/login/LoginPage";
 import HomeHeader from "../../../home/homeHeader/HomeHeader";
 // import HomeFooter from "../../../home/homeFooter/homeFooter";
 
@@ -12,7 +13,8 @@ const DefaultLayout = () => {
                 <Outlet/>
             </Container>
             <HomeFooter /> */}
-            <RegisterPage />
+            {/* <RegisterPage /> */}
+            <LoginPage />
         </main>
     );
 }

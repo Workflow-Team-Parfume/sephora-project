@@ -4,20 +4,19 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
+  FormControl,
+  Grid,
   TextField,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthUserActionType, IUser, ILogin } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
+import './LoginPage.scss';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -145,62 +144,63 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={handleChange}
-            value={values.email}
-            error={touched.email && !!errors.email}
-            helperText={touched.email && errors.email}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={handleChange}
-            value={values.password}
-            autoComplete="current-password"
-            error={touched.password && !!errors.password}
-            helperText={touched.password && errors.password}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          {/* <Button
-            onClick={() => login()}
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: "#4285F4", color: "white" }} // Customize the button's appearance
-          >
-            Sign in with Google
-          </Button> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
+          <Grid container spacing={2}>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Логін/E-mail"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={handleChange}
+                value={values.email}
+                error={touched.email && !!errors.email}
+                helperText={touched.email && errors.email}
+              />
+            </FormControl>
+            <FormControl
+              sx={{ m: 1, width: "670px", height: "50px" }}
+              variant="outlined"
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Пароль"
+                type="password"
+                id="password"
+                onChange={handleChange}
+                value={values.password}
+                autoComplete="current-password"
+                error={touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+              />
+            </FormControl>
+          </Grid>
         </Box>
+        <Button
+          id="registationButton"
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Увійти
+        </Button>
+        <Grid item xs>
+          <a id="forgotPassword" href="#">Забули пароль?</a>
+        </Grid>
       </Box>
     </Container>
   );

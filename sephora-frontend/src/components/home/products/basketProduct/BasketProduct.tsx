@@ -36,7 +36,6 @@ const BasketProduct: React.FC<{ piece: IProduct }>
                             <Typography className="productCategory">
                                 {piece.categoryName}
                             </Typography>
-                                {/*{piece.milliliters} */}
                             <Typography className="productCategory">
                                 {piece.volume[0].volume}
                             </Typography>

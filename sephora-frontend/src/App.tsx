@@ -17,6 +17,7 @@ import Details from "./components/home/products/detailsProduct/Details";
 import {DetailsProduct, Filter, Filters} from "./components/home/data";
 import routes from './common/routes';
 import Basket from "./components/home/basket/Basket";
+import Order from "./components/home/order/Order";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -87,6 +88,7 @@ function App() {
                            mainFilter={Filter}/>}/>
 
                     <Route path={routes.basket} element={<Basket/>}/>
+                    <Route path={routes.order} element={<Order/>}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

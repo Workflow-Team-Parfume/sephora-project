@@ -16,7 +16,6 @@ const Basket = () => {
     }
     
     const total: number = calculateTotal();
-    console.log(`Total: ${total}`);
 
     return (
         <Container
@@ -42,23 +41,23 @@ const Basket = () => {
                             <Stack 
                                 margin='0 15px'
                                 justifyContent='space-between' direction='row'>
-                                <Typography className="text">{t('basket.orderAmount')}</Typography>
-                                <Typography className="text">{total}{t('uan')} </Typography>
+                                <Typography className="text">{t('basket/order.orderAmount')}</Typography>
+                                <Typography className="text">{total} {t('uan')} </Typography>
                             </Stack>
                             <Stack
                                 margin='15px'
                                 justifyContent='space-between' direction='row'>
-                                <Typography className="text">{t('basket.discount')}</Typography>
-                                <Typography className="text">{discount}{t('uan')} </Typography>
+                                <Typography className="text">{t('basket/order.discount')}</Typography>
+                                <Typography className="text">{discount} {t('uan')} </Typography>
                             </Stack>
                             <Box className='line'/>
                             <Stack 
                                 margin='15px'
                                 justifyContent='space-between' direction='row'>
-                                <Typography className="total">{t('basket.total')}</Typography>
-                                <Typography className="total">{total - discount}{t('uan')} </Typography>
+                                <Typography className="total">{t('basket/order.total')}</Typography>
+                                <Typography className="total">{total - discount} {t('uan')} </Typography>
                             </Stack>
-                            <Button>{t('basket.toOrder')}</Button>
+                            <Button href="/order" className="button">{t('basket.toOrder')}</Button>
                         </Stack>
                     </Grid>
                 </Grid>

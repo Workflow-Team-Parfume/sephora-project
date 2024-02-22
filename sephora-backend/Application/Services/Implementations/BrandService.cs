@@ -13,7 +13,7 @@ public class BrandService(
 
     public async Task Delete(int id)
     {
-        if (await brandRepository.GetById(id) == null)
+        if (await brandRepository.GetById(id) is null)
             return;
 
         await brandRepository.Delete(id);
@@ -27,7 +27,9 @@ public class BrandService(
     }
 
     public async Task<IEnumerable<BrandDto>> Get()
-        => mapper.Map<IEnumerable<BrandDto>>(await brandRepository.GetAll());
+        => mapper.Map<IEnumerable<BrandDto>>(
+            await brandRepository.GetAll().ToListAsync()
+        );
 
     public async Task<BrandDto?> GetById(int id)
     {

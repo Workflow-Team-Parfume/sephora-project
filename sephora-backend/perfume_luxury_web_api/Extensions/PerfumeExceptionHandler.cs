@@ -58,6 +58,7 @@ public class PerfumeExceptionHandler : IExceptionHandler
             IOException _ => (int)HttpStatusCode.BadRequest,
             DbUpdateException _ => (int)HttpStatusCode.BadRequest,
             DbException _ => (int)HttpStatusCode.BadRequest,
+            InvalidOperationException _ => (int)HttpStatusCode.Conflict,
             _ => (int)HttpStatusCode.InternalServerError
         };
 

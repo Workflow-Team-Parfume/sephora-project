@@ -27,7 +27,9 @@ public class AmountService(
     }
 
     public async Task<IEnumerable<AmountDto>> Get()
-        => mapper.Map<IEnumerable<AmountDto>>(await amountRepository.GetAll());
+        => mapper.Map<IEnumerable<AmountDto>>(
+            await amountRepository.GetAll().ToListAsync()
+        );
 
     public async Task<AmountDto?> GetById(int id)
     {

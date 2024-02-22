@@ -1,4 +1,6 @@
-﻿namespace perfume_luxury_web_api.Extensions;
+﻿using JsonSerializer = System.Text.Json.JsonSerializer;
+
+namespace perfume_luxury_web_api.Extensions;
 
 public static class ServiceExtensions
 {
@@ -17,6 +19,26 @@ public static class ServiceExtensions
         services.AddIdentity<UserEntity, IdentityRole>()
             .AddEntityFrameworkStores<PerfumeDbContext>()
             .AddDefaultTokenProviders();
+
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.AccessDeniedPath = "";
+            options.LoginPath = "";
+            options.Cookie.HttpOnly = true;
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+            options.Events.OnRedirectToLogin = async context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(
+                    JsonSerializer.Serialize(new ProblemDetails
+                    {
+                        Status = 401,
+                        Title = "Unauthorized",
+                        Detail = "You are not authorized to access this resource."
+                    }));
+            };
+        });
     }
 
     public static void AddCustomServices(this IServiceCollection services)

@@ -38,6 +38,7 @@ public class ProductService(
     public async Task<IEnumerable<ProductDto>> Get()
         => mapper.Map<IEnumerable<ProductDto>>(
             await productRepository.GetListBySpec(new Products.GetAll())
+                .ToListAsync()
         );
 
     public async Task<ProductDto?> GetById(long id)

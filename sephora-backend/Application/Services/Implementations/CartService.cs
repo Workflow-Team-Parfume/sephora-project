@@ -19,7 +19,7 @@ public class CartService(
         var specification = new CartItems.GetByUserId(userId);
 
         return mapper.Map<IEnumerable<CartDto>>(
-            await cartRepository.GetListBySpec(specification)
+            await cartRepository.GetListBySpec(specification).ToListAsync()
         );
     }
 
@@ -51,7 +51,7 @@ public class CartService(
             throw new UnauthorizedAccessException(
                 "This user doesn't owns this record"
             );
-        
+
         await cartRepository.Delete(entity);
         await cartRepository.Save();
     }

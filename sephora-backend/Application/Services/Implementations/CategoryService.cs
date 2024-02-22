@@ -27,7 +27,9 @@ public class CategoryService(
     }
 
     public async Task<IEnumerable<CategoryDto>> Get()
-        => mapper.Map<IEnumerable<CategoryDto>>(await categoryRepository.GetAll());
+        => mapper.Map<IEnumerable<CategoryDto>>(
+            await categoryRepository.GetAll().ToListAsync()
+        );
 
     public async Task<CategoryDto?> GetById(int id)
     {

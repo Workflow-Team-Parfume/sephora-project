@@ -7,7 +7,7 @@ public class DeliveryService(
 {
     public async Task<IEnumerable<DeliveryDto>> Get()
         => mapper.Map<IEnumerable<DeliveryDto>>(
-            await deliveryRepository.GetAll()
+            await deliveryRepository.GetAll().ToListAsync()
         );
 
     public async Task<DeliveryDto?> GetById(long id)

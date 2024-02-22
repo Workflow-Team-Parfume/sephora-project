@@ -10,6 +10,7 @@ public class PieceService(
     public async Task<IEnumerable<ProductPieceDto>> Get()
         => mapper.Map<IEnumerable<ProductPieceDto>>(
             await repository.GetListBySpec(new ProductPieces.GetAll())
+                .ToListAsync()
         );
 
     public async Task<ProductPieceDto?> GetById(long id)
@@ -52,7 +53,7 @@ public class PieceService(
         // detach pictures
         var pictures = await prodPicRepo.GetListBySpec(
             new ProductPictures.GetPicsByPieceId(id)
-        );
+        ).ToListAsync();
         await DeletePictures(pictures);
 
         // delete the entity

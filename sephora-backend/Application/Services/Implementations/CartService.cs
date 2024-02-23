@@ -40,9 +40,19 @@ public class CartService(
         await cartRepository.Save();
     }
 
-    public async Task Delete(long id)
+    public async Task Delete(long id, ClaimsPrincipal user)
     {
-        await cartRepository.Delete(id);
+        CartItem? entity = await cartRepository.GetById(id);
+        if (entity is null)
+            throw new KeyNotFoundException(
+                "The cart item with the specified ID was not found"
+            );
+        if (entity.UserId != GetUserIdOrThrow(user))
+            throw new UnauthorizedAccessException(
+                "This user doesn't owns this record"
+            );
+        
+        await cartRepository.Delete(entity);
         await cartRepository.Save();
     }
 

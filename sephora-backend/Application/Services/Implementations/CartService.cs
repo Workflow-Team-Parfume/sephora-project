@@ -13,14 +13,13 @@ public class CartService(
                nameof(user)
            );
 
-    public async Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user)
+    public IQueryable<CartDto> Get(ClaimsPrincipal user)
     {
         string userId = GetUserIdOrThrow(user);
         var specification = new CartItems.GetByUserId(userId);
 
-        return mapper.Map<IEnumerable<CartDto>>(
-            await cartRepository.GetListBySpec(specification).ToListAsync()
-        );
+        return cartRepository.GetListBySpec(specification)
+            .ProjectTo<CartDto>(mapper.ConfigurationProvider);
     }
 
     public async Task<CartDto?> GetById(long id)

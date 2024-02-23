@@ -7,7 +7,7 @@ public interface ICartService
      * <param name="user">The user to get cart items of</param>
      * <returns>The cart items of the specified user</returns>
      */
-    Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user);
+    IQueryable<CartDto> Get(ClaimsPrincipal user);
 
     /**
      * <summary>Get paginated cart items of the specified user</summary>
@@ -24,7 +24,7 @@ public interface ICartService
         int pageNumber,
         int pageSize,
         bool fromStart = true
-    ) => (await Get(user)).ToPagedListInfo(pageNumber, pageSize, fromStart);
+    ) => await Get(user).ToPagedListInfo(pageNumber, pageSize, fromStart);
 
     /**
      * <summary>Get the cart item by its id</summary>

@@ -5,7 +5,7 @@ public class CartController(ICartService cartService) : ControllerBase
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await cartService.Get(User));
+        => Ok(await cartService.Get(User).ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

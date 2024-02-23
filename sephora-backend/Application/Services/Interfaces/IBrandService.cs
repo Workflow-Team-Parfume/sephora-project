@@ -2,13 +2,13 @@
 
 public interface IBrandService
 {
-    Task<IEnumerable<BrandDto>> Get();
+    IQueryable<BrandDto> Get();
 
     async Task<PagedListInfo<BrandDto>> Get(
         int pageNumber,
         int pageSize,
         bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+    ) => await Get().ToPagedListInfo(pageNumber, pageSize, fromStart);
 
     Task<BrandDto?> GetById(int id);
     Task Create(CreateBrandDto brandDto);

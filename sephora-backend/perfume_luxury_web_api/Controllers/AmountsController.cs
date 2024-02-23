@@ -5,7 +5,7 @@ public class AmountsController(IAmountService amountService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await amountService.Get());
+        => Ok(await amountService.Get().ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

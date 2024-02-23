@@ -26,10 +26,9 @@ public class BrandService(
         await brandRepository.Save();
     }
 
-    public async Task<IEnumerable<BrandDto>> Get()
-        => mapper.Map<IEnumerable<BrandDto>>(
-            await brandRepository.GetAll().ToListAsync()
-        );
+    public IQueryable<BrandDto> Get()
+        => brandRepository.GetAll()
+            .ProjectTo<BrandDto>(mapper.ConfigurationProvider);
 
     public async Task<BrandDto?> GetById(int id)
     {

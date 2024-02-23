@@ -5,7 +5,7 @@ public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
-        => Ok(await productService.Get());
+        => Ok(await productService.Get().ToListAsync());
 
     [HttpGet]
     public async Task<IActionResult> GetPaged(

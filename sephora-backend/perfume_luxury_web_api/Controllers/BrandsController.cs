@@ -5,7 +5,7 @@ public class BrandsController(IBrandService brandService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await brandService.Get());
+        => Ok(await brandService.Get().ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

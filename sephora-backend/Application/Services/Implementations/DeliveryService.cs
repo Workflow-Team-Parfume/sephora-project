@@ -5,10 +5,9 @@ public class DeliveryService(
     IMapper mapper
 ) : IDeliveryService
 {
-    public async Task<IEnumerable<DeliveryDto>> Get()
-        => mapper.Map<IEnumerable<DeliveryDto>>(
-            await deliveryRepository.GetAll().ToListAsync()
-        );
+    public IQueryable<DeliveryDto> Get()
+        => deliveryRepository.GetAll()
+            .ProjectTo<DeliveryDto>(mapper.ConfigurationProvider);
 
     public async Task<DeliveryDto?> GetById(long id)
     {

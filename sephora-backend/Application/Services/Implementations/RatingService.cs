@@ -15,10 +15,8 @@ public class RatingService(
     private bool IsUserOwner(Rating rating, ClaimsPrincipal user)
         => rating.UserId == GetUserIdOrThrow(user);
 
-    public async Task<IEnumerable<RatingDto>> Get()
-        => mapper.Map<IEnumerable<RatingDto>>(
-            await repository.GetAll().ToListAsync()
-        );
+    public IQueryable<RatingDto> Get()
+        => mapper.Map<IQueryable<RatingDto>>(repository.GetAll());
 
     public async Task<RatingDto?> GetById(long id)
         => mapper.Map<RatingDto?>(await repository.GetById(id));

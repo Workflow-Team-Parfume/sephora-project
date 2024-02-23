@@ -44,7 +44,7 @@ public class CheckoutController(
 
     [HttpGet("admin/all"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> GetAll()
-        => Ok(await checkoutService.Get());
+        => Ok(await checkoutService.Get().ToListAsync());
 
     // Manipulate status of orders via this method in admin panel
     [HttpPut("admin"), Authorize(Roles = "Admin,Moderator")]

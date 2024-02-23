@@ -39,9 +39,8 @@ const ProductsPage: React.FC<{
     const itemsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
-        event;
     };
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -50,9 +49,8 @@ const ProductsPage: React.FC<{
     const [expanded, setExpanded] = useState<boolean>(false);
 
     const handleChange =
-        (panel: boolean) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+        (panel: boolean) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
-            event;
         };
     const sort1: string[] = [t('sortBy.price'), t('sortBy.popularity'), t('sortBy.date')];
     const sort2: string[] = [t('sortBy.toLow'), t('sortBy.toHigh')];

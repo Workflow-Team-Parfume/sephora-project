@@ -5,7 +5,7 @@ public class CategoryController(ICategoryService categoryService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await categoryService.Get());
+        => Ok(await categoryService.Get().ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

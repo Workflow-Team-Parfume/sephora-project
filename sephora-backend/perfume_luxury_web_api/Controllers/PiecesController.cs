@@ -7,7 +7,7 @@ public class PiecesController(
 {
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
-        => Ok(await pieceService.Get());
+        => Ok(await pieceService.Get().ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

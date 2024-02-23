@@ -44,7 +44,7 @@ public interface ICheckoutService
      * <summary>Gets all orders.</summary>
      * <returns>A list of all orders.</returns>
      */
-    Task<IEnumerable<OrderDto>> Get();
+    IQueryable<OrderDto> Get();
 
     /**
     * <summary>
@@ -60,7 +60,7 @@ public interface ICheckoutService
         int pageNumber,
         int pageSize,
         bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+    ) => await Get().ToPagedListInfo(pageNumber, pageSize, fromStart);
 
     /**
      * <summary>Gets the order with the specified ID.</summary>

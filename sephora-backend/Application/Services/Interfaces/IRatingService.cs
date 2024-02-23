@@ -6,7 +6,7 @@ public interface IRatingService
      * <summary>Get all the ratings</summary>
      * <returns>A list of ratings</returns>
      */
-    Task<IEnumerable<RatingDto>> Get();
+    IQueryable<RatingDto> Get();
 
     /**
      * <summary>Get a paged list of ratings</summary>
@@ -21,7 +21,7 @@ public interface IRatingService
         int pageNumber,
         int pageSize,
         bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+    ) => await Get().ToPagedListInfo(pageNumber, pageSize, fromStart);
 
     /**
      * <summary>Get a rating by its ID</summary>

@@ -7,11 +7,9 @@ public class PieceService(
     IMapper mapper
 ) : IPieceService
 {
-    public async Task<IEnumerable<ProductPieceDto>> Get()
-        => mapper.Map<IEnumerable<ProductPieceDto>>(
-            await repository.GetListBySpec(new ProductPieces.GetAll())
-                .ToListAsync()
-        );
+    public IQueryable<ProductPieceDto> Get()
+        => repository.GetListBySpec(new ProductPieces.GetAll())
+            .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider);
 
     public async Task<ProductPieceDto?> GetById(long id)
         => mapper.Map<ProductPieceDto?>(

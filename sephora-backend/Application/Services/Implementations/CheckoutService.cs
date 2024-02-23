@@ -20,7 +20,7 @@ public class CheckoutService(
         var items = mapper.Map<IEnumerable<CartItem>>(cartItems);
         await PlaceOrder(items, delivery.Id);
     }
-    
+
     public async Task CheckoutAuthed(ClaimsPrincipal user)
     {
         UserEntity? userEntity = await userManager.GetUserAsync(user);
@@ -73,10 +73,9 @@ public class CheckoutService(
         await orderRepository.Save();
     }
 
-    public async Task<IEnumerable<OrderDto>> Get()
-        => mapper.Map<IEnumerable<OrderDto>>(
-            await orderRepository.GetAll().ToListAsync()
-        );
+    public IQueryable<OrderDto> Get()
+        => orderRepository.GetAll()
+            .ProjectTo<OrderDto>(mapper.ConfigurationProvider);
 
     public async Task<CategoryDto?> GetById(long id)
     {

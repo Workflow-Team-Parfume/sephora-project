@@ -27,4 +27,12 @@ public static class PagedListExtensions
         int pageSize,
         bool fromStart = true
     ) => source.ToPagedList(pageNumber, pageSize, fromStart).ToPagedListInfo();
+    
+    public static async Task<PagedListInfo<T>> ToPagedListInfo<T>(
+        this IQueryable<T> source,
+        int pageNumber,
+        int pageSize,
+        bool fromStart = true
+    ) => (await source.ToListAsync())
+        .ToPagedListInfo(pageNumber, pageSize, fromStart);
 }

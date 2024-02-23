@@ -8,11 +8,9 @@ public class AccountsService(
     IMapper mapper)
     : IAccountsService
 {
-    public async Task<IEnumerable<GetUserDto>> GetAll()
-    {
-        var users = await userManager.Users.ToListAsync();
-        return mapper.Map<IEnumerable<GetUserDto>>(users);
-    }
+    public IQueryable<GetUserDto> GetAll()
+        => userManager.Users
+            .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
 
     public async Task<GetUserDto> Get(string id)
     {

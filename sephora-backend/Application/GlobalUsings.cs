@@ -8,6 +8,7 @@ global using System.Security.Claims;
 global using System.Text;
 global using Ardalis.Specification;
 global using AutoMapper;
+global using AutoMapper.QueryableExtensions;
 global using CleanArchitecture.Application.Dtos.Amount;
 global using CleanArchitecture.Application.Dtos.Brand;
 global using CleanArchitecture.Application.Dtos.Cart;

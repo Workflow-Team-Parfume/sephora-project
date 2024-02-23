@@ -1,12 +1,13 @@
 namespace Infrastructure.Collections;
+using System.Linq.Dynamic.Core;
 
-public static class PagedListExtensions
+public static class PaginationExtensions
 {
     public static IPagedList<T> ToPagedList<T>(
         this IEnumerable<T> source,
         int pageNumber,
         int pageSize,
-        bool fromStart = true
+        bool fromStart = false
     ) => new PagedList<T>(source, pageNumber, pageSize, fromStart);
 
     public static PagedListInfo<T> ToPagedListInfo<T>(
@@ -25,14 +26,26 @@ public static class PagedListExtensions
         this IEnumerable<T> source,
         int pageNumber,
         int pageSize,
-        bool fromStart = true
+        bool fromStart = false
     ) => source.ToPagedList(pageNumber, pageSize, fromStart).ToPagedListInfo();
     
-    public static async Task<PagedListInfo<T>> ToPagedListInfo<T>(
+    // syntax: https://dynamic-linq.net/basic-simple-query
+    public static async Task<PagedListInfo<T>> ToPagedListInfoAsync<T>(
         this IQueryable<T> source,
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await source.ToListAsync())
-        .ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? preparedSelectBy = null,
+        bool fromStart = false
+    )
+    {
+        IQueryable<T> list = source;
+        if (orderBy is not null)
+            list = list.OrderBy(orderBy);
+        if (preparedSelectBy is not null)
+            list = list.Where(preparedSelectBy);
+
+        return (await list.ToListAsync())
+            .ToPagedListInfo(pageNumber, pageSize, fromStart);
+    }
 }

@@ -15,6 +15,8 @@ public interface ICartService
      * <param name="pageNumber">The page number</param>
      * <param name="pageSize">The page size</param>
      * <param name="fromStart">Whether to get from the start</param>
+     * <param name="orderBy">The order by clause (orders by property)</param>
+     * <param name="selectBy">The select by clause (orders by property)</param>
      * <returns>
      * The cart items of the specified user in the specified range
      * </returns>
@@ -23,8 +25,22 @@ public interface ICartService
         ClaimsPrincipal user,
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => await Get(user).ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null,
+        bool fromStart = false
+    )
+    {
+        // TODO: Implement selection by dynamic where clause
+        string? preparedSelectBy = null;
+
+        return await Get(user).ToPagedListInfoAsync(
+            pageNumber,
+            pageSize,
+            orderBy,
+            preparedSelectBy,
+            fromStart
+        );
+    }
 
     /**
      * <summary>Get the cart item by its id</summary>

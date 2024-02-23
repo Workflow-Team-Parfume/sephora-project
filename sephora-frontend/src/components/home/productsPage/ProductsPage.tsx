@@ -86,9 +86,7 @@ const ProductsPage: React.FC<{
                         <Typography className="title">{title}</Typography>
                         <Stack sx={{alignItems: 'end'}}>
                             <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon/>}
-                                >
+                                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                                     <Typography className='sortName'>
                                         {t('sortBy.title')} <span className="checked">{checked1}</span>
                                     </Typography>
@@ -100,10 +98,12 @@ const ProductsPage: React.FC<{
                                                 key={value}
                                                 role="listitem"
                                                 onClick={handleToggle1(value)}
-                                                sx={{p: "0"}}
-                                            >
-                                                <Typography
-                                                    className={checked1 == value ? 'checked' : 'check'}>{value}</Typography>
+                                                sx={{p: "0"}}>
+                                                <Typography className={
+                                                    checked1 == value
+                                                        ? 'checked'
+                                                        : 'check'
+                                                }>{value}</Typography>
                                             </ListItemButton>
                                         ))}
                                         {sort2.map((value) => (

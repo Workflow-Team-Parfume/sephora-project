@@ -7,14 +7,15 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     public async Task<IActionResult> Get()
         => Ok(await ratingService.Get().ToListAsync());
 
-    // TODO: Add filtering by product ID
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
     )
     {
-        var ratings = await ratingService.Get(page, size, false);
+        var ratings = await ratingService.Get(page, size, order, select);
         return Ok(ratings);
     }
 

@@ -1,17 +1,17 @@
 import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import "./basket.scss"
 import {useTranslation} from "react-i18next";
-import { Perfume } from "../data";
+import { newPieces } from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
 
 const Basket = () => {
     const {t} = useTranslation();
-    const products = Perfume;
+    const products = newPieces;
 
     const discount = 0;
 
     function calculateTotal(): number {
-        const total: number = products.reduce((acc, price) => acc + Number(price.volume[0].price), 0);
+        const total: number = products.reduce((acc, piece) => acc + Number(piece.price), 0);
         return total;
     }
     
@@ -57,7 +57,7 @@ const Basket = () => {
                                 <Typography className="total">{t('basket/order.total')}</Typography>
                                 <Typography className="total">{total - discount} {t('uan')} </Typography>
                             </Stack>
-                            <Button href="/order" className="button">{t('basket.toOrder')}</Button>
+                            <Button href="/order" className="button">{t('basket/order.toOrder')}</Button>
                         </Stack>
                     </Grid>
                 </Grid>
@@ -65,7 +65,7 @@ const Basket = () => {
             
             <Box margin={4}>
                 <Typography className="recProductsTitle">{t('basket.recomProducts')}</Typography>
-                {/*TODO: recommended products list */}
+                {/*TODO: add recommended products list */}
             </Box>
         </Container>
     );

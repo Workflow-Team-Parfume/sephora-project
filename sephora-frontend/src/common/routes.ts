@@ -8,6 +8,7 @@ const routes = {
 
     basket: '/basket',
     order: '/order',
+    thank: '/thank',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

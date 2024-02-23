@@ -2,15 +2,15 @@ import {Button, Link, Stack, Typography} from "@mui/material";
 import "./basketProduct.scss";
 import React, { useState } from "react";
 import {useTranslation} from "react-i18next";
-import {IProduct} from "../types.ts";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
+import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 
 const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
 
-const BasketProduct: React.FC<{ piece: IProduct }>
+const BasketProduct: React.FC<{ piece: ProductPieceDto }>
 = ({piece}) => {
     const {t} = useTranslation();
 
@@ -25,19 +25,19 @@ const BasketProduct: React.FC<{ piece: IProduct }>
                 <Stack spacing={4} direction='row'>
                     <img
                         className="productImg"
-                        src={piece.pictures[0] ?? imgPlaceholder}
+                        src={piece.pictures[0].url ?? imgPlaceholder}
                     />
 
                     <Stack justifyContent='space-between'>
                         <Typography className="productName">
-                            {piece?.name}
+                            {piece.product.name}
                         </Typography>
                         <Stack>
                             <Typography className="productCategory">
-                                {piece.categoryName}
+                                {piece.product.category.name}
                             </Typography>
                             <Typography className="productCategory">
-                                {piece.volume[0].volume}
+                                {piece.milliliters}ml
                             </Typography>
                         </Stack>
                     </Stack>
@@ -52,7 +52,7 @@ const BasketProduct: React.FC<{ piece: IProduct }>
                     <Button onClick={() => (handleCountChange(count+1))}><AddIcon className="img"/></Button>
                 </Stack>
                 <Typography className="productPrice">
-                        {piece.volume[0].price} {t('uan')}
+                        {piece.price} {t('uan')}
                 </Typography>
                 <Button>
                     <DeleteOutlinedIcon sx={{color:'#646464'}}/>

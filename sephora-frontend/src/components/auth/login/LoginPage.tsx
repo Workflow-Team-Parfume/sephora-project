@@ -20,10 +20,12 @@ import {
 import { AuthUserActionType, IUser, ILogin } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
-import './LoginPage.scss';
+import "./LoginPage.scss";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import React from "react";
 import Visibility from "@mui/icons-material/Visibility";
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -131,7 +133,7 @@ const LoginPage = () => {
   //     // Add code to show an error message to the user.
   //   },
   // });
-  
+
   const registerSchema = Yup.object().shape({
     userName: Yup.string()
       .required("Name is required")
@@ -215,13 +217,23 @@ const LoginPage = () => {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            gap: 10
+          }}
+        >
+          <Button id="button" variant="outlined" startIcon={<GoogleIcon />}>Google</Button>
+          <Button id="button" variant="outlined" startIcon={<FacebookIcon/>}>Facebook</Button>
+        </Box>
+        <Typography component="h1" variant="h5" mt={5}>
+          ----------------- АБО -----------------
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
             <FormControl
-              sx={{ m: 1, width: "670px", height: "50px", mb: 5}}
+              sx={{ m: 1, width: "670px", height: "50px", mb: 5 }}
               variant="outlined"
             >
               <TextField
@@ -278,7 +290,9 @@ const LoginPage = () => {
           Увійти
         </Button>
         <Grid item xs>
-          <a id="forgotPassword" href="#">Забули пароль?</a>
+          <a id="forgotPassword" href="#">
+            Забули пароль?
+          </a>
         </Grid>
       </Box>
     </Container>

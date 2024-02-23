@@ -10,8 +10,10 @@ public class BrandsController(IBrandService brandService) : Controller
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
-    ) => Ok(await brandService.Get(page, size, false));
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await brandService.Get(page, size, order, select));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)

@@ -27,7 +27,7 @@ public class PagedList<T> : List<T>, IPagedList<T>
         IEnumerable<T> items,
         int pageNumber,
         int pageSize,
-        bool fromStart = true
+        bool fromStart = false
     )
     {
         // PageSize is [1, 100]

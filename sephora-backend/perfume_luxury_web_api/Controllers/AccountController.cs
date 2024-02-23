@@ -13,8 +13,10 @@ public class AccountController(
     [HttpGet, Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
-    ) => Ok(await accountsService.Get(page, size, false));
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await accountsService.Get(page, size, order, select));
 
     [HttpGet("{id}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get(string id)

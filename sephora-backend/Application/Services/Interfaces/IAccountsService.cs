@@ -7,8 +7,22 @@ public interface IAccountsService
     async Task<PagedListInfo<GetUserDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => await GetAll().ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null,
+        bool fromStart = false
+    )
+    {
+        // TODO: Implement selection by dynamic where clause
+        string? preparedSelectBy = null;
+
+        return await GetAll().ToPagedListInfoAsync(
+            pageNumber,
+            pageSize,
+            orderBy,
+            preparedSelectBy,
+            fromStart
+        );
+    }
 
     Task<GetUserDto> Get(string id);
     Task<LoginResponseDto> Login(LoginDto dto);

@@ -54,13 +54,29 @@ public interface ICheckoutService
     * <param name="pageNumber">The number of the page</param>
     * <param name="pageSize">The size of the page</param>
     * <param name="fromStart">If true, the list will be sorted in ascending order</param>
+    * <param name="orderBy">The order by clause (orders by property)</param>
+    * <param name="selectBy">The select by clause (orders by property)</param>
     * <returns>A paginated list of orders.</returns>
     */
     async Task<PagedListInfo<OrderDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => await Get().ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null,
+        bool fromStart = false
+    ) 
+    {
+     // TODO: Implement selection by dynamic where clause
+     string? preparedSelectBy = null;
+
+     return await Get().ToPagedListInfoAsync(
+      pageNumber,
+      pageSize,
+      orderBy,
+      preparedSelectBy,
+      fromStart
+     );
+    }
 
     /**
      * <summary>Gets the order with the specified ID.</summary>

@@ -15,13 +15,29 @@ public interface IRatingService
      * <param name="fromStart">
      * Whether to start from the beginning of the list
      * </param>
+     * <param name="orderBy">The order by clause (orders by property)</param>
+     * <param name="selectBy">The select by clause (orders by property)</param>
      * <returns>A paged list of ratings</returns>
      */
     async Task<PagedListInfo<RatingDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => await Get().ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null,
+        bool fromStart = false
+    ) 
+    {
+     // TODO: Implement selection by dynamic where clause
+     string? preparedSelectBy = null;
+
+     return await Get().ToPagedListInfoAsync(
+      pageNumber,
+      pageSize,
+      orderBy,
+      preparedSelectBy,
+      fromStart
+     );
+    }
 
     /**
      * <summary>Get a rating by its ID</summary>

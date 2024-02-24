@@ -6,9 +6,8 @@ public static class PaginationExtensions
     public static IPagedList<T> ToPagedList<T>(
         this IEnumerable<T> source,
         int pageNumber,
-        int pageSize,
-        bool fromStart = false
-    ) => new PagedList<T>(source, pageNumber, pageSize, fromStart);
+        int pageSize
+    ) => new PagedList<T>(source, pageNumber, pageSize);
 
     public static PagedListInfo<T> ToPagedListInfo<T>(
         this IPagedList<T> source
@@ -25,9 +24,8 @@ public static class PaginationExtensions
     public static PagedListInfo<T> ToPagedListInfo<T>(
         this IEnumerable<T> source,
         int pageNumber,
-        int pageSize,
-        bool fromStart = false
-    ) => source.ToPagedList(pageNumber, pageSize, fromStart).ToPagedListInfo();
+        int pageSize
+    ) => source.ToPagedList(pageNumber, pageSize).ToPagedListInfo();
     
     // syntax: https://dynamic-linq.net/basic-simple-query
     public static async Task<PagedListInfo<T>> ToPagedListInfoAsync<T>(
@@ -35,8 +33,7 @@ public static class PaginationExtensions
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? preparedSelectBy = null,
-        bool fromStart = false
+        string? preparedSelectBy = null
     )
     {
         IQueryable<T> list = source;
@@ -46,6 +43,6 @@ public static class PaginationExtensions
             list = list.Where(preparedSelectBy);
 
         return (await list.ToListAsync())
-            .ToPagedListInfo(pageNumber, pageSize, fromStart);
+            .ToPagedListInfo(pageNumber, pageSize);
     }
 }

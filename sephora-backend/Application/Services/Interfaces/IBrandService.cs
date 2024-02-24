@@ -8,15 +8,8 @@ public interface IBrandService
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null,
-        bool fromStart = false
-    ) => await Get().ToPagedListInfoAsync(
-        pageNumber,
-        pageSize,
-        orderBy,
-        selectBy,
-        fromStart
-    );
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     Task<BrandDto?> GetById(int id);
     Task Create(CreateBrandDto brandDto);

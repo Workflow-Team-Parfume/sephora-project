@@ -8,15 +8,8 @@ public interface IAmountService
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null,
-        bool fromStart = false
-    ) => await Get().ToPagedListInfoAsync(
-        pageNumber,
-        pageSize,
-        orderBy,
-        selectBy,
-        fromStart
-    );
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     Task<AmountDto?> GetById(int id);
     Task Create(CreateAmountDto amountDto);

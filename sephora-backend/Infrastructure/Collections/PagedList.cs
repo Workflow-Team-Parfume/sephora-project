@@ -26,8 +26,7 @@ public class PagedList<T> : List<T>, IPagedList<T>
     public PagedList(
         IEnumerable<T> items,
         int pageNumber,
-        int pageSize,
-        bool fromStart = false
+        int pageSize
     )
     {
         // PageSize is [1, 100]
@@ -43,9 +42,6 @@ public class PagedList<T> : List<T>, IPagedList<T>
         TotalCount = enumerable.Count;
         TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
 
-        AddRange(fromStart
-            ? enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            : enumerable.SkipLast((pageNumber - 1) * pageSize).TakeLast(pageSize)
-        );
+        AddRange(enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize));
     }
 }

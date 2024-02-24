@@ -14,7 +14,6 @@ public interface ICartService
      * <param name="user">The user to get cart items of</param>
      * <param name="pageNumber">The page number</param>
      * <param name="pageSize">The page size</param>
-     * <param name="fromStart">Whether to get from the start</param>
      * <param name="orderBy">The order by clause (orders by property)</param>
      * <param name="selectBy">The select by clause (orders by property)</param>
      * <returns>
@@ -26,15 +25,9 @@ public interface ICartService
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null,
-        bool fromStart = false
-    ) => await Get(user).ToPagedListInfoAsync(
-        pageNumber,
-        pageSize,
-        orderBy,
-        selectBy,
-        fromStart
-    );
+        string? selectBy = null
+    ) => await Get(user)
+        .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     /**
      * <summary>Get the cart item by its id</summary>

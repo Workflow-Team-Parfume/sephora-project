@@ -9,6 +9,14 @@ i18n
         translation: {
         'uan': 'грн',
 
+        'singIn': 'Увійти',
+        'forgotPassword': 'Забули пароль?',
+        'email': 'E-mail',
+        'password': 'Пароль',
+        'name': 'Ім\'я',
+        'surname': 'Прізвище',
+        'phone': 'Номер телефона',
+          
         'header.fullSizePerfume': 'Повнорозмірні парфуми',
         'header.bottlingPerfumes': 'Розпив парфумерії',
         'header.care': 'Догляд',
@@ -69,11 +77,27 @@ i18n
 
         'basket': 'Кошик',
         'basket.recomProducts': 'Рекомендовані товари',
-        'basket.orderAmount': 'Сума замовлення',
-        'basket.discount': 'Знижка',
-        'basket.total': 'Загальна сума',
-        'basket.toOrder': 'Оформити замовлення',
+        'basket/order.toOrder': 'Оформити замовлення',
+        'basket/order.orderAmount': 'Сума замовлення',
+        'basket/order.discount': 'Знижка',
+        'basket/order.total': 'Загальна сума',
+
         'order.yourOrder': 'Ваше замовлення',
+        'order.newBuyer': 'Новий клієнт',
+        'order.regularCustomer': 'Постійний покупець',
+        'order.continueShopping': 'Продовжити покупки',
+        'order.further': 'Далі',
+        'order.thank': 'Дякуємо за замовлення :)',
+        'order.thank.view': 'Переглянути деталі замовлення',
+        'order.delivery.city': 'Місто',
+        'order.delivery.street': 'Вулиця',
+        'order.delivery.house': 'Будинок',
+        'order.delivery.sq': 'Кв',
+        'order.delivery.options': 'Варіанти доставки',
+        'order.delivery.paymentMethods': 'Варіанти оплати',
+        'order.delivery.addComment': 'Додати коментар до замовлення',
+        'order.delivery.promoCode': 'Я маю промокод чи сертифікат',
+        'order.delivery.callMe': 'Мені можна не телефонувати для підтвердження замовлення',
         }
     },
 
@@ -81,6 +105,14 @@ i18n
         translation: {
         'uan': 'UAN',
 
+        'singIn': 'Sing in',
+        'forgotPassword': 'Forgot your password?',
+        'email': 'E-mail',
+        'password': 'Password',
+        'name': 'Name',
+        'surname': 'Surname',
+        'phone': 'Phone number',
+          
         'header.fullSizePerfume': 'Full size perfume',
         'header.bottlingPerfumes': 'Bottling perfumes',
         'header.care': 'Care',
@@ -141,11 +173,27 @@ i18n
 
         'basket': 'Basket',
         'basket.recomProducts': 'Recommended products',
-        'basket.orderAmount': 'Order amount',
-        'basket.discount': 'Discount',
-        'basket.total': 'Total',
-        'basket.toOrder': 'To order',
+        'basket/order.toOrder': 'To order',
+        'basket/order.orderAmount': 'Order amount',
+        'basket/order.discount': 'Discount',
+        'basket/order.total': 'Total',
+
         'order.yourOrder': 'Your order',
+        'order.newBuyer': 'New buyer',
+        'order.regularCustomer': 'Regular customer',
+        'order.continueShopping': 'Continue shopping',
+        'order.further': 'Further',
+        'order.thank': 'Thank you fot your order :)',
+        'order.thank.view': 'View order details',
+        'order.delivery.city': 'City',
+        'order.delivery.street': 'Street',
+        'order.delivery.house': 'House',
+        'order.delivery.sq': 'Sq',
+        'order.delivery.options': 'Delivery options',
+        'order.delivery.paymentMethods': 'Payment methods',
+        'order.delivery.addComment': 'Add a comment to the order',
+        'order.delivery.promoCode': 'I have a promo code or certificate',
+        'order.delivery.callMe': 'You can call me to confirm the order',
         }
     }
 },

@@ -8,7 +8,7 @@ public class AccountController(
 {
     [HttpGet("all"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
-        => Ok(await accountsService.GetAll().ToListAsync());
+        => Ok(await accountsService.Get().ToListAsync());
 
     [HttpGet, Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetPaged(

@@ -8,7 +8,7 @@ public class AccountsService(
     IMapper mapper)
     : IAccountsService
 {
-    public IQueryable<GetUserDto> GetAll()
+    public IQueryable<GetUserDto> Get()
         => userManager.Users
             .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
 

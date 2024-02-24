@@ -2,7 +2,7 @@
 
 public interface IAccountsService
 {
-    IQueryable<GetUserDto> GetAll();
+    IQueryable<GetUserDto> Get();
 
     async Task<PagedListInfo<GetUserDto>> Get(
         int pageNumber,
@@ -10,19 +10,13 @@ public interface IAccountsService
         string? orderBy = null,
         string? selectBy = null,
         bool fromStart = false
-    )
-    {
-        // TODO: Implement selection by dynamic where clause
-        string? preparedSelectBy = null;
-
-        return await GetAll().ToPagedListInfoAsync(
-            pageNumber,
-            pageSize,
-            orderBy,
-            preparedSelectBy,
-            fromStart
-        );
-    }
+    ) => await Get().ToPagedListInfoAsync(
+        pageNumber,
+        pageSize,
+        orderBy,
+        selectBy,
+        fromStart
+    );
 
     Task<GetUserDto> Get(string id);
     Task<LoginResponseDto> Login(LoginDto dto);

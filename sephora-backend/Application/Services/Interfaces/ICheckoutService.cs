@@ -64,19 +64,13 @@ public interface ICheckoutService
         string? orderBy = null,
         string? selectBy = null,
         bool fromStart = false
-    ) 
-    {
-     // TODO: Implement selection by dynamic where clause
-     string? preparedSelectBy = null;
-
-     return await Get().ToPagedListInfoAsync(
-      pageNumber,
-      pageSize,
-      orderBy,
-      preparedSelectBy,
-      fromStart
-     );
-    }
+    ) => await Get().ToPagedListInfoAsync(
+        pageNumber,
+        pageSize,
+        orderBy,
+        selectBy,
+        fromStart
+    );
 
     /**
      * <summary>Gets the order with the specified ID.</summary>

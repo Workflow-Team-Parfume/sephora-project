@@ -10,19 +10,13 @@ public interface IPieceService
         string? orderBy = null,
         string? selectBy = null,
         bool fromStart = false
-    )
-    {
-        // TODO: Implement selection by dynamic where clause
-        string? preparedSelectBy = null;
-
-        return await Get().ToPagedListInfoAsync(
-            pageNumber,
-            pageSize,
-            orderBy,
-            preparedSelectBy,
-            fromStart
-        );
-    }
+    ) => await Get().ToPagedListInfoAsync(
+        pageNumber,
+        pageSize,
+        orderBy,
+        selectBy,
+        fromStart
+    );
 
     Task<ProductPieceDto?> GetById(long id);
     Task Create(CreateProductPieceDto pieceDto);

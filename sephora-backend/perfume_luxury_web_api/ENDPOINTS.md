@@ -27,6 +27,8 @@
         * Admin only
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of accounts
 * **/{id}**
     * id: string
@@ -91,6 +93,8 @@
         * Get paged amounts
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of amounts
     * ***POST***
         * Create amount
@@ -123,6 +127,8 @@
         * Get paged brands
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of brands
     * ***POST***
         * Create brand
@@ -156,6 +162,8 @@
         * Get items in cart
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of cart items
     * ***POST***
         * Create cart item
@@ -190,6 +198,8 @@
         * Get paged categories
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of categories
     * ***POST***
         * Create category
@@ -292,6 +302,8 @@
         * Get paged pieces
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of pieces
     * ***POST***
         * Admin & mod only
@@ -327,6 +339,8 @@
         * Get paged products
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of products
     * ***POST***
         * Admin & mod only
@@ -362,6 +376,8 @@
         * Get paged ratings
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of ratings
     * ***POST***
         * Requires authentication

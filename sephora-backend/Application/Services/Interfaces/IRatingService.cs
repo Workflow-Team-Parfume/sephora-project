@@ -12,9 +12,6 @@ public interface IRatingService
      * <summary>Get a paged list of ratings</summary>
      * <param name="pageNumber">The page number</param>
      * <param name="pageSize">The size of the page</param>
-     * <param name="fromStart">
-     * Whether to start from the beginning of the list
-     * </param>
      * <param name="orderBy">The order by clause (orders by property)</param>
      * <param name="selectBy">The select by clause (orders by property)</param>
      * <returns>A paged list of ratings</returns>
@@ -23,15 +20,8 @@ public interface IRatingService
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null,
-        bool fromStart = false
-    ) => await Get().ToPagedListInfoAsync(
-        pageNumber,
-        pageSize,
-        orderBy,
-        selectBy,
-        fromStart
-    );
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     /**
      * <summary>Get a rating by its ID</summary>

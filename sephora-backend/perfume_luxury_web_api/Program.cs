@@ -49,7 +49,7 @@ builder.Services.AddValidators();
 builder.Services.AddFileService(builder.Environment.IsDevelopment());
 
 // add exception handler
-builder.Services.AddExceptionHandler<PerfumeExceptionHandler>();
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();

@@ -1,14 +1,34 @@
 namespace CleanArchitecture.Application.Dtos.Delivery;
 
-// TODO: Implement
 public class DeliveryDto
 {
     public long Id { get; set; }
-    public string Address { get; set; } = String.Empty;
+
     public string Provider { get; set; } = String.Empty;
+
+    public string? PostalCode { get; set; }
     
-    public string? UserId { get; set; }
-    public string? UserName { get; set; }
-    public string? UserEmail { get; set; }
-    public string? UserPhoneNumber { get; set; }
+    public string? Country { get; set; } = "Ukraine";
+    
+    public string? Region { get; set; } // Область
+    
+    public string? District { get; set; } // Район
+    
+    public string? City { get; set; }
+    
+    public string? Street { get; set; }
+    
+    public string? Building { get; set; }
+    
+    public string? Apartment { get; set; }
+
+    public string? NovaPostWarehouse { get; set; }
+
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
+
+    public string PhoneNumber { get; set; }
+
+    public string Email { get; set; }
 }

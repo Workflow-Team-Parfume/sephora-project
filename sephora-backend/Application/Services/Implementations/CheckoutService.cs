@@ -28,10 +28,14 @@ public class CheckoutService(
             throw new SecurityException("The specified user is not found");
 
         var spec = new CartItems.GetByUserId(userEntity.Id);
-        
+
         var items = cartItemRepository.GetListBySpec(spec);
 
-        await PlaceOrder(items, userEntity.DeliveryDataId);
+        await PlaceOrder(
+            items,
+            userEntity.DeliveryDataId
+            ?? throw new ArgumentException("The specified user has no delivery ID")
+        );
         await cartService.DeleteAll(user);
     }
 
@@ -45,7 +49,7 @@ public class CheckoutService(
             );
 
         order.Status = dto.Status;
-        
+
         await orderRepository.Update(order);
         await orderRepository.Save();
     }
@@ -55,7 +59,7 @@ public class CheckoutService(
         UserEntity? userEntity = await userManager.GetUserAsync(user);
         if (userEntity is null)
             throw new SecurityException("The specified user is not found");
-        
+
         Order? order = await orderRepository.GetById(orderId);
         if (order is null)
             throw new ArgumentException(
@@ -68,7 +72,7 @@ public class CheckoutService(
             );
 
         order.Status = OrderStatus.CANCELLED_BY_USER;
-        
+
         await orderRepository.Update(order);
         await orderRepository.Save();
     }
@@ -112,7 +116,7 @@ public class CheckoutService(
                 "The cart is empty",
                 nameof(items)
             );
-        
+
         var order = new Order
         {
             Date = DateTime.Now,

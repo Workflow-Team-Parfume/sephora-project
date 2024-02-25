@@ -9,7 +9,7 @@ public class ProductPieceDto
     public bool IsBottledParfume { get; set; }
     public long ProductId { get; set; }
     public ProductDto Product { get; set; } = default!;
-    public IEnumerable<PictureDto> Pictures { get; set; }
+    public IEnumerable<PictureDto> Pictures { get; set; } = [];
     
     public DateTime CreatedAt { get; set; }
     

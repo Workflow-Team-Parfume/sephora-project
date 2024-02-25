@@ -6,6 +6,6 @@ public class Category
 
     public string Name { get; set; } = String.Empty;
 
-    public ICollection<ProductEntity> Products { get; set;}
+    public ICollection<ProductEntity> Products { get; set;} = [];
 
 }

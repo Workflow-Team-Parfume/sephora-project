@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(PerfumeDbContext))]
-    partial class PerfumeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240225213842_DeliveryMigration2")]
+    partial class DeliveryMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,23 +158,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeliveryDataSet");
-                });
-
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Favorite", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text")
-                        .HasColumnOrder(0);
-
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("UserId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
@@ -622,25 +608,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Favorite", b =>
-                {
-                    b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
-                        .WithMany("Favorites")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "Delivery")
@@ -853,8 +820,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("Favorites");
 
                     b.Navigation("Orders");
 

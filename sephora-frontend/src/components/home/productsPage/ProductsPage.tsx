@@ -31,7 +31,7 @@ const ProductsPage: React.FC<{
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     useEffect(() => {
-        http_common.get("pieces?size=4&page=1&select=perfume")
+        http_common.get("pieces?size=4&page=1")
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     });

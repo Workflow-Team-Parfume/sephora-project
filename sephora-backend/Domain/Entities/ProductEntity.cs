@@ -26,4 +26,7 @@ public class ProductEntity
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<Characteristic> Characteristics { get; set; } = [];
+
+    // TODO (just update it when a new rating is added)
+    public decimal AverageRating { get; set; }
 }

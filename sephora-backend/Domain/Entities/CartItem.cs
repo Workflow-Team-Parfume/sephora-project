@@ -9,17 +9,18 @@ public class CartItem
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
+
     public int Quantity { get; set; }
-    
+
     [ForeignKey("Users"), Column(Order = 0)]
     public string UserId { get; set; } = String.Empty;
+    public UserEntity User { get; set; } = default!;
+
     [ForeignKey("Products"), Column(Order = 1)]
     public long ProductPieceId { get; set; }
-    
-    // navigation properties
-    public UserEntity User { get; set; } = default!;
     public ProductPiece ProductPiece { get; set; } = default!;
 
     public decimal? Discount { get; set; }
+
     public decimal? Tax { get; set; }
 }

@@ -24,4 +24,6 @@ public class ProductEntity
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public ICollection<Characteristic> Characteristics { get; set; } = [];
 }

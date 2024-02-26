@@ -21,7 +21,7 @@ public class ApplicationProfile : Profile
             opts => opts.MapFrom(src => src.ProductPieces)
         ).ForMember(
             dest => dest.Volumes,
-            opts => opts.MapFrom(src => src.ProductPieces!.Select(x => x.Amount))
+            opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
         );
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();

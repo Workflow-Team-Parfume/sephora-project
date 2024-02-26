@@ -22,5 +22,6 @@ public class ProductEntity
 
     public ICollection<ProductPiece> ProductPieces { get; set; } = [];
 
-    [Column("created_at")] public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

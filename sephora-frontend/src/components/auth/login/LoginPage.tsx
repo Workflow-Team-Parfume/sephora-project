@@ -8,7 +8,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Divider,
   FormControl,
   Grid,
   IconButton,
@@ -225,10 +224,10 @@ const LoginPage = () => {
             gap: 5,
           }}
         >
-          <Button id="button" variant="outlined" startIcon={<GoogleIcon />}>
+          <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<GoogleIcon />}>
             Google
           </Button>
-          <Button id="button" variant="outlined" startIcon={<FacebookIcon />}>
+          <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<FacebookIcon />}>
             Facebook
           </Button>
         </Box>

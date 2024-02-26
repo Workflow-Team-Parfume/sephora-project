@@ -295,7 +295,7 @@ const RegisterPage = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 5, mb: 5 }}
         >
           Зареєструватися
         </Button>

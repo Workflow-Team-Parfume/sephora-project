@@ -6,7 +6,8 @@ public class ProductEntity
 
     public string Name { get; set; } = String.Empty;
 
-    public string Description { get; set; } = String.Empty;
+    public string DescriptionEn { get; set; } = String.Empty;
+    public string DescriptionUa { get; set; } = String.Empty;
 
     public bool Active { get; set; }
 

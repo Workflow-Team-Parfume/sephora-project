@@ -67,8 +67,12 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Name)
             )
             .ForMember(
-                dest => dest.ProductDescription,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Description)
+                dest => dest.ProductDescriptionEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionEn)
+            )
+            .ForMember(
+                dest => dest.ProductDescriptionUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionUa)
             )
             .ForMember(
                 dest => dest.BrandName,
@@ -81,12 +85,14 @@ public class ApplicationProfile : Profile
             .ForMember(
                 dest => dest.Price,
                 opt => opt.MapFrom(src => src.ProductPiece.Price)
-                )
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
 
         CreateMap<CreateDeliveryDto, DeliveryEntity>();
         CreateMap<DeliveryEntity, DeliveryDto>().ReverseMap();
+
+        CreateMap<Characteristic, CharacteristicDto>().ReverseMap();
     }
 }

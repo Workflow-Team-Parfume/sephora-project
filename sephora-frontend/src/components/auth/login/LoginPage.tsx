@@ -8,6 +8,7 @@ import {
   Button,
   Container,
   CssBaseline,
+  Divider,
   FormControl,
   Grid,
   IconButton,
@@ -24,8 +25,8 @@ import "./LoginPage.scss";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import React from "react";
 import Visibility from "@mui/icons-material/Visibility";
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -221,15 +222,31 @@ const LoginPage = () => {
           sx={{
             display: "flex",
             flexDirection: "row",
-            gap: 10
+            gap: 5,
           }}
         >
-          <Button id="button" variant="outlined" startIcon={<GoogleIcon />}>Google</Button>
-          <Button id="button" variant="outlined" startIcon={<FacebookIcon/>}>Facebook</Button>
+          <Button id="button" variant="outlined" startIcon={<GoogleIcon />}>
+            Google
+          </Button>
+          <Button id="button" variant="outlined" startIcon={<FacebookIcon />}>
+            Facebook
+          </Button>
         </Box>
-        <Typography component="h1" variant="h5" mt={5}>
-          ----------------- АБО -----------------
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 7,
+            mt: 5,
+          }}
+        >
+          <hr />
+          <Typography component="h1" variant="h5">
+            АБО
+          </Typography>
+          <hr />
+        </Box>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
             <FormControl

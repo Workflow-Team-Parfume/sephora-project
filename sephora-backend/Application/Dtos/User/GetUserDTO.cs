@@ -9,6 +9,6 @@ public class GetUserDto
     public string? PhoneNumber { get; set; }
     public List<string> Roles { get; set; } = [];
     public DateTime RegistrationDate { get; set; }
-    public ICollection<RatingDto>? Ratings { get; set; }
-    public ICollection<OrderDto>? Orders { get; set; }
+    public ICollection<RatingDto> Ratings { get; set; } = [];
+    public ICollection<OrderDto> Orders { get; set; } = [];
 }

@@ -1,4 +1,6 @@
-﻿namespace CleanArchitecture.Application.Dtos.Product;
+﻿using CleanArchitecture.Application.Dtos.Characteristics;
+
+namespace CleanArchitecture.Application.Dtos.Product;
 
 public class ProductDto
 {
@@ -8,13 +10,15 @@ public class ProductDto
     public bool Active { get; set; }
     public BrandDto Brand { get; set; } = default!;
     public CategoryDto Category { get; set; } = default!;
-    public IEnumerable<ProductPieceDto>? Pieces { get; set; }
-    public IEnumerable<RatingDto>? Ratings { get; set; }
+    public IEnumerable<ProductPieceDto> Pieces { get; set; } = [];
+    public IEnumerable<RatingDto> Ratings { get; set; } = [];
     
     // TODO
     public decimal AverageRating { get; set; }
 
-    public IEnumerable<AmountDto> Volumes { get; set; } = default!;
+    public IEnumerable<AmountDto> Volumes { get; set; } = [];
+    
+    public IEnumerable<CharacteristicDto> Characteristics { get; set; } = [];
     
     public DateTime CreatedAt { get; set; }
     

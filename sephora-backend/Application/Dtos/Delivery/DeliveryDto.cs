@@ -25,7 +25,7 @@ public class DeliveryDto
     public string? NovaPostWarehouse { get; set; }
 
     public string FirstName { get; set; } = String.Empty;
-
+    
     public string LastName { get; set; } = String.Empty;
 
     public string PhoneNumber { get; set; } = String.Empty;

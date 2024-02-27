@@ -47,7 +47,10 @@ public class ApplicationProfile : Profile
 
         CreateMap<CreateRatingDto, Rating>();
         CreateMap<EditRatingDto, Rating>();
-        CreateMap<Rating, RatingDto>();
+        CreateMap<Rating, RatingDto>()
+            .ForMember(dest => dest.UserPfp, opts => opts.MapFrom(src => src.User.ProfilePicture))
+            .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.User.FirstName))
+            .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.User.LastName));
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
@@ -91,7 +94,27 @@ public class ApplicationProfile : Profile
         CreateMap<CreateCartDto, CartItem>();
 
         CreateMap<CreateDeliveryDto, DeliveryEntity>();
-        CreateMap<DeliveryEntity, DeliveryDto>().ReverseMap();
+        CreateMap<DeliveryEntity, DeliveryDto>()
+            .ForMember(
+                dest => dest.FirstName,
+                opts => opts.MapFrom(src =>
+                    src.User!.FirstName ?? src.UnauthedUser!.FirstName)
+            )
+            .ForMember(
+                dest => dest.LastName,
+                opts => opts.MapFrom(src =>
+                    src.User!.LastName ?? src.UnauthedUser!.LastName)
+            )
+            .ForMember(
+                dest => dest.PhoneNumber,
+                opts => opts.MapFrom(src =>
+                    src.User!.PhoneNumber ?? src.UnauthedUser!.PhoneNumber)
+            ).ForMember(
+                dest => dest.Email,
+                opts => opts.MapFrom(src =>
+                    src.User!.Email ?? src.UnauthedUser!.Email)
+            )
+            .ReverseMap();
 
         CreateMap<Characteristic, CharacteristicDto>().ReverseMap();
         CreateMap<CreateCharacteristicDto, Characteristic>();

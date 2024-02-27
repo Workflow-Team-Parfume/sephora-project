@@ -2,6 +2,10 @@
 
 public class UserEntity : IdentityUser
 {
+    public string FirstName { get; set; } = String.Empty;
+    
+    public string LastName { get; set; } = String.Empty;
+    
     public string? ProfilePicture { get; set; }
 
     public DateTime RegistrationDate { get; set; } = DateTime.UtcNow;

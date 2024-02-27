@@ -1,12 +1,21 @@
 export default interface CreateDeliveryDto {
     get address(): string;
+
     get provider(): string;
 
-    // TODO: Consider adding the following properties:
-    // get city(): string;
-    // get zipCode(): string;
-    // get country(): string;
-    // get phoneNumber(): string;
-    // get email(): string;
-    // get createdAt(): Date;
+    get postalCode(): string | null;
+
+    get region(): string | null;
+
+    get district(): string | null;
+
+    get city(): string | null;
+
+    get street(): string | null;
+
+    get building(): string | null;
+
+    get apartment(): string | null;
+
+    get novaPostWarehouse(): string | null;
 }

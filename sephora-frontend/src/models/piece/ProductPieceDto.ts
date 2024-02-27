@@ -7,7 +7,6 @@ export default interface ProductPieceDto {
     get price(): number;
     get milliliters(): number;
     get isBottledParfume(): boolean;
-    get productId(): number;
     get product(): ProductDto;
     get pictures(): PictureDto[];
 

@@ -1,16 +1,31 @@
 export default interface DeliveryDto {
     get id(): number;
+
     get address(): string;
+
     get provider(): string;
 
-    get userId(): number;
-    get userName(): string;
-    get userEmail(): string;
-    get userPhone(): string;
+    get firstName(): string;
 
-    // TODO: Add the following properties to the DeliveryDto interface:
-    // get status(): string;
-    // get createdAt(): Date;
-    // get createdBy(): string;
-    // get deliveryDate(): Date;
+    get lastName(): string;
+
+    get phoneNumber(): string;
+
+    get email(): string;
+
+    get postalCode(): string | null;
+
+    get region(): string | null;
+
+    get district(): string | null;
+
+    get city(): string | null;
+
+    get street(): string | null;
+
+    get building(): string | null;
+
+    get apartment(): string | null;
+
+    get novaPostWarehouse(): string | null;
 }

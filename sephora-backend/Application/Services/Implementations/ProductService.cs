@@ -3,6 +3,7 @@
 public class ProductService(
     IRepository<ProductEntity> productRepository,
     IPieceService pieceService,
+    IFavoritesService favService,
     IMapper mapper
 ) : IProductService
 {
@@ -35,21 +36,30 @@ public class ProductService(
         await productRepository.Save();
     }
 
-    public IQueryable<ProductDto> Get()
-        => productRepository.GetListBySpec(new Products.GetAll())
-            .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
-
-    public async Task<ProductDto?> GetById(long id)
+    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null)
     {
-        ProductEntity? productDto = await productRepository.GetItemBySpec(
+        var products = productRepository.GetListBySpec(new Products.GetAll())
+            .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
+        await products.ForEachAsync(async x =>
+        {
+            x.IsFavorite = await favService.IsFavorite(user, x.Id);
+        });
+        return products;
+    }
+
+    public async Task<ProductDto?> GetById(long id, ClaimsPrincipal? user = null)
+    {
+        ProductEntity? entity = await productRepository.GetItemBySpec(
             new Products.GetById(id)
         );
 
-        if (productDto is null)
+        if (entity is null)
             throw new ArgumentException(
                 $"Product with the id={{{id}}} is not found"
             );
 
-        return mapper.Map<ProductDto>(productDto);
+        var dto = mapper.Map<ProductDto>(entity);
+        dto.IsFavorite = await favService.IsFavorite(user, entity.Id);
+        return dto;
     }
 }

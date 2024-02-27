@@ -12,4 +12,6 @@ public class Favorite
     [Column(Order = 1)]
     public long ProductId { get; set; }
     public ProductEntity Product { get; set; } = default!;
+
+    public bool IsActive { get; set; } = false;
 }

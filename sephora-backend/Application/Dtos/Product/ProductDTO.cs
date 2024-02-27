@@ -30,4 +30,6 @@ public class ProductDto
 
     // Publication was less than 14 days ago
     public bool IsNew => Math.Abs((CreatedAt.Date - DateTime.UtcNow.Date).Days) < 14;
+
+    public bool IsFavorite { get; set; } = false;
 }

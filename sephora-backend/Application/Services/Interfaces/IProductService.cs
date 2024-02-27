@@ -2,6 +2,7 @@
 
 public interface IProductService
 {
+    // user is here to map the user's favorites
     Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null);
 
     async Task<PagedListInfo<ProductDto>> Get(

@@ -13,6 +13,7 @@
 9. [Products controller](#productscontroller)
 10. [Rating controller](#ratingcontroller)
 11. [Role controller](#rolecontroller)
+12. [Favorites controller](#favoritescontroller)
 
 ### AccountController
 
@@ -440,5 +441,15 @@
         * Returns: List of roles
 
 **[⬆ Back to RolesController](#rolecontroller)**  
-**[⬆ Back to Table of Contents](#table-of-contents)**  
+**[⬆ Back to Table of Contents](#table-of-contents)**
+
+### FavoritesController
+* **/**
+    * ***PUT***
+        * Requires authentication
+        * Add/delete product to/from favorites
+        * Route params: long
+        * Returns: 200 OK
+
+**[⬆ Back to Table of Contents](#table-of-contents)**
 **[⬆ Back to Top](#endpoints)**  

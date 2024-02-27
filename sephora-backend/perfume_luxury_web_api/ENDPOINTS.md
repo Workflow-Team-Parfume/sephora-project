@@ -450,6 +450,18 @@
         * Add/delete product to/from favorites
         * Route params: long
         * Returns: 200 OK
+    * ***GET***
+        * Get paged ratings
+        * page: int
+        * size: int
+        * order: string | null
+        * filter: string | null
+        * Returns: Paged list of ratings
+* **/all**
+    * ***GET***
+        * Requires authentication
+        * Get all favorites
+        * Returns: List of all favorites
 
 **[⬆ Back to Table of Contents](#table-of-contents)**
 **[⬆ Back to Top](#endpoints)**  

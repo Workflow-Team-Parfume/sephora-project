@@ -13,6 +13,14 @@ public class RatingService(
                ErrorMessages.UserNotFound
            );
 
+    private static void CheckRating(int rate)
+    {
+        if (rate is < 1 or > 5)
+            throw new ArgumentException(
+                "Rate should be between 1 and 5"
+            );
+    }
+
     private void ThrowIfUserIsNotOwner(Rating? rating, ClaimsPrincipal user)
     {
         if (rating?.UserId == GetUserIdOrThrow(user))
@@ -45,6 +53,8 @@ public class RatingService(
 
     public async Task Create(CreateRatingDto createRatingDto, ClaimsPrincipal user)
     {
+        CheckRating(createRatingDto.Rate);
+        
         var rating = mapper.Map<Rating>(createRatingDto);
         rating.UserId = GetUserIdOrThrow(user);
 
@@ -55,6 +65,8 @@ public class RatingService(
 
     public async Task Edit(EditRatingDto editRatingDto, ClaimsPrincipal user)
     {
+        CheckRating(editRatingDto.Rate);
+        
         var rating = await repository.GetById(editRatingDto.Id);
         ThrowIfUserIsNotOwner(rating, user);
 

@@ -11,6 +11,10 @@ public class FavoritesController(
         await favoritesService.ChangeFavoriteStatus(User, productId);
         return Ok();
     }
+    
+    [HttpGet("isFavorite/{productId:long}")]
+    public async Task<IActionResult> IsFavorite([FromRoute] long productId)
+        => Ok(await favoritesService.IsFavorite(User, productId));
 
     [HttpGet("all")]
     public async Task<IActionResult> Get()

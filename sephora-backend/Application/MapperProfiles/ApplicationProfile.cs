@@ -94,5 +94,6 @@ public class ApplicationProfile : Profile
         CreateMap<DeliveryEntity, DeliveryDto>().ReverseMap();
 
         CreateMap<Characteristic, CharacteristicDto>().ReverseMap();
+        CreateMap<CreateCharacteristicDto, Characteristic>();
     }
 }

@@ -1,3 +1,5 @@
+using JsonSerializer = System.Text.Json.JsonSerializer;
+
 namespace perfume_luxury_web_api.Extensions;
 
 public class ExceptionHandler : IExceptionHandler
@@ -17,7 +19,7 @@ public class ExceptionHandler : IExceptionHandler
     {
         try
         {
-            return System.Text.Json.JsonSerializer.Serialize(
+            return JsonSerializer.Serialize(
                 problemDetails,
                 SerializerOptions
             );
@@ -60,7 +62,7 @@ public class ExceptionHandler : IExceptionHandler
                 IOException or
                 DbUpdateException or
                 DbException or
-                System.Linq.Dynamic.Core.Exceptions.ParseException
+                ParseException
                 => (int)HttpStatusCode.BadRequest,
 
             InvalidOperationException => (int)HttpStatusCode.Conflict,

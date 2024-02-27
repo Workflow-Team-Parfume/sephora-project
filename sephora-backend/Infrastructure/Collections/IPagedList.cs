@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace Infrastructure.Collections;
 
 public interface IPagedList<T> : IList<T>

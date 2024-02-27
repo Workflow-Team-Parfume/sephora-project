@@ -1,5 +1,6 @@
 // Global using directives
 
+global using System.Linq.Dynamic.Core;
 global using Ardalis.Specification;
 global using Ardalis.Specification.EntityFrameworkCore;
 global using CleanArchitecture.Domain.Entities;

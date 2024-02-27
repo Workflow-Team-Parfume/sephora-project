@@ -8,4 +8,5 @@ public class CreateProductDto
     public bool Active { get; set; }
     public int BrandId { get; set; }
     public int CategoryId { get; set; }
+    public IEnumerable<CreateCharacteristicDto> Characteristics { get; set; } = [];
 }

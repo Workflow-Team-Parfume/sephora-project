@@ -33,14 +33,14 @@ public static class PaginationExtensions
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? preparedSelectBy = null
+        string? selectBy = null
     )
     {
         IQueryable<T> list = source;
-        if (orderBy is not null)
+        if (!String.IsNullOrWhiteSpace(orderBy))
             list = list.OrderBy(orderBy);
-        if (preparedSelectBy is not null)
-            list = list.Where(preparedSelectBy);
+        if (!String.IsNullOrWhiteSpace(selectBy))
+            list = list.Where(selectBy);
 
         return (await list.ToListAsync())
             .ToPagedListInfo(pageNumber, pageSize);

@@ -55,5 +55,6 @@ public static class ServiceExtensions
         services.AddScoped<IDeliveryService, DeliveryService>();
         services.AddScoped<IPieceService, PieceService>();
         services.AddScoped<IRatingService, RatingService>();
+        services.AddScoped<IFavoritesService, FavoritesService>();
     }
 }

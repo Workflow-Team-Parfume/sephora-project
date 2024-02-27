@@ -5,7 +5,7 @@ public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
-        => Ok(await productService.Get().ToListAsync());
+        => Ok(await (await productService.Get()).ToListAsync());
 
     [HttpGet]
     public async Task<IActionResult> GetPaged(
@@ -17,7 +17,7 @@ public class ProductsController(IProductService productService) : Controller
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)
-        => Ok(await productService.GetById(id));
+        => Ok(await productService.GetById(id, User));
 
     [HttpPost, Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Create([FromForm] CreateProductDto product)

@@ -13,8 +13,29 @@ public class RatingService(
                ErrorMessages.UserNotFound
            );
 
-    private bool IsUserOwner(Rating rating, ClaimsPrincipal user)
-        => rating.UserId == GetUserIdOrThrow(user);
+    private void ThrowIfUserIsNotOwner(Rating? rating, ClaimsPrincipal user)
+    {
+        if (rating?.UserId == GetUserIdOrThrow(user))
+            throw new UnauthorizedAccessException(
+                "This user doesn't owns this record"
+            );
+    }
+
+    private async Task SetNewRating(long productId, decimal newRating, int newRatingsCount)
+    {
+        var product = await productRepository.GetById(productId);
+        if (product is null)
+            throw new ArgumentException(
+                $"Product with the id={{{productId}}} is not found"
+            );
+
+        product.AverageRating = (
+            product.Ratings.Aggregate(0m, (sum, next) => sum + next.Rate)
+            + newRating
+        ) / (product.Ratings.LongCount() + newRatingsCount);
+
+        await productRepository.Update(product);
+    }
 
     public IQueryable<RatingDto> Get()
         => mapper.Map<IQueryable<RatingDto>>(repository.GetAll());
@@ -27,48 +48,29 @@ public class RatingService(
         var rating = mapper.Map<Rating>(createRatingDto);
         rating.UserId = GetUserIdOrThrow(user);
 
-        var product = await productRepository.GetById(createRatingDto.ProductId);
-        if (product is null)
-            throw new ArgumentException(
-                $"Product with the id={{{createRatingDto.ProductId}}} is not found"
-            );
-
         await repository.Insert(rating);
-
-        decimal newRating = (
-            product.Ratings
-                .Aggregate(0m, (sum, next) => sum + next.Rate)
-            + rating.Rate
-        ) / (product.Ratings.LongCount() + 1);
-        product.AverageRating = newRating;
-
+        await SetNewRating(createRatingDto.ProductId, createRatingDto.Rate, 1);
         await repository.Save();
     }
 
     public async Task Edit(EditRatingDto editRatingDto, ClaimsPrincipal user)
     {
         var rating = await repository.GetById(editRatingDto.Id);
-        var userId = GetUserIdOrThrow(user);
-        if (rating?.UserId != userId)
-            throw new UnauthorizedAccessException(
-                "This user doesn't owns this record"
-            );
+        ThrowIfUserIsNotOwner(rating, user);
 
         mapper.Map(editRatingDto, rating);
-        await repository.Update(rating);
+        await repository.Update(rating!);
+        await SetNewRating(rating!.ProductId, editRatingDto.Rate - rating.Rate, 0);
         await repository.Save();
     }
 
     public async Task Delete(long id, ClaimsPrincipal user)
     {
         var rating = await repository.GetById(id);
-        var userId = GetUserIdOrThrow(user);
-        if (rating?.UserId != userId)
-            throw new UnauthorizedAccessException(
-                "This user doesn't owns this record"
-            );
+        ThrowIfUserIsNotOwner(rating, user);
 
         await repository.Delete(id);
+        await SetNewRating(rating!.ProductId, -rating.Rate, -1);
         await repository.Save();
     }
 }

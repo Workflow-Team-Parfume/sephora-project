@@ -2,6 +2,7 @@ namespace CleanArchitecture.Application.Services.Implementations;
 
 public class RatingService(
     IRepository<Rating> repository,
+    IRepository<ProductEntity> productRepository,
     UserManager<UserEntity> userManager,
     IMapper mapper
 ) : IRatingService
@@ -26,7 +27,21 @@ public class RatingService(
         var rating = mapper.Map<Rating>(createRatingDto);
         rating.UserId = GetUserIdOrThrow(user);
 
+        var product = await productRepository.GetById(createRatingDto.ProductId);
+        if (product is null)
+            throw new ArgumentException(
+                $"Product with the id={{{createRatingDto.ProductId}}} is not found"
+            );
+
         await repository.Insert(rating);
+
+        decimal newRating = (
+            product.Ratings
+                .Aggregate(0m, (sum, next) => sum + next.Rate)
+            + rating.Rate
+        ) / (product.Ratings.LongCount() + 1);
+        product.AverageRating = newRating;
+
         await repository.Save();
     }
 

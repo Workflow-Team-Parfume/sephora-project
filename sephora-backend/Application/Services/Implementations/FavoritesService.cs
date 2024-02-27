@@ -4,8 +4,7 @@ public class FavoritesService(
     UserManager<UserEntity> userManager,
     IRepository<ProductEntity> productRepository,
     IRepository<Favorite> favoritesRepository,
-    IProductService productService,
-    IMapper mapper
+    IProductService productService
 )
     : IFavoritesService
 {

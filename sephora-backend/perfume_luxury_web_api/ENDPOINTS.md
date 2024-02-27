@@ -462,6 +462,12 @@
         * Requires authentication
         * Get all favorites
         * Returns: List of all favorites
+* **/isFavorite/{productId}**
+    * ***GET***
+        * Requires authentication
+        * Check if product is in favorites
+        * Route params: long
+        * Returns: bool
 
 **[⬆ Back to Table of Contents](#table-of-contents)**
 **[⬆ Back to Top](#endpoints)**  

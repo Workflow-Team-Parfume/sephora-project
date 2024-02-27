@@ -2,13 +2,14 @@
 
 public interface IProductService
 {
-    Task<IEnumerable<ProductDto>> Get();
+    IQueryable<ProductDto> Get();
 
     async Task<PagedListInfo<ProductDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     Task<ProductDto?> GetById(long id);
     Task Create(CreateProductDto createProductDto);

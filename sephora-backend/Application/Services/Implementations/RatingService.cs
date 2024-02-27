@@ -11,12 +11,12 @@ public class RatingService(
            ?? throw new UnauthorizedAccessException(
                ErrorMessages.UserNotFound
            );
-    
+
     private bool IsUserOwner(Rating rating, ClaimsPrincipal user)
         => rating.UserId == GetUserIdOrThrow(user);
 
-    public async Task<IEnumerable<RatingDto>> Get()
-        => mapper.Map<IEnumerable<RatingDto>>(await repository.GetAll());
+    public IQueryable<RatingDto> Get()
+        => mapper.Map<IQueryable<RatingDto>>(repository.GetAll());
 
     public async Task<RatingDto?> GetById(long id)
         => mapper.Map<RatingDto?>(await repository.GetById(id));
@@ -25,7 +25,7 @@ public class RatingService(
     {
         var rating = mapper.Map<Rating>(createRatingDto);
         rating.UserId = GetUserIdOrThrow(user);
-        
+
         await repository.Insert(rating);
         await repository.Save();
     }

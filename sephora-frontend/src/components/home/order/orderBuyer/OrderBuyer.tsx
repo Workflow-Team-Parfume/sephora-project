@@ -182,7 +182,6 @@ const OrderBuyer = () => {
             <CustomTabPanel value={value} index={1}>
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
-
                         <FormControl
                             sx={{ ...textFieldStyle }} 
                             variant="outlined"

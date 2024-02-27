@@ -2,13 +2,14 @@
 
 public interface ICategoryService
 {
-    Task<IEnumerable<CategoryDto>> Get();
+    IQueryable<CategoryDto> Get();
 
     async Task<PagedListInfo<CategoryDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     Task<CategoryDto?> GetById(int id);
     Task Create(CreateCategoryDto categoryDto);

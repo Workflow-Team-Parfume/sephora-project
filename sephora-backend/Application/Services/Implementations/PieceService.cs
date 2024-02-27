@@ -7,10 +7,9 @@ public class PieceService(
     IMapper mapper
 ) : IPieceService
 {
-    public async Task<IEnumerable<ProductPieceDto>> Get()
-        => mapper.Map<IEnumerable<ProductPieceDto>>(
-            await repository.GetListBySpec(new ProductPieces.GetAll())
-        );
+    public IQueryable<ProductPieceDto> Get()
+        => repository.GetListBySpec(new ProductPieces.GetAll())
+            .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider);
 
     public async Task<ProductPieceDto?> GetById(long id)
         => mapper.Map<ProductPieceDto?>(
@@ -52,7 +51,7 @@ public class PieceService(
         // detach pictures
         var pictures = await prodPicRepo.GetListBySpec(
             new ProductPictures.GetPicsByPieceId(id)
-        );
+        ).ToListAsync();
         await DeletePictures(pictures);
 
         // delete the entity

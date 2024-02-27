@@ -13,14 +13,13 @@ public class CartService(
                nameof(user)
            );
 
-    public async Task<IEnumerable<CartDto>> Get(ClaimsPrincipal user)
+    public IQueryable<CartDto> Get(ClaimsPrincipal user)
     {
         string userId = GetUserIdOrThrow(user);
         var specification = new CartItems.GetByUserId(userId);
 
-        return mapper.Map<IEnumerable<CartDto>>(
-            await cartRepository.GetListBySpec(specification)
-        );
+        return cartRepository.GetListBySpec(specification)
+            .ProjectTo<CartDto>(mapper.ConfigurationProvider);
     }
 
     public async Task<CartDto?> GetById(long id)
@@ -51,7 +50,7 @@ public class CartService(
             throw new UnauthorizedAccessException(
                 "This user doesn't owns this record"
             );
-        
+
         await cartRepository.Delete(entity);
         await cartRepository.Save();
     }

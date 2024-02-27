@@ -1,6 +1,6 @@
 namespace perfume_luxury_web_api.Extensions;
 
-public class PerfumeExceptionHandler : IExceptionHandler
+public class ExceptionHandler : IExceptionHandler
 {
     private const string ContentType = "application/problem+json";
 
@@ -24,11 +24,10 @@ public class PerfumeExceptionHandler : IExceptionHandler
         }
         catch (Exception ex)
         {
-            const string msg = "An exception has occurred while serializing error to JSON";
             return $$"""
                      {
                      	"status": 500,
-                     	"title":"{{msg}}",
+                     	"title":"An exception has occurred while serializing error to JSON",
                      	"detail":"{{ex.Message}}"
                      }
                      """;
@@ -42,22 +41,30 @@ public class PerfumeExceptionHandler : IExceptionHandler
     )
     {
         // TODO: Add more robust logging
-        Console.WriteLine($"""
-                           Exception occurred:
-                           {exception.Message}
-                           {exception.StackTrace}
-                           """);
-        
+//         Console.WriteLine($"""
+//                            Exception occurred:
+//                            {exception.Message}
+//                            {exception.StackTrace}
+//                            """);
+
         int statusCode = exception switch
         {
             HttpException httpException => (int)httpException.StatusCode,
-            SecurityException _ => (int)HttpStatusCode.Unauthorized,
-            UnauthorizedAccessException _ => (int)HttpStatusCode.Unauthorized,
-            NotSupportedException _ => (int)HttpStatusCode.Forbidden,
-            ArgumentException _ => (int)HttpStatusCode.BadRequest,
-            IOException _ => (int)HttpStatusCode.BadRequest,
-            DbUpdateException _ => (int)HttpStatusCode.BadRequest,
-            DbException _ => (int)HttpStatusCode.BadRequest,
+
+            SecurityException or UnauthorizedAccessException
+                => (int)HttpStatusCode.Unauthorized,
+
+            NotSupportedException => (int)HttpStatusCode.Forbidden,
+
+            ArgumentException or
+                IOException or
+                DbUpdateException or
+                DbException or
+                System.Linq.Dynamic.Core.Exceptions.ParseException
+                => (int)HttpStatusCode.BadRequest,
+
+            InvalidOperationException => (int)HttpStatusCode.Conflict,
+
             _ => (int)HttpStatusCode.InternalServerError
         };
 

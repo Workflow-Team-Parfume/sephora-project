@@ -11,12 +11,6 @@ if (connStr is null)
 
 builder.Services.AddControllers().AddNewtonsoftJson(opts => 
         opts.SerializerSettings.Formatting = Formatting.Indented);
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(opts =>
-{
-    opts.SerializerSettings.ReferenceLoopHandling 
-        = ReferenceLoopHandling.Ignore;
-    opts.SerializerSettings.Formatting = Formatting.Indented;
-});
 
 // Add JWT tokens
 JwtOptions opts = builder.Environment.IsDevelopment()
@@ -55,7 +49,7 @@ builder.Services.AddValidators();
 builder.Services.AddFileService(builder.Environment.IsDevelopment());
 
 // add exception handler
-builder.Services.AddExceptionHandler<PerfumeExceptionHandler>();
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
@@ -80,7 +74,6 @@ app.UseCors(options =>
 });
 
 app.UseAuthorization();
-
 app.UseAuthentication();
 
 app.MapControllers();

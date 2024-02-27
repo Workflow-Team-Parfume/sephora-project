@@ -35,10 +35,9 @@ public class ProductService(
         await productRepository.Save();
     }
 
-    public async Task<IEnumerable<ProductDto>> Get()
-        => mapper.Map<IEnumerable<ProductDto>>(
-            await productRepository.GetListBySpec(new Products.GetAll())
-        );
+    public IQueryable<ProductDto> Get()
+        => productRepository.GetListBySpec(new Products.GetAll())
+            .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
 
     public async Task<ProductDto?> GetById(long id)
     {

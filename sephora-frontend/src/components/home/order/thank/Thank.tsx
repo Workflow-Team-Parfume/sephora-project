@@ -8,7 +8,7 @@ const Thank = () => {
     
     const navigate = useNavigate();
     const handleClick = () => {    
-        navigate('/');
+        navigate('/detailsOrder');
     };
 
     return (

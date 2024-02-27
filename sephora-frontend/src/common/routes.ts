@@ -9,6 +9,7 @@ const routes = {
     basket: '/basket',
     order: '/order',
     thank: '/thank',
+    detailsOrder: '/detailsOrder',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

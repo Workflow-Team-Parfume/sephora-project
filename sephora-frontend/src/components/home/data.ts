@@ -122,6 +122,41 @@ export const newPieces = ([
     },
 ])
 
+const orderProducts = ([
+    {
+        id: 10,
+        productPiece: newPieces[0],
+        quantity: 2,
+        orderId: 1
+    },
+    {
+        id: 11,
+        productPiece: newPieces[1],
+        quantity: 1,
+        orderId: 1
+    },
+    {
+        id: 12,
+        productPiece: newPieces[2],
+        quantity: 1,
+        orderId: 1
+    },
+    {
+        id: 13,
+        productPiece: newPieces[3],
+        quantity: 1,
+        orderId: 1
+    }
+])
+export const order = ({
+    id: 1,
+    date: new Date('26.02.2024'),
+    status: OrderStatus.CONFIRMED,
+    deliveryId: 1,
+    products: orderProducts
+})
+
+
 export const Populars = ([
     {
         id: 0,
@@ -266,7 +301,6 @@ export const Reviews2 = (
         productCategory: "Тональний крем"
     }
 );
-
 export const Reviews3 = (
     {
         userName: "Дарья",
@@ -466,7 +500,8 @@ import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
 import bielenda from './products/detailsProduct/images/Bielenda.png';
 import byredo from './products/detailsProduct/images/Byredo.png';
 import burberry2 from './products/detailsProduct/images/burberry.png';
-import {IProduct} from "./products/types.ts";
+import {IProduct} from "./products/detailsProduct/types.ts";
+import OrderStatus from "../../models/order/OrderStatus.ts";
 
 export const especiallyForYou = ([
     {

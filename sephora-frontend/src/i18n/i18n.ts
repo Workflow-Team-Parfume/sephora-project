@@ -8,6 +8,7 @@ i18n
     uk: {
         translation: {
         'uan': 'грн',
+        'pc': 'шт',
 
         'singIn': 'Увійти',
         'forgotPassword': 'Забули пароль?',
@@ -66,6 +67,7 @@ i18n
         'details.paymentAndDelivery.4': 'Оплата готівкою при отриманні на поштових відділеннях і пунктах видачі посилок',
         'details.productCode': 'код товару: ',
         'details.addToFavorites': 'Додати до улюблених',
+        'details.addedToFavorites': 'Додано до улюблених',
         'details.buy': 'Купити',
 
         'sortBy.title': 'Впорядкувати за: ',
@@ -94,16 +96,26 @@ i18n
         'order.delivery.house': 'Будинок',
         'order.delivery.sq': 'Кв',
         'order.delivery.options': 'Варіанти доставки',
+        'order.delivery.thisFieldIsRequired': 'Це поле обов\'язкове',
         'order.delivery.paymentMethods': 'Варіанти оплати',
         'order.delivery.addComment': 'Додати коментар до замовлення',
         'order.delivery.promoCode': 'Я маю промокод чи сертифікат',
         'order.delivery.callMe': 'Мені можна не телефонувати для підтвердження замовлення',
+        'order.delivery.cashOnDelivery': 'Накладений платіж',
+        'order.delivery.online': 'Онлайн',
+        'order.status': 'Статус:',
+        'order.status.issued': 'оформлено',
+        'order.paymentByCard': 'Оплата картою',
+        'order.paymentByCard.cardNumber': 'Номер карти',
+        'order.paymentByCard.saveTheCard': 'Зберегти карту',
+        'order.paymentByCard.pay': 'Оплатити',
         }
     },
 
     en: {
         translation: {
         'uan': 'UAN',
+        'pc': 'pc',
 
         'singIn': 'Sing in',
         'forgotPassword': 'Forgot your password?',
@@ -160,8 +172,9 @@ i18n
         'details.paymentAndDelivery.2': 'Cashless payment at checkout',
         'details.paymentAndDelivery.3': 'Payment in cash at the pick-up point',
         'details.paymentAndDelivery.4': 'Payment in cash upon receipt at post offices and parcel delivery points',
-        'details.productCode': 'product code',
+        'details.productCode': 'product code: ',
         'details.addToFavorites': 'Add to favorites',
+        'details.addedToFavorites': 'Added to favorites',
         'details.buy': 'Buy',
 
         'sortBy.title': 'Sort by: ',
@@ -190,10 +203,19 @@ i18n
         'order.delivery.house': 'House',
         'order.delivery.sq': 'Sq',
         'order.delivery.options': 'Delivery options',
+        'order.delivery.thisFieldIsRequired': 'This field is required',
         'order.delivery.paymentMethods': 'Payment methods',
         'order.delivery.addComment': 'Add a comment to the order',
         'order.delivery.promoCode': 'I have a promo code or certificate',
         'order.delivery.callMe': 'You can call me to confirm the order',
+        'order.delivery.cashOnDelivery': 'Cash on delivery',
+        'order.delivery.online': 'Online',
+        'order.status': 'Status: ',
+        'order.status.issued': 'issued',
+        'order.paymentByCard': 'Payment by card',
+        'order.paymentByCard.cardNumber': 'Card number',
+        'order.paymentByCard.saveTheCard': 'Save the card',
+        'order.paymentByCard.pay': 'Pay',
         }
     }
 },

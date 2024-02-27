@@ -4,8 +4,8 @@ import {useTranslation} from "react-i18next";
 import { newPieces } from "../data";
 import OrderProduct from "../products/orderProduct/OrderProduct";
 import OrderBuyer from "./orderBuyer/OrderBuyer";
-import ProductPieceDto from "../../../models/piece/ProductPieceDto";
 // import OrderDelivery from "./orderDelivery/OrderDelivery";
+import ProductPieceDto from "../../../models/piece/ProductPieceDto";
 
 
 const Order = () => {

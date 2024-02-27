@@ -1,4 +1,4 @@
-import {Button, Container, MenuItem, Rating, Select, SelectChangeEvent, Stack, Typography} from "@mui/material";
+import {Button, Container, FormControl, MenuItem, Rating, Select, SelectChangeEvent, Stack, Typography} from "@mui/material";
 import "./details.scss"
 import StarIcon from "@mui/icons-material/Star";
 import Reviews from "../../reviews/ReviewsProduct";
@@ -12,7 +12,9 @@ import novaPoshta from "../../../../assets/images/novaPoshta.png";
 import ukrPoshta from "../../../../assets/images/ukrPoshta.png";
 import meest from "../../../../assets/images/meest.png";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import {IProduct} from "../types";
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+import {IProduct} from "./types";
+import textFieldStyle from '../../../../common/textFieldStyle';
 // import { useParams } from "react-router-dom";
 // import http_common from "../../../../http_common";
 
@@ -152,20 +154,24 @@ const Details: React.FC<{ product: IProduct }>
                         </Typography>
 
                         {product.volume.length != 0 ?
-                            <Select
-                                sx={{width: '450px'}}
-                                value={volume}
-                                onChange={handleChangeVolume}
-                                displayEmpty
+                            <FormControl fullWidth
+                                sx={{ ...textFieldStyle }} 
                             >
-                                {product.volume?.map((volume) => (
-                                    <MenuItem value={volume.volume}>
-                                        <Typography className="productVolume">
-                                            {volume.volume}
-                                        </Typography>
-                                    </MenuItem>
-                                ))}
-                            </Select>
+                                <Select
+                                    sx={{width: '450px'}}
+                                    value={volume}
+                                    onChange={handleChangeVolume}
+                                    displayEmpty
+                                >
+                                    {product.volume?.map((volume) => (
+                                        <MenuItem value={volume.volume}>
+                                            <Typography className="productVolume">
+                                                {volume.volume}
+                                            </Typography>
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                             : <></>
                         }
 
@@ -175,6 +181,8 @@ const Details: React.FC<{ product: IProduct }>
                             <Button className="butFavorites">
                                 {t('details.addToFavorites')}
                                 <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
+                                {/* {t('details.addedToFavorites')}
+                                <FavoriteIcon style={{marginLeft: '10px'}}/> */}
                             </Button>
                             <Button className="butBuy">{t('details.buy')}</Button>
                         </Stack>

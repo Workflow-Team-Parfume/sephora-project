@@ -11,4 +11,16 @@ public class FavoritesController(
         await favoritesService.ChangeFavoriteStatus(User, productId);
         return Ok();
     }
+
+    [HttpGet("all")]
+    public async Task<IActionResult> Get()
+        => Ok(await favoritesService.Get(User));
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await favoritesService.Get(User, page, size, order, select));
 }

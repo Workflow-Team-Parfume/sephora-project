@@ -3,7 +3,9 @@ namespace CleanArchitecture.Application.Services.Implementations;
 public class FavoritesService(
     UserManager<UserEntity> userManager,
     IRepository<ProductEntity> productRepository,
-    IRepository<Favorite> favoritesRepository
+    IRepository<Favorite> favoritesRepository,
+    IProductService productService,
+    IMapper mapper
 )
     : IFavoritesService
 {
@@ -25,7 +27,7 @@ public class FavoritesService(
         var favorite = await favoritesRepository.GetItemBySpec(
             new Favorites.Get(userId, productId)
         );
-        
+
         if (favorite is null)
         {
             await favoritesRepository.Insert(new Favorite
@@ -40,15 +42,15 @@ public class FavoritesService(
             favorite.IsActive = !favorite.IsActive;
             await favoritesRepository.Update(favorite);
         }
-        
+
         await favoritesRepository.Save();
     }
-    
+
     public async Task<bool> IsFavorite(ClaimsPrincipal? user, long productId)
     {
         if (user is null)
             return false;
-        
+
         try
         {
             var userId = GetUserIdOrThrow(user);
@@ -61,4 +63,7 @@ public class FavoritesService(
             return false;
         }
     }
+
+    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal user)
+        => (await productService.Get(user)).Where(x => x.IsFavorite);
 }

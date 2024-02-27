@@ -5,8 +5,7 @@ public class FavoritesService(
     IRepository<ProductEntity> productRepository,
     IRepository<Favorite> favoritesRepository,
     IProductService productService
-)
-    : IFavoritesService
+) : IFavoritesService
 {
     private string GetUserIdOrThrow(ClaimsPrincipal user)
         => userManager.GetUserId(user)

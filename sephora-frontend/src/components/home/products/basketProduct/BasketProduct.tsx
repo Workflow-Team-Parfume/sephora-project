@@ -22,11 +22,13 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
     return (
         <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center' padding={'20px 12px'}>
             <Link href={'/details/' + piece.id} underline="none">
-                <Stack spacing={4} direction='row'>
-                    <img
-                        className="productImg"
-                        src={piece.pictures[0].url ?? imgPlaceholder}
-                    />
+                <Stack spacing={2} direction='row'>
+                    <Stack width='80px' alignItems='center'>
+                        <img
+                            className="productImg"
+                            src={piece.pictures[0].url ?? imgPlaceholder}
+                        />
+                    </Stack>
 
                     <Stack justifyContent='space-between'>
                         <Typography className="productName">
@@ -44,8 +46,7 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
                 </Stack>
             </Link>
 
-
-            <Stack direction='row' spacing={5} alignItems='center'>
+            <Stack direction='row' alignItems='center' justifyContent='space-between' minWidth='300px'>
                 <Stack direction='row' className="count" alignItems='center'>
                     <Button onClick={() => (handleCountChange(count-1))}><RemoveIcon className="img"/></Button>
                     <Typography className="text">{count}</Typography>

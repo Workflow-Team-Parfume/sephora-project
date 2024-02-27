@@ -19,6 +19,7 @@ import routes from './common/routes';
 import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
+import YourOrder from "./components/home/order/yourOrder/YourOrder";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -91,6 +92,7 @@ function App() {
                     <Route path={routes.basket} element={<Basket/>}/>
                     <Route path={routes.order} element={<Order/>}/>
                     <Route path={routes.thank} element={<Thank/>}/>
+                    <Route path={routes.detailsOrder} element={<YourOrder/>}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

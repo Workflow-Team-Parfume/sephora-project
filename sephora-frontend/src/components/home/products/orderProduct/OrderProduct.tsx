@@ -27,12 +27,14 @@ const OrderProduct: React.FC<{ piece: ProductPieceDto }>
             alignItems='center' 
             padding={'20px 12px'}
         >
-            <Stack spacing={4} direction='row'>
+            <Stack spacing={2} direction='row'>
                 <Link href={'/details/' + piece.id} underline="none">
-                    <img
-                        className="productImg"
-                        src={piece.pictures[0].url ?? imgPlaceholder}
-                    />
+                    <Stack width='80px' alignItems='center'>
+                        <img
+                            className="productImg"
+                            src={piece.pictures[0].url ?? imgPlaceholder}
+                        />
+                    </Stack>
                 </Link>
                 <Stack justifyContent='space-between'>
                     <Link href={'/details/' + piece.id} underline="none">

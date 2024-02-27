@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import textFieldStyle from '../../../../common/textFieldStyle';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -93,6 +94,20 @@ const OrderBuyer = () => {
         navigate('/');
     }
 
+    const tabsStyle = {
+        flexGrow: 1,
+        '&.Mui-selected': {
+            color: 'black',
+            fontSize: '20px',
+            textTransform: 'none'
+        },
+        '&:not(.Mui-selected)': {
+            color: 'grey',
+            fontSize: '20px',
+            textTransform: 'none',
+        }
+    }
+
     return (
         <Stack className="buyer">
             <Tabs
@@ -107,30 +122,10 @@ const OrderBuyer = () => {
                 }}
             >
                 <Tab label={t('order.newBuyer')} 
-                    sx={{flexGrow: 1,
-                        '&.Mui-selected': {
-                            color: 'black',
-                            fontSize: '20px',
-                            textTransform: 'none'
-                        },
-                        '&:not(.Mui-selected)': {
-                            color: 'grey',
-                            fontSize: '20px',
-                            textTransform: 'none',
-                        }}} 
+                    sx={{ ...tabsStyle }}
                     {...a11yProps(0)}/>
                 <Tab label={t('order.regularCustomer')}
-                    sx={{flexGrow: 1, 
-                        '&.Mui-selected': {
-                            color: 'black',
-                            fontSize: '20px',
-                            textTransform: 'none'
-                        },
-                        '&:not(.Mui-selected)': {
-                            color: 'grey',
-                            fontSize: '20px',
-                            textTransform: 'none',
-                        }}} 
+                    sx={{ ...tabsStyle }} 
                     {...a11yProps(1)}/>
             </Tabs>
 
@@ -138,18 +133,7 @@ const OrderBuyer = () => {
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
                         <TextField
-                            sx={{ 
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    }},
-                                }} 
+                            sx={{ ...textFieldStyle }} 
                             placeholder={t('name')+'*'}
                             required
                             id="newBuyer-name"                                    
@@ -159,18 +143,7 @@ const OrderBuyer = () => {
                             helperText={nameError}
                         />
                         <TextField
-                            sx={{ 
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    }},
-                                }} 
+                            sx={{ ...textFieldStyle }} 
                             placeholder={t('surname')+'*'}
                             required
                             id="newBuyer-surname"                                    
@@ -180,18 +153,7 @@ const OrderBuyer = () => {
                             helperText={surnameError}
                         />
                         <TextField
-                            sx={{ 
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    }},
-                                }} 
+                            sx={{ ...textFieldStyle }} 
                             placeholder={t('phone')+'*'}
                             required
                             id="newBuyer-phone"                
@@ -201,18 +163,7 @@ const OrderBuyer = () => {
                             helperText={phoneError}
                         />
                         <TextField
-                            sx={{ 
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#9D9D9D',
-                                    }},
-                                }} 
+                            sx={{ ...textFieldStyle }} 
                             placeholder={t('email')}
                             id="newBuyer-email"
                             value={email}
@@ -232,18 +183,9 @@ const OrderBuyer = () => {
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
 
-                        <FormControl sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: '#9D9D9D',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: '#9D9D9D',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#9D9D9D',
-                                },} 
-                            }} variant="outlined"
+                        <FormControl
+                            sx={{ ...textFieldStyle }} 
+                            variant="outlined"
                         >
                             <OutlinedInput
                                 placeholder={t('email')}
@@ -251,18 +193,8 @@ const OrderBuyer = () => {
                                 type={'text'}
                             />
                         </FormControl>
-                        <FormControl sx={{ 
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: '#9D9D9D',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: '#9D9D9D',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: '#9D9D9D',
-                                }},
-                            }} 
+                        <FormControl 
+                            sx={{ ...textFieldStyle }} 
                             variant="outlined"
                         >
                             <OutlinedInput

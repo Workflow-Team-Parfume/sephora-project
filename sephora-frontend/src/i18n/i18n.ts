@@ -17,7 +17,7 @@ i18n
         'name': 'Ім\'я',
         'surname': 'Прізвище',
         'phone': 'Номер телефона',
-
+          
         'header.fullSizePerfume': 'Повнорозмірні парфуми',
         'header.bottlingPerfumes': 'Розпив парфумерії',
         'header.care': 'Догляд',
@@ -124,7 +124,7 @@ i18n
         'name': 'Name',
         'surname': 'Surname',
         'phone': 'Phone number',
-
+          
         'header.fullSizePerfume': 'Full size perfume',
         'header.bottlingPerfumes': 'Bottling perfumes',
         'header.care': 'Care',

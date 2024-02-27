@@ -50,8 +50,9 @@ public interface ICartService
     /**
      * <summary>Edits the specified cart item</summary>
      * <param name="id">The cart item ID to edit</param>
+     * <param name="user">The user to edit the cart item for</param>
      */
-    Task Delete(long id);
+    Task Delete(long id, ClaimsPrincipal user);
 
     /**
      * <summary>Cleanses the cart of a user</summary>

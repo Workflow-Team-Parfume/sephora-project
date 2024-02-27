@@ -1,6 +1,5 @@
 namespace perfume_luxury_web_api.Extensions;
 
-// TODO: Add logging
 public class PerfumeExceptionHandler : IExceptionHandler
 {
     private const string ContentType = "application/problem+json";
@@ -42,6 +41,7 @@ public class PerfumeExceptionHandler : IExceptionHandler
         CancellationToken cancellationToken
     )
     {
+        // TODO: Add more robust logging
         Console.WriteLine($"""
                            Exception occurred:
                            {exception.Message}

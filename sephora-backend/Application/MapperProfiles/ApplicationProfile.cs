@@ -49,18 +49,17 @@ public class ApplicationProfile : Profile
         CreateMap<EditRatingDto, Rating>();
         CreateMap<Rating, RatingDto>();
 
-        /*
-         * TODO: Ignore profile pic mapping at all, but
-         * make an appropriate service to store the user PFPs
-         */
         CreateMap<EditUserDto, UserEntity>()
+            .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
+        CreateMap<UserEntity, GetUserDto>()
             .ForMember(
                 dest => dest.ProfilePicture,
                 opt => opt.MapFrom(src => src.ProfilePicture != null
-                    ? Path.GetRandomFileName()
+                    ? new PictureDto(src.ProfilePicture, EnvName == "Development")
                     : null
                 ));
-        CreateMap<UserEntity, GetUserDto>();
+        CreateMap<RegisterDto, UserEntity>()
+            .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
 
         CreateMap<CartItem, CartDto>()
             .ForMember(

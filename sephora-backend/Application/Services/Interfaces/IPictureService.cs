@@ -67,19 +67,19 @@ public interface IPictureService
      * <summary>Delete a picture from the file system</summary>
      * <param name="name">The name of a picture</param>
      */
-    void DeleteFile(string name);
+    void DeleteFile(string? name);
 
     /**
      * <summary>Check if a file exists in the file system</summary>
      * <param name="name">The name of a file</param>
      * <returns>Whether the file exists</returns>
      */
-    bool FileExists(string name);
+    bool FileExists(string? name);
     
     /**
      * <summary>Check if a size parameter is valid</summary>
      * <param name="size">The size of a picture</param>
      * <returns>Whether the size exists</returns>
      */
-    bool SizeExists(string size);
+    bool SizeExists(string? size);
 }

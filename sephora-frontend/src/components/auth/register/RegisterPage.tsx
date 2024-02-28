@@ -24,6 +24,7 @@ import { AuthUserActionType, IRegister, IUser } from "../types";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import "./RegisterPage.scss";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -142,6 +143,8 @@ const RegisterPage = () => {
 
   const { values, handleChange, handleSubmit /*touched, errors*/ } = formik;
 
+  const {t} = useTranslation();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -154,7 +157,7 @@ const RegisterPage = () => {
         }}
       >
         <Typography component="h1" variant="h3">
-          Реєстрація
+          {t('register')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
@@ -166,7 +169,7 @@ const RegisterPage = () => {
                 required
                 fullWidth
                 id="username"
-                label="Ім'я"
+                label={t('name')}
                 name="username"
                 onChange={handleChange}
                 value={values.userName}
@@ -181,7 +184,7 @@ const RegisterPage = () => {
                 required
                 fullWidth
                 id="surname"
-                label="Прізвище"
+                label={t('surname')}
                 name="surname"
                 onChange={handleChange}
                 // value={values.}
@@ -196,7 +199,7 @@ const RegisterPage = () => {
                 required
                 fullWidth
                 id="phoneNumber"
-                label="Номер телефону"
+                label={t('phoneNumber')}
                 name="phoneNumber"
                 onChange={handleChange}
                 value={values.phoneNumber}
@@ -239,7 +242,7 @@ const RegisterPage = () => {
               variant="outlined"
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                Пароль*
+                {t('registerPass')}
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -266,7 +269,7 @@ const RegisterPage = () => {
               variant="outlined"
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                Підтвердження пароля*
+                {t('registerPassConfirm')}
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -297,7 +300,7 @@ const RegisterPage = () => {
           variant="contained"
           sx={{ mt: 5, mb: 5 }}
         >
-          Зареєструватися
+          {t('registerBtn')}
         </Button>
       </Box>
     </Container>

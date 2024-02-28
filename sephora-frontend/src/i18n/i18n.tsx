@@ -57,6 +57,14 @@ i18n
         'details.productCode': 'код товару: ',
         'details.addToFavorites': 'Додати до улюблених',
         'details.buy': 'Купити',
+
+        'register': 'Реєстрація',
+        'name': "Ім'я",
+        'surname': 'Прізвище',
+        'phoneNumber': 'Номер телефону',
+        'registerPass': 'Пароль*',
+        'registerPassConfirm': 'Підтвердження пароля*',
+        'registerBtn': 'Зареєструватися',
         }
     },
 
@@ -112,6 +120,14 @@ i18n
         'details.productCode': 'product code',
         'details.addToFavorites': 'Add to favorites',
         'details.buy': 'Buy',
+
+        'register': 'Registration',
+        'name': 'Name',
+        'surname': 'Surname',
+        'phoneNumber': 'Phone number',
+        'registerPass': 'Password',
+        'registerPassConfirm': 'Password confirmation',
+        'registerBtn': 'Sign up'
         }
     }
 },

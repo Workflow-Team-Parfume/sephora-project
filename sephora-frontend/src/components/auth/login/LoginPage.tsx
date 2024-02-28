@@ -13,6 +13,7 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
+  Modal,
   OutlinedInput,
   TextField,
   Typography,
@@ -26,6 +27,9 @@ import React from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { PasswordRecovery } from "../../common/password_recovery/PasswordRecovery";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -206,6 +210,12 @@ const LoginPage = () => {
 
   const { values, handleChange, handleSubmit, touched, errors } = formik;
 
+  const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => {PasswordRecovery(true)};
+  const handleClose = () => setOpen(false);
+
+  const { t } = useTranslation();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -242,7 +252,7 @@ const LoginPage = () => {
         >
           <hr />
           <Typography component="h1" variant="h5">
-            АБО
+            {t('or')}
           </Typography>
           <hr />
         </Box>
@@ -254,10 +264,9 @@ const LoginPage = () => {
             >
               <TextField
                 margin="normal"
-                required
                 fullWidth
                 id="email"
-                label="Логін/E-mail"
+                label={t('loginEmail')}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -272,7 +281,7 @@ const LoginPage = () => {
               variant="outlined"
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                Пароль*
+                {t('password')}
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -303,12 +312,10 @@ const LoginPage = () => {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Увійти
+          {t('signIn')}
         </Button>
         <Grid item xs>
-          <a id="forgotPassword" href="#">
-            Забули пароль?
-          </a>
+          {PasswordRecovery()}
         </Grid>
       </Box>
     </Container>

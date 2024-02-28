@@ -57,6 +57,15 @@ i18n
         'details.productCode': 'код товару: ',
         'details.addToFavorites': 'Додати до улюблених',
         'details.buy': 'Купити',
+        
+        'passwordRecovery': 'Відновлення паролю',
+        'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
+        'send': 'Надіслати',
+        'forgotPassword': 'Забули парoль?',
+        'signIn': 'Увійти',
+        'loginEmail': 'Логін/E-mail',
+        'password': 'Пароль',
+        'or': 'АБО',
         }
     },
 
@@ -112,6 +121,15 @@ i18n
         'details.productCode': 'product code',
         'details.addToFavorites': 'Add to favorites',
         'details.buy': 'Buy',
+
+        'passwordRecovery': 'Password recovery',
+        'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
+        'send': 'Send',
+        'forgotPassword': 'Forgot your password?',
+        'signIn': 'Sign in',
+        'loginEmail': 'Login/E-mail',
+        'password': 'Password',
+        'or': 'OR',
         }
     }
 },

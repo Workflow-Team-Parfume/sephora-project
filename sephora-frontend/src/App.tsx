@@ -8,13 +8,11 @@ import HomePage from "./components/home/HomePage";
 import LoginPage from "./components/auth/login/LoginPage";
 import RegisterPage from "./components/auth/register/RegisterPage";
 import Loader from "./components/common/loader/Loader";
-// import { IAuthUser } from "./components/auth/types";
-// import { useSelector } from "react-redux";
 import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 import ProductsPage from "./components/home/productsPage/ProductsPage";
 import Details from "./components/home/products/detailsProduct/Details";
-import {DetailsProduct, Filter, Filters} from "./components/home/data";
+import {Filter, Filters} from "./components/home/data";
 import routes from './common/routes';
 import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
@@ -84,7 +82,7 @@ function App() {
                     <Route index element={<HomePage/>}/>
                     <Route path={routes.login} element={<LoginPage/>}/>
                     <Route path={routes.register} element={<RegisterPage/>}/>
-                    <Route path={routes.productDetails} element={<Details product={DetailsProduct}/>}/>
+                    <Route path={routes.productDetails} element={<Details />}/>
                     <Route path={routes.productsPage}
                            element={<ProductsPage title="Новинки" filters={Filters}
                            mainFilter={Filter}/>}/>

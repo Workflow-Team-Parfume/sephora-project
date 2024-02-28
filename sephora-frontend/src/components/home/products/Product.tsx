@@ -6,6 +6,7 @@ import React from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useTranslation } from "react-i18next";
+import routes from "../../../common/routes.ts";
 
 function IsNew(isNew: boolean) {
     if (isNew) {
@@ -16,9 +17,6 @@ function IsNew(isNew: boolean) {
         )
     }
 }
-
-const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
-
 
 const Product: React.FC<{ piece: ProductPieceDto }>
 = ({piece}) => {
@@ -38,7 +36,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
                     <CardMedia
                         component="div"
                         sx={{pt: '120%'}}
-                        image={piece.pictures[0]?.urlLg ?? imgPlaceholder}
+                        image={piece.pictures[0]?.urlLg ?? routes.picPlaceholder}
                     />
 
                     <Stack spacing={4}>

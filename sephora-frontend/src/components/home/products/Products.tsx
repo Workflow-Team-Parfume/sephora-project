@@ -28,21 +28,17 @@ const Products: React.FC<{
             .catch(e => console.error(e));
     }, [link, page]);
 
-    console.log(`${link}&page=${page}&size=${pageSize}`)
-    console.log(products);
-
     return (
         <Container
             className="containerProductsMP"
-            style={{maxWidth: "100%", justifyContent: "center"}}
-        >
+            style={{maxWidth: "100%", justifyContent: "center"}}>
             <Typography className="title">{title}</Typography>
 
             <Container sx={{pt: 5, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                 <Grid container spacing={2}>
                     {products.length > 0 ?
                         products.map((product) => (
-                            <Grid key={product.id} item xs={12} sm={6} md={4} lg={3} >
+                            <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
                                 <Product key={product.id} piece={product}/>
                             </Grid>
                         ))
@@ -52,7 +48,6 @@ const Products: React.FC<{
                 </Grid>
             </Container>
 
-            {/* TODO: Add pagination */}
             <Button className={`link${list && list.hasNextPage ? '' : ' invisible'}`}
                     onClick={() => setPage(page + 1)}>
                 {t('common.button.moreProducts')}

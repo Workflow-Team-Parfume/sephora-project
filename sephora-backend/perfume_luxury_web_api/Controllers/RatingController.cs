@@ -19,6 +19,22 @@ public class RatingController(IRatingService ratingService) : ControllerBase
         return Ok(ratings);
     }
 
+    [HttpGet("product/{id:long}")]
+    public async Task<IActionResult> GetByProduct(
+        [FromRoute] long id,
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => await GetPaged(
+        page,
+        size,
+        sort,
+        filter is null
+            ? $"Id = {id}"
+            : $"{filter} and Id = {id}"
+    );
+
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)
     {

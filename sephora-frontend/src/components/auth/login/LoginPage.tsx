@@ -13,7 +13,7 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  Modal,
+  // Modal,
   OutlinedInput,
   TextField,
   Typography,
@@ -28,7 +28,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { PasswordRecovery } from "../../common/password_recovery/PasswordRecovery";
-import { t } from "i18next";
+// import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
@@ -210,9 +210,9 @@ const LoginPage = () => {
 
   const { values, handleChange, handleSubmit, touched, errors } = formik;
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => {PasswordRecovery(true)};
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   const { t } = useTranslation();
 

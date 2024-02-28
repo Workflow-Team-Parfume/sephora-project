@@ -1,7 +1,7 @@
 import {Box, Button, Container, Grid, Stack, Typography} from "@mui/material";
 import "./basket.scss"
 import {useTranslation} from "react-i18next";
-import { newPieces } from "../data";
+import {newPieces} from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
 
 const Basket = () => {
@@ -10,11 +10,8 @@ const Basket = () => {
 
     const discount = 0;
 
-    function calculateTotal(): number {
-        const total: number = products.reduce((acc, piece) => acc + Number(piece.price), 0);
-        return total;
-    }
-    
+    const calculateTotal = () => products.reduce((acc, piece) => acc + Number(piece.price), 0);
+
     const total: number = calculateTotal();
 
     return (

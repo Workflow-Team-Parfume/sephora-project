@@ -12,7 +12,7 @@ import burberry from "./image/products/burberry.png";
 import gucci from "./image/products/gucci.png";
 
 
-export const newProducts = ([
+export const newProducts : ProductDto[] = ([
     {
         id: 1,
         name: "SkinTra — C The Light",
@@ -26,6 +26,7 @@ export const newProducts = ([
         volumes: [{id: 1, milliliters: 30}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 2,
@@ -40,6 +41,7 @@ export const newProducts = ([
         volumes: [{id: 2, milliliters: 60}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 3,
@@ -54,6 +56,7 @@ export const newProducts = ([
         volumes: [{id: 3, milliliters: 200}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 4,
@@ -68,17 +71,17 @@ export const newProducts = ([
         volumes: [{id: 4, milliliters: 100,}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     }
 ]);
 
-export const newPieces = ([
+export const newPieces : ProductPieceDto[] = ([
     {
         id: 1,
         inStock: 0,
         price: 850,
         milliliters: 30,
         isBottledParfume: false,
-        productId: 1,
         product: newProducts?.[0],
         pictures: [{name:'C The Light', url:skinTra1, urlLg:skinTra1, urlMd:skinTra1, urlSm:skinTra1, urlXs:skinTra1}],
         createdAt: new Date('23.02.2024'),
@@ -90,7 +93,6 @@ export const newPieces = ([
         price: 1307,
         milliliters: 60,
         isBottledParfume: false,
-        productId: 2,
         product: newProducts?.[1],
         pictures: [{name:'Cica Sleeping Mask', url:laneige, urlLg:laneige, urlMd:laneige, urlSm:laneige, urlXs:laneige}],
         createdAt: new Date('23.02.2024'),
@@ -102,7 +104,6 @@ export const newPieces = ([
         price: 515,
         milliliters: 200,
         isBottledParfume: false,
-        productId: 3,
         product: newProducts?.[2],
         pictures: [{name:'Wash It Off', url:skinTra2, urlLg:skinTra2, urlMd:skinTra2, urlSm:skinTra2, urlXs:skinTra2}],
         createdAt: new Date('23.02.2024'),
@@ -114,7 +115,6 @@ export const newPieces = ([
         price: 720,
         milliliters: 100,
         isBottledParfume: false,
-        productId: 4,
         product: newProducts?.[3],
         pictures: [{name:'Super Volcanic Pore Clay Mask', url:innisfree, urlLg:innisfree, urlMd:innisfree, urlSm:innisfree, urlXs:innisfree}],
         createdAt: new Date('23.02.2024'),
@@ -502,6 +502,8 @@ import byredo from './products/detailsProduct/images/Byredo.png';
 import burberry2 from './products/detailsProduct/images/burberry.png';
 import {IProduct} from "./products/detailsProduct/types.ts";
 import OrderStatus from "../../models/order/OrderStatus.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
+import ProductDto from "../../models/product/ProductDto.ts";
 
 export const especiallyForYou = ([
     {

@@ -11,11 +11,11 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
-        [FromQuery] string? order = null,
-        [FromQuery] string? select = null
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
     )
     {
-        var ratings = await ratingService.Get(page, size, order, select);
+        var ratings = await ratingService.Get(page, size, sort, filter);
         return Ok(ratings);
     }
 

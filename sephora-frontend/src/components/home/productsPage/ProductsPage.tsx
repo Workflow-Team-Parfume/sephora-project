@@ -22,6 +22,8 @@ import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../http_common.ts";
 import PagedList from "../../../models/pagedlist/PagedList.ts";
 
+const itemsPerPage = 9;
+
 const ProductsPage: React.FC<{
     title: string,
     mainFilter: IFilter,
@@ -30,14 +32,13 @@ const ProductsPage: React.FC<{
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     useEffect(() => {
-        http_common.get("pieces?size=4&page=1")
+        http_common.get(`pieces?size=${itemsPerPage}&page=${currentPage}`)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     });
-
-    const itemsPerPage = 9;
-    const [currentPage, setCurrentPage] = useState(1);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
@@ -63,7 +64,6 @@ const ProductsPage: React.FC<{
     const handleToggle2 = (value: string) => () => {
         setChecked2(value);
     };
-
 
     return (
         <Container className="productsPage" style={{maxWidth: "100%", justifyContent: "center", margin: '40px 0'}}>

@@ -53,7 +53,7 @@ const OrderProduct: React.FC<{ piece: ProductPieceDto }>
                             {piece.milliliters} {t('common.ml')}
                         </Typography>
                         <Typography className="productPrice">
-                            {piece.price} {t('uan')}
+                            {piece.price} {t('uah')}
                         </Typography>
                     </Link>
                     <Stack direction='row' className="count" alignItems='center'>

@@ -35,16 +35,16 @@ const Basket = () => {
                         <Stack margin={2}>
                             <Stack margin='0 15px' justifyContent='space-between' direction='row'>
                                 <Typography className="text">{t('basket/order.orderAmount')}</Typography>
-                                <Typography className="text">{total} {t('uan')} </Typography>
+                                <Typography className="text">{total} {t('uah')} </Typography>
                             </Stack>
                             <Stack margin='15px' justifyContent='space-between' direction='row'>
                                 <Typography className="text">{t('basket/order.discount')}</Typography>
-                                <Typography className="text">{discount} {t('uan')} </Typography>
+                                <Typography className="text">{discount} {t('uah')} </Typography>
                             </Stack>
                             <Box className='line'/>
                             <Stack margin='15px' justifyContent='space-between' direction='row'>
                                 <Typography className="total">{t('basket/order.total')}</Typography>
-                                <Typography className="total">{total - discount} {t('uan')} </Typography>
+                                <Typography className="total">{total - discount} {t('uah')} </Typography>
                             </Stack>
                             <Button href="/order" className="button">{t('basket/order.toOrder')}</Button>
                         </Stack>

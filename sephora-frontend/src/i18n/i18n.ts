@@ -7,7 +7,7 @@ i18n
         resources: {
             uk: {
                 translation: {
-                    'uan': 'грн',
+                    'uah': 'грн',
                     'pc': 'шт',
 
                     'singIn': 'Увійти',
@@ -115,7 +115,7 @@ i18n
 
             en: {
                 translation: {
-                    'uan': 'UAN',
+                    'uah': 'UAH',
                     'pc': 'pc',
 
                     'singIn': 'Sing in',

@@ -59,7 +59,7 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
                     <Button onClick={() => (handleCountChange(count + 1))}><AddIcon className="img"/></Button>
                 </Stack>
                 <Typography className="productPrice">
-                    {piece.price} {t('uan')}
+                    {piece.price} {t('uah')}
                 </Typography>
                 <Button>
                     <DeleteOutlinedIcon sx={{color: '#646464'}}/>

@@ -68,7 +68,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
                             />
                             <Typography className="productPrice">
                                 <span style={{textWrap: "nowrap"}}>
-                                    {piece.price} {t('uan')}
+                                    {piece.price} {t('uah')}
                                 </span>
                             </Typography>
                         </Stack>

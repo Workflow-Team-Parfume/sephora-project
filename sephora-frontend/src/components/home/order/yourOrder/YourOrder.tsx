@@ -5,7 +5,6 @@ import { order } from "../../data";
 import OrderProduct from "../../profile/orderProduct/OrderProduct";
 import OrderDto from "../../../../models/order/OrderDto";
 
-
 const YourOrder = () => {
     const {t} = useTranslation();
     const order1:OrderDto = order;

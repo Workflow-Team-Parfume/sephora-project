@@ -70,6 +70,13 @@ i18n.use(initReactI18next)
                     'details.addedToFavorites': 'Додано до улюблених',
                     'details.buy': 'Купити',
 
+                    'passwordRecovery': 'Відновлення паролю',
+                    'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
+                    'send': 'Надіслати',
+                    'signIn': 'Увійти',
+                    'loginEmail': 'Логін/E-mail',
+                    'or': 'АБО',
+
                     'sortBy.title': 'Впорядкувати за: ',
                     'sortBy.price': 'вартістю',
                     'sortBy.popularity': 'популярністю',
@@ -109,6 +116,12 @@ i18n.use(initReactI18next)
                     'order.paymentByCard.cardNumber': 'Номер карти',
                     'order.paymentByCard.saveTheCard': 'Зберегти карту',
                     'order.paymentByCard.pay': 'Оплатити',
+                  
+                    'register': 'Реєстрація',
+                    'phoneNumber': 'Номер телефону',
+                    'registerPass': 'Пароль*',
+                    'registerPassConfirm': 'Підтвердження пароля*',
+                    'registerBtn': 'Зареєструватися',
                 }
             },
 
@@ -217,6 +230,19 @@ i18n.use(initReactI18next)
                     'order.paymentByCard.cardNumber': 'Card number',
                     'order.paymentByCard.saveTheCard': 'Save the card',
                     'order.paymentByCard.pay': 'Pay',
+
+                    'passwordRecovery': 'Password recovery',
+                    'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
+                    'send': 'Send',
+                    'signIn': 'Sign in',
+                    'loginEmail': 'Login/E-mail',
+                    'or': 'OR',
+
+                    'register': 'Registration',
+                    'phoneNumber': 'Phone number',
+                    'registerPass': 'Password',
+                    'registerPassConfirm': 'Password confirmation',
+                    'registerBtn': 'Sign up'
                 }
             }
         },

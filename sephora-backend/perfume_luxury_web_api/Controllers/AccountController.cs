@@ -1,31 +1,43 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
-public class AccountController(IAccountsService accountsService)
-    : ControllerBase
+[Route("[controller]"), ApiController]
+public class AccountController(
+    IAccountsService accountsService,
+    UserManager<UserEntity> userManager
+) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await accountsService.GetAll());
-    }
+        => Ok(await accountsService.Get().ToListAsync());
 
-    [HttpGet("{id}")]
+    [HttpGet, Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await accountsService.Get(page, size, order, select));
+
+    [HttpGet("{id}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get(string id)
-    {
-        return Ok(await accountsService.Get(id));
-    }
+        => Ok(await accountsService.Get(id));
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
+        if (!ModelState.IsValid)
+            throw new ArgumentException("The model is not valid.");
+
         await accountsService.Register(dto);
         return Ok();
     }
-
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
+        if (!ModelState.IsValid)
+            throw new ArgumentException("The model is not valid.");
+
         var response = await accountsService.Login(dto);
         return Ok(response);
     }
@@ -37,29 +49,60 @@ public class AccountController(IAccountsService accountsService)
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete([FromRoute] string id)
     {
         await accountsService.Delete(id);
         return Ok();
     }
 
-    [HttpPut("{userId}")]
-    public async Task<IActionResult> Edit(string userId, [FromForm] EditUserDto user)
+    [HttpPut("{id}"), Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Edit(
+        string id,
+        [FromForm] EditUserDto user
+    )
     {
-        await accountsService.Edit(userId, user);
+        if (!ModelState.IsValid)
+            throw new ArgumentException("The model is not valid.");
+
+        await accountsService.Edit(id, user);
+        return Ok();
+    }
+
+    [HttpGet("my"), Authorize]
+    public async Task<IActionResult> GetMy()
+        => Ok(await accountsService.Get(
+            userManager.GetUserId(User) ?? String.Empty
+        ));
+
+    [HttpDelete("my"), Authorize]
+    public async Task<IActionResult> DeleteMy()
+    {
+        await accountsService.Delete(
+            userManager.GetUserId(User) ?? String.Empty
+        );
+        return Ok();
+    }
+
+    [HttpPut("my"), Authorize]
+    public async Task<IActionResult> EditMy([FromForm] EditUserDto user)
+    {
+        if (!ModelState.IsValid)
+            throw new ArgumentException("The model is not valid.");
+
+        await accountsService.Edit(
+            userManager.GetUserId(User) ?? String.Empty,
+            user
+        );
         return Ok();
     }
 
     [HttpGet("checkUsernameExists/{userName}")]
-    public async Task<IActionResult> CheckUsernameExists([FromRoute] string userName)
-    {
-        return Ok(await accountsService.CheckUsernameExists(userName));
-    }
+    public async Task<IActionResult> CheckUsernameExists(
+        [FromRoute] string userName
+    ) => Ok(await accountsService.CheckUsernameExists(userName));
 
     [HttpGet("checkEmailExists/{email}")]
     public async Task<IActionResult> CheckEmailExists([FromRoute] string email)
-    {
-        return Ok(await accountsService.CheckEmailExists(email));
-    }
+        => Ok(await accountsService.CheckEmailExists(email));
 }

@@ -2,7 +2,7 @@
 
 public interface IRepository<TEntity> where TEntity : class
 {
-    Task<IEnumerable<TEntity>> GetAll();
+    IQueryable<TEntity> GetAll();
 
     Task<TEntity?> GetById(object id);
 
@@ -15,7 +15,7 @@ public interface IRepository<TEntity> where TEntity : class
     Task Update(TEntity entityToUpdate);
 
     Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification);
-    Task<IEnumerable<TEntity>> GetListBySpec(ISpecification<TEntity> specification);
+    IQueryable<TEntity> GetListBySpec(ISpecification<TEntity> specification);
 
     Task<int> DeleteBySpec(ISpecification<TEntity> specification);
     

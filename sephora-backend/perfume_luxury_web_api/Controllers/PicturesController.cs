@@ -6,7 +6,7 @@ public class PicturesController(
     IHostEnvironment env
 ) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> SaveImage(IFormFile file)
     {
         string picName = await pictureService.SaveImage(file);
@@ -15,53 +15,30 @@ public class PicturesController(
 
     [HttpGet("{name}")]
     public IActionResult GetImage(
-        [FromRoute] string name, 
+        [FromRoute] string name,
         [FromQuery] string size = "original"
-            )
+    )
     {
-        if (!pictureService.SizeExists(size)) 
-            return NotFound(new
-            {
-                Status = "404 Not Found",
-                Error = "Invalid size"
-            });
+        if (!pictureService.SizeExists(size))
+            throw new HttpException("Invalid size", HttpStatusCode.NotFound);
         if (!pictureService.FileExists(name))
-            return NotFound(new
-            {
-                Status = "404 Not Found",
-                Error = "Image not found"
-            });
-        
+            throw new HttpException("Image not found", HttpStatusCode.NotFound);
+
         return File(pictureService.GetFile(name, size), "image/webp");
     }
-    
+
     // may be FromBody|FromQuery
-    [HttpDelete("{name}")]
+    [HttpDelete("{name}"), Authorize(Roles = "Admin,Moderator")]
     public IActionResult DeleteImage([FromRoute] string name)
     {
         if (!pictureService.FileExists(name))
-            return NotFound(new
-            {
-                Status = "404 Not Found",
-                Error = "Image not found"
-            });
-        try
+            throw new HttpException("Image not found", HttpStatusCode.NotFound);
+        
+        pictureService.DeleteFile(name);
+        return Ok(new
         {
-            pictureService.DeleteFile(name);
-            return Ok(new
-            {
-                Status = "200 OK",
-                Message = "Image deleted"
-            });
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            return BadRequest(new
-            {
-                Status = "400 Bad Request",
-                Error = "Failed to delete the image"
-            });
-        }
+            Status = "200 OK",
+            Message = "Image deleted"
+        });
     }
 }

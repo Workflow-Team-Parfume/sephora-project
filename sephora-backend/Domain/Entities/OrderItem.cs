@@ -7,7 +7,7 @@ public class OrderItem
     public int Quantity { get; set; }
     
     [ForeignKey("Products"), Column(Order = 1)]
-    public int ProductPieceId { get; set; }
+    public long ProductPieceId { get; set; }
     public ProductPiece ProductPiece { get; set; } = default!;
     
     [ForeignKey("Orders"), Column(Order = 2)]

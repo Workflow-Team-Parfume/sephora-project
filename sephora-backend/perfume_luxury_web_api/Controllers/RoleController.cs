@@ -1,40 +1,41 @@
 ﻿namespace perfume_luxury_web_api.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("[controller]"), ApiController]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] string roleName)
     {
         await roleService.Create(roleName);
         return Ok();
     }
-    [HttpPost("addToRole")]
+    
+    [HttpPost("addToRole"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddToRole(string userId, string roleName)
     {
         await roleService.AddToRole(userId, roleName);
         return Ok();
     }
-    [HttpPost("removeFromRole")]
+    
+    [HttpPost("removeFromRole"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> RemoveFromRole(string userId, string roleName)
     {
         await roleService.RemoveFromRole(userId, roleName);
         return Ok();
     }
-    [HttpDelete("{roleName}")]
+    
+    [HttpDelete("{roleName}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete([FromRoute] string roleName)
     {
         await roleService.Delete(roleName);
         return Ok();
     }
+    
     [HttpGet("getByUserId/{userId}")]
     public async Task<IActionResult> GetByUserId([FromRoute] string userId)
-    {
-        return Ok(await roleService.GetByUserId(userId));
-    }
-    [HttpGet]
+        => Ok(await roleService.GetByUserId(userId));
+    
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await roleService.GetAll());
-    }
+        => Ok(await roleService.GetAll());
 }

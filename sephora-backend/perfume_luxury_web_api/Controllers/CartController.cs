@@ -1,34 +1,48 @@
 namespace perfume_luxury_web_api.Controllers;
 
-// TODO: Add logging
-
-[Authorize, ApiController, Route("api/[controller]")]
+[Authorize, ApiController, Route("[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("all")]
     public async Task<IActionResult> Get()
-    {
-        return Ok(await cartService.Get(User));
-    }
+        => Ok(await cartService.Get(User).ToListAsync());
+    
+    [HttpGet]
+    public async Task<IActionResult> GetPaged(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await cartService.Get(User, page, size, order, select));
 
-    [HttpGet("{id:int}"), Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Get([FromRoute] int id)
-    {
-        var item = await cartService.GetById(id);
-        return Ok(item);
-    }
+    [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
+    public async Task<IActionResult> Get([FromRoute] long id)
+        => Ok(await cartService.GetById(id));
 
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
+
         await cartService.Create(cartItem, User);
         return Ok();
     }
-
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Remove([FromRoute] int id)
+    
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] CartDto cartItem)
     {
-        await cartService.Delete(id);
+        if (!ModelState.IsValid) 
+            throw new ArgumentException("The model is not valid.");
+
+        await cartService.Update(cartItem, User);
+        return Ok();
+    }
+
+    [HttpDelete("{id:long}")]
+    public async Task<IActionResult> Remove([FromRoute] long id)
+    {
+        await cartService.Delete(id, User);
         return Ok();
     }
 }

@@ -2,5 +2,5 @@
 
 public class CreateAmountDto
 {
-    public int Mililitters { get; set; }
+    public int Milliliters { get; set; }
 }

@@ -2,6 +2,9 @@
 
 public class ApplicationProfile : Profile
 {
+    private static string? EnvName =>
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
     public ApplicationProfile()
     {
         CreateMap<Brand, BrandDto>().ReverseMap();
@@ -13,26 +16,53 @@ public class ApplicationProfile : Profile
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
 
-        CreateMap<ProductDto, ProductEntity>().ReverseMap();
+        CreateMap<ProductEntity, ProductDto>().ForMember(
+            dest => dest.Pieces,
+            opts => opts.MapFrom(src => src.ProductPieces)
+        ).ForMember(
+            dest => dest.Volumes,
+            opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
+        );
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
-        CreateMap<ProductEntity, CreateProductParfumeDto>()
-            .ForMember(dest => dest.ParfumePieces, opt => opt.Ignore());
-        CreateMap<CreateProductParfumeDto, ProductEntity>();
-        CreateMap<EditProductParfumeDto, ProductEntity>().ReverseMap();
 
-        CreateMap<CreateProductPieceDto, ProductPiece>().ReverseMap();
-        CreateMap<ProductPieceDTO, ProductPiece>().ReverseMap();
-        CreateMap<EditProductPieceDTO, ProductPiece>().ReverseMap();
+        CreateMap<CreateProductPieceDto, ProductPiece>()
+            .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
+        CreateMap<ProductPiece, ProductPieceDto>().ForMember(
+            dest => dest.Milliliters,
+            opts => opts.MapFrom(src => src.Amount!.Milliliters)
+        ).ForMember(
+            dest => dest.Pictures,
+            opts => opts.MapFrom(src => src.ProductPictures)
+        );
+        CreateMap<EditProductPieceDto, ProductPiece>();
+
+        CreateMap<Order, OrderDto>();
+        CreateMap<OrderItem, OrderItemDto>();
+
+        CreateMap<ProductPicture, PictureDto>()
+            .ConstructUsing(x =>
+                new PictureDto(x.PicturePath, EnvName == "Development")
+            );
+
+        CreateMap<CreateRatingDto, Rating>();
+        CreateMap<EditRatingDto, Rating>();
+        CreateMap<Rating, RatingDto>()
+            .ForMember(dest => dest.UserPfp, opts => opts.MapFrom(src => src.User.ProfilePicture))
+            .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.User.FirstName))
+            .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.User.LastName));
 
         CreateMap<EditUserDto, UserEntity>()
+            .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
+        CreateMap<UserEntity, GetUserDto>()
             .ForMember(
                 dest => dest.ProfilePicture,
                 opt => opt.MapFrom(src => src.ProfilePicture != null
-                    ? Path.GetRandomFileName()
+                    ? new PictureDto(src.ProfilePicture, EnvName == "Development")
                     : null
                 ));
-        CreateMap<UserEntity, GetUserDto>();
+        CreateMap<RegisterDto, UserEntity>()
+            .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
 
         CreateMap<CartItem, CartDto>()
             .ForMember(
@@ -40,12 +70,12 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Name)
             )
             .ForMember(
-                dest => dest.ProductDescription,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Description)
+                dest => dest.ProductDescriptionEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionEn)
             )
             .ForMember(
-                dest => dest.ProductImage,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.ImgPath)
+                dest => dest.ProductDescriptionUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionUa)
             )
             .ForMember(
                 dest => dest.BrandName,
@@ -55,11 +85,38 @@ public class ApplicationProfile : Profile
                 dest => dest.CategoryName,
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
             )
+            .ForMember(
+                dest => dest.Price,
+                opt => opt.MapFrom(src => src.ProductPiece.Price)
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
-        
-        CreateMap<CreateDeliveryDto, DeliveryEntity>();  
-        // TODO: Add other delivery mappings
+
+        CreateMap<CreateDeliveryDto, DeliveryEntity>();
+        CreateMap<DeliveryEntity, DeliveryDto>()
+            .ForMember(
+                dest => dest.FirstName,
+                opts => opts.MapFrom(src =>
+                    src.User!.FirstName ?? src.UnauthedUser!.FirstName)
+            )
+            .ForMember(
+                dest => dest.LastName,
+                opts => opts.MapFrom(src =>
+                    src.User!.LastName ?? src.UnauthedUser!.LastName)
+            )
+            .ForMember(
+                dest => dest.PhoneNumber,
+                opts => opts.MapFrom(src =>
+                    src.User!.PhoneNumber ?? src.UnauthedUser!.PhoneNumber)
+            ).ForMember(
+                dest => dest.Email,
+                opts => opts.MapFrom(src =>
+                    src.User!.Email ?? src.UnauthedUser!.Email)
+            )
+            .ReverseMap();
+
+        CreateMap<Characteristic, CharacteristicDto>().ReverseMap();
+        CreateMap<CreateCharacteristicDto, Characteristic>();
     }
 }

@@ -7,8 +7,8 @@ public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity
 
     public async Task Save() => await context.SaveChangesAsync();
 
-    public virtual async Task<IEnumerable<TEntity>> GetAll()
-        => await _dbSet.ToListAsync();
+    public virtual IQueryable<TEntity> GetAll()
+        => _dbSet.AsQueryable();
 
     public virtual async Task<TEntity?> GetById(object id)
         => await _dbSet.FindAsync(id);
@@ -44,10 +44,9 @@ public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity
     }
 
     // working with specifications
-    public async Task<IEnumerable<TEntity>> GetListBySpec(
+    public IQueryable<TEntity> GetListBySpec(
         ISpecification<TEntity> specification
-    )
-        => await ApplySpecification(specification).ToListAsync();
+    ) => ApplySpecification(specification);
 
     public async Task<TEntity?> GetItemBySpec(
         ISpecification<TEntity> specification

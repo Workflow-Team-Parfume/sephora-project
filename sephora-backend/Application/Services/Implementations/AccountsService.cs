@@ -4,26 +4,25 @@ public class AccountsService(
     UserManager<UserEntity> userManager,
     SignInManager<UserEntity> signInManager,
     IJwtService jwtService,
+    IPictureService pictureService,
     IMapper mapper)
     : IAccountsService
 {
-    public async Task<IEnumerable<GetUserDto>> GetAll()
-    {
-        var users = await userManager.Users.ToListAsync();
-        return mapper.Map<IEnumerable<GetUserDto>>(users);
-    }
+    public IQueryable<GetUserDto> Get()
+        => userManager.Users
+            .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
 
     public async Task<GetUserDto> Get(string id)
     {
         var user = await userManager.FindByIdAsync(id);
-
-        if (user == null)
-            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+        if (user is null)
+            throw new HttpException(
+                ErrorMessages.UserByIDNotFound,
+                HttpStatusCode.NotFound
+            );
 
         var userDto = mapper.Map<GetUserDto>(user);
-
         userDto.Roles = (List<string>)await userManager.GetRolesAsync(user);
-
         return userDto;
     }
 
@@ -31,70 +30,92 @@ public class AccountsService(
     {
         var user = await userManager.FindByIdAsync(userId);
         if (user is null)
-            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+            throw new HttpException(
+                ErrorMessages.UserByIDNotFound,
+                HttpStatusCode.NotFound
+            );
+
         string? oldFileName = user.ProfilePicture;
         mapper.Map(userDto, user);
-        if (userDto.ProfilePicture != null)
-            //Add File Edit!!!
-            user.ProfilePicture = oldFileName;
-        else
-            user.ProfilePicture = oldFileName;
+        if (userDto.ProfilePicture is not null)
+        {
+            pictureService.DeleteFile(oldFileName);
+            var newPfp = await pictureService.SaveImage(userDto.ProfilePicture);
+            user.ProfilePicture = newPfp;
+        }
+        else user.ProfilePicture = oldFileName;
+
         await userManager.UpdateAsync(user);
     }
 
     public async Task Delete(string id)
     {
         var user = await userManager.FindByIdAsync(id);
-        if (user == null)
-            throw new HttpException(ErrorMessages.UserByIDNotFound, HttpStatusCode.NotFound);
+        if (user is null)
+            throw new HttpException(
+                ErrorMessages.UserByIDNotFound,
+                HttpStatusCode.NotFound
+            );
 
-        // TODO: Add image delete!!!
+        pictureService.DeleteFile(user.ProfilePicture);
 
         var result = await userManager.DeleteAsync(user);
         if (!result.Succeeded)
-        {
-            string message = string.Join(", ", result.Errors.Select(x => x.Description));
-            throw new HttpException(message, HttpStatusCode.BadRequest);
-        }
+            throw new HttpException(
+                String.Join(", ", result.Errors.Select(x => x.Description)),
+                HttpStatusCode.BadRequest
+            );
     }
 
     public async Task<LoginResponseDto> Login(LoginDto dto)
     {
         var user = await userManager.FindByEmailAsync(dto.Email);
 
-        if (user == null || !await userManager.CheckPasswordAsync(user, dto.Password))
-            throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
+        if (user is null ||
+            !await userManager.CheckPasswordAsync(user, dto.Password))
+            throw new HttpException(
+                ErrorMessages.InvalidCreds,
+                HttpStatusCode.BadRequest
+            );
 
         await signInManager.SignInAsync(user, true);
-        return new LoginResponseDto()
+        return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))
         };
     }
 
     public async Task Logout()
-    {
-        await signInManager.SignOutAsync();
-    }
+        => await signInManager.SignOutAsync();
 
     public async Task Register(RegisterDto dto)
     {
-        UserEntity user = new()
-        {
-            UserName = dto.Username,
-            Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
-            RegistrationDate = DateTime.Now.ToUniversalTime(),
-            ProfilePicture = "user-default-image.png",
-        };
+        if (await CheckEmailExists(dto.Email))
+            throw new HttpException(
+                "User with this email already exists",
+                HttpStatusCode.BadRequest
+            );
+        if (dto.Password != dto.PasswordConfirmation)
+            throw new HttpException(
+                "Passwords do not match",
+                HttpStatusCode.BadRequest
+            );
+
+        string? pfp = dto.ProfilePicture is null
+            ? null
+            : await pictureService.SaveImage(dto.ProfilePicture);
+        var user = mapper.Map<UserEntity>(dto);
+        user.ProfilePicture = pfp;
 
         var result = await userManager.CreateAsync(user, dto.Password);
-
         if (!result.Succeeded)
         {
-            string message = string.Join(", ", result.Errors.Select(x => x.Description));
+            pictureService.DeleteFile(pfp);
 
-            throw new HttpException(message, HttpStatusCode.BadRequest);
+            throw new HttpException(
+                String.Join(", ", result.Errors.Select(x => x.Description)),
+                HttpStatusCode.BadRequest
+            );
         }
 
         await userManager.AddToRoleAsync(user, nameof(user));
@@ -103,12 +124,12 @@ public class AccountsService(
     public async Task<bool> CheckEmailExists(string email)
     {
         var user = await userManager.FindByEmailAsync(email);
-        return user != null;
+        return user is not null;
     }
 
     public async Task<bool> CheckUsernameExists(string userName)
     {
         var user = await userManager.FindByNameAsync(userName);
-        return user != null;
+        return user is not null;
     }
 }

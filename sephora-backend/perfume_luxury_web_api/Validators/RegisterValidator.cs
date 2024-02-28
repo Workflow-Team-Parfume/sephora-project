@@ -4,7 +4,7 @@ public class RegisterValidator : AbstractValidator<RegisterDto>
 {
     public RegisterValidator()
     {
-        RuleFor(x => x.Username)
+        RuleFor(x => x.UserName)
             .NotEmpty()
             .MinimumLength(2);
 

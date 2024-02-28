@@ -5,12 +5,11 @@ public class DeliveryService(
     IMapper mapper
 ) : IDeliveryService
 {
-    public async Task<IEnumerable<DeliveryDto>> Get()
-        => mapper.Map<IEnumerable<DeliveryDto>>(
-            await deliveryRepository.GetAll()
-        );
+    public IQueryable<DeliveryDto> Get()
+        => deliveryRepository.GetAll()
+            .ProjectTo<DeliveryDto>(mapper.ConfigurationProvider);
 
-    public async Task<DeliveryDto?> GetById(int id)
+    public async Task<DeliveryDto?> GetById(long id)
     {
         DeliveryEntity? entity = await deliveryRepository.GetById(id);
         return entity is null ? null : mapper.Map<DeliveryDto>(entity);
@@ -30,7 +29,7 @@ public class DeliveryService(
         await deliveryRepository.Save();
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(long id)
     {
         await deliveryRepository.Delete(id);
         await deliveryRepository.Save();

@@ -3,11 +3,18 @@ const routes = {
     register: '/register',
     
     home: '/',
+    productsPage: '/products',
+    productDetails: '/details/:id',
+
+    basket: '/basket',
+    order: '/order',
+    thank: '/thank',
+    detailsOrder: '/detailsOrder',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',
     createCategory: '/admin/category/create',
-    editCategory: '/admin/category/edit/:id(\\d+)',
+    editCategory: '/admin/category/edit/:id',
 }
 
 export default routes;

@@ -33,7 +33,7 @@ public interface ICheckoutService
      * <param name="user">The user who cancels the order</param>
      */
     Task CancelOrder(long orderId, ClaimsPrincipal user);
-    
+
     /**
      * <summary>Changes the status of the order with the specified ID.</summary>
      * <param name="dto">The order which status will be changed</param>
@@ -44,7 +44,25 @@ public interface ICheckoutService
      * <summary>Gets all orders.</summary>
      * <returns>A list of all orders.</returns>
      */
-    Task<IEnumerable<OrderDto>> Get();
+    IQueryable<OrderDto> Get();
+
+    /**
+     * <summary>
+     * Gets a list of orders. <br/>
+     * The list is paginated and can be sorted in ascending or descending order.
+     * </summary>
+     * <param name="pageNumber">The number of the page</param>
+     * <param name="pageSize">The size of the page</param>
+     * <param name="orderBy">The order by clause (orders by property)</param>
+     * <param name="selectBy">The select by clause (orders by property)</param>
+     * <returns>A paginated list of orders.</returns>
+     */
+    async Task<PagedListInfo<OrderDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     /**
      * <summary>Gets the order with the specified ID.</summary>

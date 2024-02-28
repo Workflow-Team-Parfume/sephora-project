@@ -7,20 +7,26 @@ public static class Products
         public GetAll()
         {
             Query
-                .Include(x => x.Brand)
-                .Include(x => x.Category)
-                .Include(x => x.ProductPieces);
+                .Include(prod => prod.Brand)
+                .Include(prod => prod.Category)
+                .Include(prod => prod.ProductPieces)
+                .ThenInclude(piece => piece.ProductPictures)    // doubt it
+                .Include(prod => prod.ProductPieces)
+                .ThenInclude(piece => piece.Amount);            // doubt it
         }
     }
     public class GetById : Specification<ProductEntity>
     {
-        public GetById(int id)
+        public GetById(long id)
         {
             Query
                 .Where(x => x.Id == id)
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
-                .Include(x => x.ProductPieces);
+                .Include(x => x.ProductPieces)
+                .ThenInclude(piece => piece.ProductPictures)
+                .Include(prod => prod.ProductPieces)
+                .ThenInclude(piece => piece.Amount);
         }
     }
 }

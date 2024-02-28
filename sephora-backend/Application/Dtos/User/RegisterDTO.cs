@@ -2,11 +2,18 @@
 
 public class RegisterDto
 {
-    public string Username { get; set; } = String.Empty;
+    public string UserName { get; set; } = String.Empty;
+    
+    public string FirstName { get; set; } = String.Empty;
+    
+    public string LastName { get; set; } = String.Empty;
+    
     public string Email { get; set; } = String.Empty;
     public string? PhoneNumber { get; set; }
     public string Password { get; set; } = String.Empty; 
     public string PasswordConfirmation { get; set; } = String.Empty;
+    
+    public IFormFile? ProfilePicture { get; set; }
 
     //[EnumDataType(typeof(Gender))]
     //public Gender Gender { get; set; }

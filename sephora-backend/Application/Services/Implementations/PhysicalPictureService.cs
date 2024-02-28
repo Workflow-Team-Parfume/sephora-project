@@ -87,18 +87,19 @@ public class PhysicalPictureService : IPictureService
     public byte[] GetFileBytes(string name, string size)
         => File.ReadAllBytes(Path.Combine(ContentPath, size, name));
 
-    public void DeleteFile(string name)
+    public void DeleteFile(string? name)
     {
-        if (!FileExists(name)) return;
+        if (name is null || !FileExists(name)) return;
 
         foreach (string s in SizesPaths)
             File.Delete(Path.Combine(ContentPath, s, name));
     }
 
-    public bool FileExists(string name)
-        => File.Exists(Path.Combine(ContentPath, SizesPaths[0], name));
+    public bool FileExists(string? name)
+        => name is not null && 
+           File.Exists(Path.Combine(ContentPath, SizesPaths[0], name));
 
-    public bool SizeExists(string size)
+    public bool SizeExists(string? size)
         => SizesPaths.Contains(size);
 
     /**
@@ -106,6 +107,6 @@ public class PhysicalPictureService : IPictureService
      * <param name="extension">The file extension</param>
      * <returns>The unique file name</returns>
      */
-    private string GenerateFileName(string extension = WebpExt)
+    private static string GenerateFileName(string extension = WebpExt)
         => $"{Guid.NewGuid()}.{extension}";
 }

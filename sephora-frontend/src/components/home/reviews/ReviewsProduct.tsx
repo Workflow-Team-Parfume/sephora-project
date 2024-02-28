@@ -3,9 +3,10 @@ import { IReview } from "./types";
 import "./reviews.scss"
 import StarIcon from "@mui/icons-material/Star";
 import { useState } from "react";
+import RatingDto from "../../../models/rating/RatingDto.ts";
         
 
-const Reviews : React.FC<{title:string, reviews:IReview[]}> 
+const Reviews : React.FC<{title:string, reviews:RatingDto[]}>
 = ({title, reviews}) => {
   const itemsPerPage = 2; // Кількість елементів на сторінці
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,15 +31,15 @@ const Reviews : React.FC<{title:string, reviews:IReview[]}>
                 <Stack spacing={3.5}>
                     <Stack justifyContent='space-between' direction="row">
                     <Stack spacing={4} direction="row">
-                      {review.userImage != null ?
-                        <Avatar alt={review.userName} src={review.userImage} /> 
+                      {review.userPfp != null ?
+                        <Avatar alt={review.userName} src={review.userPfp} />
                         : <Avatar sx={{ width: '96px', height: '96px', bgcolor: '#D9D9D9' }}> </Avatar>
                         }
                         <Stack spacing={1} justifyContent='center'>
                             <div className="userName">{review.userName}</div>
                             <Rating
                               name="hover-feedback"
-                              value={review.rating}
+                              value={review.rate}
                               precision={0.5}
                               readOnly
                               icon={<StarIcon style={{ color: '#000000', fontSize:'29px' }} />}
@@ -51,7 +52,7 @@ const Reviews : React.FC<{title:string, reviews:IReview[]}>
                     </Typography>
                     </Stack>    
                     <div className="review">
-                        {review.review}
+                        {review.comment}
                     </div>
                 </Stack>
             ))}

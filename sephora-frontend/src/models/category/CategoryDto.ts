@@ -1,4 +1,7 @@
 export default interface CategoryDto {
     get id(): number;
-    get name(): string;
+
+    get nameEn(): string;
+
+    get nameUa(): string;
 }

@@ -24,7 +24,8 @@ const CategoryEditPage = () => {
     id: id ? Number(id) : 0,
     name: "",
     image: null,
-    description: "",
+    descriptionEn: "",
+descriptionUa: "",
   };
 
   const onFormikSubmit = async (values: ICategoryEdit) => {

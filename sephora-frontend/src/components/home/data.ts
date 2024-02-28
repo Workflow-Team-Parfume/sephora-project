@@ -12,13 +12,14 @@ import burberry from "./image/products/burberry.png";
 import gucci from "./image/products/gucci.png";
 
 
-export const newProducts : ProductDto[] = ([
+export const newProducts: ProductDto[] = ([
     {
         id: 1,
         name: "SkinTra — C The Light",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id:1, name:'SkinTra'},
+        brand: {id: 1, name: 'SkinTra'},
         category: {id: 1, name: "Сироватка з вітаміном С Tetra 10%"},
         pieces: [],
         ratings: [],
@@ -31,9 +32,10 @@ export const newProducts : ProductDto[] = ([
     {
         id: 2,
         name: "LANEIGE Cica Sleeping Mask",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 2, name: 'LANEIGE'},
+        brand: {id: 2, name: 'LANEIGE'},
         category: {id: 2, name: "Нічна маска для чутливої та подразненої шкіри обличчя"},
         pieces: [],
         ratings: [],
@@ -46,9 +48,10 @@ export const newProducts : ProductDto[] = ([
     {
         id: 3,
         name: "SkinTra — Wash It Off",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 3, name: 'SkinTra'},
+        brand: {id: 3, name: 'SkinTra'},
         category: {id: 3, name: "Гель для вмивання обличчя з глюкозидами"},
         pieces: [],
         ratings: [],
@@ -61,9 +64,10 @@ export const newProducts : ProductDto[] = ([
     {
         id: 4,
         name: "Innisfree Super Volcanic Pore Clay Mask",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 4, name: 'Innisfree'},
+        brand: {id: 4, name: 'Innisfree'},
         category: {id: 4, name: "Інтенсивна маска з вулканічною глиною"},
         pieces: [],
         ratings: [],
@@ -75,7 +79,7 @@ export const newProducts : ProductDto[] = ([
     }
 ]);
 
-export const newPieces : ProductPieceDto[] = ([
+export const newPieces: ProductPieceDto[] = ([
     {
         id: 1,
         inStock: 0,
@@ -83,7 +87,14 @@ export const newPieces : ProductPieceDto[] = ([
         milliliters: 30,
         isBottledParfume: false,
         product: newProducts?.[0],
-        pictures: [{name:'C The Light', url:skinTra1, urlLg:skinTra1, urlMd:skinTra1, urlSm:skinTra1, urlXs:skinTra1}],
+        pictures: [{
+            name: 'C The Light',
+            url: skinTra1,
+            urlLg: skinTra1,
+            urlMd: skinTra1,
+            urlSm: skinTra1,
+            urlXs: skinTra1
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: true,
     },
@@ -94,7 +105,14 @@ export const newPieces : ProductPieceDto[] = ([
         milliliters: 60,
         isBottledParfume: false,
         product: newProducts?.[1],
-        pictures: [{name:'Cica Sleeping Mask', url:laneige, urlLg:laneige, urlMd:laneige, urlSm:laneige, urlXs:laneige}],
+        pictures: [{
+            name: 'Cica Sleeping Mask',
+            url: laneige,
+            urlLg: laneige,
+            urlMd: laneige,
+            urlSm: laneige,
+            urlXs: laneige
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: false,
     },
@@ -105,7 +123,14 @@ export const newPieces : ProductPieceDto[] = ([
         milliliters: 200,
         isBottledParfume: false,
         product: newProducts?.[2],
-        pictures: [{name:'Wash It Off', url:skinTra2, urlLg:skinTra2, urlMd:skinTra2, urlSm:skinTra2, urlXs:skinTra2}],
+        pictures: [{
+            name: 'Wash It Off',
+            url: skinTra2,
+            urlLg: skinTra2,
+            urlMd: skinTra2,
+            urlSm: skinTra2,
+            urlXs: skinTra2
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: false,
     },
@@ -116,7 +141,14 @@ export const newPieces : ProductPieceDto[] = ([
         milliliters: 100,
         isBottledParfume: false,
         product: newProducts?.[3],
-        pictures: [{name:'Super Volcanic Pore Clay Mask', url:innisfree, urlLg:innisfree, urlMd:innisfree, urlSm:innisfree, urlXs:innisfree}],
+        pictures: [{
+            name: 'Super Volcanic Pore Clay Mask',
+            url: innisfree,
+            urlLg: innisfree,
+            urlMd: innisfree,
+            urlSm: innisfree,
+            urlXs: innisfree
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: true,
     },
@@ -166,7 +198,8 @@ export const Populars = ([
         rating: 3,
         volume: [{volume: '', price: '1720'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -179,7 +212,8 @@ export const Populars = ([
         rating: 2,
         volume: [{volume: '', price: '315'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -192,7 +226,8 @@ export const Populars = ([
         volume: [{volume: '60мл', price: '350'}],
         rating: 5,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -205,7 +240,8 @@ export const Populars = ([
         rating: 5,
         volume: [{volume: '', price: '1050'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -221,7 +257,8 @@ export const Perfume: IProduct[] = ([
         rating: 5,
         volume: [{volume: '', price: '4500'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: [],
@@ -235,7 +272,8 @@ export const Perfume: IProduct[] = ([
         rating: 4,
         volume: [{volume: '', price: '3270'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         product: null,
@@ -249,7 +287,8 @@ export const Perfume: IProduct[] = ([
         rating: 5,
         volume: [{volume: '30ml', price: '3750'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         product: null,
@@ -263,7 +302,8 @@ export const Perfume: IProduct[] = ([
         rating: 4,
         volume: [{volume: '', price: '7325'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         product: null,
@@ -450,7 +490,8 @@ export const similarProducts = ([
         volume: [{volume: '90ml', price: '4171'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -463,7 +504,8 @@ export const similarProducts = ([
         volume: [{volume: '', price: '2028'}],
         rating: 4,
         isNew: true,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -476,7 +518,8 @@ export const similarProducts = ([
         volume: [{volume: '100ml', price: '6430'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -489,7 +532,8 @@ export const similarProducts = ([
         volume: [{volume: '30ml', price: '3614'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -514,7 +558,8 @@ export const especiallyForYou = ([
         volume: [{volume: '21g', price: '100'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -527,7 +572,8 @@ export const especiallyForYou = ([
         volume: [{volume: '500ml', price: '515'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -540,7 +586,8 @@ export const especiallyForYou = ([
         volume: [{volume: '', price: '144'}],
         rating: 4,
         isNew: true,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -553,7 +600,8 @@ export const especiallyForYou = ([
         volume: [{volume: '50ml', price: '1853'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []

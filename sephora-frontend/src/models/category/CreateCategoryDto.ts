@@ -1,3 +1,5 @@
 export default interface CreateCategoryDto {
-    get name(): string;
+    get nameEn(): string;
+
+    get nameUa(): string;
 }

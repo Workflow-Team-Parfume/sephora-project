@@ -4,7 +4,9 @@ public class Category
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = String.Empty;
+    public string NameEn { get; set; } = String.Empty;
+    
+    public string NameUa { get; set; } = String.Empty;
 
     public ICollection<ProductEntity> Products { get; set;} = [];
 

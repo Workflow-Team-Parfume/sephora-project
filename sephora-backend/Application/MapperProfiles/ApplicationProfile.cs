@@ -82,8 +82,12 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Brand.Name)
             )
             .ForMember(
-                dest => dest.CategoryName,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
+                dest => dest.CategoryNameEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameEn)
+            )
+            .ForMember(
+                dest => dest.CategoryNameUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameUa)
             )
             .ForMember(
                 dest => dest.Price,

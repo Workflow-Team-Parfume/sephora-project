@@ -18,7 +18,8 @@ const CategoryCreatePage = () => {
   const init: ICategoryCreate = {
     name: "",
     image: null,
-    description: "",
+    descriptionEn: "",
+descriptionUa: "",
   };
 
   const onFormikSubmit = async (values: ICategoryCreate) => {

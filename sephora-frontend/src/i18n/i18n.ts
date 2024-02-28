@@ -109,6 +109,12 @@ i18n
         'order.paymentByCard.cardNumber': 'Номер карти',
         'order.paymentByCard.saveTheCard': 'Зберегти карту',
         'order.paymentByCard.pay': 'Оплатити',
+
+        'register': 'Реєстрація',
+        'phoneNumber': 'Номер телефону',
+        'registerPass': 'Пароль*',
+        'registerPassConfirm': 'Підтвердження пароля*',
+        'registerBtn': 'Зареєструватися',
         }
     },
 
@@ -216,6 +222,13 @@ i18n
         'order.paymentByCard.cardNumber': 'Card number',
         'order.paymentByCard.saveTheCard': 'Save the card',
         'order.paymentByCard.pay': 'Pay',
+
+
+        'register': 'Registration',
+        'phoneNumber': 'Phone number',
+        'registerPass': 'Password',
+        'registerPassConfirm': 'Password confirmation',
+        'registerBtn': 'Sign up'
         }
     }
 },

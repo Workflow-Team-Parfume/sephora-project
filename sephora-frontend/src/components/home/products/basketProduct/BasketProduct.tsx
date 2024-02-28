@@ -1,26 +1,28 @@
 import {Button, Link, Stack, Typography} from "@mui/material";
 import "./basketProduct.scss";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {useTranslation} from "react-i18next";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
+import i18n from "i18next";
 
 const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
 
 const BasketProduct: React.FC<{ piece: ProductPieceDto }>
-= ({piece}) => {
+    = ({piece}) => {
     const {t} = useTranslation();
 
     const [count, setCount] = useState(1);
     const handleCountChange = (count: number) => {
-        if(count!=0)
+        if (count != 0)
             setCount(count);
     };
     return (
-        <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center' padding={'20px 12px'}>
+        <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center'
+               padding={'20px 12px'}>
             <Link href={'/details/' + piece.id} underline="none">
                 <Stack spacing={2} direction='row'>
                     <Stack width='80px' alignItems='center'>
@@ -36,10 +38,14 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
                         </Typography>
                         <Stack>
                             <Typography className="productCategory">
-                                {piece.product.category.name}
+                                {
+                                    i18n.language === "en"
+                                        ? piece.product.category.nameEn
+                                        : piece.product.category.nameUa
+                                }
                             </Typography>
                             <Typography className="productCategory">
-                                {piece.milliliters}ml
+                                {piece.milliliters} {t('common.ml')}
                             </Typography>
                         </Stack>
                     </Stack>
@@ -48,15 +54,15 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
 
             <Stack direction='row' alignItems='center' justifyContent='space-between' minWidth='300px'>
                 <Stack direction='row' className="count" alignItems='center'>
-                    <Button onClick={() => (handleCountChange(count-1))}><RemoveIcon className="img"/></Button>
+                    <Button onClick={() => (handleCountChange(count - 1))}><RemoveIcon className="img"/></Button>
                     <Typography className="text">{count}</Typography>
-                    <Button onClick={() => (handleCountChange(count+1))}><AddIcon className="img"/></Button>
+                    <Button onClick={() => (handleCountChange(count + 1))}><AddIcon className="img"/></Button>
                 </Stack>
                 <Typography className="productPrice">
-                        {piece.price} {t('uan')}
+                    {piece.price} {t('uan')}
                 </Typography>
                 <Button>
-                    <DeleteOutlinedIcon sx={{color:'#646464'}}/>
+                    <DeleteOutlinedIcon sx={{color: '#646464'}}/>
                 </Button>
             </Stack>
         </Stack>

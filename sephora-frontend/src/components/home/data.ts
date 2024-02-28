@@ -6,10 +6,33 @@ import gisou from "./image/products/gisou.png";
 import laneige2 from "./image/products/laneige2.png";
 import ordinary from "./image/products/ordinary.png";
 import rare from "./image/products/rare.png";
-import valentino from "./image/products/valentino.png";
-import marc from "./image/products/marc.png";
-import burberry from "./image/products/burberry.png";
-import gucci from "./image/products/gucci.png";
+import Anna from "./image/reviews/Anna.png"
+import Dariia from "./image/reviews/Dariia.png"
+import Natalia from "./image/reviews/Natalia.png"
+import estee from "./image/reviews/estee.png"
+import moschino from "./image/reviews/moschino.png"
+import uriage from "./image/reviews/uriage.png"
+import banner1 from "./image/banner/image1.png"
+import banner2 from "./image/banner/image2.png"
+import banner3 from "./image/banner/image3.png"
+import main1 from "./image/banner/main1.png"
+import main2 from "./image/banner/main2.png"
+import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
+import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
+import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
+import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
+import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
+import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png';
+import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png';
+import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png';
+import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png';
+import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
+import bielenda from './products/detailsProduct/images/Bielenda.png';
+import byredo from './products/detailsProduct/images/Byredo.png';
+import burberry2 from './products/detailsProduct/images/burberry.png';
+import OrderStatus from "../../models/order/OrderStatus.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
+import ProductDto from "../../models/product/ProductDto.ts";
 
 
 export const newProducts: ProductDto[] = ([
@@ -20,7 +43,11 @@ export const newProducts: ProductDto[] = ([
         descriptionUa: "",
         active: false,
         brand: {id: 1, name: 'SkinTra'},
-        category: {id: 1, name: "Сироватка з вітаміном С Tetra 10%"},
+        category: {
+            id: 1,
+            nameUa: "Сироватка з вітаміном С Tetra 10%",
+            nameEn: "Serum with vitamin C Tetra 10%",
+        },
         pieces: [],
         ratings: [],
         averageRating: 2,
@@ -36,7 +63,11 @@ export const newProducts: ProductDto[] = ([
         descriptionUa: "",
         active: false,
         brand: {id: 2, name: 'LANEIGE'},
-        category: {id: 2, name: "Нічна маска для чутливої та подразненої шкіри обличчя"},
+        category: {
+            id: 2,
+            nameUa: "Нічна маска для чутливої та подразненої шкіри обличчя",
+            nameEn: "Night mask for sensitive and irritated facial skin",
+        },
         pieces: [],
         ratings: [],
         averageRating: 2,
@@ -52,7 +83,11 @@ export const newProducts: ProductDto[] = ([
         descriptionUa: "",
         active: false,
         brand: {id: 3, name: 'SkinTra'},
-        category: {id: 3, name: "Гель для вмивання обличчя з глюкозидами"},
+        category: {
+            id: 3,
+            nameUa: "Гель для вмивання обличчя з глюкозидами",
+            nameEn: "Face wash gel with glucosides",
+        },
         pieces: [],
         ratings: [],
         averageRating: 5,
@@ -68,7 +103,11 @@ export const newProducts: ProductDto[] = ([
         descriptionUa: "",
         active: false,
         brand: {id: 4, name: 'Innisfree'},
-        category: {id: 4, name: "Інтенсивна маска з вулканічною глиною"},
+        category: {
+            id: 4,
+            nameUa: "Інтенсивна маска з вулканічною глиною",
+            nameEn: "Intensive mask with volcanic clay",
+        },
         pieces: [],
         ratings: [],
         averageRating: 5,
@@ -248,76 +287,68 @@ export const Populars = ([
     }
 ]);
 
-export const Perfume: IProduct[] = ([
-    {
-        id: 0,
-        name: "Valentino Donna Born In Roma Intense",
-        pictures: [valentino],
-        categoryName: "Парфумована вода",
-        rating: 5,
-        volume: [{volume: '', price: '4500'}],
-        isNew: false,
-        descriptionEn: "",
-        descriptionUa: "",
-        characteristics: [],
-        codeProduct: 123,
-        reviews: [],
-        product: null,
-    },
-    {
-        id: 0,
-        name: "Marc Jacobs Daisy",
-        pictures: [marc],
-        categoryName: "Парфумована вода",
-        rating: 4,
-        volume: [{volume: '', price: '3270'}],
-        isNew: false,
-        descriptionEn: "",
-        descriptionUa: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    },
-    {
-        id: 0,
-        name: "Tom Ford Lost Cherry",
-        pictures: [burberry],
-        categoryName: "Парфумована вода унісекс",
-        rating: 5,
-        volume: [{volume: '30ml', price: '3750'}],
-        isNew: false,
-        descriptionEn: "",
-        descriptionUa: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    },
-    {
-        id: 0,
-        name: "Gucci Flora Gorgeous Gardenia",
-        pictures: [gucci],
-        categoryName: "Парфюмированная вода жіноча",
-        rating: 4,
-        volume: [{volume: '', price: '7325'}],
-        isNew: false,
-        descriptionEn: "",
-        descriptionUa: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    }
-]);
-
-
-import Anna from "./image/reviews/Anna.png"
-import Dariia from "./image/reviews/Dariia.png"
-import Natalia from "./image/reviews/Natalia.png"
-import estee from "./image/reviews/estee.png"
-import moschino from "./image/reviews/moschino.png"
-import uriage from "./image/reviews/uriage.png"
+// export const Perfume: ProductDto[] = ([
+//     {
+//         id: 0,
+//         name: "Valentino Donna Born In Roma Intense",
+//         pictures: [valentino],
+//         categoryName: "Парфумована вода",
+//         rating: 5,
+//         volume: [{volume: '', price: '4500'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         reviews: [],
+//         product: null,
+//     },
+//     {
+//         id: 0,
+//         name: "Marc Jacobs Daisy",
+//         pictures: [marc],
+//         categoryName: "Парфумована вода",
+//         rating: 4,
+//         volume: [{volume: '', price: '3270'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     },
+//     {
+//         id: 0,
+//         name: "Tom Ford Lost Cherry",
+//         pictures: [burberry],
+//         categoryName: "Парфумована вода унісекс",
+//         rating: 5,
+//         volume: [{volume: '30ml', price: '3750'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     },
+//     {
+//         id: 0,
+//         name: "Gucci Flora Gorgeous Gardenia",
+//         pictures: [gucci],
+//         categoryName: "Парфюмированная вода жіноча",
+//         rating: 4,
+//         volume: [{volume: '', price: '7325'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     }
+// ]);
 
 export const Reviews1 = (
     {
@@ -353,12 +384,6 @@ export const Reviews3 = (
     }
 )
 
-
-import banner1 from "./image/banner/image1.png"
-import banner2 from "./image/banner/image2.png"
-import banner3 from "./image/banner/image3.png"
-import main1 from "./image/banner/main1.png"
-import main2 from "./image/banner/main2.png"
 
 export const Banner1 = ({
     title: "-20%  на догляд  за обличчям та тілом",
@@ -455,12 +480,6 @@ export const Characteristics = ([
 ]);
 
 
-import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
-import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
-import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
-import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
-import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
-
 export const DetailsProduct = ({
     id: 1,
     name: "Carolina Herrera Good Girl",
@@ -475,11 +494,6 @@ export const DetailsProduct = ({
     isNew: false,
     product: null,
 });
-
-import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png';
-import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png';
-import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png';
-import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png';
 
 export const similarProducts = ([
     {
@@ -539,15 +553,6 @@ export const similarProducts = ([
         reviews: []
     },
 ])
-
-import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
-import bielenda from './products/detailsProduct/images/Bielenda.png';
-import byredo from './products/detailsProduct/images/Byredo.png';
-import burberry2 from './products/detailsProduct/images/burberry.png';
-import {IProduct} from "./products/detailsProduct/types.ts";
-import OrderStatus from "../../models/order/OrderStatus.ts";
-import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
-import ProductDto from "../../models/product/ProductDto.ts";
 
 export const especiallyForYou = ([
     {

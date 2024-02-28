@@ -8,12 +8,12 @@ const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholde
 
 
 const OrderProduct: React.FC<{ orderItem: OrderItemDto }>
-= ({orderItem}) => {
+    = ({orderItem}) => {
     const {t} = useTranslation();
 
     return (
-        <Stack 
-            className="orderProduct" 
+        <Stack
+            className="orderProduct"
             padding={'10px 12px'}
         >
             <Link href={'/details/' + orderItem.productPiece.id} underline="none">
@@ -30,15 +30,20 @@ const OrderProduct: React.FC<{ orderItem: OrderItemDto }>
                                 {orderItem.productPiece.product.name}
                             </Typography>
                             <Typography className="productCategory">
-                                {orderItem.productPiece.product.category.name}
+                                {
+                                    i18n.language === "en"
+                                        ? orderItem.productPiece.product.category.nameEn
+                                        : orderItem.productPiece.product.category.nameUa
+                                }
                             </Typography>
                             <Typography className="productCategory">
-                                {orderItem.productPiece.milliliters}ml
+                                {orderItem.productPiece.milliliters} {t('common.ml')}
                             </Typography>
                         </Stack>
                     </Stack>
-                    <Stack direction='row' spacing={4} alignItems='center' justifyContent='space-between' minWidth='150px'>
-                        <Typography className="productPrice" sx={{fontWeight:300}}>
+                    <Stack direction='row' spacing={4} alignItems='center' justifyContent='space-between'
+                           minWidth='150px'>
+                        <Typography className="productPrice" sx={{fontWeight: 300}}>
                             {orderItem.quantity} {t('pc')}
                         </Typography>
                         <Typography className="productPrice" sx={{fontWeight: 500}}>

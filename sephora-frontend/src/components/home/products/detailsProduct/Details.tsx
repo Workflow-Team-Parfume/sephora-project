@@ -78,9 +78,9 @@ const Details: React.FC = () => {
         if (click == 'description') {
             return <Typography className="description">
                 {
-                    i18n.language == "ua"
-                        ? product?.descriptionUa
-                        : product?.descriptionEn
+                    i18n.language === "en"
+                        ? product?.descriptionEn
+                        : product?.descriptionUa
                 };
             </Typography>
         } else if (click == 'characteristic') {
@@ -90,18 +90,18 @@ const Details: React.FC = () => {
                         <Typography
                             className="characteristic charactName">
                             {
-                                i18n.language == "ua"
-                                    ? characteristic.nameUa
-                                    : characteristic.nameEn
+                                i18n.language === "en"
+                                    ? characteristic.nameEn
+                                    : characteristic.nameUa
                             }
                             {': '}
                         </Typography>
                         <Typography
                             className="characteristic">
                             {
-                                i18n.language == "ua"
-                                    ? characteristic.descriptionUa
-                                    : characteristic.descriptionEn
+                                i18n.language === "en"
+                                    ? characteristic.descriptionEn
+                                    : characteristic.descriptionUa
                             }
                         </Typography>
                     </Stack>
@@ -165,7 +165,11 @@ const Details: React.FC = () => {
                                         {product.name}
                                     </Typography>
                                     <Typography className="productCategory">
-                                        {product.category.name}
+                                        {
+                                            i18n.language === "en"
+                                                ? product.category.nameEn
+                                                : product.category.nameUa
+                                        }
                                     </Typography>
                                 </Stack>
                                 <Rating
@@ -199,12 +203,7 @@ const Details: React.FC = () => {
                                             {product.volumes?.map((volume, index) => (
                                                 <MenuItem value={product.pieces[index].id}>
                                                     <Typography className="productVolume">
-                                                        {volume.milliliters}
-                                                        {
-                                                            i18n.language == "ua"
-                                                                ? ' мл'
-                                                                : ' ml'
-                                                        }
+                                                        {volume.milliliters} {t('common.ml')}
                                                     </Typography>
                                                 </MenuItem>
                                             ))}

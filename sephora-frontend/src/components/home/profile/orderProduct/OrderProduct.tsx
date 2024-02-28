@@ -3,6 +3,7 @@ import "./orderProduct.scss";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import OrderItemDto from "../../../../models/order/OrderItemDto.ts";
+import i18n from "i18next";
 
 const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 

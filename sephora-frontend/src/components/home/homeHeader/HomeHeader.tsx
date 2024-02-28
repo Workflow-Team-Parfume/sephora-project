@@ -1,124 +1,124 @@
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import "./homeHeader.scss";
-import { Button, Input, Link } from "@mui/material";
+import {Button, Input, Link} from "@mui/material";
 import logo from "../../../assets/images/Group.svg";
 import input_main_icon from "../../../assets/images/input_main_icon.svg";
 import icon1 from "../../../assets/images/icon1.svg";
 import icon2 from "../../../assets/images/icon2.svg";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 const HomeHeader = () => {
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
-  };
-  const boxStyleHeader = {
-    display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
-    alignItems: { xs: "center" },
-  };
-  return (
-    <div className="header">
-      <Box
-        sx={{
-          ...boxStyleHeader,
-          justifyContent: { xs: "center" },
-          marginBottom: 6,
-        }}
-      >
-        <Box
-          sx={{
-            ...boxStyleHeader,
-            gap: 10,
-          }}
-        >
-          <Box
-            sx={{
-              ...boxStyleHeader,
-              gap: 2,
-            }}
-          >
-            <img src={logo} alt="" />
-          </Box>
-
-          <Input
-            className="main_input"
-            id="outlined-adornment-password"
-            type={"text"}
-            sx={{
-              ":before": { borderBottomColor: "white" },
-              ":after": { borderBottomColor: "white" },
-              ":active": { borderBottomColor: "white" },
-            }}
-            endAdornment={
-              <IconButton size="small" aria-label="toggle password visibility">
-                <img src={input_main_icon} alt="" />
-              </IconButton>
-            }
-          />
-
-          <Box
-            sx={{
-              ...boxStyleHeader,
-              gap: 4,
-            }}
-          >
+    const {t, i18n} = useTranslation();
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+    };
+    const boxStyleHeader = {
+        display: "flex",
+        flexDirection: {xs: "column", sm: "row"},
+        alignItems: {xs: "center"},
+    };
+    return (
+        <div className="header">
             <Box
-              sx={{
-                ...boxStyleHeader,
-                gap: 1,
-              }}
+                sx={{
+                    ...boxStyleHeader,
+                    justifyContent: {xs: "center"},
+                    marginBottom: 6,
+                }}
             >
-              <Link
-                className="lang_link"
-                color={i18n.language=='en' ? '#000' : '#808080'}
-                onClick={() => changeLanguage("en")}
-              >
-                ENG
-              </Link>
-              <Link
-                className="lang_link"
-                color={i18n.language=='uk' ? '#000' : '#808080'}
-                onClick={() => changeLanguage("uk")}
-              >
-                УКР
-              </Link>
+                <Box
+                    sx={{
+                        ...boxStyleHeader,
+                        gap: 10,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            ...boxStyleHeader,
+                            gap: 2,
+                        }}
+                    >
+                        <img src={logo} alt=""/>
+                    </Box>
+
+                    <Input
+                        className="main_input"
+                        id="outlined-adornment-password"
+                        type={"text"}
+                        sx={{
+                            ":before": {borderBottomColor: "white"},
+                            ":after": {borderBottomColor: "white"},
+                            ":active": {borderBottomColor: "white"},
+                        }}
+                        endAdornment={
+                            <IconButton size="small" aria-label="toggle password visibility">
+                                <img src={input_main_icon} alt=""/>
+                            </IconButton>
+                        }
+                    />
+
+                    <Box
+                        sx={{
+                            ...boxStyleHeader,
+                            gap: 4,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                ...boxStyleHeader,
+                                gap: 1,
+                            }}
+                        >
+                            <Link
+                                className="lang_link"
+                                color={i18n.language === 'en' ? '#000' : '#808080'}
+                                onClick={() => changeLanguage("en")}
+                            >
+                                ENG
+                            </Link>
+                            <Link
+                                className="lang_link"
+                                color={i18n.language === 'uk' ? '#000' : '#808080'}
+                                onClick={() => changeLanguage("uk")}
+                            >
+                                УКР
+                            </Link>
+                        </Box>
+                        <Box
+                            sx={{
+                                ...boxStyleHeader,
+                                gap: 2,
+                            }}
+                        >
+                            <img src={icon1} alt=""/>
+                            <Link href={'/basket'} underline="none">
+                                <img src={icon2} alt=""/>
+                            </Link>
+                        </Box>
+                    </Box>
+                </Box>
             </Box>
-            <Box
-              sx={{
-                ...boxStyleHeader,
-                gap: 2,
-              }}
-            >
-              <img src={icon1} alt="" />
-              <Link href={'/basket'} underline="none">
-                <img src={icon2} alt="" />
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <div className="mainNav">
-        <Box
-          sx={{
-            flexGrow: 1,
-            ...boxStyleHeader,
-            justifyContent: { xs: "center" },
-            gap: 9.5,
-          }}
-        >
-          <Button color="inherit">{t("header.fullSizePerfume")}</Button>
-          <Button color="inherit">{t("header.bottlingPerfumes")}</Button>
-          <Button color="inherit">{t("header.care")}</Button>
-          <Button color="inherit">{t("header.new")}</Button>
-          <Button color="inherit">{t("header.catalogue")}</Button>
-          <Button color="inherit">{t("header.aboutUs")}</Button>
-          <Button >{t("header.paymentAndDelivery")}</Button>
-        </Box>
-      </div>
-    </div>
-  );
+            <div className="mainNav">
+                <Box
+                    sx={{
+                        flexGrow: 1,
+                        ...boxStyleHeader,
+                        justifyContent: {xs: "center"},
+                        gap: 9.5,
+                    }}
+                >
+                    <Button color="inherit">{t("header.fullSizePerfume")}</Button>
+                    <Button color="inherit">{t("header.bottlingPerfumes")}</Button>
+                    <Button color="inherit">{t("header.care")}</Button>
+                    <Button color="inherit">{t("header.new")}</Button>
+                    <Button color="inherit">{t("header.catalogue")}</Button>
+                    <Button color="inherit">{t("header.aboutUs")}</Button>
+                    <Button>{t("header.paymentAndDelivery")}</Button>
+                </Box>
+            </div>
+        </div>
+    );
 };
 
 export default HomeHeader;

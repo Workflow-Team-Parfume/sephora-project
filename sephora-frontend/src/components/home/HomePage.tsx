@@ -36,6 +36,7 @@ const HomePage = () => {
         {name: t('recCategories.face'), link: ""},
     ])
 
+    // TODO: Move links to constants file
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner/>
@@ -44,7 +45,7 @@ const HomePage = () => {
                     link='pieces?&sort=createdAt desc'
                 />
                 <Products title={t('common.title.popular')}
-                    link='pieces?&sort=averageRating desc'
+                    link='pieces?&sort=product.AverageRating desc'
                 />
                 <Banner banner={Banner1} color="#688F74"/>
                 <Products title={t('common.title.perfumes')}

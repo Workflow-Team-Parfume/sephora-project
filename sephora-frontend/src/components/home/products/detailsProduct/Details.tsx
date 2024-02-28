@@ -134,6 +134,8 @@ const Details: React.FC = () => {
         }
     }
 
+    console.log(product)
+    console.log(currentPiece())
     return (
         product && currentPiece()
             ?
@@ -262,7 +264,7 @@ const Details: React.FC = () => {
                     <Stack spacing={7} style={{alignItems: 'center'}}>
                         {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
                         <Reviews title={t('common.title.reviews')}
-                            reviews={reviews}/>
+                                 reviews={reviews}/>
                         {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
                     </Stack>
                 </Container>

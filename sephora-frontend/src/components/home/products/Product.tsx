@@ -23,7 +23,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
     const {t} = useTranslation();
 
     return (
-        <Link href={'/details/' + piece.product.id} underline="none">
+        <Link href={`/details/${piece.product.id}/?piece=${piece.id}`} underline="none">
 
             <Card className="productMainContainer"
                   sx={{height: '95%'}}>

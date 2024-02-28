@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import http_common from "../../../../http_common.ts";
 
 import ProductDto from "../../../../models/product/ProductDto.ts";
@@ -27,45 +27,43 @@ import novaPoshta from "../../../../assets/images/novaPoshta.png";
 import ukrPoshta from "../../../../assets/images/ukrPoshta.png";
 import meest from "../../../../assets/images/meest.png";
 import textFieldStyle from '../../../../common/textFieldStyle';
+import PagedList from "../../../../models/pagedlist/PagedList.ts";
 
 const Details: React.FC = () => {
     const {t} = useTranslation();
     const {id} = useParams();
+    const navigate = useNavigate();
+    const [params, setParams] = useSearchParams();
+
     const [product, setProduct] = useState<ProductDto>();
-    const [reviews, setReviews] = useState<RatingDto[]>([]);
+    const [reviews, setReviews] = useState<PagedList<RatingDto>>();
     const [click, setClick] = useState("description");
-    const [pieceId, setPieceId] = useState<number>(product?.pieces[0].id ?? 0);
+    const [pieceId, setPieceId] = useState<number>(
+        Number(params.get("piece"))
+        ?? product?.pieces[0].id
+        ?? 0
+    );
+
+    const changePiece = (pieceId: number) => {
+        navigate(`/details/${id}?piece=${pieceId}`);
+    }
 
     useEffect(() => {
         http_common.get<ProductDto>(`products/${id}`)
             .then(resp => {
-                console.log(resp.data);
-                setProduct(resp.data);
+                const pieceId = Number(params.get("piece")) || resp.data.pieces[0].id;
+                setProduct(resp.data)
+                setPieceId(pieceId)
+                setParams({piece: pieceId.toString()});
             })
             .catch(e => console.error(e));
 
-        http_common.get<RatingDto[]>(`rating/product/${id}`)
-            .then(resp => {
-                console.log(resp.data);
-                setReviews(resp.data);
-            })
+        http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
+            .then(resp => setReviews(resp.data))
             .catch(e => console.error(e));
     }, [id]);
 
-    const [params, setParams] = useSearchParams({
-        piece: pieceId.toString()
-    });
-
-    const changePiece = (pieceId: number) => {
-        setPieceId(pieceId);
-        setParams({piece: pieceId.toString()});
-    }
-
-    if (params.get("piece") !== pieceId.toString()) {
-        changePiece(Number(product?.pieces[0].id ?? 0));
-    }
-
-    const currentPiece = () => product?.pieces[pieceId];
+    const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
@@ -134,8 +132,6 @@ const Details: React.FC = () => {
         }
     }
 
-    console.log(product)
-    console.log(currentPiece())
     return (
         product && currentPiece()
             ?
@@ -191,17 +187,14 @@ const Details: React.FC = () => {
                                 </Typography>
 
                                 {product.volumes.length != 0 ?
-                                    <FormControl fullWidth
-                                                 sx={{...textFieldStyle}}
-                                    >
+                                    <FormControl fullWidth sx={{...textFieldStyle}} >
                                         <Select
                                             sx={{width: '450px'}}
                                             value={pieceId}
                                             onChange={(e) => changePiece(Number(e.target.value))}
-                                            displayEmpty
-                                        >
+                                            displayEmpty>
                                             {product.volumes?.map((volume, index) => (
-                                                <MenuItem value={product.pieces[index].id}>
+                                                <MenuItem key={index} value={product.pieces[index].id}>
                                                     <Typography className="productVolume">
                                                         {volume.milliliters} {t('common.ml')}
                                                     </Typography>
@@ -263,7 +256,7 @@ const Details: React.FC = () => {
                     <Stack spacing={7} style={{alignItems: 'center'}}>
                         {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
                         <Reviews title={t('common.title.reviews')}
-                                 reviews={reviews}/>
+                                 reviews={reviews?.items ?? []}/>
                         {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
                     </Stack>
                 </Container>

@@ -1,8 +1,7 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-i18n
-    .use(initReactI18next)
+i18n.use(initReactI18next)
     .init({
         resources: {
             uk: {
@@ -10,7 +9,7 @@ i18n
                     'uah': 'грн',
                     'pc': 'шт',
 
-                    'singIn': 'Увійти',
+                    'signIn': 'Увійти',
                     'forgotPassword': 'Забули пароль?',
                     'email': 'E-mail',
                     'password': 'Пароль',
@@ -79,7 +78,7 @@ i18n
                     'sortBy.toHigh': 'за зростанням',
 
                     'basket': 'Кошик',
-                    'basket.recomProducts': 'Рекомендовані товари',
+                    'basket.recommendedProducts': 'Рекомендовані товари',
                     'basket/order.toOrder': 'Оформити замовлення',
                     'basket/order.orderAmount': 'Сума замовлення',
                     'basket/order.discount': 'Знижка',
@@ -118,7 +117,7 @@ i18n
                     'uah': 'UAH',
                     'pc': 'pc',
 
-                    'singIn': 'Sing in',
+                    'signIn': 'Sign in',
                     'forgotPassword': 'Forgot your password?',
                     'email': 'E-mail',
                     'password': 'Password',
@@ -141,7 +140,7 @@ i18n
                     'common.title.popular': 'Popular',
                     'common.title.perfumes': 'Perfumes',
                     'common.title.recommendedCategories': 'Recommended categories',
-                    'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Reviews of out customers about cosmeticts and care',
+                    'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Reviews of out customers about cosmetics and care',
                     'common.title.reviews': 'Reviews',
                     'common.title.similarProducts': 'Similar products',
                     'common.title.especiallyForYou': 'Especially for you',
@@ -187,7 +186,7 @@ i18n
                     'sortBy.toHigh': 'to high',
 
                     'basket': 'Basket',
-                    'basket.recomProducts': 'Recommended products',
+                    'basket.recommendedProducts': 'Recommended products',
                     'basket/order.toOrder': 'To order',
                     'basket/order.orderAmount': 'Order amount',
                     'basket/order.discount': 'Discount',

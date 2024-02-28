@@ -216,7 +216,7 @@ const OrderBuyer = () => {
                         <Stack alignItems='end'>
                             <Link href='#' className="link">{t('forgotPassword')}</Link>
                         </Stack>
-                        <Button onClick={handleSingInClick} className="button">{t('singIn')}</Button>
+                        <Button onClick={handleSingInClick} className="button">{t('signIn')}</Button>
 
                         <Stack alignItems='center'>
                             <Link href='/' className="link">{t('order.continueShopping')}</Link>

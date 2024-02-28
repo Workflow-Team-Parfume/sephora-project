@@ -53,7 +53,7 @@ const Basket = () => {
             </Box>
 
             <Box margin={4}>
-                <Typography className="recProductsTitle">{t('basket.recomProducts')}</Typography>
+                <Typography className="recProductsTitle">{t('basket.recommendedProducts')}</Typography>
                 {/*TODO: add recommended products list */}
             </Box>
         </Container>

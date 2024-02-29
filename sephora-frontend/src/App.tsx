@@ -10,14 +10,13 @@ import RegisterPage from "./components/auth/register/RegisterPage";
 import Loader from "./components/common/loader/Loader";
 import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
-import ProductsPage from "./components/home/productsPage/ProductsPage";
 import Details from "./components/home/products/detailsProduct/Details";
-import {Filter, Filters} from "./components/home/data";
 import routes from './common/routes';
 import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
+import NoveltiesPage from "./components/home/productsPage/novelties/NoveltiesPage.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -83,9 +82,7 @@ function App() {
                     <Route path={routes.login} element={<LoginPage/>}/>
                     <Route path={routes.register} element={<RegisterPage/>}/>
                     <Route path={routes.productDetails} element={<Details />}/>
-                    <Route path={routes.productsPage}
-                           element={<ProductsPage title="Новинки" filters={Filters}
-                           mainFilter={Filter}/>}/>
+                    <Route path={routes.novelties} element={<NoveltiesPage/>}/>
 
                     <Route path={routes.basket} element={<Basket/>}/>
                     <Route path={routes.order} element={<Order/>}/>

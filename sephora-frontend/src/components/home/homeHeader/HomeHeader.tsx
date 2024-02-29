@@ -7,6 +7,7 @@ import input_main_icon from "../../../assets/images/input_main_icon.svg";
 import icon1 from "../../../assets/images/icon1.svg";
 import icon2 from "../../../assets/images/icon2.svg";
 import {useTranslation} from "react-i18next";
+import routes from "../../../common/routes.ts";
 
 const HomeHeader = () => {
     const {t, i18n} = useTranslation();
@@ -20,30 +21,25 @@ const HomeHeader = () => {
     };
     return (
         <div className="header">
-            <Box
-                sx={{
+            <Box sx={{
                     ...boxStyleHeader,
                     justifyContent: {xs: "center"},
                     marginBottom: 6,
-                }}
-            >
-                <Box
-                    sx={{
+                }}>
+                <Box sx={{
                         ...boxStyleHeader,
                         gap: 10,
-                    }}
-                >
-                    <Box
-                        sx={{
+                    }}>
+                    <Box sx={{
                             ...boxStyleHeader,
                             gap: 2,
-                        }}
-                    >
-                        <img src={logo} alt=""/>
+                        }}>
+                        <Link href={'/'} underline="none">
+                            <img src={logo} alt="Luxuryhub"/>
+                        </Link>
                     </Box>
 
-                    <Input
-                        className="main_input"
+                    <Input className="main_input"
                         id="outlined-adornment-password"
                         type={"text"}
                         sx={{
@@ -55,42 +51,31 @@ const HomeHeader = () => {
                             <IconButton size="small" aria-label="toggle password visibility">
                                 <img src={input_main_icon} alt=""/>
                             </IconButton>
-                        }
-                    />
+                        }/>
 
-                    <Box
-                        sx={{
+                    <Box sx={{
                             ...boxStyleHeader,
                             gap: 4,
-                        }}
-                    >
-                        <Box
-                            sx={{
+                        }}>
+                        <Box sx={{
                                 ...boxStyleHeader,
                                 gap: 1,
-                            }}
-                        >
-                            <Link
-                                className="lang_link"
+                            }}>
+                            <Link className="lang_link"
                                 color={i18n.language === 'en' ? '#000' : '#808080'}
-                                onClick={() => changeLanguage("en")}
-                            >
+                                onClick={() => changeLanguage("en")}>
                                 ENG
                             </Link>
-                            <Link
-                                className="lang_link"
+                            <Link className="lang_link"
                                 color={i18n.language === 'uk' ? '#000' : '#808080'}
-                                onClick={() => changeLanguage("uk")}
-                            >
+                                onClick={() => changeLanguage("uk")}>
                                 УКР
                             </Link>
                         </Box>
-                        <Box
-                            sx={{
+                        <Box sx={{
                                 ...boxStyleHeader,
                                 gap: 2,
-                            }}
-                        >
+                            }}>
                             <img src={icon1} alt=""/>
                             <Link href={'/basket'} underline="none">
                                 <img src={icon2} alt=""/>
@@ -100,18 +85,16 @@ const HomeHeader = () => {
                 </Box>
             </Box>
             <div className="mainNav">
-                <Box
-                    sx={{
+                <Box sx={{
                         flexGrow: 1,
                         ...boxStyleHeader,
                         justifyContent: {xs: "center"},
                         gap: 9.5,
-                    }}
-                >
+                    }}>
                     <Button color="inherit">{t("header.fullSizePerfume")}</Button>
                     <Button color="inherit">{t("header.bottlingPerfumes")}</Button>
                     <Button color="inherit">{t("header.care")}</Button>
-                    <Button color="inherit">{t("header.new")}</Button>
+                    <Button href={routes.novelties} color="inherit" variant="contained">{t("header.new")}</Button>
                     <Button color="inherit">{t("header.catalogue")}</Button>
                     <Button color="inherit">{t("header.aboutUs")}</Button>
                     <Button>{t("header.paymentAndDelivery")}</Button>

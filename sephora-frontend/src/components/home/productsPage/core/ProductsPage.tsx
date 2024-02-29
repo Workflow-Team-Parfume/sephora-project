@@ -12,15 +12,15 @@ import {
     Typography
 } from "@mui/material";
 import {useTranslation} from "react-i18next";
-import Product from "../products/Product";
-import Filters from "../filters/Filters";
-import {IFilter} from "../filters/types";
+import Product from "../../products/Product.tsx";
+import Filters from "../../filters/Filters.tsx";
+import {IFilter} from "../../filters/types.ts";
 import React, {useEffect, useState} from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './productsPage.scss'
-import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
-import http_common from "../../../http_common.ts";
-import PagedList from "../../../models/pagedlist/PagedList.ts";
+import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
+import http_common from "../../../../http_common.ts";
+import PagedList from "../../../../models/pagedlist/PagedList.ts";
 
 const itemsPerPage = 9;
 

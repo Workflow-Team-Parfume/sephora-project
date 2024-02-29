@@ -44,17 +44,26 @@ const Details: React.FC = () => {
         ?? 0
     );
 
-    const changePiece = (pieceId: number) => {
-        navigate(`/details/${id}?piece=${pieceId}`);
+    const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
+    const changePiece = (pId: number, curProduct: ProductDto) => {
+        setPieceId(pId);
+        setParams({piece: pId.toString()});
+        setImage(curProduct.pieces.find(p => p.id === pId)?.pictures[0]);
+
+        navigate(`/details/${id}?piece=${pId}`);
     }
 
     useEffect(() => {
         http_common.get<ProductDto>(`products/${id}`)
             .then(resp => {
-                const pieceId = Number(params.get("piece")) || resp.data.pieces[0].id;
-                setProduct(resp.data)
-                setPieceId(pieceId)
-                setParams({piece: pieceId.toString()});
+                const pathId = Number(params.get("piece"));
+                const pieceIds = resp.data.pieces.map(p => p.id);
+                const pieceId = pieceIds.includes(pathId)
+                    ? pathId
+                    : resp.data.pieces[0].id;
+
+                setProduct(resp.data);
+                changePiece(pieceId, resp.data);
             })
             .catch(e => console.error(e));
 
@@ -63,7 +72,6 @@ const Details: React.FC = () => {
             .catch(e => console.error(e));
     }, [id]);
 
-    const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
@@ -83,8 +91,8 @@ const Details: React.FC = () => {
             </Typography>
         } else if (click == 'characteristic') {
             return <Stack spacing={1}>
-                {(product?.characteristics ?? []).map((characteristic) => (
-                    <Stack direction='row' flexWrap='wrap'>
+                {(product?.characteristics ?? []).map((characteristic, i) => (
+                    <Stack key={i} direction='row' flexWrap='wrap'>
                         <Typography
                             className="characteristic charactName">
                             {
@@ -143,17 +151,17 @@ const Details: React.FC = () => {
 
                         <Stack direction='row' spacing={2.5}>
                             <Stack style={{width: '100px'}} spacing={2.5}>
-                                {currentPiece()?.pictures.map((img) => (
-                                    <Button onClick={() => setImage(img)}>
+                                {currentPiece()?.pictures.map((img, i) => (
+                                    <Button key={i} onClick={() => setImage(img)}>
                                         <img className={img == image ? 'imageClick' : 'image'}
-                                             alt={product.name ?? ""} src={img.urlLg}/>
+                                             alt={`Product picture ${i + 1}`} src={img.urlLg}/>
                                     </Button>
                                 ))}
                             </Stack>
 
                             <img style={{width: '600px'}}
-                                 src={image?.urlLg ?? routes.picPlaceholder}
-                                 alt={product.name!}/>
+                                 src={image?.url ?? routes.picPlaceholder}
+                                 alt="Product picture"/>
 
                             <Stack spacing={2.5}>
                                 <Stack>
@@ -191,7 +199,7 @@ const Details: React.FC = () => {
                                         <Select
                                             sx={{width: '450px'}}
                                             value={pieceId}
-                                            onChange={(e) => changePiece(Number(e.target.value))}
+                                            onChange={(e) => changePiece(Number(e.target.value), product)}
                                             displayEmpty>
                                             {product.volumes?.map((volume, index) => (
                                                 <MenuItem key={index} value={product.pieces[index].id}>

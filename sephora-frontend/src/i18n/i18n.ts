@@ -73,7 +73,6 @@ i18n.use(initReactI18next)
                     'passwordRecovery': 'Відновлення паролю',
                     'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
                     'send': 'Надіслати',
-                    'signIn': 'Увійти',
                     'loginEmail': 'Логін/E-mail',
                     'or': 'АБО',
 
@@ -234,7 +233,6 @@ i18n.use(initReactI18next)
                     'passwordRecovery': 'Password recovery',
                     'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
                     'send': 'Send',
-                    'signIn': 'Sign in',
                     'loginEmail': 'Login/E-mail',
                     'or': 'OR',
 

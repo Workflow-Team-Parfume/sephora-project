@@ -4,9 +4,7 @@ import React from "react";
 import {useTranslation} from "react-i18next";
 import OrderItemDto from "../../../../models/order/OrderItemDto.ts";
 import i18n from "i18next";
-
-const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
-
+import routes from "../../../../common/routes.ts";
 
 const OrderProduct: React.FC<{ orderItem: OrderItemDto }>
     = ({orderItem}) => {
@@ -21,9 +19,9 @@ const OrderProduct: React.FC<{ orderItem: OrderItemDto }>
                 <Stack spacing={4} direction='row' justifyContent='space-between'>
                     <Stack direction='row' spacing={1}>
                         <Stack width='95px' alignItems='center'>
-                            <img
-                                className="productImg"
-                                src={orderItem.productPiece.pictures[0].url ?? imgPlaceholder}
+                            <img className="productImg"
+                                 alt='Product image'
+                                 src={orderItem.productPiece.pictures[0].url ?? routes.picPlaceholder}
                             />
                         </Stack>
                         <Stack justifyContent='center'>

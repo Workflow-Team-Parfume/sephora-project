@@ -2,7 +2,6 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    Button,
     Container,
     Grid,
     List,
@@ -26,31 +25,29 @@ const itemsPerPage = 9;
 
 const ProductsPage: React.FC<{
     title: string,
+    link: string,
     mainFilter: IFilter,
     filters: IFilter[]
-}> = ({title, mainFilter, filters}) => {
+}> = ({title, mainFilter, filters, link}) => {
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        http_common.get(`pieces?size=${itemsPerPage}&page=${currentPage}`)
+        http_common.get(`${link}&size=${itemsPerPage}&page=${currentPage}`)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
-    });
+    }, []);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
     };
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentProducts = products?.items.slice(startIndex, endIndex);
 
     const [expanded, setExpanded] = useState<boolean>(false);
 
-    const handleChange =
-        (panel: boolean) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    const handleChange = (panel: boolean) =>
+        (_event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
         };
     const sort1: string[] = [t('sortBy.price'), t('sortBy.popularity'), t('sortBy.date')];
@@ -66,20 +63,21 @@ const ProductsPage: React.FC<{
     };
 
     return (
-        <Container className="productsPage" style={{maxWidth: "100%", justifyContent: "center", margin: '40px 0'}}>
+        <Container className="productsPage"
+                   style={{maxWidth: "100%", justifyContent: "center", margin: '40px 0'}}>
             <Grid container>
-
                 <Grid item lg={3}>
                     <Stack className='filter' spacing={2.5} sx={{padding: '0 16px'}}>
                         <Typography className='filterName'>
                             {mainFilter.name}
                         </Typography>
-                        {mainFilter.filters.map((filter) => (<Typography className='filterText'>{filter}</Typography>))}
+                        {mainFilter.filters.map((filter, i) => (
+                            <Typography key={i} className='filterText'>{filter}</Typography>
+                        ))}
                     </Stack>
                     <Filters filters={filters}/>
                 </Grid>
                 <Grid item lg={9}>
-
                     <Container style={{maxWidth: "100%", justifyContent: "center"}}>
                         <Typography className="title">{title}</Typography>
                         <Stack sx={{alignItems: 'end'}}>
@@ -91,9 +89,9 @@ const ProductsPage: React.FC<{
                                 </AccordionSummary>
                                 <AccordionDetails sx={{p: "0", margin: "0 40px"}}>
                                     <List component="div" role="list">
-                                        {sort1.map((value) => (
+                                        {sort1.map((value, i) => (
                                             <ListItemButton
-                                                key={value}
+                                                key={i}
                                                 role="listitem"
                                                 onClick={handleToggle1(value)}
                                                 sx={{p: "0"}}>
@@ -101,18 +99,24 @@ const ProductsPage: React.FC<{
                                                     checked1 == value
                                                         ? 'checked'
                                                         : 'check'
-                                                }>{value}</Typography>
+                                                }>
+                                                    {value}
+                                                </Typography>
                                             </ListItemButton>
                                         ))}
-                                        {sort2.map((value) => (
+                                        {sort2.map((value, i) => (
                                             <ListItemButton
-                                                key={value}
+                                                key={i}
                                                 role="listitem"
                                                 onClick={handleToggle2(value)}
-                                                sx={{p: "0"}}
-                                            >
-                                                <Typography
-                                                    className={checked2 == value ? 'checked' : 'check'}>{value}</Typography>
+                                                sx={{p: "0"}}>
+                                                <Typography className={
+                                                    checked2 == value
+                                                        ? 'checked'
+                                                        : 'check'
+                                                }>
+                                                    {value}
+                                                </Typography>
                                             </ListItemButton>
                                         ))}
                                     </List>
@@ -122,19 +126,21 @@ const ProductsPage: React.FC<{
 
                         <Container sx={{pt: 5, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                             <Grid container spacing={2}>
-                                {currentProducts?.map((piece) => (
-                                    <Grid item xs={12} sm={6} lg={4}>
+                                {products?.items.map((piece, i) => (
+                                    <Grid key={i} item xs={12} sm={6} lg={4}>
                                         <Product piece={piece}/>
                                     </Grid>
                                 ))}
                             </Grid>
                         </Container>
 
-                        <Button className="link" variant="outlined">{t('common.button.moreProducts')}</Button>
+                        {/*<Button className={`link${products?.hasNextPage || ' invisible'}`} variant="outlined">*/}
+                        {/*    {t('common.button.moreProducts')}*/}
+                        {/*</Button>*/}
                         <Stack sx={{margin: '40px', alignItems: 'center'}}>
                             <Pagination
                                 sx={{display: 'flex'}}
-                                count={Math.ceil(products?.items.length ?? 0 / itemsPerPage)}
+                                count={products?.totalPages}
                                 page={currentPage}
                                 onChange={handlePageChange}
                             />

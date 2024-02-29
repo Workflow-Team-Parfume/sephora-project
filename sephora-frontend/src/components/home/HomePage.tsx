@@ -8,6 +8,7 @@ import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
 import RecCategories from './mainPage/recCategories/RecCategories';
 import MainBanner from './mainPage/banner/MainBanner';
 import {useTranslation} from 'react-i18next';
+import routes from "../../common/routes.ts";
 
 // function Copyright() {
 //   return (
@@ -42,14 +43,14 @@ const HomePage = () => {
             <MainBanner/>
             <Stack spacing={19} style={{margin: '0 100px'}}>
                 <Products title={t('common.title.novelty')}
-                    link='pieces?&sort=createdAt desc'
+                    link={routes.api.dateOrdered}
                 />
                 <Products title={t('common.title.popular')}
-                    link='pieces?&sort=product.AverageRating desc'
+                    link={routes.api.popularity}
                 />
                 <Banner banner={Banner1} color="#688F74"/>
                 <Products title={t('common.title.perfumes')}
-                    link='pieces?'
+                    link={routes.api.pieces}
                 />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
                 <RecCategories

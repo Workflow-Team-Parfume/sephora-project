@@ -25,7 +25,7 @@ i18n.use(initReactI18next)
                     'common.button.moreProducts': 'Більше товарів',
                     'common.button.review': 'Переглянути',
 
-                    'common.title.bottled': 'Розпив парфумерії',
+                    'common.title.bottled': 'Розлив парфумерії',
                     'common.title.new': 'NEW',
                     'common.title.care': 'Догляд',
                     'common.title.novelty': 'Новинки',
@@ -42,7 +42,7 @@ i18n.use(initReactI18next)
 
                     'recCategories.showerAndBath': 'Душ та ванна',
                     'recCategories.accessories': 'Аксесуари',
-                    'recCategories.vitamins': 'Вітамини',
+                    'recCategories.vitamins': 'Вітаміни',
                     'recCategories.face': 'Обличчя',
 
                     'footer.aboutDelivery': 'Про доставку',
@@ -139,7 +139,7 @@ i18n.use(initReactI18next)
                     'surname': 'Surname',
                     'phone': 'Phone number',
 
-                    'header.fullSizePerfume': 'Full size perfume',
+                    'header.fullSizePerfume': 'Full-size perfumes',
                     'header.aboutUs': 'About us',
                     'header.paymentAndDelivery': 'Payment and delivery',
 

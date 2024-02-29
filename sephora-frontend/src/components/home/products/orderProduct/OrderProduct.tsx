@@ -7,9 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import i18n from "i18next";
-
-const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
-
+import routes from "../../../../common/routes.ts";
 
 const OrderProduct: React.FC<{ piece: ProductPieceDto }>
     = ({piece}) => {
@@ -31,10 +29,9 @@ const OrderProduct: React.FC<{ piece: ProductPieceDto }>
             <Stack spacing={2} direction='row'>
                 <Link href={'/details/' + piece.id} underline="none">
                     <Stack width='80px' alignItems='center'>
-                        <img
-                            className="productImg"
-                            src={piece.pictures[0].url ?? imgPlaceholder}
-                        />
+                        <img className="productImg"
+                             src={piece.pictures[0].url ?? routes.picPlaceholder}
+                             alt="Product image"/>
                     </Stack>
                 </Link>
                 <Stack justifyContent='space-between'>

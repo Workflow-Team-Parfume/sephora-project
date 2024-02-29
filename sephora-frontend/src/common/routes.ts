@@ -3,14 +3,18 @@ const routes = {
     register: '/register',
     
     home: '/',
+    productDetails: '/details/:id',
+
     products: '/products',
     novelties: '/novelties',
-    productDetails: '/details/:id',
+    care: '/care',
+    bottled: '/bottled',
+    full_sized: '/full-sized',
 
     basket: '/basket',
     order: '/order',
     thank: '/thank',
-    detailsOrder: '/order',
+    detailsOrder: '/order-details',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

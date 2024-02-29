@@ -21,14 +21,15 @@ i18n.use(initReactI18next)
                     'header.bottlingPerfumes': 'Розпив парфумерії',
                     'header.care': 'Догляд',
                     'header.new': 'NEW',
-                    'header.catalogue': 'Каталог',
                     'header.aboutUs': 'Про нас',
                     'header.paymentAndDelivery': 'Оплата та доставка',
 
                     'common.button.moreDetails': 'Детальніше',
                     'common.button.moreProducts': 'Більше товарів',
                     'common.button.review': 'Переглянути',
+
                     'common.title.novelty': 'Новинки',
+                    'common.title.catalogue': 'Каталог',
                     'common.title.popular': 'Популярне',
                     'common.title.perfumes': 'Парфуми',
                     'common.title.recommendedCategories': 'Рекомендовані категорії',
@@ -36,6 +37,7 @@ i18n.use(initReactI18next)
                     'common.title.reviews': 'Відгуки',
                     'common.title.similarProducts': 'Схожі товари',
                     'common.title.especiallyForYou': 'Спеціально для вас',
+
                     'common.ml': 'мл',
 
                     'recCategories.showerAndBath': 'Душ та ванна',
@@ -115,7 +117,7 @@ i18n.use(initReactI18next)
                     'order.paymentByCard.cardNumber': 'Номер карти',
                     'order.paymentByCard.saveTheCard': 'Зберегти карту',
                     'order.paymentByCard.pay': 'Оплатити',
-                  
+
                     'register': 'Реєстрація',
                     'phoneNumber': 'Номер телефону',
                     'registerPass': 'Пароль*',
@@ -141,13 +143,14 @@ i18n.use(initReactI18next)
                     'header.bottlingPerfumes': 'Bottling perfumes',
                     'header.care': 'Care',
                     'header.new': 'NEW',
-                    'header.catalogue': 'Catalogue',
                     'header.aboutUs': 'About us',
                     'header.paymentAndDelivery': 'Payment and delivery',
 
                     'common.button.moreDetails': 'More details',
                     'common.button.moreProducts': 'More products',
                     'common.button.review': 'Review',
+
+                    'common.title.catalogue': 'Catalogue',
                     'common.title.novelty': 'Novelty',
                     'common.title.popular': 'Popular',
                     'common.title.perfumes': 'Perfumes',
@@ -156,6 +159,7 @@ i18n.use(initReactI18next)
                     'common.title.reviews': 'Reviews',
                     'common.title.similarProducts': 'Similar products',
                     'common.title.especiallyForYou': 'Especially for you',
+
                     'common.ml': 'ml',
 
                     'recCategories.showerAndBath': 'Shower & bath',
@@ -249,6 +253,7 @@ i18n.use(initReactI18next)
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },
-    });
+    })
+    .catch(e => console.error(e));
 
-export default i18n;
+// export default i18n;

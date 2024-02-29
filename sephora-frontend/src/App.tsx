@@ -16,7 +16,8 @@ import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
-import NoveltiesPage from "./components/home/productsPage/novelties/NoveltiesPage.tsx";
+import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
+import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -82,7 +83,12 @@ function App() {
                     <Route path={routes.login} element={<LoginPage/>}/>
                     <Route path={routes.register} element={<RegisterPage/>}/>
                     <Route path={routes.productDetails} element={<Details />}/>
+
+                    <Route path={routes.products} element={<CatalogPage/>}/>
                     <Route path={routes.novelties} element={<NoveltiesPage/>}/>
+                    {/*<Route path={routes.care} element={<CarePage/>}/>*/}
+                    {/*<Route path={routes.bottled} element={<BottledPage/>}/>*/}
+                    {/*<Route path={routes.full_sized} element={<FullSizedPage/>}/>*/}
 
                     <Route path={routes.basket} element={<Basket/>}/>
                     <Route path={routes.order} element={<Order/>}/>

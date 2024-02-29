@@ -18,6 +18,7 @@ import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
+import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -86,7 +87,7 @@ function App() {
 
                     <Route path={routes.products} element={<CatalogPage/>}/>
                     <Route path={routes.novelties} element={<NoveltiesPage/>}/>
-                    {/*<Route path={routes.care} element={<CarePage/>}/>*/}
+                    <Route path={routes.care} element={<CarePage/>}/>
                     {/*<Route path={routes.bottled} element={<BottledPage/>}/>*/}
                     {/*<Route path={routes.full_sized} element={<FullSizedPage/>}/>*/}
 

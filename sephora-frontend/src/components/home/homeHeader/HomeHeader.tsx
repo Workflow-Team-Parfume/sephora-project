@@ -92,11 +92,17 @@ const HomeHeader = () => {
                     justifyContent: {xs: "center"},
                     gap: 9.5,
                 }}>
-                    <Button color="inherit">{t("header.fullSizePerfume")}</Button>
-                    <Button color="inherit">{t("header.bottlingPerfumes")}</Button>
-                    <Button color="inherit">{t("header.care")}</Button>
+                    <Button color="inherit" variant="contained">
+                        {t("header.fullSizePerfume")}
+                    </Button>
+                    <Button color="inherit" variant="contained">
+                        {t("header.bottlingPerfumes")}
+                    </Button>
+                    <Button href={routes.care} color="inherit" variant="contained">
+                        {t("common.title.care")}
+                    </Button>
                     <Button href={routes.novelties} color="inherit" variant="contained">
-                        {t("header.new")}
+                        {t("common.title.new")}
                     </Button>
                     <Button href={routes.products} color="inherit" variant="contained">
                         {t("common.title.catalogue")}

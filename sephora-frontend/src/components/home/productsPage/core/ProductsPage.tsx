@@ -40,6 +40,8 @@ const ProductsPage: React.FC<{
             .catch(e => console.error(e));
     }, [currentPage, link]);
 
+    // console.log(products)
+
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
     };

@@ -18,7 +18,6 @@ i18n.use(initReactI18next)
                     'phone': 'Номер телефона',
 
                     'header.fullSizePerfume': 'Повнорозмірні парфуми',
-                    'header.bottlingPerfumes': 'Розпив парфумерії',
                     'header.aboutUs': 'Про нас',
                     'header.paymentAndDelivery': 'Оплата та доставка',
 
@@ -26,6 +25,7 @@ i18n.use(initReactI18next)
                     'common.button.moreProducts': 'Більше товарів',
                     'common.button.review': 'Переглянути',
 
+                    'common.title.bottled': 'Розпив парфумерії',
                     'common.title.new': 'NEW',
                     'common.title.care': 'Догляд',
                     'common.title.novelty': 'Новинки',
@@ -140,7 +140,6 @@ i18n.use(initReactI18next)
                     'phone': 'Phone number',
 
                     'header.fullSizePerfume': 'Full size perfume',
-                    'header.bottlingPerfumes': 'Bottling perfumes',
                     'header.aboutUs': 'About us',
                     'header.paymentAndDelivery': 'Payment and delivery',
 
@@ -148,6 +147,7 @@ i18n.use(initReactI18next)
                     'common.button.moreProducts': 'More products',
                     'common.button.review': 'Review',
 
+                    'common.title.bottled': 'Bottling perfumes',
                     'common.title.new': 'NEW',
                     'common.title.care': 'Care',
                     'common.title.catalogue': 'Catalogue',

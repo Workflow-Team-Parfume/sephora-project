@@ -29,6 +29,7 @@ const routes = {
         pieces: '/pieces?',
         popularity: '/pieces?&sort=product.AverageRating desc',
         care: '/pieces?filter=product.category.nameEn = "Care"',
+        bottled: '/pieces?filter=isBottledParfume = true',
     }
 }
 

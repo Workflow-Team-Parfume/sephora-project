@@ -95,8 +95,8 @@ const HomeHeader = () => {
                     <Button color="inherit" variant="contained">
                         {t("header.fullSizePerfume")}
                     </Button>
-                    <Button color="inherit" variant="contained">
-                        {t("header.bottlingPerfumes")}
+                    <Button href={routes.bottled} color="inherit" variant="contained">
+                        {t("common.title.bottled")}
                     </Button>
                     <Button href={routes.care} color="inherit" variant="contained">
                         {t("common.title.care")}

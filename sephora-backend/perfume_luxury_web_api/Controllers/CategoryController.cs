@@ -6,7 +6,7 @@ public class CategoryController(ICategoryService categoryService) : Controller
     [HttpGet("all")]
     public async Task<IActionResult> Get()
         => Ok(await categoryService.Get().ToListAsync());
-    
+
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
@@ -20,7 +20,9 @@ public class CategoryController(ICategoryService categoryService) : Controller
         => Ok(await categoryService.GetById(id));
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromForm] CreateCategoryDto category)
+    public async Task<IActionResult> Create(
+        [FromForm] CreateCategoryDto category
+    )
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
@@ -37,11 +39,13 @@ public class CategoryController(ICategoryService categoryService) : Controller
     }
 
     [HttpPut]
-    public async Task<IActionResult> Edit([FromBody] EditCategoryDto category)
+    public async Task<IActionResult> Edit(
+        [FromForm] EditCategoryDto category
+    )
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
-        
+
         await categoryService.Edit(category);
         return Ok();
     }

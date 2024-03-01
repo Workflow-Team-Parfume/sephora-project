@@ -1,8 +1,8 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import CategoryListPage from "./components/admin/category/list/CategoryListPage";
-import CategoryCreatePage from "./components/admin/category/create/CategoryCreatePage";
-import CategoryEditPage from "./components/admin/category/edit/CategoryEditPage";
+import CategoryListPage from "./components/admin/category/CategoryListPage.tsx";
+import CategoryCreatePage from "./components/admin/category/CategoryCreatePage.tsx";
+import CategoryEditPage from "./components/admin/category/CategoryEditPage.tsx";
 import AdminLayout from "./components/admin/container/AdminLayout";
 import HomePage from "./components/home/HomePage";
 import LoginPage from "./components/auth/login/LoginPage";

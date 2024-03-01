@@ -127,10 +127,10 @@ const OrderDelivery = () => {
                                     <MenuItem value="" disabled>
                                         {t('order.delivery.options')}
                                     </MenuItem>
-                                    <MenuItem value={'Pickup'}>Самовивіз</MenuItem>
-                                    <MenuItem value={'Nova Post'}>Нова пошта</MenuItem>
-                                    <MenuItem value={'Nova Post(post machine)'}>Нова пошта (Поштомат)</MenuItem>
-                                    <MenuItem value={'Ukrpost'}>Укрпошта</MenuItem>
+                                    <MenuItem value={'Pickup'}>{t('order.delivery.pickup')}</MenuItem>
+                                    <MenuItem value={'Nova Post'}>{t('order.delivery.novaPost')}</MenuItem>
+                                    <MenuItem value={'Nova Post(post machine)'}>{t('order.delivery.novaPost.postMachine')}</MenuItem>
+                                    <MenuItem value={'Ukrpost'}>{t('order.delivery.ukrpost')}</MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField

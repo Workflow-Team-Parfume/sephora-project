@@ -1,12 +1,12 @@
 const routes = {
     login: '/login',
     register: '/register',
+    profile: '/profile',
     
     home: '/',
     productsPage: '/products',
     productDetails: '/details/:id',
 
-    basket: '/basket',
     order: '/order',
     thank: '/thank',
     detailsOrder: '/detailsOrder',

@@ -1,43 +1,13 @@
-import {Box, Button, FormControl, IconButton, InputAdornment, Link, OutlinedInput, Stack, Tab, Tabs, TextField, Typography} from "@mui/material";
+import {Button, FormControl, IconButton, InputAdornment, Link, OutlinedInput, Stack, Tab, Tabs, TextField} from "@mui/material";
 import "./orderBuyer.scss";
 import {useTranslation} from "react-i18next";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import textFieldStyle from '../../../../common/textFieldStyle';
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-  }
-  
-function CustomTabPanel(props: TabPanelProps) {
-const { children, value, index, ...other } = props;
-
-return (
-    <div
-    role="tabpanel"
-    hidden={value !== index}
-    id={`simple-tabpanel-${index}`}
-    aria-labelledby={`simple-tab-${index}`}
-    {...other}
-    >
-    {value === index && (
-        <Box sx={{ p: 3 }}>
-        <Typography>{children}</Typography>
-        </Box>
-    )}
-    </div>
-);
-}
-  
-function a11yProps(index: number) {
-return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-};
-}
+import a11yProps from "../../../common/tabPanel/a11yProps";
+import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
+import tabsStyle from "../../../common/tabPanel/tabsStyle";
 
 const OrderBuyer = () => {
     const {t} = useTranslation();    
@@ -56,7 +26,9 @@ const OrderBuyer = () => {
     const [surname, setSurname] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
+    
     const [nameError, setNameError] = useState<string>('');
     const [surnameError, setSurnameError] = useState<string>('');
     const [phoneError, setPhoneError] = useState<string>('');
@@ -92,20 +64,6 @@ const OrderBuyer = () => {
     
     const handleSingInClick = () => {
         navigate('/');
-    }
-
-    const tabsStyle = {
-        flexGrow: 1,
-        '&.Mui-selected': {
-            color: 'black',
-            fontSize: '20px',
-            textTransform: 'none'
-        },
-        '&:not(.Mui-selected)': {
-            color: 'grey',
-            fontSize: '20px',
-            textTransform: 'none',
-        }
     }
 
     return (
@@ -188,9 +146,11 @@ const OrderBuyer = () => {
                             variant="outlined"
                         >
                             <OutlinedInput
+                                value={email}
                                 placeholder={t('email')}
                                 id="order-email"
                                 type={'text'}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}    
                             />
                         </FormControl>
                         <FormControl 
@@ -201,6 +161,8 @@ const OrderBuyer = () => {
                                 placeholder={t('password')}
                                 id="order-password"
                                 type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}    
                                 endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton

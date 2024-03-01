@@ -37,11 +37,11 @@ const Product: React.FC<{ piece: ProductPieceDto }>
 
                     <CardMedia
                         component="div"
-                        sx={{pt: '120%'}}
+                        sx={{pt: '100%',backgroundSize:'contain'}}
                         image={piece.pictures[0]?.urlLg ?? imgPlaceholder}
                     />
 
-                    <Stack spacing={4}>
+                    <Stack spacing={'5%'}>
                         <Typography className="productName">
                             {piece.product?.name}
                         </Typography>

@@ -10,8 +10,15 @@ public class ApplicationProfile : Profile
         CreateMap<Brand, BrandDto>().ReverseMap();
         CreateMap<Brand, CreateBrandDto>().ReverseMap();
 
-        CreateMap<Category, CategoryDto>().ReverseMap();
-        CreateMap<Category, CreateCategoryDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>()
+            .ForMember(
+                dest => dest.Picture,
+                opts => opts.MapFrom(src => new PictureDto(src.Picture, EnvName == "Development"))
+            );
+        CreateMap<CreateCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
+        CreateMap<EditCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
 
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();

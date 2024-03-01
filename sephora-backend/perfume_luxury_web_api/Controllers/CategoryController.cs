@@ -37,7 +37,7 @@ public class CategoryController(ICategoryService categoryService) : Controller
     }
 
     [HttpPut]
-    public async Task<IActionResult> Edit([FromBody] CategoryDto category)
+    public async Task<IActionResult> Edit([FromBody] EditCategoryDto category)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");

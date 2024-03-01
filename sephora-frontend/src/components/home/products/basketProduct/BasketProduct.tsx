@@ -20,7 +20,7 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
             setCount(count);
     };
     return (
-        <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center' padding={'20px 12px'}>
+        <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center' padding={'12px 20px'}>
             <Link href={'/details/' + piece.id} underline="none">
                 <Stack spacing={2} direction='row'>
                     <Stack width='80px' alignItems='center'>

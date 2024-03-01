@@ -16,10 +16,10 @@ import ProductsPage from "./components/home/productsPage/ProductsPage";
 import Details from "./components/home/products/detailsProduct/Details";
 import {DetailsProduct, Filter, Filters} from "./components/home/data";
 import routes from './common/routes';
-import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
+import Profile from "./components/home/profile/Profile";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -88,11 +88,11 @@ function App() {
                     <Route path={routes.productsPage}
                            element={<ProductsPage title="Новинки" filters={Filters}
                            mainFilter={Filter}/>}/>
-
-                    <Route path={routes.basket} element={<Basket/>}/>
+                           
                     <Route path={routes.order} element={<Order/>}/>
                     <Route path={routes.thank} element={<Thank/>}/>
                     <Route path={routes.detailsOrder} element={<YourOrder/>}/>
+                    <Route path={routes.profile} element={<Profile/>}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

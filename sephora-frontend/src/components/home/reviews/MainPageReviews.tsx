@@ -39,13 +39,17 @@ const Reviews: React.FC<{ title: string, reviews: IMPReview[] }>
                                 </Typography>
                             </Stack>
 
-                            <Stack direction="row" spacing={4}>
-                                <img className="productImage" src={review.productImage} alt={review.productName}/>
-                                <Stack style={{margin: "48px 37px"}}>
-                                    <Typography className="productName">{review.productName}</Typography>
-                                    <Typography className="productCategory">{review.productCategory}</Typography>
-                                </Stack>
-                            </Stack>
+                            <Grid container spacing={4}>
+                                <Grid item lg={6} sx={{backgroundSize:'contain'}}>
+                                    <img className="productImage" src={review.productImage} alt={review.productName}/>
+                                </Grid>
+                                <Grid item lg={6} paddingBottom='15%'>
+                                    <Stack justifyContent='center' height='100%' spacing={1}>
+                                        <Typography className="productName">{review.productName}</Typography>
+                                        <Typography className="productCategory">{review.productCategory}</Typography>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     ))}
                 </Grid>

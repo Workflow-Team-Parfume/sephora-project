@@ -1,26 +1,33 @@
 .reviews{
     .userName{
         font-family: 'Lato', sans-serif;
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 700;
     }
     .review{
         font-family: 'Lato', sans-serif;
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 400;
+        height: 115px;
     }
     .productCategory{
-        font-size: 21px;
+        font-size: 24px;
         font-weight: 300;
+        color: #9D9D9D;
     }
     .productName{
         font-family: 'Lato', sans-serif ;
-        font-size: 21px ;
-        font-weight: 400 ;
+        font-size: 24px ;
+        font-weight: 500 ;
         height: 67px ;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
     }
     .productImage{
-        max-width: 190px;
+        max-width: 215px;
+        max-height: 246px;
     }
     .title{
         text-align: center;

@@ -6,14 +6,12 @@ import OrderProduct from "../../profile/orderProduct/OrderProduct";
 import OrderDto from "../../../../models/order/OrderDto";
 import { CalculateOrderTotal } from "../../../../common/calculateTotal";
 
-
 const YourOrder = () => {
     const {t} = useTranslation();
     const order1:OrderDto = order;
 
     const total: number = CalculateOrderTotal(order1);
     const discount = 0;
-
 
     return (
         <Stack className="yourOrder" margin='80px 17%'>

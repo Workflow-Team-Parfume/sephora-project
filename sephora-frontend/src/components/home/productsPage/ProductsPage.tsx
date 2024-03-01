@@ -31,7 +31,7 @@ const ProductsPage: React.FC<{
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     useEffect(() => {
-        http_common.get("pieces?size=4&page=1&select=perfume")
+        http_common.get("pieces?size=4&page=1")
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     });
@@ -39,9 +39,8 @@ const ProductsPage: React.FC<{
     const itemsPerPage = 9;
     const [currentPage, setCurrentPage] = useState(1);
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
-        event;
     };
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -50,9 +49,8 @@ const ProductsPage: React.FC<{
     const [expanded, setExpanded] = useState<boolean>(false);
 
     const handleChange =
-        (panel: boolean) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+        (panel: boolean) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
-            event;
         };
     const sort1: string[] = [t('sortBy.price'), t('sortBy.popularity'), t('sortBy.date')];
     const sort2: string[] = [t('sortBy.toLow'), t('sortBy.toHigh')];
@@ -86,9 +84,7 @@ const ProductsPage: React.FC<{
                         <Typography className="title">{title}</Typography>
                         <Stack sx={{alignItems: 'end'}}>
                             <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon/>}
-                                >
+                                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                                     <Typography className='sortName'>
                                         {t('sortBy.title')} <span className="checked">{checked1}</span>
                                     </Typography>
@@ -100,10 +96,12 @@ const ProductsPage: React.FC<{
                                                 key={value}
                                                 role="listitem"
                                                 onClick={handleToggle1(value)}
-                                                sx={{p: "0"}}
-                                            >
-                                                <Typography
-                                                    className={checked1 == value ? 'checked' : 'check'}>{value}</Typography>
+                                                sx={{p: "0"}}>
+                                                <Typography className={
+                                                    checked1 == value
+                                                        ? 'checked'
+                                                        : 'check'
+                                                }>{value}</Typography>
                                             </ListItemButton>
                                         ))}
                                         {sort2.map((value) => (

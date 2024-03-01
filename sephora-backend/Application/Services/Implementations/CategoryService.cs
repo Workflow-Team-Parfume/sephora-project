@@ -26,8 +26,9 @@ public class CategoryService(
         await categoryRepository.Save();
     }
 
-    public async Task<IEnumerable<CategoryDto>> Get()
-        => mapper.Map<IEnumerable<CategoryDto>>(await categoryRepository.GetAll());
+    public IQueryable<CategoryDto> Get()
+        => categoryRepository.GetAll()
+            .ProjectTo<CategoryDto>(mapper.ConfigurationProvider);
 
     public async Task<CategoryDto?> GetById(int id)
     {

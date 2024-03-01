@@ -107,6 +107,40 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Characteristic", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameUa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ValueEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ValueUa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Characteristics");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.DeliveryEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -115,12 +149,38 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
+                    b.Property<string>("Apartment")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Building")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
+                    b.Property<string>("District")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NovaPostWarehouse")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PostalCode")
                         .HasColumnType("text");
 
                     b.Property<string>("Provider")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UnauthedUserId")
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")
@@ -129,6 +189,26 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeliveryDataSet");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Favorite", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
+                        .HasColumnOrder(0);
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
@@ -200,6 +280,9 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
+                    b.Property<decimal>("AverageRating")
+                        .HasColumnType("numeric");
+
                     b.Property<int>("BrandId")
                         .HasColumnType("integer");
 
@@ -210,7 +293,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DescriptionEn")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DescriptionUa")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -314,6 +402,44 @@ namespace Infrastructure.Migrations
                     b.ToTable("Ratings");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.UnauthedUser", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("DeliveryDataId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryDataId")
+                        .IsUnique();
+
+                    b.ToTable("UnauthedUser");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -326,7 +452,7 @@ namespace Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<long>("DeliveryDataId")
+                    b.Property<long?>("DeliveryDataId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Email")
@@ -335,6 +461,14 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -541,6 +675,36 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Characteristic", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
+                        .WithMany("Characteristics")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.Favorite", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.ProductEntity", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CleanArchitecture.Domain.Entities.UserEntity", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.Order", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "Delivery")
@@ -641,13 +805,21 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CleanArchitecture.Domain.Entities.UnauthedUser", b =>
+                {
+                    b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "DeliveryData")
+                        .WithOne("UnauthedUser")
+                        .HasForeignKey("CleanArchitecture.Domain.Entities.UnauthedUser", "DeliveryDataId");
+
+                    b.Navigation("DeliveryData");
+                });
+
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
                 {
                     b.HasOne("CleanArchitecture.Domain.Entities.DeliveryEntity", "DeliveryData")
                         .WithOne("User")
                         .HasForeignKey("CleanArchitecture.Domain.Entities.UserEntity", "DeliveryDataId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("DeliveryData");
                 });
@@ -720,6 +892,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.DeliveryEntity", b =>
                 {
+                    b.Navigation("UnauthedUser");
+
                     b.Navigation("User");
                 });
 
@@ -730,6 +904,8 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.ProductEntity", b =>
                 {
+                    b.Navigation("Characteristics");
+
                     b.Navigation("ProductPieces");
 
                     b.Navigation("Ratings");
@@ -743,6 +919,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("CleanArchitecture.Domain.Entities.UserEntity", b =>
                 {
                     b.Navigation("CartItems");
+
+                    b.Navigation("Favorites");
 
                     b.Navigation("Orders");
 

@@ -1,7 +1,7 @@
 import {Outlet} from "react-router-dom";
 import { Container } from "@mui/material";
 import HomeHeader from "../../../home/homeHeader/HomeHeader";
-import HomeFooter from "../../../home/homeFooter/homeFooter";
+import HomeFooter from "../../../home/homeFooter/homeFooter.tsx";
 
 const DefaultLayout = () => {
     return (

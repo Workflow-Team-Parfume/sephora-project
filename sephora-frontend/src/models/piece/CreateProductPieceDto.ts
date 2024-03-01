@@ -1,6 +1,6 @@
 export default interface CreateProductPieceDto {
-    get inStock(): number | null;
     get productId(): number;
+    get inStock(): number | null;
     get price(): number;
     get amountId(): number;
     get isBottledParfume(): boolean;

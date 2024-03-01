@@ -15,6 +15,6 @@ public class EditProductPieceDto
      * If there shouldn't be any changes commenced, both of these
      * collections must be empty
      */
-    public IEnumerable<IFormFile> NewPhotos { get; set; }
-    public IEnumerable<long> DeletePhotos { get; set; }
+    public IEnumerable<IFormFile> NewPhotos { get; set; } = [];
+    public IEnumerable<long> DeletePhotos { get; set; } = [];
 }

@@ -9,6 +9,7 @@ import a11yProps from "../../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../../common/tabPanel/tabsStyle";
 
+        
 const OrderBuyer = () => {
     const {t} = useTranslation();    
     const navigate = useNavigate();
@@ -28,7 +29,6 @@ const OrderBuyer = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    
     const [nameError, setNameError] = useState<string>('');
     const [surnameError, setSurnameError] = useState<string>('');
     const [phoneError, setPhoneError] = useState<string>('');
@@ -65,6 +65,7 @@ const OrderBuyer = () => {
     const handleSingInClick = () => {
         navigate('/');
     }
+
 
     return (
         <Stack className="buyer">
@@ -140,7 +141,6 @@ const OrderBuyer = () => {
             <CustomTabPanel value={value} index={1}>
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
-
                         <FormControl
                             sx={{ ...textFieldStyle }} 
                             variant="outlined"

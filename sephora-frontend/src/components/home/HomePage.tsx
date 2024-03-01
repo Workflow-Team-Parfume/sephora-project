@@ -44,9 +44,9 @@ const defaultProps: HomePageProps = {
 }
 
 async function fetchAll(setCallback: (props: HomePageProps) => void) {
-    const novelty = http_common.get("pieces?size=4&page=1&sort=createdAt,desc");
-    const popular = http_common.get("pieces?size=4&page=1&sort=rating,desc");
-    const perfumes = http_common.get("pieces?size=4&page=1&select=perfume");
+    const novelty = http_common.get("pieces?size=4&page=1&sort=createdAt desc");
+    const popular = http_common.get("pieces?size=4&page=1&sort=averageRating desc");
+    const perfumes = http_common.get("pieces?size=4&page=1");
     setCallback({
         novelty: (await novelty).data,
         popular: (await popular).data,

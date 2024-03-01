@@ -1,4 +1,5 @@
 ﻿global using System.Data.Common;
+global using System.Linq.Dynamic.Core.Exceptions;
 global using System.Net;
 global using System.Security;
 global using System.Text;

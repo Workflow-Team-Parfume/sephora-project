@@ -26,7 +26,7 @@ export function Basket () {
     const handleClose = () => setOpen(false);
 
     const {t} = useTranslation();
-    const products = [newPieces[0],newPieces[2]];
+    const products = newPieces;
 
     const discount = 0;
 

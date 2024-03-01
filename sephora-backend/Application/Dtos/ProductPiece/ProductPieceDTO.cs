@@ -3,13 +3,18 @@
 public class ProductPieceDto
 {
     public long Id { get; set; }
+    
     public int? InStock { get; set; }
+    
     public decimal Price { get; set; }
+    
     public int Milliliters { get; set; }
+    
     public bool IsBottledParfume { get; set; }
-    public long ProductId { get; set; }
+    
     public ProductDto Product { get; set; } = default!;
-    public IEnumerable<PictureDto> Pictures { get; set; }
+    
+    public IEnumerable<PictureDto> Pictures { get; set; } = [];
     
     public DateTime CreatedAt { get; set; }
     

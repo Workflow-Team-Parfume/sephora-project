@@ -3,6 +3,6 @@ export default interface RatingDto {
     get comment(): string;
     get rate(): number;
 
-    // get name(): string;
-    // get pfp(): string;
+    get userName(): string;
+    get userPfp(): string;
 }

@@ -15,7 +15,6 @@ const Order = () => {
 
     const total: number = CalculateProductTotal(pieces);
     const discount = 0;
-
     
     return (
         <Container

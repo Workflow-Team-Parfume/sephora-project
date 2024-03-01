@@ -92,7 +92,6 @@ function App() {
                     <Route path={routes.order} element={<Order/>}/>
                     <Route path={routes.thank} element={<Thank/>}/>
                     <Route path={routes.detailsOrder} element={<YourOrder/>}/>
-
                     <Route path={routes.profile} element={<Profile/>}/>
                 </Route>
 

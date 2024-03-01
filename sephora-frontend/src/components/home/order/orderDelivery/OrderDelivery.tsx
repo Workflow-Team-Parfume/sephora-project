@@ -134,7 +134,7 @@ const OrderDelivery = () => {
                                 </Select>
                             </FormControl>
                             <TextField
-                                sx={{ ...textFieldStyle }} 
+                                sx={{ ...textFieldStyle }
                                 placeholder={t('address.street')+'*'}
                                 required
                                 id="delivery-street"
@@ -152,7 +152,7 @@ const OrderDelivery = () => {
                             />
                             <Stack direction='row' spacing={2} maxWidth='400px'>
                                 <TextField
-                                    sx={{ ...textFieldStyle }} 
+                                    sx={{ ...textFieldStyle }}
                                     placeholder={t('address.house')+'*'}
                                     required
                                     id="delivery-house"
@@ -162,7 +162,7 @@ const OrderDelivery = () => {
                                     helperText={houseError}
                                 />
                                 <TextField
-                                    sx={{ ...textFieldStyle }} 
+                                    sx={{ ...textFieldStyle }}
                                     placeholder={t('address.sq')}
                                     id="delivery-sq"
                                     value={sq}

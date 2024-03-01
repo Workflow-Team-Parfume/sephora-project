@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import {initReactI18next} from 'react-i18next';
 
 i18n
   .use(initReactI18next)
@@ -19,6 +19,17 @@ i18n
         'surname': 'Прізвище',
         'phone': 'Номер телефона',
         'date': 'Дата народження',
+          
+        'passwordRecovery': 'Відновлення паролю',
+        'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
+        'send': 'Надіслати',
+        'loginEmail': 'Логін/E-mail',
+        'or': 'АБО'
+        'register': 'Реєстрація',
+        'phoneNumber': 'Номер телефону',
+        'registerPass': 'Пароль*',
+        'registerPassConfirm': 'Підтвердження пароля*',
+        'registerBtn': 'Зареєструватися',
           
         'header.fullSizePerfume': 'Повнорозмірні парфуми',
         'header.bottlingPerfumes': 'Розпив парфумерії',
@@ -150,6 +161,18 @@ i18n
         'surname': 'Surname',
         'phone': 'Phone number',
         'date': 'Date of birth',
+          
+        'passwordRecovery': 'Password recovery',
+        'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
+        'send': 'Send',
+        'signIn': 'Sign in',
+        'loginEmail': 'Login/E-mail',
+        'or': 'OR',
+        'register': 'Registration',
+        'phoneNumber': 'Phone number',
+        'registerPass': 'Password',
+        'registerPassConfirm': 'Password confirmation',
+        'registerBtn': 'Sign up'
           
         'header.fullSizePerfume': 'Full size perfume',
         'header.bottlingPerfumes': 'Bottling perfumes',

@@ -149,11 +149,11 @@ const orderProducts = ([
     }
 ])
 export const order = ({
-        id: 1,
-        date: new Date('02.26.2024'),
-        status: OrderStatus.CONFIRMED,
-        deliveryId: 1,
-        products: [orderProducts[0]]
+    id: 1,
+    date: new Date('02.26.2024'),
+    status: OrderStatus.CONFIRMED,
+    deliveryId: 1,
+    products: [orderProducts[0]]
 })
 export const orders = ([
     {

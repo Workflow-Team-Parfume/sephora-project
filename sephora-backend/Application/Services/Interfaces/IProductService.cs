@@ -2,15 +2,19 @@
 
 public interface IProductService
 {
-    Task<IEnumerable<ProductDto>> Get();
+    // user is here to map the user's favorites
+    Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null);
 
     async Task<PagedListInfo<ProductDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null,
+        ClaimsPrincipal? user = null
+    ) => await (await Get(user))
+        .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
-    Task<ProductDto?> GetById(long id);
+    Task<ProductDto?> GetById(long id, ClaimsPrincipal? user = null);
     Task Create(CreateProductDto createProductDto);
     Task Edit(EditProductDto editProductDto);
     Task Delete(long id);

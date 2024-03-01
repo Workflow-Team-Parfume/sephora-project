@@ -110,19 +110,19 @@ const HomeHeader = () => {
                         marginX: '5%',
                     }}
                 >
-                    <Button href={routes.full_sized} color="inherit" variant="contained">
+                    <Button href={routes.full_sized} color="inherit">
                         {t("header.fullSizePerfume")}
                     </Button>
-                    <Button href={routes.bottled} color="inherit" variant="contained">
+                    <Button href={routes.bottled} color="inherit">
                         {t("header.bottled")}
                     </Button>
-                    <Button href={routes.care} color="inherit" variant="contained">
+                    <Button href={routes.care} color="inherit">
                         {t("header.care")}
                     </Button>
-                    <Button href={routes.novelties} color="inherit" variant="contained">
+                    <Button href={routes.novelties} color="inherit">
                         {t("header.new")}
                     </Button>
-                    <Button href={routes.products} color="inherit" variant="contained">
+                    <Button href={routes.products} color="inherit">
                         {t("header.catalogue")}
                     </Button>
                     <Button color="inherit">{t("header.aboutUs")}</Button>

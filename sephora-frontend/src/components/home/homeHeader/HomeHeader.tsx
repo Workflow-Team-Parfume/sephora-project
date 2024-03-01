@@ -35,9 +35,7 @@ const HomeHeader = () => {
                         ...boxStyleHeader,
                         gap: 2,
                     }}>
-                        <Link href={'/'} underline="none">
-                            <img src={logo} alt="Luxuryhub"/>
-                        </Link>
+                        <img src={logo} alt="Luxuryhub"/>
                     </Box>
 
                     <Input className="main_input"

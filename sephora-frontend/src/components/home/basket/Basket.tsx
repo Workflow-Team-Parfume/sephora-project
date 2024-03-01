@@ -48,7 +48,6 @@ export function Basket () {
             >
                 <Box 
                     sx={style}
-                    id="custom-modal" 
                     className="containerBasket"
                     style={{maxWidth: "100%", justifyContent: "center", margin: '20px 0'}}
                 >

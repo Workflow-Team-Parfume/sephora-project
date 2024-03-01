@@ -6,19 +6,16 @@ import OrderProduct from "../products/orderProduct/OrderProduct";
 import OrderBuyer from "./orderBuyer/OrderBuyer";
 // import OrderDelivery from "./orderDelivery/OrderDelivery";
 import ProductPieceDto from "../../../models/piece/ProductPieceDto"
+import { CalculateProductTotal } from "../../../common/calculateTotal";
 
 
 const Order = () => {
     const {t} = useTranslation();
     const pieces:ProductPieceDto[] = newPieces;
 
-    const total: number = calculateTotal();
+    const total: number = CalculateProductTotal(pieces);
     const discount = 0;
 
-    function calculateTotal(): number {
-        const total: number = pieces.reduce((acc, piece) => acc + piece.price, 0);
-        return total;
-    }
     
     return (
         <Container

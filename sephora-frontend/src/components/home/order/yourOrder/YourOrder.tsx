@@ -4,19 +4,16 @@ import {useTranslation} from "react-i18next";
 import { order } from "../../data";
 import OrderProduct from "../../profile/orderProduct/OrderProduct";
 import OrderDto from "../../../../models/order/OrderDto";
+import { CalculateOrderTotal } from "../../../../common/calculateTotal";
 
 
 const YourOrder = () => {
     const {t} = useTranslation();
     const order1:OrderDto = order;
 
-    const total: number = calculateTotal();
+    const total: number = CalculateOrderTotal(order1);
     const discount = 0;
 
-    function calculateTotal(): number {
-        const total: number = order1.products.reduce((acc, piece) => acc + piece.productPiece.price * piece.quantity, 0);
-        return total;
-    }
 
     return (
         <Stack className="yourOrder" margin='80px 17%'>

@@ -100,7 +100,7 @@ const OrderDelivery = () => {
                         <Stack spacing={2}>
                             <TextField
                                 sx={{ ...textFieldStyle }} 
-                                placeholder={t('order.delivery.city')+'*'}
+                                placeholder={t('address.city')+'*'}
                                 required
                                 id="delivery-city"
                                 value={city}
@@ -135,7 +135,7 @@ const OrderDelivery = () => {
                             </FormControl>
                             <TextField
                                 sx={{ ...textFieldStyle }} 
-                                placeholder={t('order.delivery.street')+'*'}
+                                placeholder={t('address.street')+'*'}
                                 required
                                 id="delivery-street"
                                 value={street}
@@ -153,7 +153,7 @@ const OrderDelivery = () => {
                             <Stack direction='row' spacing={2} maxWidth='400px'>
                                 <TextField
                                     sx={{ ...textFieldStyle }} 
-                                    placeholder={t('order.delivery.house')+'*'}
+                                    placeholder={t('address.house')+'*'}
                                     required
                                     id="delivery-house"
                                     value={house}
@@ -163,7 +163,7 @@ const OrderDelivery = () => {
                                 />
                                 <TextField
                                     sx={{ ...textFieldStyle }} 
-                                    placeholder={t('order.delivery.sq')}
+                                    placeholder={t('address.sq')}
                                     id="delivery-sq"
                                     value={sq}
                                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSq(event.target.value)}

@@ -90,7 +90,9 @@ const HomeHeader = () => {
                 gap: 2,
               }}
             >
-              <img src={icon1} alt="" />
+              <Button disableTouchRipple href="/profile">
+                <img src={icon1} alt="" />
+              </Button>
               {Basket()}
                 
             </Box>

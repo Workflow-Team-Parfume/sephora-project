@@ -42,7 +42,7 @@ const OrderProduct: React.FC<{ orderItem: OrderItemDto }>
                             {orderItem.quantity} {t('pc')}
                         </Typography>
                         <Typography className="productPrice" sx={{fontWeight: 500}}>
-                            {orderItem.productPiece.price} {t('uan')}
+                            {orderItem.productPiece.price * orderItem.quantity} {t('uan')}
                         </Typography>
                     </Stack>
                 </Stack>

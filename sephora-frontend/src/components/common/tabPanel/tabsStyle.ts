@@ -3,12 +3,12 @@ const tabsStyle = {
     maxWidth: 'none',
     '&.Mui-selected': {
         color: 'black',
-        fontSize: '20px',
+        fontSize: '24px',
         textTransform: 'none'
     },
     '&:not(.Mui-selected)': {
         color: 'grey',
-        fontSize: '20px',
+        fontSize: '24px',
         textTransform: 'none',
     }
 }

@@ -38,7 +38,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
                         image={piece.pictures[0]?.urlLg ?? routes.picPlaceholder}
                     />
 
-                    <Stack spacing={4}>
+                    <Stack spacing={'5%'}>
                         <Typography className="productName">
                             {piece.product?.name}
                         </Typography>

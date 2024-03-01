@@ -221,11 +221,57 @@ const orderProducts = ([
 ])
 export const order = ({
     id: 1,
-    date: new Date('26.02.2024'),
+    date: new Date('02.26.2024'),
     status: OrderStatus.CONFIRMED,
     deliveryId: 1,
-    products: orderProducts
+    products: [orderProducts[0]]
 })
+export const orders = ([
+    {
+        id: 12165847689,
+        date: new Date('02.26.2024'),
+        status: OrderStatus.CONFIRMED,
+        deliveryId: 1,
+        products: [orderProducts[0]]
+    },
+    {
+        id: 2,
+        date: new Date('2.03.2024'),
+        status: OrderStatus.CANCELLED_BY_USER,
+        deliveryId: 1,
+        products: orderProducts
+    },
+    {
+        id: 3,
+        date: new Date('3.02.2024'),
+        status: OrderStatus.DELIVERED,
+        deliveryId: 1,
+        products: [orderProducts[1],orderProducts[2]]
+    },
+])
+
+export const addresses = ([
+    {
+        id: 1,
+        name: 'Олена',
+        surname: 'Юркевич',
+        street: 'Вулиця',
+        house: '12',
+        sq: '',
+        city: 'Київ, Київська обл.',
+        phone: '+38 (012) 345 6789'
+    },
+    {
+        id: 2,
+        name: 'Євгенія',
+        surname: 'Гурко',
+        street: 'Вулиця',
+        house: '13',
+        sq: '',
+        city: 'Київ, Київська обл.',
+        phone: '+38 (012) 345 6789'
+    },
+])
 
 
 export const Populars = ([

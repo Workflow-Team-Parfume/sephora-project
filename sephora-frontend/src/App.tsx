@@ -12,7 +12,6 @@ import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 import Details from "./components/home/products/detailsProduct/Details";
 import routes from './common/routes';
-import Basket from "./components/home/basket/Basket";
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
@@ -96,6 +95,7 @@ function App() {
                     <Route path={routes.order} element={<Order/>}/>
                     <Route path={routes.thank} element={<Thank/>}/>
                     <Route path={routes.detailsOrder} element={<YourOrder/>}/>
+                    <Route path={routes.profile} element={<Profile/>}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

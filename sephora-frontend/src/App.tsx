@@ -21,6 +21,7 @@ import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 import BottledPage from "./models/piece/BottledPage.tsx";
 import {Basket} from "./components/home/basket/Basket.tsx";
 import Profile from "./components/home/profile/Profile.tsx";
+import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -91,7 +92,7 @@ function App() {
                     <Route path={routes.novelties} element={<NoveltiesPage/>}/>
                     <Route path={routes.care} element={<CarePage/>}/>
                     <Route path={routes.bottled} element={<BottledPage/>}/>
-                    {/*<Route path={routes.full_sized} element={<FullSizedPage/>}/>*/}
+                    <Route path={routes.full_sized} element={<FullSizedPage/>}/>
 
                     <Route path={routes.basket} element={<Basket/>}/>
                     <Route path={routes.order} element={<Order/>}/>

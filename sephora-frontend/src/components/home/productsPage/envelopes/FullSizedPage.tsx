@@ -1,16 +1,16 @@
-import {useTranslation} from "react-i18next";
+import React from "react";
 import ProductsPage from "../core/ProductsPage.tsx";
 import {Filter, Filters} from "../../data.ts";
 import routes from "../../../../common/routes.ts";
-import React from "react";
+import {useTranslation} from "react-i18next";
 
-const CatalogPage: React.FC = () => {
+const FullSizedPage : React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
-        title={t('header.catalogue')}
+        title={t('header.fullSizePerfume')}
         filters={Filters}
         mainFilter={Filter}
-        link={routes.api.pieces}/>;
+        link={routes.api.full_sized}/>;
 };
 
-export default CatalogPage;
+export default FullSizedPage;

@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 const CarePage: React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
-        title={t('common.title.care')}
+        title={t('header.care')}
         filters={Filters}
         mainFilter={Filter}
         link={routes.api.care}/>;

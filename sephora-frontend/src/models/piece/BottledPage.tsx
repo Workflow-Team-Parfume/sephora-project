@@ -7,7 +7,7 @@ import routes from "../../common/routes.ts";
 const BottledPage: React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
-        title={t('common.title.bottled')}
+        title={t('header.bottled')}
         filters={Filters}
         mainFilter={Filter}
         link={routes.api.bottled}/>;

@@ -31,6 +31,7 @@ const routes = {
         popularity: '/pieces?&sort=product.AverageRating desc',
         care: '/pieces?filter=product.category.nameEn = "Care"',
         bottled: '/pieces?filter=isBottledParfume = true',
+        full_sized: '/pieces?filter=isBottledParfume = false',
     }
 }
 

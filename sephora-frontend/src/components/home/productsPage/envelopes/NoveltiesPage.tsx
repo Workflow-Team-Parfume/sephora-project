@@ -7,7 +7,7 @@ import routes from "../../../../common/routes.ts";
 const NoveltiesPage : React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
-        title={t('common.title.novelty')}
+        title={t('header.novelty')}
         filters={Filters}
         mainFilter={Filter}
         link={routes.api.novelties}/>;

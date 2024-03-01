@@ -6,11 +6,13 @@ import input_main_icon from "../../../assets/images/input_main_icon.svg";
 import icon1 from "../../../assets/images/icon1.svg";
 import { useTranslation } from "react-i18next";
 import { Basket } from "../basket/Basket";
+import routes from "../../../common/routes.ts";
 
 const HomeHeader = () => {
   const { t, i18n } = useTranslation();
   const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(language)
+        .catch(e => console.error(e));
   };
   const boxStyleHeader = {
     display: "flex",

@@ -19,6 +19,8 @@ import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPag
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 import BottledPage from "./models/piece/BottledPage.tsx";
+import {Basket} from "./components/home/basket/Basket.tsx";
+import Profile from "./components/home/profile/Profile.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);

@@ -19,18 +19,18 @@ i18n
         'surname': 'Прізвище',
         'phone': 'Номер телефона',
         'date': 'Дата народження',
-          
+
         'passwordRecovery': 'Відновлення паролю',
         'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
         'send': 'Надіслати',
         'loginEmail': 'Логін/E-mail',
-        'or': 'АБО'
+        'or': 'АБО',
         'register': 'Реєстрація',
         'phoneNumber': 'Номер телефону',
         'registerPass': 'Пароль*',
         'registerPassConfirm': 'Підтвердження пароля*',
         'registerBtn': 'Зареєструватися',
-          
+
         'header.fullSizePerfume': 'Повнорозмірні парфуми',
         'header.bottlingPerfumes': 'Розпив парфумерії',
         'header.care': 'Догляд',
@@ -38,7 +38,7 @@ i18n
         'header.catalogue': 'Каталог',
         'header.aboutUs': 'Про нас',
         'header.paymentAndDelivery': 'Оплата та доставка',
-          
+
         'common.button.moreDetails': 'Детальніше',
         'common.button.moreProducts': 'Більше товарів',
         'common.button.review': 'Переглянути',
@@ -50,7 +50,7 @@ i18n
         'common.title.reviews': 'Відгуки',
         'common.title.similarProducts': 'Схожі товари',
         'common.title.especiallyForYou': 'Спеціально для вас',
-          
+
         'recCategories.showerAndBath': 'Душ та ванна',
         'recCategories.accessories': 'Аксесуари',
         'recCategories.vitamins': 'Вітаміни',
@@ -122,7 +122,7 @@ i18n
         'order.paymentByCard.cardNumber': 'Номер карти',
         'order.paymentByCard.saveTheCard': 'Зберегти карту',
         'order.paymentByCard.pay': 'Оплатити',
-        
+
         'address.city': 'Місто',
         'address.street': 'Вулиця',
         'address.house': 'Будинок',
@@ -161,7 +161,7 @@ i18n
         'surname': 'Surname',
         'phone': 'Phone number',
         'date': 'Date of birth',
-          
+
         'passwordRecovery': 'Password recovery',
         'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
         'send': 'Send',
@@ -172,8 +172,8 @@ i18n
         'phoneNumber': 'Phone number',
         'registerPass': 'Password',
         'registerPassConfirm': 'Password confirmation',
-        'registerBtn': 'Sign up'
-          
+        'registerBtn': 'Sign up',
+
         'header.fullSizePerfume': 'Full size perfume',
         'header.bottlingPerfumes': 'Bottling perfumes',
         'header.care': 'Care',
@@ -198,7 +198,7 @@ i18n
         'recCategories.accessories': 'Accessories',
         'recCategories.vitamins': 'Vitamins',
         'recCategories.face': 'Face',
-        
+
         'footer.aboutDelivery': 'About delivery',
         'footer.paymentMethods': 'Payment methods',
         'footer.aboutProducts': 'About products',

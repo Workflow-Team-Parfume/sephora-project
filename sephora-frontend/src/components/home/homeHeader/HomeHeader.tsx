@@ -126,7 +126,7 @@ const HomeHeader = () => {
                         {t("header.catalogue")}
                     </Button>
                     <Button color="inherit">{t("header.aboutUs")}</Button>
-                    <Button>{t("header.paymentAndDelivery")}</Button>
+                    <Button color="inherit">{t("header.paymentAndDelivery")}</Button>
                 </Box>
             </div>
         </div>

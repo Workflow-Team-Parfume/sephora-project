@@ -11,7 +11,7 @@ public class Order
     
     [ForeignKey("DeliveryDataSet"), Column(Order = 0)]
     public long DeliveryId { get; set; }
-    
-    public DeliveryEntity Delivery { get; set; }
-    public ICollection<OrderItem>? Products { get; set; }
+
+    public DeliveryEntity Delivery { get; set; } = default!;
+    public ICollection<OrderItem> Products { get; set; } = [];
 }

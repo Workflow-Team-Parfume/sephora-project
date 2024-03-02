@@ -5,13 +5,15 @@ public class CartController(ICartService cartService) : ControllerBase
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await cartService.Get(User));
+        => Ok(await cartService.Get(User).ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
-    ) => Ok(await cartService.Get(User, page, size));
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => Ok(await cartService.Get(User, page, size, sort, filter));
 
     [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
     public async Task<IActionResult> Get([FromRoute] long id)

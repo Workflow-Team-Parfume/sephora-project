@@ -6,7 +6,9 @@ public class ProductEntity
 
     public string Name { get; set; } = String.Empty;
 
-    public string? Description { get; set; }
+    public string DescriptionEn { get; set; } = String.Empty;
+
+    public string DescriptionUa { get; set; } = String.Empty;
 
     public bool Active { get; set; }
 
@@ -14,14 +16,18 @@ public class ProductEntity
 
     public Brand Brand { get; set; } = default!;
 
-    public ICollection<Rating>? Ratings { get; set; }
+    public ICollection<Rating> Ratings { get; set; } = [];
 
     public int CategoryId { get; set; }
 
     public Category Category { get; set; } = default!;
 
-    public ICollection<ProductPiece>? ProductPieces { get; set; }
+    public ICollection<ProductPiece> ProductPieces { get; set; } = [];
 
-    [Column("created_at")]
+    [Column("created_at")] 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public ICollection<Characteristic> Characteristics { get; set; } = [];
+
+    public decimal AverageRating { get; set; }
 }

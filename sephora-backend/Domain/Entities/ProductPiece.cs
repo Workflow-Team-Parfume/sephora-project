@@ -16,9 +16,9 @@ public class ProductPiece
 
     public long ProductId { get; set; }
 
-    public ProductEntity Product { get; set; }
+    public ProductEntity Product { get; set; } = default!;
     
-    public ICollection<ProductPicture>? ProductPictures { get; set; }
+    public ICollection<ProductPicture> ProductPictures { get; set; } = [];
     
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

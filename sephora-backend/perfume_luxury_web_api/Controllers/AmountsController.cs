@@ -5,13 +5,15 @@ public class AmountsController(IAmountService amountService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await amountService.Get());
+        => Ok(await amountService.Get().ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
-    ) => Ok(await amountService.Get(page, size, false));
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => Ok(await amountService.Get(page, size, sort, filter));
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> Get([FromRoute] int id)

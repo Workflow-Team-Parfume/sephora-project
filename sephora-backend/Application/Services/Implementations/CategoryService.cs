@@ -2,32 +2,54 @@
 
 public class CategoryService(
     IRepository<Category> categoryRepository,
-    IMapper mapper)
-    : ICategoryService
+    IPictureService picService,
+    IMapper mapper
+) : ICategoryService
 {
     public async Task Create(CreateCategoryDto categoryDto)
     {
-        await categoryRepository.Insert(mapper.Map<Category>(categoryDto));
+        string picName = await picService.SaveImage(categoryDto.Picture);
+        Category category = mapper.Map<Category>(categoryDto);
+        category.Picture = picName;
+
+        await categoryRepository.Insert(category);
         await categoryRepository.Save();
     }
 
     public async Task Delete(int id)
     {
-        if (await categoryRepository.GetById(id) == null)
-            return;
+        var category = await categoryRepository.GetById(id);
+        if (category is null)
+            throw new ApplicationException("Category not found");
 
-        await categoryRepository.Delete(id);
+        picService.DeleteFile(category.Picture);
+
+        await categoryRepository.Delete(category);
         await categoryRepository.Save();
     }
 
-    public async Task Edit(CategoryDto categoryDto)
+    public async Task Edit(EditCategoryDto categoryDto)
     {
-        await categoryRepository.Update(mapper.Map<Category>(categoryDto));
+        var category = await categoryRepository.GetById(categoryDto);
+        if (category is null)
+            throw new ApplicationException("Category not found");
+        
+        string oldPic = category.Picture;
+        mapper.Map(categoryDto, category);
+
+        if (categoryDto.Picture is not null)
+        {
+            picService.DeleteFile(oldPic);
+            category.Picture = await picService.SaveImage(categoryDto.Picture);
+        }
+        
+        await categoryRepository.Update(category);
         await categoryRepository.Save();
     }
 
-    public async Task<IEnumerable<CategoryDto>> Get()
-        => mapper.Map<IEnumerable<CategoryDto>>(await categoryRepository.GetAll());
+    public IQueryable<CategoryDto> Get()
+        => categoryRepository.GetAll()
+            .ProjectTo<CategoryDto>(mapper.ConfigurationProvider);
 
     public async Task<CategoryDto?> GetById(int id)
     {
@@ -35,8 +57,8 @@ public class CategoryService(
             new Categories.GetById(id)
         );
 
-        if (category == null)
-            throw new Exception();
+        if (category is null)
+            throw new ApplicationException("Category not found");
 
         return mapper.Map<CategoryDto>(category);
     }

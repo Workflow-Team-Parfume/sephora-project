@@ -5,21 +5,35 @@ public class RatingController(IRatingService ratingService) : ControllerBase
 {
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-    {
-        var ratings = await ratingService.Get();
-        return Ok(ratings);
-    }
-    
-    // TODO: Add filtering by product ID
+        => Ok(await ratingService.Get().ToListAsync());
+
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
     )
     {
-        var ratings = await ratingService.Get(page, size, false);
+        var ratings = await ratingService.Get(page, size, sort, filter);
         return Ok(ratings);
     }
+
+    [HttpGet("product/{id:long}")]
+    public async Task<IActionResult> GetByProduct(
+        [FromRoute] long id,
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => await GetPaged(
+        page,
+        size,
+        sort,
+        filter is null
+            ? $"Id = {id}"
+            : $"{filter} and Id = {id}"
+    );
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)
@@ -27,9 +41,9 @@ public class RatingController(IRatingService ratingService) : ControllerBase
         var rating = await ratingService.GetById(id);
         if (rating is null)
             throw new HttpException(
-                $"The rating with ID={{{id}}} was not found", 
+                $"The rating with ID={{{id}}} was not found",
                 HttpStatusCode.NotFound
-                );
+            );
         return Ok(rating);
     }
 
@@ -43,8 +57,8 @@ public class RatingController(IRatingService ratingService) : ControllerBase
         return Ok();
     }
 
-    [HttpPut("{id:long}"), Authorize]
-    public async Task<IActionResult> Edit(long id, EditRatingDto editRatingDto)
+    [HttpPut, Authorize]
+    public async Task<IActionResult> Edit(EditRatingDto editRatingDto)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");

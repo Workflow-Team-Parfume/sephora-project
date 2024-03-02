@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Environment.IsDevelopment()
+string? connStr = builder.Environment.IsDevelopment()
     ? builder.Configuration.GetConnectionString("RemoteDb")
     : Environment.GetEnvironmentVariable("RemoteDb");
 
@@ -11,17 +11,13 @@ if (connStr is null)
 
 builder.Services.AddControllers().AddNewtonsoftJson(opts => 
         opts.SerializerSettings.Formatting = Formatting.Indented);
-builder.Services.AddControllersWithViews().AddNewtonsoftJson(opts =>
-{
-    opts.SerializerSettings.ReferenceLoopHandling 
-        = ReferenceLoopHandling.Ignore;
-    opts.SerializerSettings.Formatting = Formatting.Indented;
-});
 
 // Add JWT tokens
-JwtOptions opts = builder.Environment.IsDevelopment()
-    ? builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>()
-    : new JwtOptions
+JwtOptions? opts = null;
+if (builder.Environment.IsDevelopment())
+    opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
+else if (!builder.Environment.IsDevelopment() || opts is null)
+    opts = new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
         Key = Environment.GetEnvironmentVariable("JwtKey"),
@@ -29,7 +25,7 @@ JwtOptions opts = builder.Environment.IsDevelopment()
             Environment.GetEnvironmentVariable("JwtLifetime")
         )
     };
-builder.Services.AddJwt(opts);
+builder.Services.AddJwt(opts!);
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -55,7 +51,7 @@ builder.Services.AddValidators();
 builder.Services.AddFileService(builder.Environment.IsDevelopment());
 
 // add exception handler
-builder.Services.AddExceptionHandler<PerfumeExceptionHandler>();
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
@@ -80,7 +76,6 @@ app.UseCors(options =>
 });
 
 app.UseAuthorization();
-
 app.UseAuthentication();
 
 app.MapControllers();

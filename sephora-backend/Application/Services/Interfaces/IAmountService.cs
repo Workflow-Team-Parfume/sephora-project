@@ -1,16 +1,16 @@
-﻿
-namespace CleanArchitecture.Application.Services.Interfaces;
+﻿namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface IAmountService
 {
-    Task<IEnumerable<AmountDto>> Get();
+    IQueryable<AmountDto> Get();
 
     async Task<PagedListInfo<AmountDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await Get()).ToPagedListInfo(pageNumber, pageSize, fromStart);
-    
+        string? orderBy = null,
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+
     Task<AmountDto?> GetById(int id);
     Task Create(CreateAmountDto amountDto);
     Task Edit(AmountDto amountDto);

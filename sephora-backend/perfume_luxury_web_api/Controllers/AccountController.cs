@@ -8,13 +8,15 @@ public class AccountController(
 {
     [HttpGet("all"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get()
-        => Ok(await accountsService.GetAll());
+        => Ok(await accountsService.Get().ToListAsync());
 
     [HttpGet, Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
-        [FromQuery] int size = 10
-    ) => Ok(await accountsService.Get(page, size, false));
+        [FromQuery] int size = 10,
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => Ok(await accountsService.Get(page, size, sort, filter));
 
     [HttpGet("{id}"), Authorize(Roles = "Admin")]
     public async Task<IActionResult> Get(string id)
@@ -29,7 +31,7 @@ public class AccountController(
         await accountsService.Register(dto);
         return Ok();
     }
-
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
@@ -67,13 +69,13 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpGet("/my"), Authorize]
+    [HttpGet("my"), Authorize]
     public async Task<IActionResult> GetMy()
         => Ok(await accountsService.Get(
             userManager.GetUserId(User) ?? String.Empty
         ));
 
-    [HttpDelete("/my"), Authorize]
+    [HttpDelete("my"), Authorize]
     public async Task<IActionResult> DeleteMy()
     {
         await accountsService.Delete(
@@ -82,7 +84,7 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpPut("/my"), Authorize]
+    [HttpPut("my"), Authorize]
     public async Task<IActionResult> EditMy([FromForm] EditUserDto user)
     {
         if (!ModelState.IsValid)

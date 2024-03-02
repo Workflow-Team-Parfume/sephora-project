@@ -113,7 +113,7 @@ const AddressBook = () => {
                                     <Typography className="text">{t('profile.addressBook.tel')} {address.phone}</Typography>
                                 </Stack>
                                 <Box className='line'/>
-                                <Stack alignItems='flex-start'>
+                                <Stack alignItems='flex-start' minWidth='none'>
                                     <Button className="edit">{t('profile.addressBook.edit')}</Button>
                                 </Stack>
                             </Stack>

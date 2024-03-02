@@ -2,13 +2,14 @@
 
 public interface IAccountsService
 {
-    Task<IEnumerable<GetUserDto>> GetAll();
+    IQueryable<GetUserDto> Get();
 
     async Task<PagedListInfo<GetUserDto>> Get(
         int pageNumber,
         int pageSize,
-        bool fromStart = true
-    ) => (await GetAll()).ToPagedListInfo(pageNumber, pageSize, fromStart);
+        string? orderBy = null,
+        string? selectBy = null
+    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     Task<GetUserDto> Get(string id);
     Task<LoginResponseDto> Login(LoginDto dto);

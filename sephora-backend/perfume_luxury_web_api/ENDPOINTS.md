@@ -13,6 +13,7 @@
 9. [Products controller](#productscontroller)
 10. [Rating controller](#ratingcontroller)
 11. [Role controller](#rolecontroller)
+12. [Favorites controller](#favoritescontroller)
 
 ### AccountController
 
@@ -27,6 +28,8 @@
         * Admin only
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of accounts
 * **/{id}**
     * id: string
@@ -91,6 +94,8 @@
         * Get paged amounts
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of amounts
     * ***POST***
         * Create amount
@@ -123,6 +128,8 @@
         * Get paged brands
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of brands
     * ***POST***
         * Create brand
@@ -156,6 +163,8 @@
         * Get items in cart
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of cart items
     * ***POST***
         * Create cart item
@@ -190,6 +199,8 @@
         * Get paged categories
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of categories
     * ***POST***
         * Create category
@@ -292,6 +303,8 @@
         * Get paged pieces
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of pieces
     * ***POST***
         * Admin & mod only
@@ -327,6 +340,8 @@
         * Get paged products
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of products
     * ***POST***
         * Admin & mod only
@@ -362,6 +377,8 @@
         * Get paged ratings
         * page: int
         * size: int
+        * order: string | null
+        * filter: string | null
         * Returns: Paged list of ratings
     * ***POST***
         * Requires authentication
@@ -424,5 +441,33 @@
         * Returns: List of roles
 
 **[⬆ Back to RolesController](#rolecontroller)**  
-**[⬆ Back to Table of Contents](#table-of-contents)**  
+**[⬆ Back to Table of Contents](#table-of-contents)**
+
+### FavoritesController
+* **/**
+    * ***PUT***
+        * Requires authentication
+        * Add/delete product to/from favorites
+        * Route params: long
+        * Returns: 200 OK
+    * ***GET***
+        * Get paged ratings
+        * page: int
+        * size: int
+        * order: string | null
+        * filter: string | null
+        * Returns: Paged list of ratings
+* **/all**
+    * ***GET***
+        * Requires authentication
+        * Get all favorites
+        * Returns: List of all favorites
+* **/isFavorite/{productId}**
+    * ***GET***
+        * Requires authentication
+        * Check if product is in favorites
+        * Route params: long
+        * Returns: bool
+
+**[⬆ Back to Table of Contents](#table-of-contents)**
 **[⬆ Back to Top](#endpoints)**  

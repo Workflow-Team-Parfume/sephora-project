@@ -10,8 +10,15 @@ public class ApplicationProfile : Profile
         CreateMap<Brand, BrandDto>().ReverseMap();
         CreateMap<Brand, CreateBrandDto>().ReverseMap();
 
-        CreateMap<Category, CategoryDto>().ReverseMap();
-        CreateMap<Category, CreateCategoryDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>()
+            .ForMember(
+                dest => dest.Picture,
+                opts => opts.MapFrom(src => new PictureDto(src.Picture, EnvName == "Development"))
+            );
+        CreateMap<CreateCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
+        CreateMap<EditCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
 
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
@@ -21,7 +28,7 @@ public class ApplicationProfile : Profile
             opts => opts.MapFrom(src => src.ProductPieces)
         ).ForMember(
             dest => dest.Volumes,
-            opts => opts.MapFrom(src => src.ProductPieces!.Select(x => x.Amount))
+            opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
         );
         CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
         CreateMap<EditProductDto, ProductEntity>().ReverseMap();
@@ -47,7 +54,10 @@ public class ApplicationProfile : Profile
 
         CreateMap<CreateRatingDto, Rating>();
         CreateMap<EditRatingDto, Rating>();
-        CreateMap<Rating, RatingDto>();
+        CreateMap<Rating, RatingDto>()
+            .ForMember(dest => dest.UserPfp, opts => opts.MapFrom(src => src.User.ProfilePicture))
+            .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.User.FirstName))
+            .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.User.LastName));
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
@@ -67,26 +77,57 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Name)
             )
             .ForMember(
-                dest => dest.ProductDescription,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Description)
+                dest => dest.ProductDescriptionEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionEn)
+            )
+            .ForMember(
+                dest => dest.ProductDescriptionUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.DescriptionUa)
             )
             .ForMember(
                 dest => dest.BrandName,
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Brand.Name)
             )
             .ForMember(
-                dest => dest.CategoryName,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
+                dest => dest.CategoryNameEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameEn)
+            )
+            .ForMember(
+                dest => dest.CategoryNameUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameUa)
             )
             .ForMember(
                 dest => dest.Price,
                 opt => opt.MapFrom(src => src.ProductPiece.Price)
-                )
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
 
         CreateMap<CreateDeliveryDto, DeliveryEntity>();
-        CreateMap<DeliveryEntity, DeliveryDto>().ReverseMap();
+        CreateMap<DeliveryEntity, DeliveryDto>()
+            .ForMember(
+                dest => dest.FirstName,
+                opts => opts.MapFrom(src =>
+                    src.User!.FirstName ?? src.UnauthedUser!.FirstName)
+            )
+            .ForMember(
+                dest => dest.LastName,
+                opts => opts.MapFrom(src =>
+                    src.User!.LastName ?? src.UnauthedUser!.LastName)
+            )
+            .ForMember(
+                dest => dest.PhoneNumber,
+                opts => opts.MapFrom(src =>
+                    src.User!.PhoneNumber ?? src.UnauthedUser!.PhoneNumber)
+            ).ForMember(
+                dest => dest.Email,
+                opts => opts.MapFrom(src =>
+                    src.User!.Email ?? src.UnauthedUser!.Email)
+            )
+            .ReverseMap();
+
+        CreateMap<Characteristic, CharacteristicDto>().ReverseMap();
+        CreateMap<CreateCharacteristicDto, Characteristic>();
     }
 }

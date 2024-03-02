@@ -16,9 +16,6 @@ public class PagedList<T> : List<T>, IPagedList<T>
      * <param name="items">Collection to be paginated</param>
      * <param name="pageNumber">Current page number</param>
      * <param name="pageSize">Number of items per page</param>
-     * <param name="fromStart">
-     * Whether to start from the first page or the last one
-     * </param>
      * <exception cref="ArgumentOutOfRangeException">
      * PageSize is less than 1
      * </exception>
@@ -26,8 +23,7 @@ public class PagedList<T> : List<T>, IPagedList<T>
     public PagedList(
         IEnumerable<T> items,
         int pageNumber,
-        int pageSize,
-        bool fromStart = true
+        int pageSize
     )
     {
         // PageSize is [1, 100]
@@ -43,9 +39,6 @@ public class PagedList<T> : List<T>, IPagedList<T>
         TotalCount = enumerable.Count;
         TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
 
-        AddRange(fromStart
-            ? enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            : enumerable.SkipLast((pageNumber - 1) * pageSize).TakeLast(pageSize)
-        );
+        AddRange(enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize));
     }
 }

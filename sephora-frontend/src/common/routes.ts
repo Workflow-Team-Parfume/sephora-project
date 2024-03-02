@@ -4,17 +4,34 @@ const routes = {
     profile: '/profile',
     
     home: '/',
-    productsPage: '/products',
     productDetails: '/details/:id',
+
+    products: '/products',
+    novelties: '/novelties',
+    care: '/care',
+    bottled: '/bottled',
+    full_sized: '/full-sized',
 
     order: '/order',
     thank: '/thank',
-    detailsOrder: '/detailsOrder',
+    detailsOrder: '/order-details',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',
     createCategory: '/admin/category/create',
     editCategory: '/admin/category/edit/:id',
+
+    picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
+
+    api: {
+        novelties: '/pieces?filter=createdAt > DateTime.UtcNow.AddDays(-14)&sort=createdAt desc',
+        dateOrdered: '/pieces?sort=createdAt desc',
+        pieces: '/pieces?',
+        popularity: '/pieces?&sort=product.AverageRating desc',
+        care: '/pieces?filter=product.category.nameEn = "Care"',
+        bottled: '/pieces?filter=isBottledParfume = true',
+        full_sized: '/pieces?filter=isBottledParfume = false',
+    }
 }
 
 export default routes;

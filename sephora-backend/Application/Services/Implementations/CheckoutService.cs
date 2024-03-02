@@ -17,10 +17,10 @@ public class CheckoutService(
         var delivery = mapper.Map<DeliveryEntity>(deliveryDto);
         await deliveryService.Create(deliveryDto);
 
-        var items = cartItems.ToArray();
-        await PlaceOrder(mapper.Map<CartItem[]>(items), delivery.Id);
+        var items = mapper.Map<IEnumerable<CartItem>>(cartItems);
+        await PlaceOrder(items, delivery.Id);
     }
-    
+
     public async Task CheckoutAuthed(ClaimsPrincipal user)
     {
         UserEntity? userEntity = await userManager.GetUserAsync(user);
@@ -28,12 +28,14 @@ public class CheckoutService(
             throw new SecurityException("The specified user is not found");
 
         var spec = new CartItems.GetByUserId(userEntity.Id);
-        
-        CartItem[] items
-            = (await cartItemRepository.GetListBySpec(spec)).ToArray();
 
-        await PlaceOrder(items, userEntity.DeliveryDataId);
+        var items = cartItemRepository.GetListBySpec(spec);
 
+        await PlaceOrder(
+            items,
+            userEntity.DeliveryDataId
+            ?? throw new ArgumentException("The specified user has no delivery ID")
+        );
         await cartService.DeleteAll(user);
     }
 
@@ -43,11 +45,11 @@ public class CheckoutService(
         if (order is null)
             throw new ArgumentException(
                 "The specified order is not found",
-                nameof(dto.Id)
+                nameof(dto)
             );
 
         order.Status = dto.Status;
-        
+
         await orderRepository.Update(order);
         await orderRepository.Save();
     }
@@ -57,7 +59,7 @@ public class CheckoutService(
         UserEntity? userEntity = await userManager.GetUserAsync(user);
         if (userEntity is null)
             throw new SecurityException("The specified user is not found");
-        
+
         Order? order = await orderRepository.GetById(orderId);
         if (order is null)
             throw new ArgumentException(
@@ -70,15 +72,14 @@ public class CheckoutService(
             );
 
         order.Status = OrderStatus.CANCELLED_BY_USER;
-        
+
         await orderRepository.Update(order);
         await orderRepository.Save();
     }
 
-    public async Task<IEnumerable<OrderDto>> Get()
-        => mapper.Map<IEnumerable<OrderDto>>(
-            await orderRepository.GetAll()
-        );
+    public IQueryable<OrderDto> Get()
+        => orderRepository.GetAll()
+            .ProjectTo<OrderDto>(mapper.ConfigurationProvider);
 
     public async Task<CategoryDto?> GetById(long id)
     {
@@ -107,20 +108,21 @@ public class CheckoutService(
      * <param name="items">The items that will be added to the order</param>
      * <param name="deliveryId">The ID of the delivery</param>
      */
-    private async Task PlaceOrder(CartItem[] items, long deliveryId)
+    private async Task PlaceOrder(IEnumerable<CartItem> items, long deliveryId)
     {
-        if (items.Length == 0)
+        var cartItems = items.ToArray();
+        if (cartItems.IsNullOrEmpty())
             throw new ArgumentException(
                 "The cart is empty",
                 nameof(items)
             );
-        
+
         var order = new Order
         {
             Date = DateTime.Now,
             Status = OrderStatus.PENDING,
             DeliveryId = deliveryId,
-            Products = items.Select(cartItem => new OrderItem
+            Products = cartItems.Select(cartItem => new OrderItem
             {
                 Quantity = cartItem.Quantity,
                 ProductPieceId = cartItem.ProductPieceId

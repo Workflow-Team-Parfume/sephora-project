@@ -98,23 +98,7 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DescriptionEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DescriptionUa")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("NameUa")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Picture")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -399,17 +383,11 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("numeric");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
                         .IsRequired()

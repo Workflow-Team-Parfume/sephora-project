@@ -108,13 +108,6 @@ public class ProductService(
             throw new ArgumentException(
                 $"Product with the id={{{id}}} is not found"
             );
-        
-        entity.ProductPieces = entity.ProductPieces
-            .OrderByDescending(x => x.CreatedAt)
-            .ToList();
-        
-        foreach (var piece in entity.ProductPieces)
-            piece.Product = null!;
 
         var dto = mapper.Map<ProductDto>(entity);
         dto.IsFavorite = await IsFavorite(user, entity.Id);

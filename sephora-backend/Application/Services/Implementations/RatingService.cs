@@ -46,7 +46,7 @@ public class RatingService(
     }
 
     public IQueryable<RatingDto> Get()
-        => repository.GetAll().ProjectTo<RatingDto>(mapper.ConfigurationProvider);
+        => mapper.Map<IQueryable<RatingDto>>(repository.GetAll());
 
     public async Task<RatingDto?> GetById(long id)
         => mapper.Map<RatingDto?>(await repository.GetById(id));

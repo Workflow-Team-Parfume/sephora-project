@@ -25,7 +25,6 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import "./RegisterPage.scss";
 import { useTranslation } from "react-i18next";
-import textFieldStyle from '../../../common/textFieldStyle';
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
@@ -163,7 +162,7 @@ const RegisterPage = () => {
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
                     <Grid container spacing={2}>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -178,7 +177,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -193,14 +192,14 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <TextField
                                 required
                                 fullWidth
                                 id="phoneNumber"
-                                label={t('phone')}
+                                label={t('phoneNumber')}
                                 name="phoneNumber"
                                 onChange={handleChange}
                                 value={values.phoneNumber}
@@ -208,7 +207,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -224,7 +223,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -239,11 +238,11 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <InputLabel htmlFor="outlined-adornment-password">
-                                {t('password')}*
+                                {t('registerPass')}
                             </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
@@ -266,7 +265,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+                            sx={{ m: 1, width: "670px", height: "50px" }}
                             variant="outlined"
                         >
                             <InputLabel htmlFor="outlined-adornment-password">
@@ -289,7 +288,7 @@ const RegisterPage = () => {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                label={t('registerPassConfirm')}
+                                label="Password"
                             />
                         </FormControl>
                     </Grid>
@@ -299,7 +298,7 @@ const RegisterPage = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 5, mb: 5, textTransform: 'none' }}
+                    sx={{ mt: 5, mb: 5 }}
                 >
                     {t('registerBtn')}
                 </Button>

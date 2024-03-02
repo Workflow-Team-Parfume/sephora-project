@@ -30,7 +30,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import { PasswordRecovery } from "../../common/password_recovery/PasswordRecovery";
 // import { t } from "i18next";
 import { useTranslation } from "react-i18next";
-import textFieldStyle from '../../../common/textFieldStyle';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -260,14 +259,14 @@ const LoginPage = () => {
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
           <Grid container spacing={2}>
             <FormControl
-              sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px", mb: 5 }}
+              sx={{ m: 1, width: "670px", height: "50px", mb: 5 }}
               variant="outlined"
             >
               <TextField
                 margin="normal"
                 fullWidth
                 id="email"
-                label={t('email/login')}
+                label={t('loginEmail')}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -278,11 +277,11 @@ const LoginPage = () => {
               />
             </FormControl>
             <FormControl
-              sx={{ ...textFieldStyle, m: 1, width: "670px", height: "50px" }}
+              sx={{ m: 1, width: "670px", height: "50px" }}
               variant="outlined"
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                {t('password')}*
+                {t('password')}
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -311,7 +310,7 @@ const LoginPage = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2, textTransform: 'none' }}
+          sx={{ mt: 3, mb: 2 }}
         >
           {t('signIn')}
         </Button>

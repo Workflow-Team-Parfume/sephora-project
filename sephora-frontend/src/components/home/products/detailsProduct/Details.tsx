@@ -1,42 +1,80 @@
-import {Button, Container, FormControl, MenuItem, Rating, Select, SelectChangeEvent, Stack, Typography} from "@mui/material";
-import "./details.scss"
-import StarIcon from "@mui/icons-material/Star";
-import Reviews from "../../reviews/ReviewsProduct";
+import React, {useEffect, useState} from "react";
+import {
+    Button,
+    Container,
+    FormControl,
+    MenuItem,
+    Rating,
+    Select,
+    Stack,
+    Typography
+} from "@mui/material";
 import {useTranslation} from "react-i18next";
-// import Products from "../Products";
-// import { especiallyForYou, similarProducts } from "../../data";
-// import { useEffect, useState } from "react";
-import {useState} from "react";
+import i18n from "i18next";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import http_common from "../../../../http_common.ts";
 
+import ProductDto from "../../../../models/product/ProductDto.ts";
+import PictureDto from "../../../../models/picture/PictureDto.ts";
+import RatingDto from "../../../../models/rating/RatingDto.ts";
+import routes from "../../../../common/routes.ts";
+
+import StarIcon from "@mui/icons-material/Star";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Reviews from "../../reviews/ReviewsProduct";
+import "./details.scss";
 import novaPoshta from "../../../../assets/images/novaPoshta.png";
 import ukrPoshta from "../../../../assets/images/ukrPoshta.png";
 import meest from "../../../../assets/images/meest.png";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-import {IProduct} from "./types";
 import textFieldStyle from '../../../../common/textFieldStyle';
-// import { useParams } from "react-router-dom";
-// import http_common from "../../../../http_common";
+import PagedList from "../../../../models/pagedlist/PagedList.ts";
 
-
-const Details: React.FC<{ product: IProduct }>
-    = ({product}) => {
-    // const params = useParams();
-    //   const productId = Number(params.id);
-    //   const [product, setProduct] = useState<IProduct | undefined>();
-
-    //   useEffect(() => {
-    //       http_common.get<IProduct>(`api/Products/${productId}`)
-    //           .then(resp => {
-    //               console.log(resp.data);
-    //               setProduct(resp.data);
-    //           })
-    //   }, []);
+const Details: React.FC = () => {
     const {t} = useTranslation();
+    const {id} = useParams();
+    const navigate = useNavigate();
+    const [params, setParams] = useSearchParams();
 
-    // const {id} = useParams();
-
+    const [product, setProduct] = useState<ProductDto>();
+    const [reviews, setReviews] = useState<PagedList<RatingDto>>();
     const [click, setClick] = useState("description");
+    const [pieceId, setPieceId] = useState<number>(
+        Number(params.get("piece"))
+        ?? product?.pieces[0].id
+        ?? 0
+    );
+
+    const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
+    const changePiece = (pId: number, curProduct: ProductDto) => {
+        setPieceId(pId);
+        setParams({piece: pId.toString()});
+        setImage(curProduct.pieces.find(p => p.id === pId)?.pictures[0]);
+
+        navigate(`/details/${id}?piece=${pId}`);
+    }
+
+    useEffect(() => {
+        http_common.get<ProductDto>(`products/${id}`)
+            .then(resp => {
+                const pathId = Number(params.get("piece"));
+                const pieceIds = resp.data.pieces.map(p => p.id);
+                const pieceId = pieceIds.includes(pathId)
+                    ? pathId
+                    : resp.data.pieces[0].id;
+
+                setProduct(resp.data);
+                changePiece(pieceId, resp.data);
+            })
+            .catch(e => console.error(e));
+
+        http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
+            .then(resp => setReviews(resp.data))
+            .catch(e => console.error(e));
+    }, [id]);
+
+    const [image, setImage] = useState<PictureDto | undefined>(
+        currentPiece()?.pictures[0]
+    );
 
     const handleChangeClick = (click: string) => {
         setClick(click);
@@ -45,25 +83,33 @@ const Details: React.FC<{ product: IProduct }>
     function Click() {
         if (click == 'description') {
             return <Typography className="description">
-                {product.description}
+                {
+                    i18n.language === "en"
+                        ? product?.descriptionEn
+                        : product?.descriptionUa
+                };
             </Typography>
         } else if (click == 'characteristic') {
             return <Stack spacing={1}>
-                {(product.characteristics).map((characteristic) => (
-                    <Stack direction='row' flexWrap='wrap'>
+                {(product?.characteristics ?? []).map((characteristic, i) => (
+                    <Stack key={i} direction='row' flexWrap='wrap'>
                         <Typography
                             className="characteristic charactName">
-                            {characteristic.name + ':'}
+                            {
+                                i18n.language === "en"
+                                    ? characteristic.nameEn
+                                    : characteristic.nameUa
+                            }
+                            {': '}
                         </Typography>
-                        {(characteristic.characteristics).map((charact) => (
-                            <Typography
-                                className="characteristic">
-                                {' ' + charact}
-                                {characteristic.characteristics.at(
-                                    characteristic.characteristics.length - 1
-                                ) == charact ? '' : ','}
-                            </Typography>
-                        ))}
+                        <Typography
+                            className="characteristic">
+                            {
+                                i18n.language === "en"
+                                    ? characteristic.descriptionEn
+                                    : characteristic.descriptionUa
+                            }
+                        </Typography>
                     </Stack>
                 ))}
             </Stack>
@@ -94,143 +140,136 @@ const Details: React.FC<{ product: IProduct }>
         }
     }
 
-    const [volume, setVolume] = useState(product.volume?.at(0)?.volume);
-    const [price, setPrice] = useState(product.volume?.at(0)?.price);
-
-    const handleChangeVolume = (event: SelectChangeEvent) => {
-        setVolume(event.target.value);
-        setPrice(product.volume.find(v => v.volume == event.target.value)?.price)
-    };
-
-    const [image, setImage] = useState(product.pictures.at(0));
-
-    const handleChangeImage = (image: string) => {
-        setImage(product.pictures.find(i => i == image));
-    };
-
     return (
-        <Container style={{maxWidth: "90%", alignItems: 'center'}}>
-            <Container
-                style={{maxWidth: "100%", alignItems: 'center'}}
-                className="productDetails">
+        product && currentPiece()
+            ?
+            <>
+                <Container style={{maxWidth: "90%", alignItems: 'center'}}>
+                    <Container
+                        style={{maxWidth: "100%", alignItems: 'center'}}
+                        className="productDetails">
 
-                <Stack direction='row' spacing={2.5}>
-                    <Stack style={{width: '100px'}} spacing={2.5}>
-                        {product.pictures.map((img) => (
-                            <Button onClick={() => handleChangeImage(img)}>
-                                <img className={img == image ? 'imageClick' : 'image'}
-                                     alt={product.name} src={img}/>
-                            </Button>
-                        ))}
-                    </Stack>
+                        <Stack direction='row' spacing={2.5}>
+                            <Stack style={{width: '100px'}} spacing={2.5}>
+                                {currentPiece()?.pictures.map((img, i) => (
+                                    <Button key={i} onClick={() => setImage(img)}>
+                                        <img className={img == image ? 'imageClick' : 'image'}
+                                             alt={`Product picture ${i + 1}`} src={img.urlLg}/>
+                                    </Button>
+                                ))}
+                            </Stack>
 
-                    <img style={{width: '600px'}} src={image} alt={product.name}/>
+                            <img style={{width: '600px'}}
+                                 src={image?.url ?? routes.picPlaceholder}
+                                 alt="Product picture"/>
 
-                    <Stack spacing={2.5}>
-                        <Stack>
-                            <Typography className="productName">
-                                {product.name}
-                            </Typography>
-                            <Typography className="productCategory">
-                                {product.categoryName}
-                            </Typography>
+                            <Stack spacing={2.5}>
+                                <Stack>
+                                    <Typography className="productName">
+                                        {product.name}
+                                    </Typography>
+                                    <Typography className="productCategory">
+                                        {
+                                            i18n.language === "en"
+                                                ? product.category.nameEn
+                                                : product.category.nameUa
+                                        }
+                                    </Typography>
+                                </Stack>
+                                <Rating
+                                    name="hover-feedback"
+                                    value={product.averageRating}
+                                    precision={0.5}
+                                    readOnly
+                                    icon={<StarIcon style={{color: 'black'}}/>}
+                                    emptyIcon={<StarIcon
+                                        style={{color: '#9D9D9D'}}
+                                        fontSize="inherit"/>}
+                                />
+                                {/*<Typography*/}
+                                {/*    className="productCode">*/}
+                                {/*    {t('details.productCode')} {product.codeProduct}*/}
+                                {/*</Typography>*/}
+                                <Typography className="productPrice">
+                                    {currentPiece()?.price.toFixed(2)} грн
+                                </Typography>
+
+                                {product.volumes.length != 0 ?
+                                    <FormControl fullWidth sx={{...textFieldStyle}} >
+                                        <Select
+                                            sx={{width: '450px'}}
+                                            value={pieceId}
+                                            onChange={(e) => changePiece(Number(e.target.value), product)}
+                                            displayEmpty>
+                                            {product.volumes?.map((volume, index) => (
+                                                <MenuItem key={index} value={product.pieces[index].id}>
+                                                    <Typography className="productVolume">
+                                                        {volume.milliliters} {t('common.ml')}
+                                                    </Typography>
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                    : <></>
+                                }
+
+                                <Stack
+                                    spacing={1} sx={{width: '450px'}}
+                                    style={{marginTop: '40px'}}>
+                                    <Button className="butFavorites">
+                                        {t('details.addToFavorites')}
+                                        <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
+                                        {/* {t('details.addedToFavorites')}
+                                <FavoriteIcon style={{marginLeft: '10px'}}/> */}
+                                    </Button>
+                                    <Button className="butBuy">{t('details.buy')}</Button>
+                                </Stack>
+                            </Stack>
                         </Stack>
-                        <Rating
-                            name="hover-feedback"
-                            value={product.rating}
-                            precision={0.5}
-                            readOnly
-                            icon={<StarIcon style={{color: 'black'}}/>}
-                            emptyIcon={<StarIcon
-                                style={{color: '#9D9D9D'}}
-                                fontSize="inherit"/>}
-                        />
-                        <Typography
-                            className="productCode">
-                            {t('details.productCode')} {product.codeProduct}
-                        </Typography>
-                        <Typography className="productPrice">
-                            {price}грн
-                        </Typography>
 
-                        {product.volume.length != 0 ?
-                            <FormControl fullWidth
-                                sx={{ ...textFieldStyle }} 
-                            >
-                                <Select
-                                    sx={{width: '450px'}}
-                                    value={volume}
-                                    onChange={handleChangeVolume}
-                                    displayEmpty
-                                >
-                                    {product.volume?.map((volume) => (
-                                        <MenuItem value={volume.volume}>
-                                            <Typography className="productVolume">
-                                                {volume.volume}
-                                            </Typography>
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            : <></>
-                        }
 
                         <Stack
-                            spacing={1} sx={{width: '450px'}}
-                            style={{marginTop: '40px'}}>
-                            <Button className="butFavorites">
-                                {t('details.addToFavorites')}
-                                <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
-                                {/* {t('details.addedToFavorites')}
-                                <FavoriteIcon style={{marginLeft: '10px'}}/> */}
-                            </Button>
-                            <Button className="butBuy">{t('details.buy')}</Button>
+                            direction='row'
+                            spacing={10}
+                            style={{maxWidth: "80%", margin: '70px auto'}}>
+                            <Stack sx={{width: '220px'}} justifyContent='center' spacing={3}>
+                                <Button onClick={
+                                    () => handleChangeClick('description')
+                                } className={click == 'description'
+                                    ? 'clickLeft'
+                                    : 'clickDisable clickLeft'}>
+                                    {t('details.description')}
+                                </Button>
+                                <Button onClick={
+                                    () => handleChangeClick('characteristic')
+                                } className={click == 'characteristic'
+                                    ? 'clickLeft'
+                                    : 'clickDisable clickLeft'}>
+                                    {t('details.characteristics')}
+                                </Button>
+                                <Button onClick={
+                                    () => handleChangeClick('paymentAndDelivery')
+                                } className={click == 'paymentAndDelivery'
+                                    ? 'clickLeft'
+                                    : 'clickDisable clickLeft'}>
+                                    {t('details.paymentAndDelivery')}
+                                </Button>
+                            </Stack>
+                            <Stack className="click">
+                                {Click()}
+                            </Stack>
                         </Stack>
-                    </Stack>
-                </Stack>
+                    </Container>
 
-
-                <Stack
-                    direction='row'
-                    spacing={10}
-                    style={{maxWidth: "80%", margin: '70px auto'}}>
-                    <Stack sx={{width: '220px'}} justifyContent='center' spacing={3}>
-                        <Button onClick={
-                            () => handleChangeClick('description')
-                        } className={click == 'description'
-                            ? 'clickLeft'
-                            : 'clickDisable clickLeft'}>
-                            {t('details.description')}
-                        </Button>
-                        <Button onClick={
-                            () => handleChangeClick('characteristic')
-                        } className={click == 'characteristic'
-                            ? 'clickLeft'
-                            : 'clickDisable clickLeft'}>
-                            {t('details.characteristics')}
-                        </Button>
-                        <Button onClick={
-                            () => handleChangeClick('paymentAndDelivery')
-                        } className={click == 'paymentAndDelivery'
-                            ? 'clickLeft'
-                            : 'clickDisable clickLeft'}>
-                            {t('details.paymentAndDelivery')}
-                        </Button>
+                    <Stack spacing={7} style={{alignItems: 'center'}}>
+                        {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
+                        <Reviews title={t('common.title.reviews')}
+                                 reviews={reviews?.items ?? []}/>
+                        {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
                     </Stack>
-                    <Stack className="click">
-                        {Click()}
-                    </Stack>
-                </Stack>
-            </Container>
-
-            <Stack spacing={7} style={{alignItems: 'center'}}>
-                {/*<Products title={t('common.title.similarProducts')} products={similarProducts}/>*/}
-                <Reviews
-                    title={t('common.title.reviews')}
-                    reviews={product.reviews}/>
-                {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
-            </Stack>
-        </Container>
+                </Container>
+            </>
+            : <>{/*TODO: Add spinner*/}</>
     );
 }
 

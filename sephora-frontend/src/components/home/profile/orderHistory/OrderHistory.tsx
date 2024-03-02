@@ -40,7 +40,7 @@ const OrderHistory = () => {
                                 </Stack>
                             </Stack>
                             <Stack direction='row' alignItems='center' justifyContent='space-between' spacing={10}>
-                                <Typography className="text">{CalculateOrderTotal(order)} {t('uan')}</Typography>
+                                <Typography className="text">{CalculateOrderTotal(order)} {t('uah')}</Typography>
                                 <Stack className="containerScrollX" direction='row-reverse' spacing='15px'>
                                     {order.products.map((product) => (
                                         <Stack width='53px' alignItems='center'>

@@ -8,6 +8,10 @@ import textFieldStyle from '../../../../common/textFieldStyle';
 import a11yProps from "../../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../../common/tabPanel/tabsStyle";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1db40972940f7af61d8ed35f35428145635bd39a
 
         
 const OrderBuyer = () => {
@@ -66,7 +70,11 @@ const OrderBuyer = () => {
         navigate('/');
     }
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 1db40972940f7af61d8ed35f35428145635bd39a
     return (
         <Stack className="buyer">
             <Tabs
@@ -179,8 +187,7 @@ const OrderBuyer = () => {
                         <Stack alignItems='end'>
                             <Link href='#' className="link">{t('forgotPassword')}</Link>
                         </Stack>
-                        <Button onClick={handleSingInClick} className="button">{t('singIn')}</Button>
-
+                        <Button onClick={handleSingInClick} className="button">{t('signIn')}</Button>
                         <Stack alignItems='center'>
                             <Link href='/' className="link">{t('order.continueShopping')}</Link>
                         </Stack>

@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { FormControl, Link, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import "./PasswordRecovery.scss";
+import textFieldStyle from '../../../common/textFieldStyle';
 
 const style = {
   position: "absolute" as "absolute",
@@ -43,13 +44,13 @@ export function PasswordRecovery() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h5" component="h2" textAlign={"center"}>
-            {t("passwordRecovery")}
+            {t("password")}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 4, mb: 2, fontSize: 15 }}>
             {t("passwordRecoveryText")}
           </Typography>
           <FormControl
-            sx={{ m: 0, width: "400px", height: "50px", mb: 5 }}
+            sx={{ ...textFieldStyle, m: 0, width: "400px", height: "50px", mb: 5 }}
             variant="outlined"
           >
             <TextField

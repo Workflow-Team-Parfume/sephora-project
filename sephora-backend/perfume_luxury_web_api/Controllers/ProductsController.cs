@@ -11,9 +11,9 @@ public class ProductsController(IProductService productService) : Controller
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
-        [FromQuery] string? order = null,
-        [FromQuery] string? select = null
-    ) => Ok(await productService.Get(page, size, order, select));
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => Ok(await productService.Get(page, size, sort, filter));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)

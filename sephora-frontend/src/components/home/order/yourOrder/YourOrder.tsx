@@ -25,20 +25,20 @@ const YourOrder = () => {
                             margin='0 15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="text">{t('basket/order.orderAmount')}</Typography>
-                            <Typography className="text">{total} {t('uah')} </Typography>
+                            <Typography className="text">{total} {t('uan')} </Typography>
                         </Stack>
                         <Stack
                             margin='15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="text">{t('basket/order.discount')}</Typography>
-                            <Typography className="text">{discount} {t('uah')} </Typography>
+                            <Typography className="text">{discount} {t('uan')} </Typography>
                         </Stack>
                         <Box className='line'/>
                         <Stack 
                             margin='15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="total">{t('basket/order.total')}</Typography>
-                            <Typography className="total">{total - discount} {t('uah')} </Typography>
+                            <Typography className="total">{total - discount} {t('uan')} </Typography>
                         </Stack>
                     </Stack>
         </Stack>

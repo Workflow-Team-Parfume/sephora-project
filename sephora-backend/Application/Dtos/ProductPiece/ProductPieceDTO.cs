@@ -19,5 +19,5 @@ public class ProductPieceDto
     public DateTime CreatedAt { get; set; }
     
     // Publication was less than 14 days ago
-    public bool IsNew => CreatedAt > DateTime.UtcNow.AddDays(-14);
+    public bool IsNew => Math.Abs((CreatedAt.Date - DateTime.UtcNow.Date).Days) < 14;
 }

@@ -9,7 +9,7 @@ import a11yProps from "../../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../../common/tabPanel/tabsStyle";
 
-
+        
 const OrderBuyer = () => {
     const {t} = useTranslation();    
     const navigate = useNavigate();
@@ -66,7 +66,7 @@ const OrderBuyer = () => {
         navigate('/');
     }
 
-    
+
     return (
         <Stack className="buyer">
             <Tabs
@@ -179,7 +179,8 @@ const OrderBuyer = () => {
                         <Stack alignItems='end'>
                             <Link href='#' className="link">{t('forgotPassword')}</Link>
                         </Stack>
-                        <Button onClick={handleSingInClick} className="button">{t('signIn')}</Button>
+                        <Button onClick={handleSingInClick} className="button">{t('singIn')}</Button>
+
                         <Stack alignItems='center'>
                             <Link href='/' className="link">{t('order.continueShopping')}</Link>
                         </Stack>

@@ -13,6 +13,6 @@ public interface ICategoryService
 
     Task<CategoryDto?> GetById(int id);
     Task Create(CreateCategoryDto categoryDto);
-    Task Edit(EditCategoryDto categoryDto);
+    Task Edit(CategoryDto categoryDto);
     Task Delete(int id);
 }

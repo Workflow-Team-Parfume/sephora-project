@@ -11,29 +11,13 @@ public class RatingController(IRatingService ratingService) : ControllerBase
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
-        [FromQuery] string? sort = null,
-        [FromQuery] string? filter = null
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
     )
     {
-        var ratings = await ratingService.Get(page, size, sort, filter);
+        var ratings = await ratingService.Get(page, size, order, select);
         return Ok(ratings);
     }
-
-    [HttpGet("product/{id:long}")]
-    public async Task<IActionResult> GetByProduct(
-        [FromRoute] long id,
-        [FromQuery] int page = 1,
-        [FromQuery] int size = 10,
-        [FromQuery] string? sort = null,
-        [FromQuery] string? filter = null
-    ) => await GetPaged(
-        page,
-        size,
-        sort,
-        filter is null
-            ? $"Id = {id}"
-            : $"{filter} and Id = {id}"
-    );
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)

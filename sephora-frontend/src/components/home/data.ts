@@ -33,7 +33,17 @@ import burberry2 from './products/detailsProduct/images/burberry.png';
 import OrderStatus from "../../models/order/OrderStatus.ts";
 import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
 import ProductDto from "../../models/product/ProductDto.ts";
+import PictureDto from "../../models/picture/PictureDto.ts";
+import routes from "../../common/routes.ts";
 
+const placeholderPic : PictureDto = {
+    name: 'placeholder',
+    url: routes.picPlaceholder,
+    urlLg: routes.picPlaceholder,
+    urlMd: routes.picPlaceholder,
+    urlSm: routes.picPlaceholder,
+    urlXs: routes.picPlaceholder,
+}
 
 export const newProducts: ProductDto[] = ([
     {
@@ -47,6 +57,9 @@ export const newProducts: ProductDto[] = ([
             id: 1,
             nameUa: "Сироватка з вітаміном С Tetra 10%",
             nameEn: "Serum with vitamin C Tetra 10%",
+            descriptionUa: "",
+            descriptionEn: "",
+            picture: placeholderPic
         },
         pieces: [],
         ratings: [],
@@ -67,6 +80,9 @@ export const newProducts: ProductDto[] = ([
             id: 2,
             nameUa: "Нічна маска для чутливої та подразненої шкіри обличчя",
             nameEn: "Night mask for sensitive and irritated facial skin",
+            descriptionUa: "",
+            descriptionEn: "",
+            picture: placeholderPic
         },
         pieces: [],
         ratings: [],
@@ -87,6 +103,9 @@ export const newProducts: ProductDto[] = ([
             id: 3,
             nameUa: "Гель для вмивання обличчя з глюкозидами",
             nameEn: "Face wash gel with glucosides",
+            descriptionUa: "",
+            descriptionEn: "",
+            picture: placeholderPic
         },
         pieces: [],
         ratings: [],
@@ -107,6 +126,9 @@ export const newProducts: ProductDto[] = ([
             id: 4,
             nameUa: "Інтенсивна маска з вулканічною глиною",
             nameEn: "Intensive mask with volcanic clay",
+            descriptionUa: "",
+            descriptionEn: "",
+            picture: placeholderPic
         },
         pieces: [],
         ratings: [],

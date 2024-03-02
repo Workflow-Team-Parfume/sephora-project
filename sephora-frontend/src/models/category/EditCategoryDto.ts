@@ -1,6 +1,4 @@
-import PictureDto from "../picture/PictureDto.ts";
-
-export default interface CategoryDto {
+export default interface EditCategoryDto {
     get id(): number;
 
     get nameEn(): string;
@@ -11,5 +9,5 @@ export default interface CategoryDto {
 
     get descriptionUa(): string;
 
-    get picture(): PictureDto;
+    get picture(): File | null;
 }

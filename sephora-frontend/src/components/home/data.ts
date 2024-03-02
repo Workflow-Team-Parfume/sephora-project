@@ -6,81 +6,134 @@ import gisou from "./image/products/gisou.png";
 import laneige2 from "./image/products/laneige2.png";
 import ordinary from "./image/products/ordinary.png";
 import rare from "./image/products/rare.png";
-import valentino from "./image/products/valentino.png";
-import marc from "./image/products/marc.png";
-import burberry from "./image/products/burberry.png";
-import gucci from "./image/products/gucci.png";
+import Anna from "./image/reviews/Anna.png"
+import Dariia from "./image/reviews/Dariia.png"
+import Natalia from "./image/reviews/Natalia.png"
+import estee from "./image/reviews/estee.png"
+import moschino from "./image/reviews/moschino.png"
+import uriage from "./image/reviews/uriage.png"
+import banner1 from "./image/banner/image1.png"
+import banner2 from "./image/banner/image2.png"
+import banner3 from "./image/banner/image3.png"
+import main1 from "./image/banner/main1.png"
+import main2 from "./image/banner/main2.png"
+import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
+import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
+import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
+import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
+import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
+import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png';
+import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png';
+import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png';
+import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png';
+import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
+import bielenda from './products/detailsProduct/images/Bielenda.png';
+import byredo from './products/detailsProduct/images/Byredo.png';
+import burberry2 from './products/detailsProduct/images/burberry.png';
+import OrderStatus from "../../models/order/OrderStatus.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
+import ProductDto from "../../models/product/ProductDto.ts";
 
 
-export const newProducts = ([
+export const newProducts: ProductDto[] = ([
     {
         id: 1,
         name: "SkinTra — C The Light",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id:1, name:'SkinTra'},
-        category: {id: 1, name: "Сироватка з вітаміном С Tetra 10%"},
+        brand: {id: 1, name: 'SkinTra'},
+        category: {
+            id: 1,
+            nameUa: "Сироватка з вітаміном С Tetra 10%",
+            nameEn: "Serum with vitamin C Tetra 10%",
+        },
         pieces: [],
         ratings: [],
         averageRating: 2,
         volumes: [{id: 1, milliliters: 30}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 2,
         name: "LANEIGE Cica Sleeping Mask",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 2, name: 'LANEIGE'},
-        category: {id: 2, name: "Нічна маска для чутливої та подразненої шкіри обличчя"},
+        brand: {id: 2, name: 'LANEIGE'},
+        category: {
+            id: 2,
+            nameUa: "Нічна маска для чутливої та подразненої шкіри обличчя",
+            nameEn: "Night mask for sensitive and irritated facial skin",
+        },
         pieces: [],
         ratings: [],
         averageRating: 2,
         volumes: [{id: 2, milliliters: 60}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 3,
         name: "SkinTra — Wash It Off",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 3, name: 'SkinTra'},
-        category: {id: 3, name: "Гель для вмивання обличчя з глюкозидами"},
+        brand: {id: 3, name: 'SkinTra'},
+        category: {
+            id: 3,
+            nameUa: "Гель для вмивання обличчя з глюкозидами",
+            nameEn: "Face wash gel with glucosides",
+        },
         pieces: [],
         ratings: [],
         averageRating: 5,
         volumes: [{id: 3, milliliters: 200}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     },
     {
         id: 4,
         name: "Innisfree Super Volcanic Pore Clay Mask",
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         active: false,
-        brand:{id: 4, name: 'Innisfree'},
-        category: {id: 4, name: "Інтенсивна маска з вулканічною глиною"},
+        brand: {id: 4, name: 'Innisfree'},
+        category: {
+            id: 4,
+            nameUa: "Інтенсивна маска з вулканічною глиною",
+            nameEn: "Intensive mask with volcanic clay",
+        },
         pieces: [],
         ratings: [],
         averageRating: 5,
         volumes: [{id: 4, milliliters: 100,}],
         createdAt: new Date('23.02.2024'),
         isNew: true,
+        characteristics: [],
     }
 ]);
 
-export const newPieces = ([
+export const newPieces: ProductPieceDto[] = ([
     {
         id: 1,
         inStock: 0,
         price: 850,
         milliliters: 30,
         isBottledParfume: false,
-        productId: 1,
         product: newProducts?.[0],
-        pictures: [{name:'C The Light', url:skinTra1, urlLg:skinTra1, urlMd:skinTra1, urlSm:skinTra1, urlXs:skinTra1}],
+        pictures: [{
+            name: 'C The Light',
+            url: skinTra1,
+            urlLg: skinTra1,
+            urlMd: skinTra1,
+            urlSm: skinTra1,
+            urlXs: skinTra1
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: true,
     },
@@ -90,9 +143,15 @@ export const newPieces = ([
         price: 1307,
         milliliters: 60,
         isBottledParfume: false,
-        productId: 2,
         product: newProducts?.[1],
-        pictures: [{name:'Cica Sleeping Mask', url:laneige, urlLg:laneige, urlMd:laneige, urlSm:laneige, urlXs:laneige}],
+        pictures: [{
+            name: 'Cica Sleeping Mask',
+            url: laneige,
+            urlLg: laneige,
+            urlMd: laneige,
+            urlSm: laneige,
+            urlXs: laneige
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: false,
     },
@@ -102,9 +161,15 @@ export const newPieces = ([
         price: 515,
         milliliters: 200,
         isBottledParfume: false,
-        productId: 3,
         product: newProducts?.[2],
-        pictures: [{name:'Wash It Off', url:skinTra2, urlLg:skinTra2, urlMd:skinTra2, urlSm:skinTra2, urlXs:skinTra2}],
+        pictures: [{
+            name: 'Wash It Off',
+            url: skinTra2,
+            urlLg: skinTra2,
+            urlMd: skinTra2,
+            urlSm: skinTra2,
+            urlXs: skinTra2
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: false,
     },
@@ -114,9 +179,15 @@ export const newPieces = ([
         price: 720,
         milliliters: 100,
         isBottledParfume: false,
-        productId: 4,
         product: newProducts?.[3],
-        pictures: [{name:'Super Volcanic Pore Clay Mask', url:innisfree, urlLg:innisfree, urlMd:innisfree, urlSm:innisfree, urlXs:innisfree}],
+        pictures: [{
+            name: 'Super Volcanic Pore Clay Mask',
+            url: innisfree,
+            urlLg: innisfree,
+            urlMd: innisfree,
+            urlSm: innisfree,
+            urlXs: innisfree
+        }],
         createdAt: new Date('23.02.2024'),
         isNew: true,
     },
@@ -212,7 +283,8 @@ export const Populars = ([
         rating: 3,
         volume: [{volume: '', price: '1720'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -225,7 +297,8 @@ export const Populars = ([
         rating: 2,
         volume: [{volume: '', price: '315'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -238,7 +311,8 @@ export const Populars = ([
         volume: [{volume: '60мл', price: '350'}],
         rating: 5,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -251,79 +325,76 @@ export const Populars = ([
         rating: 5,
         volume: [{volume: '', price: '1050'}],
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
     }
 ]);
 
-export const Perfume: IProduct[] = ([
-    {
-        id: 0,
-        name: "Valentino Donna Born In Roma Intense",
-        pictures: [valentino],
-        categoryName: "Парфумована вода",
-        rating: 5,
-        volume: [{volume: '', price: '4500'}],
-        isNew: false,
-        description: "",
-        characteristics: [],
-        codeProduct: 123,
-        reviews: [],
-        product: null,
-    },
-    {
-        id: 0,
-        name: "Marc Jacobs Daisy",
-        pictures: [marc],
-        categoryName: "Парфумована вода",
-        rating: 4,
-        volume: [{volume: '', price: '3270'}],
-        isNew: false,
-        description: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    },
-    {
-        id: 0,
-        name: "Tom Ford Lost Cherry",
-        pictures: [burberry],
-        categoryName: "Парфумована вода унісекс",
-        rating: 5,
-        volume: [{volume: '30ml', price: '3750'}],
-        isNew: false,
-        description: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    },
-    {
-        id: 0,
-        name: "Gucci Flora Gorgeous Gardenia",
-        pictures: [gucci],
-        categoryName: "Парфюмированная вода жіноча",
-        rating: 4,
-        volume: [{volume: '', price: '7325'}],
-        isNew: false,
-        description: "",
-        characteristics: [],
-        codeProduct: 123,
-        product: null,
-        reviews: []
-    }
-]);
-
-
-import Anna from "./image/reviews/Anna.png"
-import Dariia from "./image/reviews/Dariia.png"
-import Natalia from "./image/reviews/Natalia.png"
-import estee from "./image/reviews/estee.png"
-import moschino from "./image/reviews/moschino.png"
-import uriage from "./image/reviews/uriage.png"
+// export const Perfume: ProductDto[] = ([
+//     {
+//         id: 0,
+//         name: "Valentino Donna Born In Roma Intense",
+//         pictures: [valentino],
+//         categoryName: "Парфумована вода",
+//         rating: 5,
+//         volume: [{volume: '', price: '4500'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         reviews: [],
+//         product: null,
+//     },
+//     {
+//         id: 0,
+//         name: "Marc Jacobs Daisy",
+//         pictures: [marc],
+//         categoryName: "Парфумована вода",
+//         rating: 4,
+//         volume: [{volume: '', price: '3270'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     },
+//     {
+//         id: 0,
+//         name: "Tom Ford Lost Cherry",
+//         pictures: [burberry],
+//         categoryName: "Парфумована вода унісекс",
+//         rating: 5,
+//         volume: [{volume: '30ml', price: '3750'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     },
+//     {
+//         id: 0,
+//         name: "Gucci Flora Gorgeous Gardenia",
+//         pictures: [gucci],
+//         categoryName: "Парфюмированная вода жіноча",
+//         rating: 4,
+//         volume: [{volume: '', price: '7325'}],
+//         isNew: false,
+//         descriptionEn: "",
+//         descriptionUa: "",
+//         characteristics: [],
+//         codeProduct: 123,
+//         product: null,
+//         reviews: []
+//     }
+// ]);
 
 export const Reviews1 = (
     {
@@ -359,12 +430,6 @@ export const Reviews3 = (
     }
 )
 
-
-import banner1 from "./image/banner/image1.png"
-import banner2 from "./image/banner/image2.png"
-import banner3 from "./image/banner/image3.png"
-import main1 from "./image/banner/main1.png"
-import main2 from "./image/banner/main2.png"
 
 export const Banner1 = ({
     title: "-20%  на догляд  за обличчям та тілом",
@@ -461,12 +526,6 @@ export const Characteristics = ([
 ]);
 
 
-import goodGirl1 from '../home/products/detailsProduct/images/goodGirl1.png'
-import goodGirl2 from '../home/products/detailsProduct/images/goodGirl2.png'
-import goodGirl3 from '../home/products/detailsProduct/images/goodGirl3.png'
-import goodGirl4 from '../home/products/detailsProduct/images/goodGirl4.png'
-import goodGirl5 from '../home/products/detailsProduct/images/goodGirl5.png'
-
 export const DetailsProduct = ({
     id: 1,
     name: "Carolina Herrera Good Girl",
@@ -482,11 +541,6 @@ export const DetailsProduct = ({
     product: null,
 });
 
-import pradaParadoxe from './products/detailsProduct/images/Prada Paradoxe.png';
-import yves from './products/detailsProduct/images/Yves Saint Laurent Libre.png';
-import dior1 from './products/detailsProduct/images/DIOR — Sauvage Parfum.png';
-import dior2 from './products/detailsProduct/images/DIOR — Miss Dior.png';
-
 export const similarProducts = ([
     {
         id: 0,
@@ -496,7 +550,8 @@ export const similarProducts = ([
         volume: [{volume: '90ml', price: '4171'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -509,7 +564,8 @@ export const similarProducts = ([
         volume: [{volume: '', price: '2028'}],
         rating: 4,
         isNew: true,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -522,7 +578,8 @@ export const similarProducts = ([
         volume: [{volume: '100ml', price: '6430'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -535,19 +592,13 @@ export const similarProducts = ([
         volume: [{volume: '30ml', price: '3614'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
     },
 ])
-
-import apieu from './products/detailsProduct/images/A\'pieu  Milk.png';
-import bielenda from './products/detailsProduct/images/Bielenda.png';
-import byredo from './products/detailsProduct/images/Byredo.png';
-import burberry2 from './products/detailsProduct/images/burberry.png';
-import {IProduct} from "./products/detailsProduct/types.ts";
-import OrderStatus from "../../models/order/OrderStatus.ts";
 
 export const especiallyForYou = ([
     {
@@ -558,7 +609,8 @@ export const especiallyForYou = ([
         volume: [{volume: '21g', price: '100'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -571,7 +623,8 @@ export const especiallyForYou = ([
         volume: [{volume: '500ml', price: '515'}],
         rating: 4,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -584,7 +637,8 @@ export const especiallyForYou = ([
         volume: [{volume: '', price: '144'}],
         rating: 4,
         isNew: true,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []
@@ -597,7 +651,8 @@ export const especiallyForYou = ([
         volume: [{volume: '50ml', price: '1853'}],
         rating: 3,
         isNew: false,
-        description: "",
+        descriptionEn: "",
+        descriptionUa: "",
         characteristics: [],
         codeProduct: 123,
         reviews: []

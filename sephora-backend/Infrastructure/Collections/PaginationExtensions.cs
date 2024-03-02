@@ -35,12 +35,13 @@ public static class PaginationExtensions
         string? selectBy = null
     )
     {
+        IQueryable<T> list = source;
         if (!String.IsNullOrWhiteSpace(orderBy))
-            source = source.OrderBy(orderBy);
+            list = list.OrderBy(orderBy);
         if (!String.IsNullOrWhiteSpace(selectBy))
-            source = source.Where(selectBy);
+            list = list.Where(selectBy);
 
-        return (await source.ToListAsync())
+        return (await list.ToListAsync())
             .ToPagedListInfo(pageNumber, pageSize);
     }
 }

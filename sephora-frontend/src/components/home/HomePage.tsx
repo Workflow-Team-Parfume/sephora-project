@@ -1,14 +1,17 @@
+import {useEffect, useState} from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
-import {Banner1, Banner2, Banner3, Reviews1, Reviews2, Reviews3} from "./data";
+import {Reviews1, Reviews2, Reviews3, Banner1, Banner2, Banner3} from "./data";
 import Reviews from "./reviews/MainPageReviews";
 import Banner from "./mainPage/banner/Banner";
 import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
 import RecCategories from './mainPage/recCategories/RecCategories';
 import MainBanner from './mainPage/banner/MainBanner';
 import {useTranslation} from 'react-i18next';
-import routes from "../../common/routes.ts";
+import http_common from "../../http_common.ts";
+import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
+import PagedList, {DefaultPagedList} from "../../models/pagedlist/PagedList.ts";
 
 // function Copyright() {
 //   return (
@@ -28,7 +31,37 @@ import routes from "../../common/routes.ts";
 // // TODO remove, this demo shouldn't need to reset the theme.
 // const defaultTheme = createTheme();
 
+type HomePageProps = {
+    novelty: PagedList<ProductPieceDto>,
+    popular: PagedList<ProductPieceDto>,
+    perfumes: PagedList<ProductPieceDto>,
+}
+
+const defaultProps: HomePageProps = {
+    novelty: DefaultPagedList,
+    popular: DefaultPagedList,
+    perfumes: DefaultPagedList,
+}
+
+async function fetchAll(setCallback: (props: HomePageProps) => void) {
+    const novelty = http_common.get("pieces?size=4&page=1&sort=createdAt desc");
+    const popular = http_common.get("pieces?size=4&page=1&sort=averageRating desc");
+    const perfumes = http_common.get("pieces?size=4&page=1");
+    setCallback({
+        novelty: (await novelty).data,
+        popular: (await popular).data,
+        perfumes: (await perfumes).data,
+    });
+}
+
 const HomePage = () => {
+    const [prods, setProds] = useState<HomePageProps>(defaultProps);
+    useEffect(() => {
+        fetchAll(setProds).catch(e => console.error(e));
+    }, []);
+
+    console.log(prods)
+
     const {t} = useTranslation();
     const recCategories = ([
         {name: t('recCategories.showerAndBath'), link: ""},
@@ -37,20 +70,22 @@ const HomePage = () => {
         {name: t('recCategories.face'), link: ""},
     ])
 
-    // TODO: Move links to constants file
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner/>
-            <Stack spacing={19} style={{margin: '0 100px'}}>
-                <Products title={t('header.novelty')}
-                    link={routes.api.dateOrdered}
+            <Stack spacing={19} style={{margin: '0 10%'}}>
+                <Products
+                    title={t('common.title.novelty')}
+                    products={prods.novelty} link=''
                 />
-                <Products title={t('common.title.popular')}
-                    link={routes.api.popularity}
+                <Products
+                    title={t('common.title.popular')}
+                    products={prods.popular} link=''
                 />
                 <Banner banner={Banner1} color="#688F74"/>
-                <Products title={t('common.title.perfumes')}
-                    link={routes.api.pieces}
+                <Products
+                    title={t('common.title.perfumes')}
+                    products={prods.perfumes} link=''
                 />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
                 <RecCategories

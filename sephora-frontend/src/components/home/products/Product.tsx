@@ -4,9 +4,8 @@ import StarIcon from "@mui/icons-material/Star";
 import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import React from "react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import {useTranslation} from "react-i18next";
-import routes from "../../../common/routes.ts";
-import i18n from "i18next";
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useTranslation } from "react-i18next";
 
 function IsNew(isNew: boolean) {
     if (isNew) {
@@ -18,15 +17,19 @@ function IsNew(isNew: boolean) {
     }
 }
 
-const Product: React.FC<{ piece: ProductPieceDto }>
-    = ({piece}) => {
-    const {t} = useTranslation();
+const imgPlaceholder = 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg';
 
+
+const Product: React.FC<{ piece: ProductPieceDto }>
+= ({piece}) => {
+    const {t} = useTranslation();
+    
     return (
-        <Link href={`/details/${piece.product.id}/?piece=${piece.id}`} underline="none">
+        <Link href={'/details/' + piece.id} underline="none">
 
             <Card className="productMainContainer"
-                  sx={{height: '95%'}}>
+                    sx={{height: '95%'}}
+            >
                 {IsNew(piece.isNew)}
                 <FavoriteBorderIcon className="favorite"/>
                 {/* <FavoriteIcon className="favorite"/> */}
@@ -34,8 +37,8 @@ const Product: React.FC<{ piece: ProductPieceDto }>
 
                     <CardMedia
                         component="div"
-                        sx={{pt: '120%'}}
-                        image={piece.pictures[0]?.urlLg ?? routes.picPlaceholder}
+                        sx={{pt: '100%',backgroundSize:'contain'}}
+                        image={piece.pictures[0]?.urlLg ?? imgPlaceholder}
                     />
 
                     <Stack spacing={'5%'}>
@@ -43,15 +46,11 @@ const Product: React.FC<{ piece: ProductPieceDto }>
                             {piece.product?.name}
                         </Typography>
                         <Typography className="productCategory">
-                            {
-                                i18n.language === "en"
-                                    ? piece.product?.category?.nameEn
-                                    : piece.product?.category?.nameUa
-                            }
+                            {piece.product.category.name}
                             {piece.milliliters != 0
-                                ? <span> &#8211; </span>
+                                ? <span>&#8211;</span>
                                 : ''}
-                            {piece.milliliters} {t('common.ml')}
+                            {piece.milliliters}
                         </Typography>
                         <Stack spacing={2}>
                             <Rating
@@ -68,7 +67,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
                             />
                             <Typography className="productPrice">
                                 <span style={{textWrap: "nowrap"}}>
-                                    {piece.price} {t('uah')}
+                                    {piece.price} {t('uan')}
                                 </span>
                             </Typography>
                         </Stack>

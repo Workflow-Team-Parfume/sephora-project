@@ -2,48 +2,27 @@
 
 public class CategoryService(
     IRepository<Category> categoryRepository,
-    IPictureService picService,
-    IMapper mapper
-) : ICategoryService
+    IMapper mapper)
+    : ICategoryService
 {
     public async Task Create(CreateCategoryDto categoryDto)
     {
-        string picName = await picService.SaveImage(categoryDto.Picture);
-        Category category = mapper.Map<Category>(categoryDto);
-        category.Picture = picName;
-
-        await categoryRepository.Insert(category);
+        await categoryRepository.Insert(mapper.Map<Category>(categoryDto));
         await categoryRepository.Save();
     }
 
     public async Task Delete(int id)
     {
-        var category = await categoryRepository.GetById(id);
-        if (category is null)
-            throw new ApplicationException("Category not found");
+        if (await categoryRepository.GetById(id) == null)
+            return;
 
-        picService.DeleteFile(category.Picture);
-
-        await categoryRepository.Delete(category);
+        await categoryRepository.Delete(id);
         await categoryRepository.Save();
     }
 
-    public async Task Edit(EditCategoryDto categoryDto)
+    public async Task Edit(CategoryDto categoryDto)
     {
-        var category = await categoryRepository.GetById(categoryDto);
-        if (category is null)
-            throw new ApplicationException("Category not found");
-        
-        string oldPic = category.Picture;
-        mapper.Map(categoryDto, category);
-
-        if (categoryDto.Picture is not null)
-        {
-            picService.DeleteFile(oldPic);
-            category.Picture = await picService.SaveImage(categoryDto.Picture);
-        }
-        
-        await categoryRepository.Update(category);
+        await categoryRepository.Update(mapper.Map<Category>(categoryDto));
         await categoryRepository.Save();
     }
 
@@ -57,8 +36,8 @@ public class CategoryService(
             new Categories.GetById(id)
         );
 
-        if (category is null)
-            throw new ApplicationException("Category not found");
+        if (category == null)
+            throw new Exception();
 
         return mapper.Map<CategoryDto>(category);
     }

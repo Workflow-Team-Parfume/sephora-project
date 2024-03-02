@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import ModalDelete from "../../common/ModalDelete.tsx";
-import http_common from "../../../http_common.ts";
-import CategoryDto from "../../../models/category/CategoryDto.ts";
-import i18n from "i18next";
+import ModalDelete from "../../../common/ModalDelete";
+import http_common from "../../../../http_common";
+import { ICategoryItem } from "./types";
 
 const CategoryListPage = () => {
-  const [list, setList] = useState<CategoryDto[]>([]);
+  const [list, setList] = useState<ICategoryItem[]>([]);
 
   useEffect(() => {
-    http_common.get<CategoryDto[]>("/category").then((resp) => {
+    http_common.get<ICategoryItem[]>("api/category").then((resp) => {
       console.log("Categories", resp.data);
       setList(resp.data);
     });
@@ -18,7 +17,7 @@ const CategoryListPage = () => {
 
   const onClickDelete = async (id: number) => {
     try {
-      await http_common.delete(`/category/${id}`);
+      await http_common.delete(`api/category/${id}`);
       setList(list.filter((x) => x.id !== id));
     } catch {
       console.log("Помилка видалення");
@@ -49,21 +48,11 @@ const CategoryListPage = () => {
               {list.map((c) => (
                 <TableRow key={c.id}>
                   <TableCell>{c.id}</TableCell>
+                  <TableCell>{c.name}</TableCell>
+                  <TableCell>{c.image}</TableCell>
+                  <TableCell>{c.description}</TableCell>
                   <TableCell>
-                    {i18n.language === "en" ? c.nameEn : c.nameUa}
-                  </TableCell>
-                  <TableCell>
-                    <img src={c.picture.url}
-                         alt={c.nameEn + " picture"}
-                         style={{ width: "100px" }} />
-                  </TableCell>
-                  <TableCell>
-                    {i18n.language === "en" ? c.descriptionEn : c.descriptionUa}
-                  </TableCell>
-                  <TableCell>
-                    <ModalDelete id={c.id}
-                                 text={i18n.language === "en" ? c.nameEn : c.nameUa}
-                                 deleteFunc={onClickDelete} />
+                    <ModalDelete id={c.id} text={c.name} deleteFunc={onClickDelete} />
                     &nbsp; &nbsp;
                     <Link to={`edit/${c.id}`} className="btn btn-info">
                       Змінити

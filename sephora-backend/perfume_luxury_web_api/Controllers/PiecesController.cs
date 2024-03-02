@@ -13,9 +13,9 @@ public class PiecesController(
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
-        [FromQuery] string? sort = null,
-        [FromQuery] string? filter = null
-    ) => Ok(await pieceService.Get(page, size, sort, filter));
+        [FromQuery] string? order = null,
+        [FromQuery] string? select = null
+    ) => Ok(await pieceService.Get(page, size, order, select));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)

@@ -5,9 +5,7 @@ export default interface EditProductDto {
 
     get name(): string | null;
 
-    get descriptionEn(): string;
-
-    get descriptionUa(): string;
+    get description(): string;
 
     get active(): boolean;
 

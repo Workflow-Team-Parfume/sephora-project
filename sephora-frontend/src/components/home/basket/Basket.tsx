@@ -1,14 +1,14 @@
 import {Box, Button, Grid, Modal, Stack, Typography} from "@mui/material";
 import "./basket.scss"
 import {useTranslation} from "react-i18next";
-import {newPieces} from "../data";
+import { newPieces } from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
 import React from "react";
 import Product from "../products/Product";
 import icon2 from "../../../assets/images/icon2.svg";
 
 const style = {
-    position: 'absolute' as const,
+    position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -30,8 +30,11 @@ export function Basket () {
 
     const discount = 0;
 
-    const calculateTotal = () => products.reduce((acc, piece) => acc + Number(piece.price), 0);
-
+    function calculateTotal(): number {
+        const total: number = products.reduce((acc, piece) => acc + Number(piece.price), 0);
+        return total;
+    }
+    
     const total: number = calculateTotal();
 
     return (
@@ -68,20 +71,20 @@ export function Basket () {
                                         margin='0 15px'
                                         justifyContent='space-between' direction='row'>
                                         <Typography className="text">{t('basket/order.orderAmount')}</Typography>
-                                        <Typography className="text">{total} {t('uah')} </Typography>
+                                        <Typography className="text">{total} {t('uan')} </Typography>
                                     </Stack>
                                     <Stack
                                         margin='15px'
                                         justifyContent='space-between' direction='row'>
                                         <Typography className="text">{t('basket/order.discount')}</Typography>
-                                        <Typography className="text">{discount} {t('uah')} </Typography>
+                                        <Typography className="text">{discount} {t('uan')} </Typography>
                                     </Stack>
                                     <Box className='line'/>
                                     <Stack 
                                         margin='15px'
                                         justifyContent='space-between' direction='row'>
                                         <Typography className="total">{t('basket/order.total')}</Typography>
-                                        <Typography className="total">{total - discount} {t('uah')} </Typography>
+                                        <Typography className="total">{total - discount} {t('uan')} </Typography>
                                     </Stack>
                                     <Button href="/order" className="button">{t('basket/order.toOrder')}</Button>
                                 </Stack>

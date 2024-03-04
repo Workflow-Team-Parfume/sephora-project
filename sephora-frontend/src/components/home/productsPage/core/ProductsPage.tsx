@@ -28,27 +28,39 @@ const ProductsPage: React.FC<{
     title: string,
     link: string,
     mainFilter: IFilter,
-    filters: IFilter[]
-}> = ({title, mainFilter, filters, link}) => {
+    filters: IFilter[],
+    defaultOrder: SortingOrder | null | undefined,
+    defaultDirection: SortingOrder | null | undefined
+}> = ({title, mainFilter, filters, link, defaultOrder = null, defaultDirection = null}) => {
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [checked1, setChecked1] = useState<SortingOrder>(Orders[1]);
+    const [order, setOrder] = useState<SortingOrder>(
+        defaultOrder ?? Orders[1]
+    );
     const handleToggle1 = (value: SortingOrder) => () => {
-        setChecked1(value);
+        setOrder(value);
     };
-    const [checked2, setChecked2] = useState<SortingOrder>(Directions[1]);
+    const [direction, setDirection] = useState<SortingOrder>(
+        defaultDirection ?? Directions[1]
+    );
     const handleToggle2 = (value: SortingOrder) => () => {
-        setChecked2(value);
+        setDirection(value);
     };
 
     useEffect(() => {
-        http_common.get(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${checked1.value} ${checked2.value}`)
+        console.log(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${order.value} ${direction.value}`)
+        http_common.get(
+            `${link}
+            &size=${itemsPerPage}
+            &page=${currentPage}
+            &sort=${order.value} ${direction.value}
+            `)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
-    }, [currentPage, link, checked1.value, checked2.value]);
+    }, [currentPage, link, order.value, direction.value]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
@@ -86,7 +98,7 @@ const ProductsPage: React.FC<{
                                         <Typography className='sortName'>
                                             {t('sortBy.title')}
                                             <span className="checked">
-                                                {t(checked1.key)}
+                                                {t(order.key)}
                                             </span>
                                         </Typography>
                                     </AccordionSummary>
@@ -99,7 +111,7 @@ const ProductsPage: React.FC<{
                                                     onClick={handleToggle1(value)}
                                                     sx={{p: "0"}}>
                                                     <Typography className={
-                                                        checked1 == value
+                                                        order == value
                                                             ? 'checked'
                                                             : 'check'
                                                     }>{t(value.key)}</Typography>
@@ -112,7 +124,7 @@ const ProductsPage: React.FC<{
                                                     onClick={handleToggle2(value)}
                                                     sx={{p: "0"}}>
                                                     <Typography className={
-                                                        checked2 == value
+                                                        direction == value
                                                             ? 'checked'
                                                             : 'check'
                                                     }>{t(value.key)}</Typography>

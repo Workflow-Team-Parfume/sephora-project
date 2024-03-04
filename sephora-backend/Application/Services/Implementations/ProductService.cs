@@ -29,15 +29,6 @@ public class ProductService(
         var entity = mapper.Map<ProductEntity>(createProductDto);
         await productRepo.Insert(entity);
         await productRepo.Save();
-
-        foreach (var charDto in createProductDto.Characteristics)
-        {
-            var charEntity = mapper.Map<Characteristic>(charDto);
-            charEntity.ProductId = entity.Id;
-            await charRepo.Insert(charEntity);
-        }
-
-        await charRepo.Save();
     }
 
     public async Task Delete(long id)

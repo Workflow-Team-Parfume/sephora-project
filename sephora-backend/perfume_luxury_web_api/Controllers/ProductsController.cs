@@ -20,7 +20,7 @@ public class ProductsController(IProductService productService) : Controller
         => Ok(await productService.GetById(id, User));
 
     [HttpPost, Authorize(Roles = "Admin,Moderator")]
-    public async Task<IActionResult> Create([FromForm] CreateProductDto product)
+    public async Task<IActionResult> Create([FromBody] CreateProductDto product)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");

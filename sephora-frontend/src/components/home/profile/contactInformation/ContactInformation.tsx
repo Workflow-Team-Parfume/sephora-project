@@ -1,8 +1,8 @@
-import {Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, OutlinedInput, Stack, TextField} from "@mui/material";
+import {Avatar, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, OutlinedInput, Stack, TextField} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import { useState } from "react";
 import textFieldStyle from '../../../../common/textFieldStyle';
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Edit, Visibility, VisibilityOff } from "@mui/icons-material";
 import PhoneMask from "../../../../common/phoneMask";
 
 
@@ -43,6 +43,28 @@ const ContactInformation = () => {
         }
         // navigate('/');
     };
+
+    const [image, setImage] = useState<string>('');
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const result = reader.result as string;
+            setImage(result);
+        };
+        reader.readAsDataURL(file);
+        }
+    };
+
+    const handleAvatarClick = () => {
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput) {
+        fileInput.click();
+        }
+    };
+    const [hovered, setHovered] = useState(false);
 
     return (
         <Stack alignItems='center' margin='0 17%' spacing={5}>
@@ -196,6 +218,37 @@ const ContactInformation = () => {
                                 <FormHelperText>{passwordError}</FormHelperText>
                             </FormControl>
                         </Stack>
+                        <div style={{position:'relative', cursor: 'pointer'}}
+                            onClick={handleAvatarClick}
+                            onMouseEnter={()=>(setHovered(true))}
+                            onMouseLeave={()=>(setHovered(false))}
+                        >
+                            <input
+                                type="file"
+                                id="fileInput"
+                                accept="image/*"
+                                style={{ display: 'none' }}
+                                onChange={handleImageChange}
+                            />
+                            <Avatar
+                                alt="User Photo"
+                                src={image}
+                                sx={{ width: '180px', height: '180px' }}
+                            />
+                           {hovered && 
+                                <IconButton
+                                style={{
+                                    zIndex: 2,
+                                    position: 'absolute',
+                                    top:'70px',
+                                    left:'70px'
+                                }}
+                                aria-label="edit"
+                                >
+                                    <Edit />
+                                </IconButton>
+                           }
+                        </div>
                     </Stack>
                 </Grid>
             </Grid>

@@ -41,7 +41,7 @@ const HomePage = () => {
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner/>
-            <Stack spacing={19} style={{margin: '0 100px'}}>
+            <Stack spacing={19} style={{margin: '0 10%'}}>
                 <Products title={t('header.novelty')}
                     link={routes.api.dateOrdered}
                 />

@@ -6,6 +6,7 @@ import BasketProduct from "../products/basketProduct/BasketProduct";
 import React from "react";
 import Product from "../products/Product";
 import icon2 from "../../../assets/images/icon2.svg";
+import { CalculateProductTotal } from "../../../common/calculateTotal";
 
 const style = {
     position: 'absolute' as const,
@@ -30,9 +31,7 @@ export function Basket () {
 
     const discount = 0;
 
-    const calculateTotal = () => products.reduce((acc, piece) => acc + Number(piece.price), 0);
-
-    const total: number = calculateTotal();
+    const total: number = CalculateProductTotal(products);
 
     return (
         <div>

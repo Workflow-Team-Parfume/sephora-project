@@ -12,10 +12,21 @@ i18n.use(initReactI18next)
                     'signIn': 'Увійти',
                     'forgotPassword': 'Забули пароль?',
                     'email': 'E-mail',
+                    'email/login': 'E-mail/Login',
                     'password': 'Пароль',
                     'name': 'Ім\'я',
                     'surname': 'Прізвище',
                     'phone': 'Номер телефона',
+                    'date': 'Дата народження',
+
+                    'passwordRecovery': 'Відновлення паролю',
+                    'passwordRecoveryText': 'На Вашу електронну адресу надсилається лист, який дозволить вам автоматично увійти до системи.',
+                    'send': 'Надіслати',
+                    'or': 'АБО',
+                    'registerPassConfirm': 'Підтвердження пароля*',
+                    'registerBtn': 'Зареєструватися',
+                    'dontHaveAnAccount': 'Не маєте акаунта?',
+                    'registration': ' Реєстрація',
 
                     'header.bottled': 'Розлив парфумерії',
                     'header.new': 'NEW',
@@ -70,17 +81,9 @@ i18n.use(initReactI18next)
                     'details.addToFavorites': 'Додати до улюблених',
                     'details.addedToFavorites': 'Додано до улюблених',
                     'details.buy': 'Купити',
-
-                    'passwordRecovery': 'Відновлення паролю',
-                    'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
-                    'send': 'Надіслати',
-                    'loginEmail': 'Логін/E-mail',
-                    'or': 'АБО',
-                    'register': 'Реєстрація',
-                    'phoneNumber': 'Номер телефону',
-                    'registerPass': 'Пароль*',
-                    'registerPassConfirm': 'Підтвердження пароля*',
-                    'registerBtn': 'Зареєструватися',
+                    'details.reviews.name': 'Ваше ім\'я',
+                    'details.reviews.comment': 'Коментар',
+                    'details.reviews.addComment': 'Додати коментар',
 
                     'sortBy.title': 'Впорядкувати за: ',
                     'sortBy.price': 'вартістю',
@@ -145,6 +148,10 @@ i18n.use(initReactI18next)
                     'profile.orderHistory.delivered': 'Доставлено',
                     'profile.orderHistory.inProcess': 'В процесі',
                     'profile.orderHistory.cancelled': 'Скасовано',
+
+                    'wrong': 'Щось пішло не так(',
+                    'pageIsNotResponding': 'Сторінка не відповідає',
+                    'return': 'Повернутись на головну',
                 }
             },
 
@@ -155,22 +162,20 @@ i18n.use(initReactI18next)
 
                     'signIn': 'Sign in',
                     'forgotPassword': 'Forgot your password?',
-                    'email': 'E-mail',
                     'password': 'Password',
                     'name': 'Name',
                     'surname': 'Surname',
                     'phone': 'Phone number',
-                  
+                    'date': 'Date of birth',
+
                     'passwordRecovery': 'Password recovery',
                     'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
                     'send': 'Send',
-                    'loginEmail': 'Login/E-mail',
                     'or': 'OR',
-                    'register': 'Registration',
-                    'phoneNumber': 'Phone number',
-                    'registerPass': 'Password',
                     'registerPassConfirm': 'Password confirmation',
                     'registerBtn': 'Sign up',
+                    'dontHaveAnAccount': 'Don\'t have an account?',
+                    'registration': ' Registration',
 
                     'header.bottled': 'Bottled perfumes',
                     'header.new': 'NEW',
@@ -225,6 +230,9 @@ i18n.use(initReactI18next)
                     'details.addToFavorites': 'Add to favorites',
                     'details.addedToFavorites': 'Added to favorites',
                     'details.buy': 'Buy',
+                    'details.reviews.name': 'Your name',
+                    'details.reviews.comment': 'Comment',
+                    'details.reviews.addComment': 'Add comment',
 
                     'sortBy.title': 'Sort by: ',
                     'sortBy.price': 'price',
@@ -289,6 +297,10 @@ i18n.use(initReactI18next)
                     'profile.orderHistory.delivered': 'Delivered',
                     'profile.orderHistory.inProcess': 'In process',
                     'profile.orderHistory.cancelled': 'Cancelled',
+
+                    'wrong': 'Something went wrong (',
+                    'pageIsNotResponding': 'The page is not responding',
+                    'return': 'Return to the main page',
                 }
             }
         },

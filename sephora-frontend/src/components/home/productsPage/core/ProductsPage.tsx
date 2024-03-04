@@ -20,6 +20,7 @@ import './productsPage.scss'
 import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../../http_common.ts";
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import SortingOrder, {Directions, Orders} from "./SortingOrder.ts";
 
 const itemsPerPage = 9;
 
@@ -34,13 +35,20 @@ const ProductsPage: React.FC<{
 
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [checked1, setChecked1] = useState<SortingOrder>(Orders[1]);
+    const handleToggle1 = (value: SortingOrder) => () => {
+        setChecked1(value);
+    };
+    const [checked2, setChecked2] = useState<SortingOrder>(Directions[1]);
+    const handleToggle2 = (value: SortingOrder) => () => {
+        setChecked2(value);
+    };
+
     useEffect(() => {
-        http_common.get(`${link}&size=${itemsPerPage}&page=${currentPage}`)
+        http_common.get(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${checked1.value} ${checked2.value}`)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
-    }, [currentPage, link]);
-
-    // console.log(products)
+    }, [currentPage, link, checked1.value, checked2.value]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
@@ -52,17 +60,6 @@ const ProductsPage: React.FC<{
         (_event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
         };
-    const sort1: string[] = [t('sortBy.price'), t('sortBy.popularity'), t('sortBy.date')];
-    const sort2: string[] = [t('sortBy.toLow'), t('sortBy.toHigh')];
-
-    const [checked1, setChecked1] = useState<string>(sort1[1]);
-    const handleToggle1 = (value: string) => () => {
-        setChecked1(value);
-    };
-    const [checked2, setChecked2] = useState<string>(sort2[1]);
-    const handleToggle2 = (value: string) => () => {
-        setChecked2(value);
-    };
 
     return products
         ? (
@@ -87,12 +84,15 @@ const ProductsPage: React.FC<{
                                 <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
                                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                                         <Typography className='sortName'>
-                                            {t('sortBy.title')} <span className="checked">{checked1}</span>
+                                            {t('sortBy.title')}
+                                            <span className="checked">
+                                                {t(checked1.key)}
+                                            </span>
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails sx={{p: "0", margin: "0 40px"}}>
                                         <List component="div" role="list">
-                                            {sort1.map((value, i) => (
+                                            {Orders.map((value, i) => (
                                                 <ListItemButton
                                                     key={i}
                                                     role="listitem"
@@ -102,12 +102,10 @@ const ProductsPage: React.FC<{
                                                         checked1 == value
                                                             ? 'checked'
                                                             : 'check'
-                                                    }>
-                                                        {value}
-                                                    </Typography>
+                                                    }>{t(value.key)}</Typography>
                                                 </ListItemButton>
                                             ))}
-                                            {sort2.map((value, i) => (
+                                            {Directions.map((value, i) => (
                                                 <ListItemButton
                                                     key={i}
                                                     role="listitem"
@@ -117,9 +115,7 @@ const ProductsPage: React.FC<{
                                                         checked2 == value
                                                             ? 'checked'
                                                             : 'check'
-                                                    }>
-                                                        {value}
-                                                    </Typography>
+                                                    }>{t(value.key)}</Typography>
                                                 </ListItemButton>
                                             ))}
                                         </List>

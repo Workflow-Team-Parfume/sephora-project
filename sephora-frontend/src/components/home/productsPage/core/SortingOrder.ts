@@ -1,32 +1,41 @@
 export default interface SortingOrder {
-    get nameEn(): string;
-    get nameUa(): string;
+    // get nameEn(): string;
+    // get nameUa(): string;
+    get key(): string;
     get value(): string;
 }
 
 export const Orders: SortingOrder[] = [
     {
-        nameEn: 'Price',
-        nameUa: 'Ціна',
-        value: 'product.Price'
+        // nameEn: 'price',
+        // nameUa: 'вартістю',
+        key: 'sortBy.price',
+        value: 'price'
     },
-
     {
-        nameEn: 'Popularity',
-        nameUa: 'Популярність',
+        key: 'sortBy.popularity',
+        // nameEn: 'popularity',
+        // nameUa: 'популярністю',
         value: 'product.AverageRating'
-
-    }
+    },
+    {
+        key: 'sortBy.date',
+        // nameEn: 'date',
+        // nameUa: 'датою',
+        value: 'createdAt'
+    },
 ]
 export const Directions: SortingOrder[] = [
     {
-        nameEn: 'Ascending',
-        nameUa: 'За зростанням',
-        value: ' asc'
+        // nameEn: 'to low',
+        // nameUa: 'за спаданням',
+        key: 'sortBy.toLow',
+        value: 'desc'
     },
     {
-        nameEn: 'Descending',
-        nameUa: 'За спаданням',
-        value: ' desc'
-    }
+        // nameEn: 'to high',
+        // nameUa: 'за зростанням',
+        key: 'sortBy.toHigh',
+        value: 'asc'
+    },
 ]

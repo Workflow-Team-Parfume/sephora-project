@@ -7,6 +7,8 @@ import {useTranslation} from "react-i18next";
 const FullSizedPage : React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
+        defaultOrder={null}
+        defaultDirection={null}
         title={t('header.fullSizePerfume')}
         filters={Filters}
         mainFilter={Filter}

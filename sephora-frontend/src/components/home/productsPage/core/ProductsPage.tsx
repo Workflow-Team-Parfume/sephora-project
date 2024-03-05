@@ -20,6 +20,7 @@ import './productsPage.scss'
 import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../../http_common.ts";
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import SortingOrder, {Directions, Orders} from "./SortingOrder.ts";
 
 const itemsPerPage = 9;
 
@@ -27,20 +28,39 @@ const ProductsPage: React.FC<{
     title: string,
     link: string,
     mainFilter: IFilter,
-    filters: IFilter[]
-}> = ({title, mainFilter, filters, link}) => {
+    filters: IFilter[],
+    defaultOrder: SortingOrder | null | undefined,
+    defaultDirection: SortingOrder | null | undefined
+}> = ({title, mainFilter, filters, link, defaultOrder = null, defaultDirection = null}) => {
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [order, setOrder] = useState<SortingOrder>(
+        defaultOrder ?? Orders[1]
+    );
+    const handleToggle1 = (value: SortingOrder) => () => {
+        setOrder(value);
+    };
+    const [direction, setDirection] = useState<SortingOrder>(
+        defaultDirection ?? Directions[1]
+    );
+    const handleToggle2 = (value: SortingOrder) => () => {
+        setDirection(value);
+    };
+
     useEffect(() => {
-        http_common.get(`${link}&size=${itemsPerPage}&page=${currentPage}`)
+        console.log(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${order.value} ${direction.value}`)
+        http_common.get(
+            `${link}
+            &size=${itemsPerPage}
+            &page=${currentPage}
+            &sort=${order.value} ${direction.value}
+            `)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
-    }, [currentPage, link]);
-
-    // console.log(products)
+    }, [currentPage, link, order.value, direction.value]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
@@ -52,17 +72,6 @@ const ProductsPage: React.FC<{
         (_event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
         };
-    const sort1: string[] = [t('sortBy.price'), t('sortBy.popularity'), t('sortBy.date')];
-    const sort2: string[] = [t('sortBy.toLow'), t('sortBy.toHigh')];
-
-    const [checked1, setChecked1] = useState<string>(sort1[1]);
-    const handleToggle1 = (value: string) => () => {
-        setChecked1(value);
-    };
-    const [checked2, setChecked2] = useState<string>(sort2[1]);
-    const handleToggle2 = (value: string) => () => {
-        setChecked2(value);
-    };
 
     return products
         ? (
@@ -87,39 +96,38 @@ const ProductsPage: React.FC<{
                                 <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
                                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
                                         <Typography className='sortName'>
-                                            {t('sortBy.title')} <span className="checked">{checked1}</span>
+                                            {t('sortBy.title')}
+                                            <span className="checked">
+                                                {t(order.key)}
+                                            </span>
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails sx={{p: "0", margin: "0 40px"}}>
                                         <List component="div" role="list">
-                                            {sort1.map((value, i) => (
+                                            {Orders.map((value, i) => (
                                                 <ListItemButton
                                                     key={i}
                                                     role="listitem"
                                                     onClick={handleToggle1(value)}
                                                     sx={{p: "0"}}>
                                                     <Typography className={
-                                                        checked1 == value
+                                                        order == value
                                                             ? 'checked'
                                                             : 'check'
-                                                    }>
-                                                        {value}
-                                                    </Typography>
+                                                    }>{t(value.key)}</Typography>
                                                 </ListItemButton>
                                             ))}
-                                            {sort2.map((value, i) => (
+                                            {Directions.map((value, i) => (
                                                 <ListItemButton
                                                     key={i}
                                                     role="listitem"
                                                     onClick={handleToggle2(value)}
                                                     sx={{p: "0"}}>
                                                     <Typography className={
-                                                        checked2 == value
+                                                        direction == value
                                                             ? 'checked'
                                                             : 'check'
-                                                    }>
-                                                        {value}
-                                                    </Typography>
+                                                    }>{t(value.key)}</Typography>
                                                 </ListItemButton>
                                             ))}
                                         </List>

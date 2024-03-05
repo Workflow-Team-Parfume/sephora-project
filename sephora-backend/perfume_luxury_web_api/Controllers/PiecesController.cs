@@ -7,15 +7,26 @@ public class PiecesController(
 {
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
-        => Ok(await pieceService.Get().ToListAsync());
-    
+    {
+        var items = await pieceService.Get().ToListAsync();
+        foreach (var i in items)
+            i.Product.Pieces = [];
+        return Ok(items);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
         [FromQuery] string? sort = null,
         [FromQuery] string? filter = null
-    ) => Ok(await pieceService.Get(page, size, sort, filter));
+    )
+    {
+        var items = await pieceService.Get(page, size, sort, filter);
+        foreach (var i in items.Items)
+            i.Product.Pieces = [];
+        return Ok(items);
+    }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)

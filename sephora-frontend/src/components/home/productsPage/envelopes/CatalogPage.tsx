@@ -7,6 +7,8 @@ import React from "react";
 const CatalogPage: React.FC = () => {
     const {t} = useTranslation();
     return <ProductsPage
+        defaultOrder={null}
+        defaultDirection={null}
         title={t('header.catalogue')}
         filters={Filters}
         mainFilter={Filter}

@@ -24,7 +24,7 @@ const routes = {
     picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
 
     api: {
-        novelties: '/pieces?filter=createdAt > DateTime.UtcNow.AddDays(-14)&sort=createdAt desc',
+        novelties: '/pieces?filter=createdAt > DateTime.UtcNow.AddDays(-14)',
         dateOrdered: '/pieces?sort=createdAt desc',
         pieces: '/pieces?',
         popularity: '/pieces?&sort=product.AverageRating desc',

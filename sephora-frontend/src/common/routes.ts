@@ -12,7 +12,6 @@ const routes = {
     bottled: '/bottled',
     full_sized: '/full-sized',
 
-    basket: '/basket',
     order: '/order',
     thank: '/thank',
     detailsOrder: '/order-details',

@@ -19,9 +19,9 @@ import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPag
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 import BottledPage from "./models/piece/BottledPage.tsx";
-import {Basket} from "./components/home/basket/Basket.tsx";
 import Profile from "./components/home/profile/Profile.tsx";
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
+import NotFound from "./components/home/404/NotFound.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -94,11 +94,12 @@ function App() {
                     <Route path={routes.bottled} element={<BottledPage/>}/>
                     <Route path={routes.full_sized} element={<FullSizedPage/>}/>
 
-                    <Route path={routes.basket} element={<Basket/>}/>
                     <Route path={routes.order} element={<Order/>}/>
                     <Route path={routes.thank} element={<Thank/>}/>
                     <Route path={routes.detailsOrder} element={<YourOrder/>}/>
                     <Route path={routes.profile} element={<Profile/>}/>
+                    
+                    <Route path='*' element={<NotFound/>}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

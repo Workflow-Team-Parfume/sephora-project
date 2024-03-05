@@ -3,10 +3,11 @@ import "./homeHeader.scss";
 import {Box, Button, OutlinedInput, Stack} from "@mui/material";
 import logo from "../../../assets/images/Group.svg";
 import input_main_icon from "../../../assets/images/input_main_icon.svg";
-import icon1 from "../../../assets/images/icon1.svg";
+// import icon1 from "../../../assets/images/icon1.svg";
 import {useTranslation} from "react-i18next";
 import {Basket} from "../basket/Basket";
 import routes from "../../../common/routes.ts";
+import LoginPage from "../../auth/login/LoginPage.tsx";
 
 const HomeHeader = () => {
     const {t, i18n} = useTranslation();
@@ -92,9 +93,10 @@ const HomeHeader = () => {
                             gap: 2,
                         }}
                     >
-                        <Button disableTouchRipple href="/profile">
+                        {LoginPage()}
+                        {/* <Button disableTouchRipple href="/profile">
                             <img src={icon1} alt=""/>
-                        </Button>
+                        </Button> */}
                         {Basket()}
 
                     </Box>
@@ -110,23 +112,23 @@ const HomeHeader = () => {
                         marginX: '5%',
                     }}
                 >
-                    <Button href={routes.full_sized} color="inherit">
+                    <Button href={routes.full_sized} disableTouchRipple>
                         {t("header.fullSizePerfume")}
                     </Button>
-                    <Button href={routes.bottled} color="inherit">
+                    <Button href={routes.bottled} disableTouchRipple>
                         {t("header.bottled")}
                     </Button>
-                    <Button href={routes.care} color="inherit">
+                    <Button href={routes.care} disableTouchRipple>
                         {t("header.care")}
                     </Button>
-                    <Button href={routes.novelties} color="inherit">
+                    <Button href={routes.novelties} disableTouchRipple>
                         {t("header.new")}
                     </Button>
-                    <Button href={routes.products} color="inherit">
+                    <Button href={routes.products} disableTouchRipple>
                         {t("header.catalogue")}
                     </Button>
-                    <Button color="inherit">{t("header.aboutUs")}</Button>
-                    <Button color="inherit">{t("header.paymentAndDelivery")}</Button>
+                    <Button disableTouchRipple>{t("header.aboutUs")}</Button>
+                    <Button disableTouchRipple>{t("header.paymentAndDelivery")}</Button>
                 </Box>
             </div>
         </div>

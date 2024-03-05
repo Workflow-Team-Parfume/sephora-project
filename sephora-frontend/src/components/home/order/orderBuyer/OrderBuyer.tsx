@@ -8,8 +8,7 @@ import textFieldStyle from '../../../../common/textFieldStyle';
 import a11yProps from "../../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../../common/tabPanel/tabsStyle";
-
-        
+    
 const OrderBuyer = () => {
     const {t} = useTranslation();    
     const navigate = useNavigate();

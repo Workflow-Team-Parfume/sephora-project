@@ -7,6 +7,6 @@ public interface IPagedList<T> : IList<T>
     int TotalCount { get; }
     int TotalPages { get; }
     
-    bool HasPreviousPage => CurrentPage > 1;
+    bool HasPreviousPage => CurrentPage > 1 && TotalPages > 1;
     bool HasNextPage => CurrentPage < TotalPages;
 }

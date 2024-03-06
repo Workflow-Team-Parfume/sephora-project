@@ -1,6 +1,6 @@
 namespace CleanArchitecture.Application.SearchEngine;
 
-public class ProductSearchService : ISearchService<ProductEntity, ProductDto>
+public class ProductSearchService : ISearchService<ProductDto>
 {
     private const LuceneVersion Version = LuceneVersion.LUCENE_48;
     private static readonly string[] Fields =
@@ -19,12 +19,10 @@ public class ProductSearchService : ISearchService<ProductEntity, ProductDto>
     private readonly IndexWriter _writer;
     private readonly IProductService _productService;
     private readonly MultiFieldQueryParser _queryParser;
-    private readonly IMapper _mapper;
 
     public ProductSearchService(
         string indexPath,
-        IProductService productService,
-        IMapper mapper
+        IProductService productService
     )
     {
         var analyzer = new StandardAnalyzer(Version);
@@ -34,11 +32,7 @@ public class ProductSearchService : ISearchService<ProductEntity, ProductDto>
         _productService = productService;
         _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer);
         _writer = new IndexWriter(_directory, config);
-        _mapper = mapper;
     }
-
-    public void Index(ProductEntity entity)
-        => Index(_mapper.Map<ProductDto>(entity));
     
     public void Index(ProductDto dto)
     {
@@ -91,17 +85,14 @@ public class ProductSearchService : ISearchService<ProductEntity, ProductDto>
         _writer.Commit();
     }
 
-    private void RemoveCore(string id)
+    public void Remove(ProductDto dto)
     {
-        var term = new Term(nameof(ProductDto.Id), id);
+        var term = new Term(nameof(ProductDto.Id), dto.Id.ToString());
         _writer.DeleteDocuments(term);
         _writer.Commit();
     }
- 
-    public void Remove(ProductEntity entity) => RemoveCore(entity.Id.ToString());
 
-    public void Remove(ProductDto dto) => RemoveCore(dto.Id.ToString());
-
+    // TODO: Verify the implementation
     public async Task<PagedListInfo<ProductDto>> Search(
         string searchTerm,
         int pageNumber = 1,

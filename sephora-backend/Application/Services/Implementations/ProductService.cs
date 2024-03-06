@@ -105,9 +105,7 @@ public class ProductService(
         );
 
         if (entity is null)
-            throw new ArgumentException(
-                $"Product with the id={{{id}}} is not found"
-            );
+            return null;
         
         entity.ProductPieces = entity.ProductPieces
             .OrderByDescending(x => x.CreatedAt)

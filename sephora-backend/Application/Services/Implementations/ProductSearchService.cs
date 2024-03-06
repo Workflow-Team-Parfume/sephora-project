@@ -1,8 +1,11 @@
-namespace CleanArchitecture.Application.SearchEngine;
+using Directory = System.IO.Directory;
+
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class ProductSearchService : ISearchService<ProductDto>
 {
     private const LuceneVersion Version = LuceneVersion.LUCENE_48;
+
     private static readonly string[] Fields =
     [
         nameof(ProductEntity.Name),
@@ -14,11 +17,11 @@ public class ProductSearchService : ISearchService<ProductDto>
         "CategoryDescriptionEn",
         "BrandName"
     ];
-    
+
     private readonly SimpleFSDirectory _directory;
-    private readonly IndexWriter _writer;
     private readonly IProductService _productService;
     private readonly MultiFieldQueryParser _queryParser;
+    private readonly IndexWriterConfig _config;
 
     public ProductSearchService(
         string indexPath,
@@ -26,70 +29,97 @@ public class ProductSearchService : ISearchService<ProductDto>
     )
     {
         var analyzer = new StandardAnalyzer(Version);
-        var config = new IndexWriterConfig(Version, analyzer);
-        
+
+        _config = new IndexWriterConfig(Version, analyzer);
         _directory = new SimpleFSDirectory(indexPath);
         _productService = productService;
         _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer);
-        _writer = new IndexWriter(_directory, config);
+        
+        InitialIndex(indexPath).Wait();
     }
-    
-    public void Index(ProductDto dto)
+
+    private async Task InitialIndex(string indexPath)
     {
-        _writer.AddDocument(new Document
+        // index the existing products if there is no cache
+        if (!Directory.EnumerateFileSystemEntries(indexPath).IsNullOrEmpty())
+            return;
+        
+        var products = await _productService.Get();
+        Index(products);
+    }
+
+    private static void IndexCore(IndexWriter writer, ProductDto item)
+    {
+        writer.AddDocument(new Document
         {
             new StringField(
                 nameof(ProductDto.Id),
-                dto.Id.ToString(),
-                Field.Store.YES),
+                item.Id.ToString(),
+                Field.Store.YES
+            ),
             new StringField(
                 nameof(ProductDto.Name),
-                dto.Name, Field.Store.YES
+                item.Name,
+                Field.Store.YES
             ),
             new StringField(
                 nameof(ProductDto.DescriptionEn),
-                dto.DescriptionEn,
+                item.DescriptionEn,
                 Field.Store.YES
             ),
             new StringField(
                 nameof(ProductDto.DescriptionUa),
-                dto.DescriptionUa,
+                item.DescriptionUa,
                 Field.Store.YES
             ),
             new StringField(
                 "CategoryNameUa",
-                dto.Category.NameUa,
+                item.Category.NameUa,
                 Field.Store.YES
             ),
             new StringField(
                 "CategoryNameEn",
-                dto.Category.NameEn,
+                item.Category.NameEn,
                 Field.Store.YES
             ),
             new StringField(
                 "CategoryDescriptionUa",
-                dto.Category.DescriptionUa,
+                item.Category.DescriptionUa,
                 Field.Store.YES
             ),
             new StringField(
                 "CategoryDescriptionEn",
-                dto.Category.DescriptionEn,
+                item.Category.DescriptionEn,
                 Field.Store.YES
             ),
             new StringField(
                 "BrandName",
-                dto.Brand.Name,
+                item.Brand.Name,
                 Field.Store.YES
             ),
         });
-        _writer.Commit();
+    }
+    public void Index(ProductDto item)
+    {
+        using var writer = new IndexWriter(_directory, _config);
+        IndexCore(writer, item);
+        writer.Commit();
     }
 
+    public void Index(IEnumerable<ProductDto> items)
+    {
+        using var writer = new IndexWriter(_directory, _config);
+        foreach (var item in items)
+            IndexCore(writer, item);
+        writer.Commit();
+    }
+    
     public void Remove(ProductDto dto)
     {
+        using var writer = new IndexWriter(_directory, _config);
         var term = new Term(nameof(ProductDto.Id), dto.Id.ToString());
-        _writer.DeleteDocuments(term);
-        _writer.Commit();
+        writer.DeleteDocuments(term);
+        writer.Commit();
     }
 
     // TODO: Verify the implementation
@@ -102,7 +132,7 @@ public class ProductSearchService : ISearchService<ProductDto>
         using var directoryReader = DirectoryReader.Open(_directory);
         IndexSearcher searcher = new(directoryReader);
         var query = _queryParser.Parse(searchTerm);
-        
+
         // Create a TotalHitCountCollector instance
         var totalCntCollector = new TotalHitCountCollector();
         searcher.Search(query, totalCntCollector);
@@ -110,8 +140,8 @@ public class ProductSearchService : ISearchService<ProductDto>
 
         // Perform the search of preceding results with the collector
         int from = (pageNumber - 1) * pageSize;
-        var after = from > 0 
-            ? searcher.Search(query, from).ScoreDocs.Last() 
+        var after = from > 0
+            ? searcher.Search(query, from).ScoreDocs.Last()
             : null;
 
         // Retrieve the necessary docs
@@ -119,7 +149,7 @@ public class ProductSearchService : ISearchService<ProductDto>
         searcher.Search(query, collector);
         var hits = collector.GetTopDocs().ScoreDocs;
 
-        var prods = new List<ProductDto>();
+        List<ProductDto> prods = [];
         foreach (var hit in hits)
         {
             var document = searcher.Doc(hit.Doc);
@@ -138,7 +168,7 @@ public class ProductSearchService : ISearchService<ProductDto>
             CurrentPage: pageNumber,
             PageSize: pageSize,
             TotalPages: totalPages,
-            TotalCount: Convert.ToInt32(totalHits),
+            TotalCount: prods.Count,
             HasPreviousPage: pageNumber > 1 && totalPages > 1,
             HasNextPage: totalPages > pageNumber
         );

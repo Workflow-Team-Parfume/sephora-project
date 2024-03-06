@@ -2,9 +2,20 @@
 
 public interface IProductService
 {
-    // user is here to map the user's favorites
+    /**
+     * <summary>Gets the products</summary>
+     * <param name="user">The user to map the favorites</param>
+     */
     Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null);
 
+    /**
+     * <summary>Gets the products</summary>
+     * <param name="pageNumber">The page number</param>
+     * <param name="pageSize">The page size</param>
+     * <param name="orderBy">The order by</param>
+     * <param name="selectBy">The select by</param>
+     * <param name="user">The user to map the favorites</param>
+     */
     async Task<PagedListInfo<ProductDto>> Get(
         int pageNumber,
         int pageSize,
@@ -14,8 +25,28 @@ public interface IProductService
     ) => await (await Get(user))
         .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
+    /**
+     * <summary>Gets the product by its id</summary>
+     * <param name="id">The id of the product</param>
+     * <param name="user">The user to map the favorites</param>
+     */
     Task<ProductDto?> GetById(long id, ClaimsPrincipal? user = null);
+    
+    /**
+     * <summary>Creates a new product</summary>
+     * <param name="createProductDto">The product to create</param>
+     */
     Task Create(CreateProductDto createProductDto);
+    
+    /**
+     * <summary>Edits the product</summary>
+     * <param name="editProductDto">The product to edit</param>
+     */
     Task Edit(EditProductDto editProductDto);
+    
+    /**
+     * <summary>Deletes the product</summary>
+     * <param name="id">The id of the product</param>
+     */
     Task Delete(long id);
 }

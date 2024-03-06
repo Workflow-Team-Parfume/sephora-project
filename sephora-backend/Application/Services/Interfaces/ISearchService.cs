@@ -1,25 +1,18 @@
-namespace CleanArchitecture.Application.SearchEngine;
+namespace CleanArchitecture.Application.Services.Interfaces;
 
 public interface ISearchService<T>
 {
     /**
      * <summary>Indexes the entity in the search engine</summary>
-     * <param name="entity">The entity to index</param>
+     * <param name="item">The item to index</param>
      */
-    void Index(T entity);
+    void Index(T item);
 
     /**
      * <summary>Indexes the entities in the search engine</summary>
-     * <param name="entities">The entities to index</param>
+     * <param name="items">The items to index</param>
      */
-    void Index(IEnumerable<T> entities)
-    {
-        var enumerated = entities is IQueryable 
-            ? entities.ToList() 
-            : entities;
-        foreach (var entity in enumerated)
-            Index(entity);
-    }
+    void Index(IEnumerable<T> items);
 
     /**
      * <summary>Removes the entity from the search engine.</summary>

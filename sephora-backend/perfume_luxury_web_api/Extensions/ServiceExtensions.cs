@@ -57,4 +57,15 @@ public static class ServiceExtensions
         services.AddScoped<IRatingService, RatingService>();
         services.AddScoped<IFavoritesService, FavoritesService>();
     }
+    
+    public static void AddSearchService(this IServiceCollection services, string indexPath)
+    {
+        Directory.CreateDirectory(indexPath);
+        services.AddScoped<ISearchService<ProductDto>>(
+            provider => new ProductSearchService(
+                indexPath,
+                provider.GetRequiredService<IProductService>()
+            )
+        );
+    }
 }

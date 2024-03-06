@@ -6,6 +6,7 @@ namespace CleanArchitecture.Application.SearchEngine;
 public interface ISearchService<TEntity, TDto>
 {
     void Index(TEntity entity);
+    void Index(TDto dto);
 
     void Index(IEnumerable<TEntity> entities)
     {
@@ -13,10 +14,19 @@ public interface ISearchService<TEntity, TDto>
             ? entities.ToList() 
             : entities;
         foreach (var entity in enumerated)
-        {
             Index(entity);
-        }
     }
+    void Index(IEnumerable<TDto> dtos)
+    {
+        var enumerated = dtos is IQueryable 
+            ? dtos.ToList() 
+            : dtos;
+        foreach (var entity in enumerated)
+            Index(entity);
+    }
+
+    void Remove(TEntity entity);
+    void Remove(TDto dto);
 
     Task<PagedListInfo<TDto>> Search(
         string searchTerm,

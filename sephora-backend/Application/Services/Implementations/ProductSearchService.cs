@@ -138,33 +138,34 @@ public class ProductSearchService : ISearchService<ProductDto>
         writer.Commit();
     }
 
-    // TODO: Verify the implementation
     public async Task<PagedListInfo<ProductDto>> Search(
         string searchTerm,
         int pageNumber = 1,
         int pageSize = 10
     )
     {
+        // Validate the input
+        if (pageNumber < 1)
+            throw new ArgumentException("Invalid page number");
+        
+        if (pageSize < 1)
+            throw new ArgumentException("Invalid page size");
+        
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            throw new ArgumentException("Search term is null or empty");
+        
+        // Open the directory, create a searcher and a query
         using var directoryReader = DirectoryReader.Open(_directory);
         IndexSearcher searcher = new(directoryReader);
         var query = _queryParser.Parse($"{searchTerm}~2 OR *{searchTerm}*");
 
-        // Create a TotalHitCountCollector instance
+        // Calculate the total hits
         var totalCntCollector = new TotalHitCountCollector();
         searcher.Search(query, totalCntCollector);
         double totalHits = totalCntCollector.TotalHits;
 
         if (totalHits == 0)
-            return new PagedListInfo<ProductDto>
-            (
-                Items: new List<ProductDto>(),
-                CurrentPage: pageNumber,
-                PageSize: pageSize,
-                TotalPages: 0,
-                TotalCount: 0,
-                HasPreviousPage: false,
-                HasNextPage: false
-            );
+            return new PagedListInfo<ProductDto>();
 
         // Perform the search of preceding results with the collector
         int from = (pageNumber - 1) * pageSize;
@@ -172,7 +173,7 @@ public class ProductSearchService : ISearchService<ProductDto>
             ? searcher.Search(query, from).ScoreDocs.Last()
             : null;
 
-        // Retrieve the necessary docs
+        // Retrieve the necessary subsequent docs
         var collector = TopScoreDocCollector.Create(pageSize, after, true);
         searcher.Search(query, collector);
         var hits = collector.GetTopDocs().ScoreDocs;
@@ -196,7 +197,7 @@ public class ProductSearchService : ISearchService<ProductDto>
             CurrentPage: pageNumber,
             PageSize: pageSize,
             TotalPages: totalPages,
-            TotalCount: prods.Count,
+            TotalCount: Convert.ToInt32(totalHits),
             HasPreviousPage: pageNumber > 1 && totalPages > 1,
             HasNextPage: totalPages > pageNumber
         );

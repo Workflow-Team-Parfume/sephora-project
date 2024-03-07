@@ -33,8 +33,14 @@ public class ProductSearchService : ISearchService<ProductDto>
         _config = new IndexWriterConfig(Version, analyzer);
         _directory = new SimpleFSDirectory(indexPath);
         _productService = productService;
-        _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer);
-        
+        _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer)
+        {
+            DefaultOperator = Operator.OR,
+            // for wildcard search
+            // disable if search is slow
+            AllowLeadingWildcard = true 
+        };
+
         InitialIndex(indexPath).Wait();
     }
 
@@ -43,66 +49,72 @@ public class ProductSearchService : ISearchService<ProductDto>
         // index the existing products if there is no cache
         if (!Directory.EnumerateFileSystemEntries(indexPath).IsNullOrEmpty())
             return;
-        
+
         var products = await _productService.Get();
         Index(products);
     }
 
-    private static void IndexCore(IndexWriter writer, ProductDto item)
-    {
-        writer.AddDocument(new Document
-        {
-            new StringField(
-                nameof(ProductDto.Id),
-                item.Id.ToString(),
-                Field.Store.YES
-            ),
-            new StringField(
-                nameof(ProductDto.Name),
-                item.Name,
-                Field.Store.YES
-            ),
-            new StringField(
-                nameof(ProductDto.DescriptionEn),
-                item.DescriptionEn,
-                Field.Store.YES
-            ),
-            new StringField(
-                nameof(ProductDto.DescriptionUa),
-                item.DescriptionUa,
-                Field.Store.YES
-            ),
-            new StringField(
-                "CategoryNameUa",
-                item.Category.NameUa,
-                Field.Store.YES
-            ),
-            new StringField(
-                "CategoryNameEn",
-                item.Category.NameEn,
-                Field.Store.YES
-            ),
-            new StringField(
-                "CategoryDescriptionUa",
-                item.Category.DescriptionUa,
-                Field.Store.YES
-            ),
-            new StringField(
-                "CategoryDescriptionEn",
-                item.Category.DescriptionEn,
-                Field.Store.YES
-            ),
-            new StringField(
-                "BrandName",
-                item.Brand.Name,
-                Field.Store.YES
-            ),
-        });
-    }
+    private static Document IndexItem(ProductDto item) =>
+    [
+        new StringField(
+            nameof(ProductDto.Id),
+            item.Id.ToString(),
+            Field.Store.YES
+        ),
+
+        new TextField(
+            nameof(ProductDto.Name),
+            item.Name,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            nameof(ProductDto.DescriptionEn),
+            item.DescriptionEn,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            nameof(ProductDto.DescriptionUa),
+            item.DescriptionUa,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            "CategoryNameUa",
+            item.Category.NameUa,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            "CategoryNameEn",
+            item.Category.NameEn,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            "CategoryDescriptionUa",
+            item.Category.DescriptionUa,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            "CategoryDescriptionEn",
+            item.Category.DescriptionEn,
+            Field.Store.YES
+        ),
+
+        new TextField(
+            "BrandName",
+            item.Brand.Name,
+            Field.Store.YES
+        )
+    ];
+
     public void Index(ProductDto item)
     {
         using var writer = new IndexWriter(_directory, _config);
-        IndexCore(writer, item);
+        writer.AddDocument(IndexItem(item));
         writer.Commit();
     }
 
@@ -110,10 +122,14 @@ public class ProductSearchService : ISearchService<ProductDto>
     {
         using var writer = new IndexWriter(_directory, _config);
         foreach (var item in items)
-            IndexCore(writer, item);
+        {
+            Document doc = IndexItem(item);
+            writer.AddDocument(doc);
+        }
+
         writer.Commit();
     }
-    
+
     public void Remove(ProductDto dto)
     {
         using var writer = new IndexWriter(_directory, _config);
@@ -131,12 +147,24 @@ public class ProductSearchService : ISearchService<ProductDto>
     {
         using var directoryReader = DirectoryReader.Open(_directory);
         IndexSearcher searcher = new(directoryReader);
-        var query = _queryParser.Parse(searchTerm);
+        var query = _queryParser.Parse($"{searchTerm}~2 OR *{searchTerm}*");
 
         // Create a TotalHitCountCollector instance
         var totalCntCollector = new TotalHitCountCollector();
         searcher.Search(query, totalCntCollector);
         double totalHits = totalCntCollector.TotalHits;
+
+        if (totalHits == 0)
+            return new PagedListInfo<ProductDto>
+            (
+                Items: new List<ProductDto>(),
+                CurrentPage: pageNumber,
+                PageSize: pageSize,
+                TotalPages: 0,
+                TotalCount: 0,
+                HasPreviousPage: false,
+                HasNextPage: false
+            );
 
         // Perform the search of preceding results with the collector
         int from = (pageNumber - 1) * pageSize;
@@ -149,14 +177,14 @@ public class ProductSearchService : ISearchService<ProductDto>
         searcher.Search(query, collector);
         var hits = collector.GetTopDocs().ScoreDocs;
 
-        List<ProductDto> prods = [];
+        IList<ProductDto> prods = [];
         foreach (var hit in hits)
         {
             var document = searcher.Doc(hit.Doc);
-            var dto = await _productService.GetById(
-                document.GetField(nameof(ProductEntity.Id)).GetInt64Value()
-                ?? 0
+            long id = Convert.ToInt64(
+                document.GetField(nameof(ProductDto.Id)).GetStringValue()
             );
+            var dto = await _productService.GetById(id);
             if (dto is not null)
                 prods.Add(dto);
         }

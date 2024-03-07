@@ -11,6 +11,9 @@ const routes = {
     thank: '/thank',
     detailsOrder: '/detailsOrder',
 
+    deliveryMain: '/deliveryMain',
+    deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
+
     admin: '/admin',
     adminCategoriesList: '/admin/category',
     createCategory: '/admin/category/create',

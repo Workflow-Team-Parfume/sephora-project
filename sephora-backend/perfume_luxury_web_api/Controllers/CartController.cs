@@ -15,7 +15,7 @@ public class CartController(ICartService cartService) : ControllerBase
         [FromQuery] string? select = null
     ) => Ok(await cartService.Get(User, page, size, order, select));
 
-    [HttpGet("{id:long}"), Authorize(Roles = "Admin,Moderator")]
+    [HttpGet("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Get([FromRoute] long id)
         => Ok(await cartService.GetById(id));
 

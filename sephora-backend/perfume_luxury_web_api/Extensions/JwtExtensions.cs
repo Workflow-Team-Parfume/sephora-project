@@ -1,4 +1,6 @@
-﻿namespace perfume_luxury_web_api.Extensions;
+﻿using Microsoft.AspNetCore.Authentication.Certificate;
+
+namespace perfume_luxury_web_api.Extensions;
 
 public static class JwtExtensions
 {
@@ -9,9 +11,14 @@ public static class JwtExtensions
     {
         if (!jwtOpts.AreValid)
             throw new SecurityException("Invalid JWT options provided");
-        
+
+        services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate();
+
         services.AddAuthentication(options =>
         {
+
             options.DefaultAuthenticateScheme
                 = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme

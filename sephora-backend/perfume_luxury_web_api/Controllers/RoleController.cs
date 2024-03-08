@@ -3,28 +3,28 @@
 [Route("[controller]"), ApiController]
 public class RoleController(IRoleService roleService) : ControllerBase
 {
-    [HttpPost, Authorize(Roles = "Admin")]
+    [HttpPost, Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Create([FromBody] string roleName)
     {
         await roleService.Create(roleName);
         return Ok();
     }
     
-    [HttpPost("addToRole"), Authorize(Roles = "Admin")]
+    [HttpPost("addToRole"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> AddToRole(string userId, string roleName)
     {
         await roleService.AddToRole(userId, roleName);
         return Ok();
     }
     
-    [HttpPost("removeFromRole"), Authorize(Roles = "Admin")]
+    [HttpPost("removeFromRole"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> RemoveFromRole(string userId, string roleName)
     {
         await roleService.RemoveFromRole(userId, roleName);
         return Ok();
     }
     
-    [HttpDelete("{roleName}"), Authorize(Roles = "Admin")]
+    [HttpDelete("{roleName}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Delete([FromRoute] string roleName)
     {
         await roleService.Delete(roleName);

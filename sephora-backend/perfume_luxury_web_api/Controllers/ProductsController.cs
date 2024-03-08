@@ -19,7 +19,7 @@ public class ProductsController(IProductService productService) : Controller
     public async Task<IActionResult> Get([FromRoute] long id)
         => Ok(await productService.GetById(id, User));
 
-    [HttpPost, Authorize(Roles = "Admin,Moderator")]
+    [HttpPost, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Create([FromForm] CreateProductDto product)
     {
         if (!ModelState.IsValid)
@@ -29,14 +29,14 @@ public class ProductsController(IProductService productService) : Controller
         return Ok();
     }
 
-    [HttpDelete("{id:long}"), Authorize(Roles = "Admin,Moderator")]
+    [HttpDelete("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Delete([FromRoute] long id)
     {
         await productService.Delete(id);
         return Ok();
     }
 
-    [HttpPut, Authorize(Roles = "Admin,Moderator")]
+    [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Edit([FromBody] EditProductDto product)
     {
         if (!ModelState.IsValid)

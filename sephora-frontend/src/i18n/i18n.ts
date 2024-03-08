@@ -146,6 +146,8 @@ i18n
         'profile.orderHistory.delivered': 'Доставлено',
         'profile.orderHistory.inProcess': 'В процесі',
         'profile.orderHistory.cancelled': 'Скасовано',
+
+        'register.birthdate': 'Дата народження',
         }
     },
 
@@ -289,6 +291,8 @@ i18n
         'profile.orderHistory.delivered': 'Delivered',
         'profile.orderHistory.inProcess': 'In process',
         'profile.orderHistory.cancelled': 'Cancelled',
+
+        'register.birthdate': 'Date of birth',
         }
     }
 },

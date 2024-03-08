@@ -27,8 +27,10 @@ export enum AuthUserActionType {
     user?: IUser;
   }
 export interface IRegister {
-    userName: string;
+    firstName: string;
+    lastName: string;
     email: string;
+    dateOfBirth: Date;
     phoneNumber: string;
     password: string;
     passwordConfirmation: string;

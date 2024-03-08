@@ -1,4 +1,3 @@
-import React from "react";
 import {Route, Routes} from "react-router-dom";
 import CategoryListPage from "./components/admin/category/list/CategoryListPage";
 import CategoryCreatePage from "./components/admin/category/create/CategoryCreatePage";
@@ -8,8 +7,6 @@ import HomePage from "./components/home/HomePage";
 import LoginPage from "./components/auth/login/LoginPage";
 import RegisterPage from "./components/auth/register/RegisterPage";
 import Loader from "./components/common/loader/Loader";
-// import { IAuthUser } from "./components/auth/types";
-// import { useSelector } from "react-redux";
 import DefaultLayout from "./components/admin/container/default/DefaultLayout";
 import AdminDashboard from "./components/admin/dashboard/AdminDashboard"
 import ProductsPage from "./components/home/productsPage/ProductsPage";
@@ -20,61 +17,12 @@ import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
 import Profile from "./components/home/profile/Profile";
+import { useSelector } from "react-redux";
+import {IAuthUser } from "./components/auth/types";
+
 
 function App() {
-    // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-
-    React.useEffect(() => {
-        console.log(localStorage.token);
-
-        // if (localStorage.token) {
-        //   const token = localStorage.token;
-        //   var user = jwtDecode(token) as IUser;
-        //   store.dispatch({
-        //     type: AuthUserActionType.LOGIN_USER,
-        //     payload: {
-        //       id: user.id,
-        //       userName: user.userName,
-        //       email: user.email,
-        //       profilePicture: user.profilePicture,
-        //       registrationDate: user.registrationDate,
-        //       phoneNumber: user.phoneNumber,
-        //       roles: user.roles,
-        //     },
-        //   });
-        // }
-
-        // if (localStorage.access_token) {
-        //   const access_token = localStorage.access_token;
-        //   axios
-        //     .get(
-        //       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
-        //       {
-        //         headers: {
-        //           Authorization: `Bearer ${access_token}`,
-        //           Accept: "application/json",
-        //         },
-        //       }
-        //     )
-        //     .then((res) => {
-        //       if (res.data) {
-        //         store.dispatch({
-        //           type: AuthUserActionType.LOGIN_GOOGLE_USER,
-        //           payload: {
-        //             id: res.data.id,
-        //             userName: res.data.name,
-        //             email: res.data.email,
-        //             profilePicture: res.data.picture,
-        //             registrationDate: "",
-        //             phoneNumber: "",
-        //             roles: ["user"],
-        //           },
-        //         });
-        //       }
-        //     })
-        //     .catch((err) => console.log(err));
-        // }
-    }, [])
+    const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
     return (
         <>
@@ -95,7 +43,7 @@ function App() {
                     <Route path={routes.profile} element={<Profile/>}/>
                 </Route>
 
-                {/* {user?.role === "admin" && isAuth ? ( */}
+                {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? (
                 <Route path={routes.admin} element={<AdminLayout/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={routes.adminCategoriesList}>
@@ -104,9 +52,9 @@ function App() {
                         <Route path={routes.editCategory} element={<CategoryEditPage/>}/>
                     </Route>
                 </Route>
-                {/* ) : (
+                ) : (
                   <Route path="admin" element={<LoginPage />} />
-                )} */}
+                )}
             </Routes>
         </>
     );

@@ -21,7 +21,7 @@ public class PiecesController(
     public async Task<IActionResult> GetById(long id)
         => Ok(await pieceService.GetById(id));
 
-    [HttpPost, Authorize(Roles = "Admin,Moderator")]
+    [HttpPost, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Create(
         [FromForm] CreateProductPieceDto dto
     )
@@ -33,7 +33,7 @@ public class PiecesController(
         return Ok();
     }
 
-    [HttpPut, Authorize(Roles = "Admin,Moderator")]
+    [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Update(
         [FromBody] EditProductPieceDto dto
     )
@@ -45,7 +45,7 @@ public class PiecesController(
         return Ok();
     }
 
-    [HttpDelete("{id:long}"), Authorize(Roles = "Admin,Moderator")]
+    [HttpDelete("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Delete(long id)
     {
         await pieceService.Delete(id);

@@ -1,35 +1,45 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-i18n
-    .use(initReactI18next)
+i18n.use(initReactI18next)
     .init({
         resources: {
             uk: {
                 translation: {
-                    'uan': 'грн',
+                    'uah': 'грн',
                     'pc': 'шт',
 
-                    'singIn': 'Увійти',
+                    'signIn': 'Увійти',
                     'forgotPassword': 'Забули пароль?',
                     'email': 'E-mail',
+                    'email/login': 'E-mail/Login',
                     'password': 'Пароль',
                     'name': 'Ім\'я',
                     'surname': 'Прізвище',
                     'phone': 'Номер телефона',
+                    'date': 'Дата народження',
 
-                    'header.fullSizePerfume': 'Повнорозмірні парфуми',
-                    'header.bottlingPerfumes': 'Розпив парфумерії',
-                    'header.care': 'Догляд',
+                    'passwordRecovery': 'Відновлення паролю',
+                    'passwordRecoveryText': 'На Вашу електронну адресу надсилається лист, який дозволить вам автоматично увійти до системи.',
+                    'send': 'Надіслати',
+                    'or': 'АБО',
+                    'registerPassConfirm': 'Підтвердження пароля*',
+                    'registerBtn': 'Зареєструватися',
+                    'dontHaveAnAccount': 'Не маєте акаунта?',
+                    'registration': ' Реєстрація',
+
+                    'header.bottled': 'Розлив парфумерії',
                     'header.new': 'NEW',
+                    'header.care': 'Догляд',
                     'header.catalogue': 'Каталог',
+                    'header.fullSizePerfume': 'Повнорозмірні парфуми',
                     'header.aboutUs': 'Про нас',
                     'header.paymentAndDelivery': 'Оплата та доставка',
+                    'header.novelty': 'Новинки',
 
                     'common.button.moreDetails': 'Детальніше',
                     'common.button.moreProducts': 'Більше товарів',
                     'common.button.review': 'Переглянути',
-                    'common.title.novelty': 'Новинки',
                     'common.title.popular': 'Популярне',
                     'common.title.perfumes': 'Парфуми',
                     'common.title.recommendedCategories': 'Рекомендовані категорії',
@@ -38,9 +48,11 @@ i18n
                     'common.title.similarProducts': 'Схожі товари',
                     'common.title.especiallyForYou': 'Спеціально для вас',
 
+                    'common.ml': 'мл',
+
                     'recCategories.showerAndBath': 'Душ та ванна',
                     'recCategories.accessories': 'Аксесуари',
-                    'recCategories.vitamins': 'Вітамини',
+                    'recCategories.vitamins': 'Вітаміни',
                     'recCategories.face': 'Обличчя',
 
                     'footer.aboutDelivery': 'Про доставку',
@@ -69,13 +81,9 @@ i18n
                     'details.addToFavorites': 'Додати до улюблених',
                     'details.addedToFavorites': 'Додано до улюблених',
                     'details.buy': 'Купити',
-
-                    'passwordRecovery': 'Відновлення паролю',
-                    'passwordRecoveryText': 'На Вашу електронну адрусу надсилається лист, який дозволить вам автоматично увійти до системи.',
-                    'send': 'Надіслати',
-                    'signIn': 'Увійти',
-                    'loginEmail': 'Логін/E-mail',
-                    'or': 'АБО',
+                    'details.reviews.name': 'Ваше ім\'я',
+                    'details.reviews.comment': 'Коментар',
+                    'details.reviews.addComment': 'Додати коментар',
 
                     'sortBy.title': 'Впорядкувати за: ',
                     'sortBy.price': 'вартістю',
@@ -85,7 +93,7 @@ i18n
                     'sortBy.toHigh': 'за зростанням',
 
                     'basket': 'Кошик',
-                    'basket.recomProducts': 'Рекомендовані товари',
+                    'basket.recommendedProducts': 'Рекомендовані товари',
                     'basket/order.toOrder': 'Оформити замовлення',
                     'basket/order.orderAmount': 'Сума замовлення',
                     'basket/order.discount': 'Знижка',
@@ -116,6 +124,11 @@ i18n
                     'order.paymentByCard.cardNumber': 'Номер карти',
                     'order.paymentByCard.saveTheCard': 'Зберегти карту',
                     'order.paymentByCard.pay': 'Оплатити',
+                  
+                    'address.city': 'Місто',
+                    'address.street': 'Вулиця',
+                    'address.house': 'Будинок',
+                    'address.sq': 'Кв',
 
                     'register': 'Реєстрація',
                     'phoneNumber': 'Номер телефону',
@@ -139,42 +152,76 @@ i18n
 
                     'delivery.search': 'Введіть ваше місто',
                     'delivery.weMakeYouHappy': 'Робимо вас щасливими. Безкоштовно',
-                    'delivery.enterTheName': 'Введіть назву вашого населеного пункту, і ми запропонуємо варіанти доставки вашого щастя',
+                    'delivery.enterTheName': 'Введіть назву вашого населеного пункту, і ми запропонуємо варіанти доставки вашого щастя'
+                  
+                    'profile.contactInformation': 'Контактна інформація',
+                    'profile.contactInformation.passwordsDoNotMatch': 'Паролі не співпадають',
+                    'profile.addressBook': 'Адресна книга',
+                    'profile.wishlist': 'Список бажань',
+                    'profile.orderHistory': 'Історія замовлень',
+                    'profile.contactInformation.oldPassword': 'Старий пароль',
+                    'profile.contactInformation.newPassword': 'Новий пароль',
+                    'profile.contactInformation.passwordVerification': 'Підтвердження пароля',
+                    'profile.save': 'Зберегти',
+                    'profile.addressBook.edit': 'Редагувати',
+                    'profile.addressBook.addAddress': 'Додати нову адресу',
+                    'profile.addressBook.st': 'вул.',
+                    'profile.addressBook.tel': 'тел.',
+                    'profile.wishlist.listIsEmpty': 'Список пустий',
+                    'profile.orderHistory.order': 'Замовлення №',
+                    'profile.orderHistory.delivered': 'Доставлено',
+                    'profile.orderHistory.inProcess': 'В процесі',
+                    'profile.orderHistory.cancelled': 'Скасовано',
+
+                    'wrong': 'Щось пішло не так(',
+                    'pageIsNotResponding': 'Сторінка не відповідає',
+                    'return': 'Повернутись на головну',
                 }
             },
 
             en: {
                 translation: {
-                    'uan': 'UAN',
+                    'uah': 'UAH',
                     'pc': 'pc',
 
-                    'singIn': 'Sing in',
+                    'signIn': 'Sign in',
                     'forgotPassword': 'Forgot your password?',
-                    'email': 'E-mail',
                     'password': 'Password',
                     'name': 'Name',
                     'surname': 'Surname',
                     'phone': 'Phone number',
+                    'date': 'Date of birth',
 
-                    'header.fullSizePerfume': 'Full size perfume',
-                    'header.bottlingPerfumes': 'Bottling perfumes',
-                    'header.care': 'Care',
+                    'passwordRecovery': 'Password recovery',
+                    'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
+                    'send': 'Send',
+                    'or': 'OR',
+                    'registerPassConfirm': 'Password confirmation',
+                    'registerBtn': 'Sign up',
+                    'dontHaveAnAccount': 'Don\'t have an account?',
+                    'registration': ' Registration',
+
+                    'header.bottled': 'Bottled perfumes',
                     'header.new': 'NEW',
+                    'header.care': 'Care',
                     'header.catalogue': 'Catalogue',
+                    'header.fullSizePerfume': 'Full-size perfumes',
                     'header.aboutUs': 'About us',
                     'header.paymentAndDelivery': 'Payment and delivery',
+                    'header.novelty': 'Novelty',
 
                     'common.button.moreDetails': 'More details',
                     'common.button.moreProducts': 'More products',
                     'common.button.review': 'Review',
-                    'common.title.novelty': 'Novelty',
                     'common.title.popular': 'Popular',
                     'common.title.perfumes': 'Perfumes',
                     'common.title.recommendedCategories': 'Recommended categories',
-                    'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Reviews of out customers about cosmeticts and care',
+                    'common.title.reviewsOfOurCustomersAboutCosmeticsAndCare': 'Reviews of out customers about cosmetics and care',
                     'common.title.reviews': 'Reviews',
                     'common.title.similarProducts': 'Similar products',
                     'common.title.especiallyForYou': 'Especially for you',
+
+                    'common.ml': 'ml',
 
                     'recCategories.showerAndBath': 'Shower & bath',
                     'recCategories.accessories': 'Accessories',
@@ -207,6 +254,9 @@ i18n
                     'details.addToFavorites': 'Add to favorites',
                     'details.addedToFavorites': 'Added to favorites',
                     'details.buy': 'Buy',
+                    'details.reviews.name': 'Your name',
+                    'details.reviews.comment': 'Comment',
+                    'details.reviews.addComment': 'Add comment',
 
                     'sortBy.title': 'Sort by: ',
                     'sortBy.price': 'price',
@@ -216,7 +266,7 @@ i18n
                     'sortBy.toHigh': 'to high',
 
                     'basket': 'Basket',
-                    'basket.recomProducts': 'Recommended products',
+                    'basket.recommendedProducts': 'Recommended products',
                     'basket/order.toOrder': 'To order',
                     'basket/order.orderAmount': 'Order amount',
                     'basket/order.discount': 'Discount',
@@ -248,12 +298,10 @@ i18n
                     'order.paymentByCard.saveTheCard': 'Save the card',
                     'order.paymentByCard.pay': 'Pay',
 
-                    'passwordRecovery': 'Password recovery',
-                    'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',
-                    'send': 'Send',
-                    'signIn': 'Sign in',
-                    'loginEmail': 'Login/E-mail',
-                    'or': 'OR',
+                    'address.city': 'City',
+                    'address.street': 'Street',
+                    'address.house': 'House',
+                    'address.sq': 'Sq',
 
                     'register': 'Registration',
                     'phoneNumber': 'Phone number',
@@ -278,6 +326,29 @@ i18n
                     'delivery.search': 'Enter your city',
                     'delivery.weMakeYouHappy': 'We make you happy. Free',
                     'delivery.enterTheName': 'Enter the name of your locality, and we will offer options for the delivery of your happiness',
+
+                    'profile.contactInformation': 'Contact Information',
+                    'profile.contactInformation.passwordsDoNotMatch': 'Passwords do not match',
+                    'profile.addressBook': 'Address book',
+                    'profile.wishlist': 'Wishlist',
+                    'profile.orderHistory': 'Order history',
+                    'profile.contactInformation.oldPassword': 'Old password',
+                    'profile.contactInformation.newPassword': 'New password',
+                    'profile.contactInformation.passwordVerification': 'Password verification',
+                    'profile.save': 'Save',
+                    'profile.addressBook.edit': 'Edit',
+                    'profile.addressBook.addAddress': 'Add a new address',
+                    'profile.addressBook.st': 'St.',
+                    'profile.addressBook.tel': 'tel.',
+                    'profile.wishlist.listIsEmpty': 'The list is empty',
+                    'profile.orderHistory.order': 'Order No.',
+                    'profile.orderHistory.delivered': 'Delivered',
+                    'profile.orderHistory.inProcess': 'In process',
+                    'profile.orderHistory.cancelled': 'Cancelled',
+
+                    'wrong': 'Something went wrong (',
+                    'pageIsNotResponding': 'The page is not responding',
+                    'return': 'Return to the main page',
                 }
             }
         },
@@ -286,6 +357,7 @@ i18n
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },
-    });
+    })
+    .catch(e => console.error(e));
 
-export default i18n;
+// export default i18n;

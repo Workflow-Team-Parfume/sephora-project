@@ -2,16 +2,16 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { FormControl, Link, TextField } from "@mui/material";
+import { Button, FormControl, Stack, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import "./PasswordRecovery.scss";
+import textFieldStyle from '../../../common/textFieldStyle';
 
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -25,16 +25,14 @@ export function PasswordRecovery() {
   const { t } = useTranslation();
 
   return (
-    <div>
-      <Link
+    <Stack className="passwordRecovery" alignItems='center'>
+      <Button
         id="forgotPassword"
-        component="button"
-        variant="body2"
         onClick={handleOpen}
-        marginBottom={10}
+        sx={{ marginBottom:10 }}
       >
         {t("forgotPassword")}
-      </Link>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -42,15 +40,16 @@ export function PasswordRecovery() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h5" component="h2" textAlign={"center"}>
+          <Typography id="modal-modal-title" className="text" variant="h5" component="h2" textAlign={"center"}>
             {t("passwordRecovery")}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 4, mb: 2, fontSize: 15 }}>
+          <Typography id="modal-modal-description" className="text" sx={{ mt: 4, mb: 2, fontSize: 16, maxWidth: '490px'}}>
             {t("passwordRecoveryText")}
           </Typography>
           <FormControl
-            sx={{ m: 0, width: "400px", height: "50px", mb: 5 }}
+            sx={{ ...textFieldStyle, m: 0, mb: 2.5 }}
             variant="outlined"
+            fullWidth
           >
             <TextField
               margin="normal"
@@ -67,17 +66,16 @@ export function PasswordRecovery() {
               // helperText={touched.email && errors.email}
             />
           </FormControl>
-          <Link
+          <Button
             id="send"
-            component="button"
-            variant="body2"
             onClick={handleOpen}
-            marginBottom={10}
+            fullWidth
+            sx={{marginBottom:'10px'}}
           >
             {t("send")}
-          </Link>
+          </Button>
         </Box>
       </Modal>
-    </div>
+    </Stack>
   );
 }

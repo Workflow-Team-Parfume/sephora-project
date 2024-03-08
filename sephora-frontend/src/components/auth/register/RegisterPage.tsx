@@ -25,6 +25,8 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import "./RegisterPage.scss";
 import { useTranslation } from "react-i18next";
+import textFieldStyle from '../../../common/textFieldStyle';
+import PhoneMask from "../../../common/phoneMask";
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
@@ -131,9 +133,12 @@ const RegisterPage = () => {
         validationSchema: registerSchema,
         onSubmit: onHandleSubmit,
     });
-    const [showPassword, setShowPassword] = React.useState(false);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+    const [showPassword2, setShowPassword2] = React.useState<boolean>(false);
+    const handleClickShowPassword2 = () => setShowPassword2(!showPassword2);
 
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
@@ -157,12 +162,12 @@ const RegisterPage = () => {
                 }}
             >
                 <Typography component="h1" variant="h3">
-                    {t('register')}
+                    {t('registration')}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
                     <Grid container spacing={2}>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -177,7 +182,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -192,22 +197,25 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <TextField
                                 required
                                 fullWidth
                                 id="phoneNumber"
-                                label={t('phoneNumber')}
+                                label={t('phone')}
                                 name="phoneNumber"
                                 onChange={handleChange}
                                 value={values.phoneNumber}
                                 autoComplete="tel"
+                                InputProps={{
+                                    inputComponent: PhoneMask as any
+                                }}
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <TextField
@@ -223,7 +231,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px", }}
                             variant="outlined"
                         >
                             <TextField
@@ -238,11 +246,11 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <InputLabel htmlFor="outlined-adornment-password">
-                                {t('registerPass')}
+                                {t('password')}*
                             </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
@@ -265,7 +273,7 @@ const RegisterPage = () => {
                             />
                         </FormControl>
                         <FormControl
-                            sx={{ m: 1, width: "670px", height: "50px" }}
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                             variant="outlined"
                         >
                             <InputLabel htmlFor="outlined-adornment-password">
@@ -273,22 +281,22 @@ const RegisterPage = () => {
                             </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
-                                type={showPassword ? "text" : "password"}
+                                type={showPassword2 ? "text" : "password"}
                                 // value={values.password}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
+                                            onClick={handleClickShowPassword2}
                                             onChange={handleChange}
                                             onMouseDown={handleMouseDownPassword}
                                             edge="end"
                                         >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                label="Password"
+                                label={t('registerPassConfirm')}
                             />
                         </FormControl>
                     </Grid>
@@ -298,7 +306,7 @@ const RegisterPage = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 5, mb: 5 }}
+                    sx={{ mt: 5, mb: 5, textTransform: 'none' }}
                 >
                     {t('registerBtn')}
                 </Button>

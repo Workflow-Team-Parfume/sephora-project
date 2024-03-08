@@ -22,7 +22,9 @@ public class CartDto
 
     public string BrandName { get; set; } = String.Empty;
 
-    public string CategoryName { get; set; } = String.Empty;
+    public string CategoryNameEn { get; set; } = String.Empty;
+    
+    public string CategoryNameUa { get; set; } = String.Empty;
 
     public decimal Price { get; set; }
 

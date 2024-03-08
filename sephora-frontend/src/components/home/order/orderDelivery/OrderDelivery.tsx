@@ -1,7 +1,7 @@
 import {Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputAdornment, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography} from "@mui/material";
 import "./orderDelivery.scss";
 import {useTranslation} from "react-i18next";
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -100,7 +100,7 @@ const OrderDelivery = () => {
                         <Stack spacing={2}>
                             <TextField
                                 sx={{ ...textFieldStyle }} 
-                                placeholder={t('order.delivery.city')+'*'}
+                                placeholder={t('address.city')+'*'}
                                 required
                                 id="delivery-city"
                                 value={city}
@@ -127,15 +127,15 @@ const OrderDelivery = () => {
                                     <MenuItem value="" disabled>
                                         {t('order.delivery.options')}
                                     </MenuItem>
-                                    <MenuItem value={'Pickup'}>Самовивіз</MenuItem>
-                                    <MenuItem value={'Nova Post'}>Нова пошта</MenuItem>
-                                    <MenuItem value={'Nova Post(post machine)'}>Нова пошта (Поштомат)</MenuItem>
-                                    <MenuItem value={'Ukrpost'}>Укрпошта</MenuItem>
+                                    <MenuItem value={'Pickup'}>{t('order.delivery.pickup')}</MenuItem>
+                                    <MenuItem value={'Nova Post'}>{t('order.delivery.novaPost')}</MenuItem>
+                                    <MenuItem value={'Nova Post(post machine)'}>{t('order.delivery.novaPost.postMachine')}</MenuItem>
+                                    <MenuItem value={'Ukrpost'}>{t('order.delivery.ukrpost')}</MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField
-                                sx={{ ...textFieldStyle }} 
-                                placeholder={t('order.delivery.street')+'*'}
+                                sx={{ ...textFieldStyle }}
+                                placeholder={t('address.street')+'*'}
                                 required
                                 id="delivery-street"
                                 value={street}
@@ -152,8 +152,8 @@ const OrderDelivery = () => {
                             />
                             <Stack direction='row' spacing={2} maxWidth='400px'>
                                 <TextField
-                                    sx={{ ...textFieldStyle }} 
-                                    placeholder={t('order.delivery.house')+'*'}
+                                    sx={{ ...textFieldStyle }}
+                                    placeholder={t('address.house')+'*'}
                                     required
                                     id="delivery-house"
                                     value={house}
@@ -162,8 +162,8 @@ const OrderDelivery = () => {
                                     helperText={houseError}
                                 />
                                 <TextField
-                                    sx={{ ...textFieldStyle }} 
-                                    placeholder={t('order.delivery.sq')}
+                                    sx={{ ...textFieldStyle }}
+                                    placeholder={t('address.sq')}
                                     id="delivery-sq"
                                     value={sq}
                                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSq(event.target.value)}

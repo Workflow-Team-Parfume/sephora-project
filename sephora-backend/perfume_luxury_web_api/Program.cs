@@ -16,7 +16,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(opts =>
 JwtOptions? opts = null;
 if (builder.Environment.IsDevelopment())
     opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
-else if (builder.Environment.IsDevelopment() || opts is null)
+else if (!builder.Environment.IsDevelopment() || opts is null)
     opts = new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),

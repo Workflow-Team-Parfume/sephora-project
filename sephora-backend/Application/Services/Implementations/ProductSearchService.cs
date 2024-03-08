@@ -36,9 +36,8 @@ public class ProductSearchService : ISearchService<ProductDto>
         _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer)
         {
             DefaultOperator = Operator.OR,
-            // for wildcard search
-            // disable if search is slow
-            AllowLeadingWildcard = true 
+            // for wildcard search (slow)
+            // AllowLeadingWildcard = true 
         };
 
         InitialIndex(indexPath).Wait();
@@ -157,7 +156,7 @@ public class ProductSearchService : ISearchService<ProductDto>
         // Open the directory, create a searcher and a query
         using var directoryReader = DirectoryReader.Open(_directory);
         IndexSearcher searcher = new(directoryReader);
-        var query = _queryParser.Parse($"{searchTerm}~2 OR *{searchTerm}*");
+        var query = _queryParser.Parse($"{searchTerm}~2 OR {searchTerm}*");
 
         // Calculate the total hits
         var totalCntCollector = new TotalHitCountCollector();

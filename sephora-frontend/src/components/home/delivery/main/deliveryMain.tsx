@@ -1,15 +1,12 @@
-import * as React from "react";
 import {
+  Button,
   Container,
-  CssBaseline,
   Grid,
   IconButton,
   Input,
-  Paper,
+  Stack,
   Typography,
-  styled,
 } from "@mui/material";
-import Box from "@mui/material/Box";
 import input_main_icon from "../../../../assets/images/input_main_icon.svg";
 import deliveryImage1 from "../../../../assets/images/deliveryImage1.svg";
 import deliveryImage2 from "../../../../assets/images/deliveryImage2.svg";
@@ -18,180 +15,107 @@ import deliveryImage4 from "../../../../assets/images/deliveryImage4.svg";
 import deliveryImage5 from "../../../../assets/images/deliveryImage5.svg";
 import deliveryImage6 from "../../../../assets/images/deliveryImage6.svg";
 import './deliveryMain.scss';
-// import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-// const { t } = useTranslation();
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
-export default function DeliveryMain() {
+const DeliveryMain = () => {
+  const { t } = useTranslation();
+const deliveries = [
+  {
+    image: deliveryImage1,
+    title: t('deliveryOptions.freeByCourier'),
+    description: t('deliveryOptions.freeByCourier.details')
+  },
+  {
+    image: deliveryImage2,
+    title: t('deliveryOptions.pickup'),
+    description: t('deliveryOptions.pickup.details')
+  },
+  {
+    image: deliveryImage3,
+    title: t('deliveryOptions.newPost'),
+    description: t('deliveryOptions.newPost.details')
+  },
+  {
+    image: deliveryImage4,
+    title: t('deliveryOptions.ukrposhta'),
+    description: t('deliveryOptions.ukrposhta.details')
+  },
+  {
+    image: deliveryImage5,
+    title: t('deliveryOptions.meest'),
+    description: t('deliveryOptions.meest.details')
+  },
+  {
+    image: deliveryImage6,
+    title: t('deliveryOptions.byCourier'),
+    description: t('deliveryOptions.byCourier.details')
+  }
+]
   return (
     <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 5,
-            marginBottom: 5,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+      <Container
+        className="mainPageDelivery"
+        style={{maxWidth: "80%", justifyContent: "center", margin: '140px auto'}}
+      >
+       
+       <Stack
+          alignItems="center"
+          justifyContent='center'
+          spacing={15}
         >
-          <Box
-            height={400}
-            width={400}            
-            my={4}
-            display="flex"
-            flexDirection={"column"}
+          <Stack
+            sx={{background:'#FAFAFA', width: '55%', padding: '50px 30px'}}
             alignItems="center"
-            gap={4}
-            p={2}
-            sx={{ background: "grey" }}
+            justifyContent='center'
+            spacing={7.5}
           >
-            <Typography variant="h5" component="h2">
-              h1. Heading
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-              laborum fugiat deleniti? Eum quasi quidem quibusdam.
-            </Typography>
+            <Stack spacing={3} alignItems="center"
+            justifyContent='center'>
+              <Typography className="title">{t('delivery.weMakeYouHappy')}</Typography>
+              <Typography className="titleDesc">{t('delivery.enterTheName')}</Typography>
+            </Stack>
             <Input
-              className="main_input"
-              id="outlined-adornment-password"
-              type={"text"}
+              id="standard-adornment-password"
+              type='text'
+              sx={{ width: '75%' }}
+              classes={{ underline: 'custom-input-underline' }}
+              className='titleDesc'
               endAdornment={
-                <IconButton
-                  size="small"
-                  aria-label="toggle password visibility"
-                >
-                  <img src={input_main_icon} alt="" />
+                <IconButton size="small" aria-label="toggle password visibility">
+                  <img src={input_main_icon} alt=""/>
                 </IconButton>
               }
+              placeholder={t('delivery.search')}
             />
-          </Box>
+          </Stack>
 
-          <Box
-            sx={{
-              marginTop: 5,
-              marginBottom: 5,
-              display: "grid",
-              justifyItems: "center",
-              alignItems: "center", 
-              gridTemplateColumns: "repeat(3, 490px)",
-              rowGap: 1
-            }}
-          >
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img1" src={deliveryImage1} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img2" src={deliveryImage2} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img3"  src={deliveryImage3} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img4" src={deliveryImage4} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img5" src={deliveryImage5} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-            <Item
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: 481,
-                height: 392
-              }}
-            >
-              <img id="img6" src={deliveryImage6} alt="" />
-              <Typography variant="h5" component="h2">
-                h1. Heading
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                laborum fugiat deleniti? Eum quasi quidem quibusdam.
-              </Typography>
-            </Item>
-          </Box>
-        </Box>
+          <Stack spacing={10} alignItems='center'>
+            <Typography className="title">{t('deliveryOptions')}</Typography>
+            <Grid container spacing={2}>
+              {deliveries.map((delivery) => (
+                <Grid item xs={12} md={6} lg={4}>
+                  <Button href="/" style={{textDecoration:'none'}}>
+                    <Stack alignItems="center" className="delivery" justifyContent='center' spacing={4}>
+                      <Stack sx={{height: '94px', justifyContent: 'center'}}>
+                        <img src={delivery.image} alt={delivery.title} />
+                      </Stack>
+                      <Stack alignItems="center" justifyContent='center' spacing={1}>
+                      <Typography className="deliveriesTitle">
+                        {delivery.title}
+                      </Typography>
+                      <Typography className="deliveriesText">
+                        {delivery.description}
+                      </Typography>
+                      </Stack>
+                    </Stack>
+                  </Button>
+                </Grid>
+              ))}
+            </Grid>
+          </Stack>
+        </Stack>
       </Container>
     </>
   );
 }
+export default DeliveryMain;

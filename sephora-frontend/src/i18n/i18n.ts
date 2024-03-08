@@ -122,6 +122,24 @@ i18n
                     'registerPass': 'Пароль*',
                     'registerPassConfirm': 'Підтвердження пароля*',
                     'registerBtn': 'Зареєструватися',
+                    
+                    'deliveryOptions': 'Варіанти доставки',
+                    'deliveryOptions.freeByCourier': 'Безкоштовно кур’єром (Luxury Hub)',
+                    'deliveryOptions.pickup': 'Самовивіз',
+                    'deliveryOptions.newPost': 'Нова пошта',
+                    'deliveryOptions.ukrposhta': 'Укрпошта',
+                    'deliveryOptions.meest': 'Meest ПОШТА (Самовивіз)',
+                    'deliveryOptions.byCourier': 'Кур\'єром по Україні (інші перевізники)',
+                    'deliveryOptions.freeByCourier.details': 'Доставка по Києву та іншим населенним пунктам України нашою кур\'єрською службою безкоштовна. Мінімальна сума замовлення — від 169 грн',
+                    'deliveryOptions.pickup.details': 'Наші пункти працюють безкоштовно у всіх районах м.Києва',
+                    'deliveryOptions.newPost.details': 'При сумі замовлення понад 849 грн — доставка безкоштовна! Мінімальна сума замовлення — 169 грн.',
+                    'deliveryOptions.ukrposhta.details': 'При сумі замовлення понад 299 грн — доставка безкоштовна! Мінімальна сума замовлення  — 169 грн.',
+                    'deliveryOptions.meest.details': 'При доставці компанією «Meest ПОШТА» вашу посилку буде відправлено наступного дня після оформлення замовлення. Термін доставки — від 1 до 3 днів.',
+                    'deliveryOptions.byCourier.details': 'Доставка кур\'єрською службою компаній-перевізників в міста України  при сумі замовлення понад 849 грн — доставка безкоштовна! ',
+
+                    'delivery.search': 'Введіть ваше місто',
+                    'delivery.weMakeYouHappy': 'Робимо вас щасливими. Безкоштовно',
+                    'delivery.enterTheName': 'Введіть назву вашого населеного пункту, і ми запропонуємо варіанти доставки вашого щастя',
                 }
             },
 
@@ -241,7 +259,25 @@ i18n
                     'phoneNumber': 'Phone number',
                     'registerPass': 'Password',
                     'registerPassConfirm': 'Password confirmation',
-                    'registerBtn': 'Sign up'
+                    'registerBtn': 'Sign up',
+
+                    'deliveryOptions': 'Delivery options',
+                    'deliveryOptions.freeByCourier': 'Free by courier (Luxury Hub)',
+                    'deliveryOptions.pickup': 'Pickup',
+                    'deliveryOptions.newPost': 'New post',
+                    'deliveryOptions.ukrposhta': 'Ukrposhta',
+                    'deliveryOptions.meest': 'Meest MAIL (Pick-up)',
+                    'deliveryOptions.byCourier': 'By courier in Ukraine (other carriers)',
+                    'deliveryOptions.freeByCourier.details': 'Delivery in Kyiv and other populated areas of Ukraine by our courier service is free. The minimum order amount is from 169 UAH',
+                    'deliveryOptions.pickup.details': 'Our points work free of charge in all districts of Kyiv',
+                    'deliveryOptions.newPost.details': 'Delivery is free for orders over UAH 849! The minimum order amount is UAH 169.',
+                    'deliveryOptions.ukrposhta.details': 'For orders over UAH 299, delivery is free! The minimum order amount is UAH 169.',
+                    'deliveryOptions.meest.details': 'When delivered by the "Meest POSHTA" company, your parcel will be sent the next day after placing the order. The delivery time is from 1 to 3 days.',
+                    'deliveryOptions.byCourier.details': 'Delivery by courier service of carrier companies to cities of Ukraine with an order amount of over UAH 849 — delivery is free!',
+
+                    'delivery.search': 'Enter your city',
+                    'delivery.weMakeYouHappy': 'We make you happy. Free',
+                    'delivery.enterTheName': 'Enter the name of your locality, and we will offer options for the delivery of your happiness',
                 }
             }
         },

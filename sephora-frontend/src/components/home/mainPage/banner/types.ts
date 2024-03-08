@@ -1,6 +1,8 @@
 export interface IBanner{
-    title:string;
-    description:string;
+    titleUa:string;
+    titleEn:string;
+    descriptionUa:string;
+    descriptionEn:string;
     link:string;
     image:string;
 }
@@ -11,9 +13,10 @@ export interface IFullSizeBanner{
 }
 
 export interface IMainBanner{
-    title:string;
-    description:string|undefined;
+    titleUa:string;
+    titleEn:string;
+    descriptionUa:string;
+    descriptionEn:string;
     link:string;
     image:string;
-    width:string;
 }

@@ -1,4 +1,4 @@
-import {Button, Container, Grid, Typography} from "@mui/material";
+import {Button, CircularProgress, Container, Grid, Stack, Typography} from "@mui/material";
 import "./products.scss"
 import Product from "./Product";
 import {useTranslation} from "react-i18next";
@@ -42,8 +42,11 @@ const Products: React.FC<{
                                 <Product key={product.id} piece={product}/>
                             </Grid>
                         ))
-                        /* TODO: Redo this stub (add spinner) */
-                        : <>No products were found</>
+                        : <Grid item xs={12}>
+                            <Stack sx={{alignItems:'center', justifyContent:'center', marginY:4}}>
+                            <CircularProgress color="inherit"/>
+                            </Stack>
+                        </Grid>
                     }
                 </Grid>
             </Container>

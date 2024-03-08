@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Products from "./products/Products";
-import {Banner1, Banner2, Banner3, Reviews1, Reviews2, Reviews3} from "./data";
+import {Banner1, Banner2, Banner3, Reviews1, Reviews2, Reviews3, mainBanner} from "./data";
 import Reviews from "./reviews/MainPageReviews";
 import Banner from "./mainPage/banner/Banner";
 import FullSizeBanner from "./mainPage/banner/FullSizeBanner";
@@ -40,7 +40,7 @@ const HomePage = () => {
     // TODO: Move links to constants file
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
-            <MainBanner/>
+            <MainBanner banners={mainBanner}/>
             <Stack spacing={19} style={{margin: '0 10%'}}>
                 <Products title={t('header.novelty')}
                     link={routes.api.dateOrdered}

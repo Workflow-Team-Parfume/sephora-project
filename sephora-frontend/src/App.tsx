@@ -110,6 +110,8 @@ function App() {
                         <Route path={routes.createCategory} element={<CategoryCreatePage/>}/>
                         <Route path={routes.editCategory} element={<CategoryEditPage/>}/>
                     </Route>
+
+                    <Route path='*' element={<NotFound/>}/>
                 </Route>
                 {/* ) : (
                   <Route path="admin" element={<LoginPage />} />

@@ -122,6 +122,75 @@ i18n
                     'registerPass': 'Пароль*',
                     'registerPassConfirm': 'Підтвердження пароля*',
                     'registerBtn': 'Зареєструватися',
+
+                    // DeliveryFreeLuxuryHub
+                    'deliveryFreeLuxuryHub_line0': "Безкоштовно кур’єром (Luxury Hub)",
+                    'deliveryFreeLuxuryHub_line1': "Доставка по Києву та іншим населенним пунктам України нашою кур'єрською службою безкоштовна. Мінімальна сума замовлення — від 169 грн.",
+                    'deliveryFreeLuxuryHub_line2': 'Замовлення, оформлені у робочі дні до 4:00 години ранку в м. Києві зазвичай доставляються в той же день.',
+                    'deliveryFreeLuxuryHub_line3': 'Найближчий можливий час доставки ми запропонуємо обрати при оформленні замовлення. ',
+                    'deliveryFreeLuxuryHub_line4': "Будь ласка, для своєчасного підтвердження доставки кур'єром будьте на зв'язку з вашим контактним номером телефону. Якщо ви двічі не відповіли на телефонний дзвінок і кур'єр вже виїхав за межі вашого району — доставка буде перенесена на наступний день.",
+                    'deliveryFreeLuxuryHub_line5': "В разі відсутності або поломки ліфта, кур'єр зможе доставити замовлення тільки до 5-го поверху. Якщо Ви живете вище, Вам потрібно буде спуститися і зустріти кур'єра для отримання замовлення.",
+                    'deliveryFreeLuxuryHub_line6': "Ви можете оплатити замовлення за допомогою карт VISA/Mastercard під час оформлення замовлення або готівкою, передавши її кур'єру під час доставки. Кур'єр обов'язково видасть вам товарний чек.",
+                    'deliveryFreeLuxuryHub_line7': "Після оплати замовлення, будь ласка, звірте вміст посилки з накладною в присутності кур'єра. У випадку, якщо доставлений товар не буде відповідати вашому замовленню, кур'єр, згідно вашого прохання, забере такий товар і поверне оплачені за нього кошти.",
+                    'deliveryFreeLuxuryHub_line8': "Замовлення зберігається у кур'єра протягом 2х робочих днів, якщо протягом цього часу кур'єр не зміг зв'язатися з вами і доставити посилку, на третій день замовлення відправляється назад.",
+                    'deliveryFreeLuxuryHub_line9': "Декілька моментів, які допомоуть успішної зустрітись з кур'єром у разі відсутності мобільного зв'язку та електроенергії:",
+                    'deliveryFreeLuxuryHub_line10': "1. Будь ласка, перевірте, чи вказано номер вашої квартири при оформленні замовлення. Так, навіть якщо мобільний зв'язок не працюватиме, наш кур'єр матиме змогу доставити посилку до дверей і передати вам замовлення.",
+                    'deliveryFreeLuxuryHub_line11': "2. У разі відсутності мобільного зв'язку у приблизний час візиту кур'єра, будь ласка, також тимчасово не закривайте спільні двері на сходовій клітці. Наш кур'єр доставить замовлення до дверей вказаної вами квартири та зможе покликати вас для отримання.",
+                    'deliveryFreeLuxuryHub_line12': "3. У разі відсутності електроенергії, зв'язку або у будь-якому випадку, якщо ви не впевнені, що зможете зустрітися з кур'єром, ви також можете залишити інструкції та оплату посилки у консьєржа. Наш кур'єр перепитає консьєржа про інструкції та залишить для вас посилку.",
+                    'deliveryFreeLuxuryHub_line13': "Ми дбаємо про безпеку своїх клієнтів та кур'єрів, тому під час повітряної тривоги доставка замовлень може призупинятися. Будь ласка, не хвилюйтеся та потурбуйтеся про вашу безпеку. Після закінчення повітряної тривоги кур'єр відновить рух за маршрутом і доставить вам посилку.",
+                    'deliveryFreeLuxuryHub_line14': "Дуже дякуємо за розуміння та бережіть себе!",
+                    'main': "Головна",
+                    'payment_and_delivery': "Оплата і доставка",
+
+                    // DeliveryPickup
+                    'deliveryPickup_line0': "Самовивіз",
+                    'deliveryPickup_line1': "Наші пункти видачі посилок працюють з понеділка до п'ятниці з 10:00 до 20:00 та по суботах з 10:00 до 19:00, у неділю — вихідний.",
+                    'deliveryPickup_line2': "Мінімальна сума замовлення — від 169 грн.",
+                    'deliveryPickup_line3': "Замовлення, оформлені у робочі дні до 4:00 години ранку в м. Києві зазвичай Через повітряну тривогу доставка замовлення в пункт видачі може затриматися. Будь ласка, в цьому випадку дайте нам трохи додаткового часу на доставку замовлення після закінчення тривоги. Перед візитом до нас дочекайтеся повідомлення про те, що посилка прибула до нашого пункту видачі замовлень. в той же день.",
+                    'deliveryPickup_line4': "Замовлення зберігається на пункті самовивозу протягом 3х робочих днів, після цього замовлення відправляється назад.",
+                    'deliveryPickup_line5': "Будь-ласка, зверніть увагу: вибираючи оплату готівкою, ви не зможете скористатися платіжною карткою на точці самовивозу. Оплатити замовлення в такому випадку можливо лише готівкою. Розрахуватись платіжною карткою ви можете під час оформлення замовлення на сайті. При оплаті картою вказаний у замовленні одержувач повинен буде показати документ, що посвідчує особу.",
+                
+                    // DeliveryNewPost
+                    'deliveryNewPost_line0': 'Нова пошта',
+                    'deliveryNewPost_line1': "При сумі замовлення до 849 грн доставка коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна!",
+                    'deliveryNewPost_line2': "Мінімальна сума замовлення — 169 грн.",
+                    'deliveryNewPost_line3': "Оплатити замовлення ви можете за допомогою карт VISA/Mastercard під час оформлення замовлення або готівкою у відділенні компанії «Нова пошта».  Жодних прихованих платежів, оплати послуг транспортних компаній, плати за переказ коштів, комісій та іншого! Ви оплачуєте тільки суму вашого замовлення.",
+                    'deliveryNewPost_line4': "Замовлення з доставкою через «Нова пошта» приймаються згідно графіка роботи перевізника. Графік роботи компанії «Нова пошта» ви можете знайти на її офіційному сайті. Також ви можете відстежити статус доставки замовлення за допомогою спеціального сервісу «Нова пошта» на сайті компанії.",
+                    'deliveryNewPost_line5': "Поштомат",
+                    'deliveryNewPost_line6': "«Нова пошта» повідомить Вас про прибуття посилки в поштомат. Для отримання посилки біля обраного поштомата потрібно включити Bluetooth, в додатку «Нова пошта» вибрати вашу посилку і підтвердити відкриття комірки.",
+                    'deliveryNewPost_line7': "При сумі замовлення до 849 грн доставка коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна!",
+                    'deliveryNewPost_line8': "Мінімальна сума замовлення — 169 грн.",
+                    'deliveryNewPost_line9': "Зверніть увагу! Замовлення зберігається не більше 3 днів, після вичерпання цього терміну відправляється назад.",
+                    'deliveryNewPost_line10': "Замовлення з доставкою через «Нова пошту» приймаються згідно графіка роботи перевізника. Графік роботи компанії «Нова пошта» ви можете знайти на її офіційному сайті. Також ви можете відстежити статус доставки замовлення за допомогою спеціального сервісу «Нова пошта» на сайті компанії.",
+                    'deliveryNewPost_line11': "Самовивіз",
+                    'deliveryNewPost_line12': "Зверніть увагу! Замовлення зберігається на складі транспортної компанії не більше 4 робочих днів, після вичерпання цього терміну відправляється назад. При оплаті картою на сайті зазначений в замовленні отримувач має показати документ, що засвідчує особу, або штрихкод одержувача у додатку «Нова пошта» (для заказів на суму до 5 000 грн). ",
+                    'deliveryNewPost_line13': "Будь ласка, обов'язково перевірте посилку при отриманні у відділенні «Нова пошта». У разі, якщо ви помітили пошкодження посилки або недостачу будь-яких позицій, ви можете відмовитися від посилки, склавши з представником компанії «Нова пошта» відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий — візьме представник компанії—перевізника.",
+                
+                    // DeliveryUkrPoshta
+                    'deliveryUkrPoshta_line0': "Укрпошта",
+                    'deliveryUkrPoshta_line1': "Спеціальні тарифи! При сумі замовлення до 299 грн доставка коштує всього 28 грн, при сумі замовлення понад 299 грн — доставка безкоштовна! Мінімальна сума замовлення  — 169 грн.",
+                    'deliveryUkrPoshta_line2': "За умови доставки замовлення компанією Укрпошта, його буде відправлено наступного дня після оформлення. Доставка Укрпоштою займає від 1 до 3 днів. Оплатити замовлення ви можете за допомогою карт VISA/Mastercard під час оформлення замовлення або готівкою у відділенні Укрпошти",
+                    'deliveryUkrPoshta_line3': "Жодних прихованих платежів, оплати послуг транспортних компаній, плати за переказ коштів, комісій та іншого! Ви оплачуєте тільки суму вашого замовлення.",
+                    'deliveryUkrPoshta_line4': "Зверніть увагу! Замовлення зберігається на складі відділення протягом 5 днів, починаючи з 6-го дня знімається плата у розмірі 3 грн. 80 коп. за кожний наступний день зберігання. Ці послуги оплачуєте ви!",
+                    'deliveryUkrPoshta_line5': "Будь ласка, обов'язково перевірте посилку при отриманні в присутності представника компанії «Укрпошта». У разі, якщо ви помітили пошкодження посилки або недостачу будь—яких позицій, ви можете відмовитися від посилки, склавши з представником компанії відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий — візьме представник компанії «Укрпошта».",
+                    'deliveryUkrPoshta_line6': "Отримати замовлення може лише людина, вказана у транспортній декларації як отримувач. При собі необхідно мати документ, що засвідчує особу.",
+                
+                    // DeliveryMeestMail
+                    'deliveryMeestMail_line0': "Meest ПОШТА (Самовивіз)",
+                    'deliveryMeestMail_line1': "При сумі замовлення до 849 грн доставка коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна!",
+                    'deliveryMeestMail_line2': "Мінімальна сума замовлення — 169 грн.",
+                    'deliveryMeestMail_line3': "При доставці компанією «Meest ПОШТА» вашу посилку буде відправлено наступного дня після оформлення замовлення. Термін доставки — від 1 до 3 днів.",
+                    'deliveryMeestMail_line4': "Оплатити замовлення ви можете за допомогою карт VISA/Mastercard під час оформлення замовлення або готівкою у відділенні компанії  «Meest ПОШТА». Будь—ласка, зверніть увагу: вибираючи оплату готівкою, ви не зможете скористатися платіжною карткою у відділенні. Оплатити замовлення в такому випадку можливо лише готівкою. Жодних прихованих платежів, оплати послуг транспортних компаній, плати за переказ коштів, комісій та іншого! Ви оплачуєте тільки суму вашого замовлення.",
+                    'deliveryMeestMail_line5': "Зверніть увагу! Замовлення зберігається на складі транспортної компанії не більше 5 робочих днів, після вичерпання цього терміну відправляється назад. Отримати замовлення може лише людина, вказана у транспортній декларації як отримувач. При собі необхідно мати документ, що засвідчує особу.",
+                    'deliveryMeestMail_line6': "Будь ласка, обов'язково перевірте посилку при отриманні у присутності представника компанії Meest ПОШТА. У разі, якщо ви помітили пошкодження посилки або недостачу будь-яких позицій, ви можете відмовитися від посилки, склавши з представником компанії відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий - візьме представник компанії-перевізника.",
+                    'deliveryMeestMail_line7': "Замовлення з доставкою через  «Meest ПОШТА» приймаються згідно графіка роботи перевізника. Графік роботи компанії  «Meest ПОШТА» ви можете знайти на її офіційному сайті. Також ви маєте можливість прослідкувати місце знаходження вашого замовлення за допомогою спеціального сервісу  «Meest ПОШТА».",
+                
+                    // DeliveryByCourierInUkraine
+                    'deliveryByCourierInUkraine_line0': "Кур’єром по Україні (інші перевізники)",
+                    'deliveryByCourierInUkraine_line1': "У зв'язку з підвищенням тарифів перевізниками ми змушені трохи підняти ліміт для безкоштовної доставки. Доставка кур'єрською службою компаній-перевізників в міста України при сумі замовлення до 849 грн коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна! Мінімальна сума замовлення — 169 грн.",
+                    'deliveryByCourierInUkraine_line2': "Жодних прихованих платежів, оплати послуг транспортних компаній, плати за переказ коштів, комісій та іншого! Ви оплачуєте тільки суму вашого замовлення.",
+                    'deliveryByCourierInUkraine_line3': "Також зверніть будь-ласка увагу: згідно з Законом України №№361-IX, при отриманні замовлення на суму від 5 000 грн кур’єр служби «Нова пошта» може попросити вас надати копію сторінок паспорта, що посвідчують особу одержувача.",
+                    'deliveryByCourierInUkraine_line4': "При оплаті картою зазначений в замовленні отримувач має показати документ, що засвідчує особу. ",
                 }
             },
 
@@ -241,7 +310,76 @@ i18n
                     'phoneNumber': 'Phone number',
                     'registerPass': 'Password',
                     'registerPassConfirm': 'Password confirmation',
-                    'registerBtn': 'Sign up'
+                    'registerBtn': 'Sign up',
+
+                    // DeliveryFreeLuxuryHub 
+                    'deliveryFreeLuxuryHub_line0': "Free by courier (Luxury Hub)",
+                    'deliveryFreeLuxuryHub_line1': "Delivery in Kyiv and other populated areas of Ukraine by our courier service is free. The minimum order amount is from UAH 169.",
+                    'deliveryFreeLuxuryHub_line2': 'Orders placed on working days before 4:00 a.m. in Kyiv are usually delivered on the same day.',
+                    'deliveryFreeLuxuryHub_line3': 'We will offer to choose the nearest possible delivery time when placing the order.',
+                    'deliveryFreeLuxuryHub_line4': 'Please be in touch with your contact phone number for timely confirmation of delivery by courier. If you did not answer the phone call twice and the courier has already left your area, the delivery will be postponed to the next day.',
+                    'deliveryFreeLuxuryHub_line5': 'In case of absence or breakdown of the elevator, the courier will be able to deliver the order only to the 5th floor. If you live higher, you will need to go down and meet the courier to receive the order.',
+                    'deliveryFreeLuxuryHub_line6': 'You can pay for your order by VISA/Mastercard at checkout or by handing it to the courier at the time of delivery. The courier will definitely issue you a goods receipt.',
+                    'deliveryFreeLuxuryHub_line7': 'After paying for the order, please check the contents of the package with the invoice in the presence of the courier. In the event that the delivered goods do not match your order, the courier, according to your request, will take such goods and return the money paid for them.',
+                    'deliveryFreeLuxuryHub_line8': 'The order is kept by the courier for 2 working days, if during this time the courier was unable to contact you and deliver the package, the order is sent back on the third day.',
+                    'deliveryFreeLuxuryHub_line9': 'A few points that will help you successfully meet the courier in the absence of mobile communication and electricity:',
+                    'deliveryFreeLuxuryHub_line10': '1. Please check whether your apartment number is specified when placing an order. Yes, even if the mobile connection does not work, our courier will be able to deliver the parcel to your door and hand over the order to you.',
+                    'deliveryFreeLuxuryHub_line11': "2. If there is no mobile connection at the approximate time of the courier's visit, please also temporarily do not close the common door on the stairwell. Our courier will deliver the order to the door of the apartment specified by you and will be able to call you for collection.",
+                    'deliveryFreeLuxuryHub_line12': "3. If there is no electricity, no communication, or in any case, if you are not sure that you will be able to meet the courier, you can also leave the instructions and payment of the package with the concierge. Our courier will ask the concierge about the instructions and leave the package for you.",
+                    'deliveryFreeLuxuryHub_line13': "We care about the safety of our customers and couriers, so during an air alert, the delivery of orders may be suspended. Please do not worry and take care of your safety. After the end of the air alert, the courier will resume traffic along the route and deliver the package to you.",
+                    'deliveryFreeLuxuryHub_line14': 'Thank you very much for your understanding and take care!',
+                    'main': "Main",
+                    'payment_and_delivery': "Payment and delivery",
+
+                    // DeliveryPickup
+                    'deliveryPickup_line0': "Pickup",
+                    'deliveryPickup_line1': "Our parcel delivery points are open from Monday to Friday from 10:00 to 20:00 and on Saturdays from 10:00 to 19:00, Sunday is closed.",
+                    'deliveryPickup_line2': "The minimum order amount is from UAH 169.",
+                    'deliveryPickup_line3': "Orders placed on working days before 4:00 a.m. in Kyiv usually may be delayed due to an air alarm. Please, in this case, allow us a little extra time to ship the order after the alarm is over. Before visiting us, wait for the notification that the parcel has arrived at our point of delivery of orders. on the same day",
+                    'deliveryPickup_line4': "The order is stored at the pick-up point for 3 working days, after which the order is sent back.",
+                    'deliveryPickup_line5': "Please note: if you choose to pay in cash, you will not be able to use a payment card at the pick-up point. In this case, it is only possible to pay for the order in cash. You can pay with a payment card when placing an order on the website. When paying by card, the recipient specified in the order will have to show an identity document.",
+                    
+                    // DeliveryNewPost
+                    'deliveryNewPost_line0': 'New post',
+                    'deliveryNewPost_line1': "For orders up to UAH 849, delivery costs only UAH 39, for orders over UAH 849, delivery is free!",
+                    'deliveryNewPost_line2': "The minimum order amount is UAH 169.",
+                    'deliveryNewPost_line3': "You can pay for your order using VISA/Mastercard cards when placing your order or in cash at the Nova Poshta branch. No hidden payments, payment for the services of transport companies, fees for transferring funds, commissions and more! You pay only the amount of your order.",
+                    'deliveryNewPost_line4': "Orders with delivery through «Nova Poshta» are accepted according to the carrier's work schedule. You can find the working schedule of Nova Poshta on its official website. You can also track the delivery status of the order using the special 'New Mail' service on the company's website.",
+                    'deliveryNewPost_line5': "Post machine",
+                    'deliveryNewPost_line6': "«Nova Poshta» will notify you about the arrival of the parcel at the post office. To receive a parcel at the selected post office, you need to turn on Bluetooth, select your parcel in the «New Mail» application and confirm the opening of the cell.",
+                    'deliveryNewPost_line7': "For orders up to UAH 849, delivery costs only UAH 39, for orders over UAH 849, delivery is free!",
+                    'deliveryNewPost_line8': "The minimum order amount is UAH 169.",
+                    'deliveryNewPost_line9': "Pay attention! The order is stored for no more than 3 days, after which it is sent back.",
+                    'deliveryNewPost_line10': "Orders with delivery through «New Post» are accepted according to the carrier's work schedule. You can find the working schedule of Nova Poshta on its official website. You can also track the delivery status of the order using the special 'New Mail' service on the company's website.",
+                    'deliveryNewPost_line11': "Pickup",
+                    'deliveryNewPost_line12': "Pay attention! The order is stored in the warehouse of the transport company for no more than 4 working days, after which it is sent back. When paying by card on the website, the recipient specified in the order must show an identity document or the recipient's barcode in the Nova Poshta application (for orders up to UAH 5,000). ",
+                    'deliveryNewPost_line13': "Please be sure to check the parcel when you receive it at the «New Post» branch. In the event that you notice damage to the parcel or lack of any items, you can refuse the parcel by drawing up an appropriate document with a representative of the 'New Post' company. Please keep one copy, the representative of the carrier company will take the second.",
+                
+                    // DeliveryUkrPoshta
+                    'deliveryUkrPoshta_line0': "Ukrposhta",
+                    'deliveryUkrPoshta_line1': "Special rates! For orders up to UAH 299, delivery costs only UAH 28, for orders over UAH 299, delivery is free. The minimum order amount is UAH 169.",
+                    'deliveryUkrPoshta_line2': "If the order is delivered by Ukrposhta, it will be sent the next day after registration. Delivery by Ukrposhta takes from 1 to 3 days. You can pay for your order using VISA/Mastercard cards when placing an order or in cash at a Ukrposhta branch",
+                    'deliveryUkrPoshta_line3': "No hidden payments, payment for the services of transport companies, fees for transferring funds, commissions and more! You pay only the amount of your order.",
+                    'deliveryUkrPoshta_line4': "Pay attention! The order is stored in the warehouse of the department for 5 days, starting from the 6th day, a fee of UAH 3 is deducted. 80 kopecks for each subsequent day of storage. You pay for these services!",
+                    'deliveryUkrPoshta_line5': "Please be sure to check the package upon receipt in the presence of a representative of the Ukrposhta company. If you notice that the parcel is damaged or any items are missing, you can refuse the parcel by drawing up an appropriate document with the company representative. Please keep one copy, the other will be taken by a representative of the Ukrposhta company.",
+                    'deliveryUkrPoshta_line6': "Only the person specified in the transport declaration as the recipient can receive the order. You must have an identity document with you.",
+                
+                    // DeliveryMeestMail
+                    'deliveryMeestMail_line0': "Meest MAIL (Pick-up)",
+                    'deliveryMeestMail_line1': "For orders up to UAH 849, delivery costs only UAH 39, for orders over UAH 849, delivery is free! The minimum order amount is UAH 169.",
+                    'deliveryMeestMail_line2': "The minimum order amount is UAH 169..",
+                    'deliveryMeestMail_line3': "When delivered by the «Meest POSHTA» company, your parcel will be sent the next day after placing the order. The delivery time is from 1 to 3 days.",
+                    'deliveryMeestMail_line4': "You can pay for the order using VISA/Mastercard cards when placing the order or in cash at the «Meest POSHTA» branch. Please note: when choosing to pay in cash, you will not be able to use a payment card in the branch. In this case, it is only possible to pay for the order in cash.  No hidden payments, payment for the services of transport companies, fees for transferring funds, commissions and more! You pay only the amount of your order.",
+                    'deliveryMeestMail_line5': "Pay attention! The order is stored in the warehouse of the transport company for no more than 5 working days, after which it is sent back. Only the person specified in the transport declaration as the recipient can receive the order. You must have an identity document with you.",
+                    'deliveryMeestMail_line6': "Please be sure to check the package upon receipt in the presence of a representative of the Meest POST company. If you notice that the parcel is damaged or any items are missing, you can refuse the parcel by drawing up an appropriate document with the company representative. Please keep one copy, the representative of the carrier company will take the second.",
+                    'deliveryMeestMail_line7': "Orders with delivery through «Meest POSHTA» are accepted according to the carrier's work schedule. You can find the working schedule of the «Meest POSHTA» company on its official website. You also have the opportunity to track the location of your order using the special «Meest POSHTA» service.",
+                
+                    // DeliveryByCourierInUkraine
+                    'deliveryByCourierInUkraine_line0': "By courier in Ukraine (other carriers)",
+                    'deliveryByCourierInUkraine_line1': "In connection with the increase in tariffs by carriers, we are forced to slightly raise the limit for free delivery. Delivery by courier service of carrier companies to cities of Ukraine for orders up to UAH 849 costs only UAH 39, for orders over UAH 849 — delivery is free! The minimum order amount is UAH 169.",
+                    'deliveryByCourierInUkraine_line2': "No hidden payments, payment for the services of transport companies, fees for transferring funds, commissions and more! You pay only the amount of your order.",
+                    'deliveryByCourierInUkraine_line3': "Also, please pay attention: in accordance with the Law of Ukraine No. 361-IX, when receiving an order for the amount of UAH 5,000 or more, the courier of the «Nova Poshta» service may ask you to provide a copy of the passport pages proving the identity of the recipient.",
+                    'deliveryByCourierInUkraine_line4': "When paying by card, the recipient specified in the order must show an identity document.",
                 }
             }
         },

@@ -13,6 +13,11 @@ const routes = {
 
     deliveryMain: '/deliveryMain',
     deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
+    deliveryPickup: '/deliveryPickup',
+    deliveryNewPost: '/deliveryNewPost',
+    deliveryUkrPoshta: '/deliveryUkrPoshta',
+    deliveryMeestMail: '/deliveryMeestMail',
+    deliveryByCourierInUkraine: '/deliveryByCourierInUkraine',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

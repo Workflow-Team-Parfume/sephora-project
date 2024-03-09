@@ -21,6 +21,12 @@ import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
 import DeliveryMain from "./components/home/delivery/main/deliveryMain";
+import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub";
+import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup";
+import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost";
+import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta";
+import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail";
+import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -96,6 +102,12 @@ function App() {
                     <Route path={routes.detailsOrder} element={<YourOrder/>}/>
 
                     <Route path={routes.deliveryMain} element={<DeliveryMain />}/>
+                    <Route path={routes.deliveryFreeLuxuryHub} element={<DeliveryFreeLuxuryHub />}/>
+                    <Route path={routes.deliveryPickup} element={<DeliveryPickup />}/>
+                    <Route path={routes.deliveryNewPost} element={<DeliveryNewPost />}/>
+                    <Route path={routes.deliveryUkrPoshta} element={<DeliveryUkrPoshta />}/>
+                    <Route path={routes.deliveryMeestMail} element={<DeliveryMeestMail />}/>
+                    <Route path={routes.deliveryByCourierInUkraine} element={<DeliveryByCourierInUkraine />}/>
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

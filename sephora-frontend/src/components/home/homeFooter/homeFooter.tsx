@@ -3,6 +3,7 @@ import "./homeFooter.scss";
 import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
+import routes from "../../../common/routes";
 
 const HomeFooter = () => {
   const boxStyle = {
@@ -25,7 +26,7 @@ const HomeFooter = () => {
               ...boxStyle,
             }}
           >
-            <Button disableTouchRipple id="links" sx={{paddingBottom:2}}>
+            <Button disableTouchRipple id="links" href={routes.deliveryMain} sx={{paddingBottom:2}}>
              {t('footer.aboutDelivery')}
             </Button>
             {/* <Button>{t('footer.paymentMethods')}</Button>

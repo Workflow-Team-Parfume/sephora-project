@@ -16,22 +16,19 @@ import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
 import DeliveryMain from "./components/home/delivery/main/deliveryMain";
-<<<<<<< HEAD
 import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub";
 import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup";
 import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost";
 import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta";
 import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail";
 import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine";
-=======
-import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
-import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
-import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
-import BottledPage from "./models/piece/BottledPage.tsx";
+import NotFound from "./components/home/404/NotFound.tsx";
 import Profile from "./components/home/profile/Profile.tsx";
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
-import NotFound from "./components/home/404/NotFound.tsx";
->>>>>>> ede550271d209c149e991e926e8ac702e253a275
+import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
+import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
+import BottledPage from "./models/piece/BottledPage.tsx";
+import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -111,17 +108,15 @@ function App() {
                     <Route path={routes.profile} element={<Profile/>}/>
                   
                     <Route path={routes.deliveryMain} element={<DeliveryMain />}/>
-<<<<<<< HEAD
+
                     <Route path={routes.deliveryFreeLuxuryHub} element={<DeliveryFreeLuxuryHub />}/>
                     <Route path={routes.deliveryPickup} element={<DeliveryPickup />}/>
                     <Route path={routes.deliveryNewPost} element={<DeliveryNewPost />}/>
                     <Route path={routes.deliveryUkrPoshta} element={<DeliveryUkrPoshta />}/>
                     <Route path={routes.deliveryMeestMail} element={<DeliveryMeestMail />}/>
                     <Route path={routes.deliveryByCourierInUkraine} element={<DeliveryByCourierInUkraine />}/>
-=======
                     
                     <Route path='*' element={<NotFound/>}/>
->>>>>>> ede550271d209c149e991e926e8ac702e253a275
                 </Route>
 
                 {/* {user?.role === "admin" && isAuth ? ( */}

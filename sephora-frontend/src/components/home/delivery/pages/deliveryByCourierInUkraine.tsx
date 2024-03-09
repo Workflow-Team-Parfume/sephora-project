@@ -1,13 +1,14 @@
 import './deliveryPages.scss';
 import { useTranslation } from "react-i18next";
 import { Button, Container, Stack, Typography } from "@mui/material";
+import routes from '../../../../common/routes';
 
 const DeliveryByCourierInUkraine = () => {
 
   const { t } = useTranslation();
   
   return (
-    <Container className="fontStyle"
+    <Container className="deliveryFontStyle"
       sx={{
         width: "100%",
         display: "flex",
@@ -20,20 +21,23 @@ const DeliveryByCourierInUkraine = () => {
           {t('deliveryByCourierInUkraine_line0')}
         </Typography>
         <Stack className="fontStyleStack" direction={"row"} alignItems={"center"} justifyContent={"center"}>
-          <Button className="fontStyleStack">{t('main')}</Button>/
-          <Button className="fontStyleStack">{t('payment_and_delivery')}</Button>/
-          <Button className="fontStyleStack">{t('deliveryByCourierInUkraine_line0')}</Button>
+          <Button className="fontStyleStack" href={routes.home}>{t('main')}</Button>/
+          <Button className="fontStyleStack" href={routes.deliveryMain}>{t('payment_and_delivery')}</Button>/
+          <Button className="fontStyleStack" href={routes.deliveryByCourierInUkraine}>{t('deliveryByCourierInUkraine_line0')}</Button>
         </Stack><br /> <br />
-        <Typography variant="body2" fontSize={24} gutterBottom>
+        <Typography className='text'>
           {t("deliveryByCourierInUkraine_line1")}
+          <span className='bold'>
+            {t('delivery.theMinimum')}
+          </span>
         </Typography><br />
-        <Typography variant="body2" fontWeight={"bold"} fontSize={24}gutterBottom>
+        <Typography className='text' fontWeight={"bold"}>
           {t("deliveryByCourierInUkraine_line2")}
         </Typography><br /> <br /> <br />
-        <Typography variant="body2" fontSize={24} gutterBottom>
+        <Typography className='text'>
           {t("deliveryByCourierInUkraine_line3")}
         </Typography><br /><br />
-        <Typography variant="body2" fontSize={24}>
+        <Typography className='text'>
           {t("deliveryByCourierInUkraine_line4")}
         </Typography> <br />
         <br /><br /><br /><br /><br />

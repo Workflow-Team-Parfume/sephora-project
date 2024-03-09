@@ -1,6 +1,7 @@
 import { Button, Container, Stack, Typography } from '@mui/material';
 import './deliveryPages.scss';
 import { useTranslation } from "react-i18next";
+import routes from '../../../../common/routes';
 
 
 const DeliveryUkrPoshta = () => {
@@ -8,7 +9,7 @@ const DeliveryUkrPoshta = () => {
   const { t } = useTranslation();
   
   return (
-    <Container className="fontStyle"
+    <Container className="deliveryFontStyle"
     sx={{
       width: "100%",
       display: "flex",
@@ -21,27 +22,36 @@ const DeliveryUkrPoshta = () => {
         {t('deliveryUkrPoshta_line0')}
       </Typography>
       <Stack className="fontStyleStack" direction={"row"} alignItems={"center"} justifyContent={"center"}>
-        <Button className="fontStyleStack">{t('main')}</Button>/
-        <Button className="fontStyleStack">{t('payment_and_delivery')}</Button>/
-        <Button className="fontStyleStack">{t('deliveryUkrPoshta_line0')}</Button>
+        <Button className="fontStyleStack" href={routes.home}>{t('main')}</Button>/
+        <Button className="fontStyleStack" href={routes.deliveryMain}>{t('payment_and_delivery')}</Button>/
+        <Button className="fontStyleStack" href={routes.deliveryUkrPoshta}>{t('deliveryUkrPoshta_line0')}</Button>
       </Stack><br /> <br />
-      <Typography variant="body2" fontSize={24}>
-        {t("deliveryUkrPoshta_line1")}
-      </Typography><br />
-      <Typography variant="body2" fontSize={24}>
+      <Typography className="text">
+        <span className='bold'>
+          {t("deliveryUkrPoshta_line1")}
+        </span>
         {t("deliveryUkrPoshta_line2")}
+        <span className='bold'>
+          {t('delivery.theMinimum')}
+        </span>
       </Typography><br />
-      <Typography variant="body2" fontWeight={"bold"} fontSize={24} gutterBottom>
-        {t("deliveryUkrPoshta_line3")}
-      </Typography><br /><br /> <br />
-      <Typography variant="body2" fontSize={24}>
-        {t("deliveryUkrPoshta_line4")}
+      <Typography className="text">
+          {t("deliveryUkrPoshta_line3")}
       </Typography> <br />
-      <Typography variant="body2" fontSize={24}>
+      <Typography className="text bold">
+        {t("deliveryUkrPoshta_line4")}
+      </Typography><br /><br /> <br />
+      <Typography className="text">
+        <span className='bold'>
+          {t('delivery.payAttention')}
+        </span>
         {t("deliveryUkrPoshta_line5")}
       </Typography> <br />
-      <Typography variant="body2" fontSize={24} gutterBottom>
+      <Typography className="text">
         {t("deliveryUkrPoshta_line6")}
+      </Typography> <br />
+      <Typography className="text">
+        {t("deliveryUkrPoshta_line7")}
       </Typography>
       <br /><br /><br /><br /><br />
   </Container>

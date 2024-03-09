@@ -8,47 +8,54 @@ import {
   Typography,
 } from "@mui/material";
 import input_main_icon from "../../../../assets/images/input_main_icon.svg";
-import deliveryImage1 from "../../../../assets/images/deliveryImage1.svg";
-import deliveryImage2 from "../../../../assets/images/deliveryImage2.svg";
-import deliveryImage3 from "../../../../assets/images/deliveryImage3.svg";
-import deliveryImage4 from "../../../../assets/images/deliveryImage4.svg";
-import deliveryImage5 from "../../../../assets/images/deliveryImage5.svg";
-import deliveryImage6 from "../../../../assets/images/deliveryImage6.svg";
+import deliveryFreeByCourier from "../../../../assets/images/delivery/deliveryFreeByCourier.svg";
+import deliveryPickup from "../../../../assets/images/delivery/deliveryPickup.svg";
+import deliveryNewPost from "../../../../assets/images/delivery/deliveryNewPost.svg";
+import deliveryUkrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg";
+import deliveryMeestMail from "../../../../assets/images/delivery/deliveryMeestMail.svg";
+import deliveryByCourierInUkraine from "../../../../assets/images/delivery/deliveryByCourierInUkraine.svg";
 import './deliveryMain.scss';
 import { useTranslation } from "react-i18next";
+import routes from "../../../../common/routes";
 
 const DeliveryMain = () => {
   const { t } = useTranslation();
 const deliveries = [
   {
-    image: deliveryImage1,
+    image: deliveryFreeByCourier,
     title: t('deliveryOptions.freeByCourier'),
-    description: t('deliveryOptions.freeByCourier.details')
+    description: t('deliveryOptions.freeByCourier.details'),
+    link: routes.deliveryFreeLuxuryHub
   },
   {
-    image: deliveryImage2,
+    image: deliveryPickup,
     title: t('deliveryOptions.pickup'),
-    description: t('deliveryOptions.pickup.details')
+    description: t('deliveryOptions.pickup.details'),
+    link: routes.deliveryPickup
   },
   {
-    image: deliveryImage3,
+    image: deliveryNewPost,
     title: t('deliveryOptions.newPost'),
-    description: t('deliveryOptions.newPost.details')
+    description: t('deliveryOptions.newPost.details'),
+    link: routes.deliveryNewPost
   },
   {
-    image: deliveryImage4,
+    image: deliveryUkrPoshta,
     title: t('deliveryOptions.ukrposhta'),
-    description: t('deliveryOptions.ukrposhta.details')
+    description: t('deliveryOptions.ukrposhta.details'),
+    link: routes.deliveryUkrPoshta
   },
   {
-    image: deliveryImage5,
+    image: deliveryMeestMail,
     title: t('deliveryOptions.meest'),
-    description: t('deliveryOptions.meest.details')
+    description: t('deliveryOptions.meest.details'),
+    link: routes.deliveryMeestMail
   },
   {
-    image: deliveryImage6,
+    image: deliveryByCourierInUkraine,
     title: t('deliveryOptions.byCourier'),
-    description: t('deliveryOptions.byCourier.details')
+    description: t('deliveryOptions.byCourier.details'),
+    link: routes.deliveryByCourierInUkraine
   }
 ]
   return (
@@ -94,7 +101,7 @@ const deliveries = [
             <Grid container spacing={2}>
               {deliveries.map((delivery) => (
                 <Grid item xs={12} md={6} lg={4}>
-                  <Button href="/" style={{textDecoration:'none'}}>
+                  <Button href={delivery.link} style={{textDecoration:'none'}}>
                     <Stack alignItems="center" className="delivery" justifyContent='center' spacing={4}>
                       <Stack sx={{height: '94px', justifyContent: 'center'}}>
                         <img src={delivery.image} alt={delivery.title} />

@@ -28,13 +28,13 @@ const MainBanner = () => {
             <Grid container>
 
             <Grid item lg={6} style={{position:"relative"}}>
-                <img style={{ width: "100%", height:"100%" }}  src={banner1.image}/>
+                <img style={{ width: "100%", height:"90%" }} className="imgLeft"  src={banner1.image}/>
                 <Typography className='bannerTitle1'>{banner1.title}</Typography>
                 <Button className='butMainBanner' href={banner1.link}>{t('common.button.moreDetails')}</Button>
             </Grid>
 
             <Grid item lg={6} style={{position:"relative"}}>
-                <img style={{ width: "100%", height:"100%" }}  src={banner2.image}/>
+                <img style={{ width: "100%", height:"90%" }}  src={banner2.image}/>
                 <Typography className='bannerTitle2'>{banner2.title}</Typography>
                 <Typography className='bannerDes'>{banner2.description}</Typography>
             </Grid>

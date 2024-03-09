@@ -5,20 +5,16 @@ import { newPieces } from "../data";
 import OrderProduct from "../products/orderProduct/OrderProduct";
 import OrderBuyer from "./orderBuyer/OrderBuyer";
 // import OrderDelivery from "./orderDelivery/OrderDelivery";
-import ProductPieceDto from "../../../models/piece/ProductPieceDto";
+import ProductPieceDto from "../../../models/piece/ProductPieceDto"
+import { CalculateProductTotal } from "../../../common/calculateTotal";
 
 
 const Order = () => {
     const {t} = useTranslation();
     const pieces:ProductPieceDto[] = newPieces;
 
-    const total: number = calculateTotal();
+    const total: number = CalculateProductTotal(pieces);
     const discount = 0;
-
-    function calculateTotal(): number {
-        const total: number = pieces.reduce((acc, piece) => acc + piece.price, 0);
-        return total;
-    }
     
     return (
         <Container
@@ -38,20 +34,20 @@ const Order = () => {
                             margin='0 15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="text">{t('basket/order.orderAmount')}</Typography>
-                            <Typography className="text">{total} {t('uan')} </Typography>
+                            <Typography className="text">{total} {t('uah')} </Typography>
                         </Stack>
                         <Stack
                             margin='15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="text">{t('basket/order.discount')}</Typography>
-                            <Typography className="text">{discount} {t('uan')} </Typography>
+                            <Typography className="text">{discount} {t('uah')} </Typography>
                         </Stack>
                         <Box className='line'/>
                         <Stack 
                             margin='15px'
                             justifyContent='space-between' direction='row'>
                             <Typography className="total">{t('basket/order.total')}</Typography>
-                            <Typography className="total">{total - discount} {t('uan')} </Typography>
+                            <Typography className="total">{total - discount} {t('uah')} </Typography>
                         </Stack>
                     </Stack>
                 </Grid>

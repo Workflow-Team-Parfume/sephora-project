@@ -29,15 +29,6 @@ public class ProductService(
         var entity = mapper.Map<ProductEntity>(createProductDto);
         await productRepo.Insert(entity);
         await productRepo.Save();
-
-        foreach (var charDto in createProductDto.Characteristics)
-        {
-            var charEntity = mapper.Map<Characteristic>(charDto);
-            charEntity.ProductId = entity.Id;
-            await charRepo.Insert(charEntity);
-        }
-
-        await charRepo.Save();
     }
 
     public async Task Delete(long id)
@@ -108,6 +99,13 @@ public class ProductService(
             throw new ArgumentException(
                 $"Product with the id={{{id}}} is not found"
             );
+        
+        entity.ProductPieces = entity.ProductPieces
+            .OrderByDescending(x => x.CreatedAt)
+            .ToList();
+        
+        foreach (var piece in entity.ProductPieces)
+            piece.Product = null!;
 
         var dto = mapper.Map<ProductDto>(entity);
         dto.IsFavorite = await IsFavorite(user, entity.Id);

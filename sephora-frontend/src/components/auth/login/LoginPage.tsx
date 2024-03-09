@@ -6,15 +6,14 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
-  Container,
-  CssBaseline,
   FormControl,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
-  // Modal,
+  Modal,
   OutlinedInput,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -28,8 +27,23 @@ import Visibility from "@mui/icons-material/Visibility";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { PasswordRecovery } from "../../common/password_recovery/PasswordRecovery";
-// import { t } from "i18next";
 import { useTranslation } from "react-i18next";
+import textFieldStyle from '../../../common/textFieldStyle';
+import routes from "../../../common/routes";
+import icon1 from "../../../assets/images/icon1.svg";
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '55%',
+  height: '75%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -216,109 +230,115 @@ const LoginPage = () => {
 
   const { t } = useTranslation();
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+    <div>
+      <Button onClick={handleOpen}><img src={icon1} alt=""/></Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            gap: 5,
-          }}
-        >
-          <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<GoogleIcon />}>
-            Google
+        <Stack sx={style} className="login" justifyContent='center' alignItems='center'>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 5,
+            }}
+          >
+            <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<GoogleIcon sx={{width: '36px', height: '36px'}}/>}>
+              Google
+            </Button>
+            <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<FacebookIcon  sx={{width: '36px', height: '36px'}}/>}>
+              Facebook
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 7,
+              mt: 5
+            }}
+          >
+            <hr color="#514C4C"/>
+            <Typography className="or">
+              {t('or')}
+            </Typography>
+            <hr color="#514C4C"/>
+          </Box>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
+            <Grid container spacing={2} sx={{justifyContent:'center'}}>
+              <FormControl
+                sx={{ ...textFieldStyle, width: "670px", mb: 2.5 }}
+                variant="outlined"
+              >
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="email"
+                  label={t('email/login')}
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  onChange={handleChange}
+                  value={values.email}
+                  error={touched.email && !!errors.email}
+                  helperText={touched.email && errors.email}
+                />
+              </FormControl>
+              <FormControl
+                sx={{ ...textFieldStyle, width: "670px" }}
+                variant="outlined"
+              >
+                <InputLabel htmlFor="outlined-adornment-password">
+                  {t('password')}
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onChange={handleChange}
+                        onMouseDown={handleMouseDownPassword}
+                        value={values.password}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+            </Grid>
+          </Box>
+          <Button
+            className="registationButton"
+            type="submit"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            {t('signIn')}
           </Button>
-          <Button id="buttonGoogleFacebook" variant="outlined" startIcon={<FacebookIcon />}>
-            Facebook
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 7,
-            mt: 5,
-          }}
-        >
-          <hr />
-          <Typography component="h1" variant="h5">
-            {t('or')}
-          </Typography>
-          <hr />
-        </Box>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
-          <Grid container spacing={2}>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px", mb: 5 }}
-              variant="outlined"
-            >
-              <TextField
-                margin="normal"
-                fullWidth
-                id="email"
-                label={t('loginEmail')}
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={handleChange}
-                value={values.email}
-                error={touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-password">
-                {t('password')}
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onChange={handleChange}
-                      onMouseDown={handleMouseDownPassword}
-                      value={values.password}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
-          </Grid>
-        </Box>
-        <Button
-          id="registationButton"
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          {t('signIn')}
-        </Button>
-        <Grid item xs>
-          {PasswordRecovery()}
-        </Grid>
-      </Box>
-    </Container>
+          <Box>
+            {PasswordRecovery()}
+            <Typography className="regBut">
+              {t('dontHaveAnAccount')} 
+              <Button disableTouchRipple href={routes.register} className="regBut" sx={{borderBottom: '1px solid black'}}> {t('registration')}</Button>
+            </Typography>
+          </Box>
+        </Stack>
+      </Modal>
+    </div>
   );
 };
 

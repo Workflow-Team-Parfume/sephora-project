@@ -7,32 +7,60 @@
   outline: none;
 }
 
-#img1{
-    width: 73px;
-    height: 76px;
-}
-
-#img2{
-    width: 94px;
-    height: 94px;
-}
-
-#img3{
-    width: 89px;
-    height: 89px;
-}
-
-#img4{
-    width: 212px;
-    height: 66px;
-}
-
-#img5{
-    width: 176px;
-    height: 44px;
-}
-
-#img6{
-    width: 203px;
-    height: 94px;
+.mainPageDelivery{
+    .delivery{
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.10);
+        padding: 25px 20px;
+        border-radius: 0;
+        max-width: 480px;
+        color: black;
+        text-transform: none;
+    }
+      
+    .custom-input-underline {
+        &::before {
+            border-bottom-color: black; /* Колір за замовчуванням */
+        }
+        &:hover::before {
+            border-bottom-color: black; /* Колір при наведенні */
+        }
+        &::after {
+            border-bottom-color: black; /* Колір при нажатті */
+        }
+    }
+      
+    .deliveriesTitle{
+        font-size: 20px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 600;
+        height: 3rem;
+        text-align: center;
+    }
+    .deliveriesText{
+        font-size: 16px;
+        font-family: 'Lato', sans-serif;
+        height: 4.5rem;
+        text-align: center;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+    .title{
+        font-size: 32px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 700;
+    }
+    .titleDesc{
+        font-size: 24px;
+        font-family: 'Lato', sans-serif;
+        color: #646464;
+        text-align: center;
+    }
+    button{
+        border: none;
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
 }

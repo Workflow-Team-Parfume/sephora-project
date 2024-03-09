@@ -6,9 +6,13 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from "redux-persist/integration/react";
 import './i18n/i18n.ts'
+import { ThemeProvider } from '@mui/material';
+import theme from './common/themeBreakpoints.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   //<GoogleOAuthProvider clientId="200083464199-0h960k60j4f3v5bg0lvu7d2dob2cg93m.apps.googleusercontent.com">
+  
+  <ThemeProvider theme={theme}>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
@@ -16,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
+    </ThemeProvider>
   //</GoogleOAuthProvider>
 );
 // If you want to start measuring performance in your app, pass a function

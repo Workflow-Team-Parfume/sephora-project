@@ -2,6 +2,7 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    CircularProgress,
     Container,
     Grid,
     List,
@@ -162,7 +163,9 @@ const ProductsPage: React.FC<{
             </Container>
         )
         : (
-            <>{/*TODO: Add spinner*/}</>
+            <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
+                <CircularProgress color="inherit"/>
+            </Stack>
         );
 }
 

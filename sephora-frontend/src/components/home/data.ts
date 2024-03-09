@@ -454,15 +454,19 @@ export const Reviews3 = (
 
 
 export const Banner1 = ({
-    title: "-20%  на догляд  за обличчям та тілом",
-    description: "Акція триває до 28.01.2024. Не пропустіть свій шанс на прекрасний початок дня!",
+    titleUa: "-20%  на догляд  за обличчям та тілом",
+    titleEn: "-20% on face and body care",
+    descriptionUa: "Акція триває до 28.01.2024. Не пропустіть свій шанс на прекрасний початок дня!",
+    descriptionEn: "The promotion lasts until January 28, 2024. Don't miss your chance for a great start to the day!",
     link: "",
     image: banner1
 })
 
 export const Banner2 = ({
-    title: "Новий Yves Saint Laurent",
-    description: "відкрийте для себе Black Opium Over Red — соковитий варіант культового аромату, тепер із вишневим відтінком",
+    titleUa: "Новий Yves Saint Laurent",
+    titleEn: "New Yves Saint Laurent ",
+    descriptionUa: "",
+    descriptionEn: "",
     link: "",
     image: banner2
 })
@@ -471,12 +475,15 @@ export const Banner3 = ({image: banner3, link: ""})
 
 export const mainBanner = ([
     {
-        title: "Знижка 20% на товар найменшої вартості за умови придбання двох акційних товарів Hugo Boss",
-        link: "", image: main1, width: "600px", description: ""
+        titleUa: "Знижка 20% на товар найменшої вартості за умови придбання двох акційних товарів Hugo Boss",
+        titleEn: "A 20% discount on the product of the lowest value, provided that you purchase two promotional products from Hugo Boss",
+        link: "", image: main1, width: "600px", descriptionUa: "", descriptionEn: ""
     },
     {
-        title: "Відкрийте унікальні продукти Cosmed!",
-        description: "Це бренд космецевтики, яка подбає про найвибагливішу шкіру",
+        titleUa: "Відкрийте унікальні продукти Cosmed!",
+        titleEn: "Discover unique productsCosmed!",
+        descriptionUa: "Це бренд космецевтики, яка подбає про найвибагливішу шкіру",
+        descriptionEn: "This is a cosmeceutical brand that takes care of the most demanding skin",
         link: "",
         image: main2,
         width: "400px"

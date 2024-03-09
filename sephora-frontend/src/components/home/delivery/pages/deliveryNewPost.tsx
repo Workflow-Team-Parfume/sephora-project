@@ -11,13 +11,9 @@ const DeliveryNewPost = () => {
     <Container className="fontStyle"
     sx={{
       width: "100%",
-      maxWidth: 1480,
-      minWidth: 1480,
       display: "flex",
       flexDirection: "column",
       justifyContent: "start",
-      marginLeft: 30,
-      marginRight: 35,
       marginTop: 15
     }}
   >

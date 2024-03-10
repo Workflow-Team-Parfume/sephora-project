@@ -9,10 +9,8 @@ public static class Products
             Query
                 .Include(prod => prod.Brand)
                 .Include(prod => prod.Category)
-                .Include(prod => prod.ProductPieces)
-                .ThenInclude(piece => piece.ProductPictures)    // doubt it
-                .Include(prod => prod.ProductPieces)
-                .ThenInclude(piece => piece.Amount);            // doubt it
+                .Include(prod => prod.ProductPieces) // doubt it's needed
+                .ThenInclude(piece => piece.ProductPictures); 
         }
     }
     public class GetById : Specification<ProductEntity>

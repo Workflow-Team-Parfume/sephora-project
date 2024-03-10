@@ -6,8 +6,7 @@ public static class Favorites
     {
         public Get(string userId, long productId)
         {
-            Query
-                .Where(x => x.UserId == userId && x.ProductId == productId);
+            Query.Where(x => x.UserId == userId && x.ProductId == productId);
         }
     }
 }

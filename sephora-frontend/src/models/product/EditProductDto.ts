@@ -5,7 +5,9 @@ export default interface EditProductDto {
 
     get name(): string | null;
 
-    get description(): string;
+    get descriptionEn(): string;
+
+    get descriptionUa(): string;
 
     get active(): boolean;
 
@@ -14,4 +16,6 @@ export default interface EditProductDto {
     get categoryId(): number;
 
     get characteristics(): CharacteristicDto[];
+
+    get deletedCharacteristics(): number[];
 }

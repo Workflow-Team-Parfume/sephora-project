@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from "redux-persist/integration/react";
 import './i18n/i18n.ts'
+import { ThemeProvider } from '@mui/material';
+import theme from './common/themeBreakpoints.ts';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { IUser, AuthUserActionType } from './components/auth/types.ts';
@@ -65,6 +67,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <GoogleOAuthProvider clientId="797576004258-c9tuljbakbj0ec9u1roe4eeqtuesuous.apps.googleusercontent.com">
+  
+  <ThemeProvider theme={theme}>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
@@ -72,6 +76,7 @@ root.render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
+    </ThemeProvider>
   //</GoogleOAuthProvider>
 );
 // If you want to start measuring performance in your app, pass a function

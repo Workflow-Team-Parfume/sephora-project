@@ -11,9 +11,9 @@ public class CartController(ICartService cartService) : ControllerBase
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
-        [FromQuery] string? order = null,
-        [FromQuery] string? select = null
-    ) => Ok(await cartService.Get(User, page, size, order, select));
+        [FromQuery] string? sort = null,
+        [FromQuery] string? filter = null
+    ) => Ok(await cartService.Get(User, page, size, sort, filter));
 
     [HttpGet("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Get([FromRoute] long id)

@@ -1,3 +1,5 @@
+using Directory = System.IO.Directory;
+
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class PhysicalPictureService : IPictureService

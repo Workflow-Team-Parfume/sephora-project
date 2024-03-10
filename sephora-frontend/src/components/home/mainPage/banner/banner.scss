@@ -70,14 +70,10 @@
 
     .imgLeft{
         filter: brightness(55%);
-      }
+    }
   
     .bannerTitle1{
         width: 700px;
-        left: 10%;
-        top: 39%;
-        position: absolute;
-        z-index: 2;
         color: #FFF;
         font-family: 'Lato', sans-serif;
         font-size: 40px;
@@ -85,12 +81,9 @@
     }
     
     .butMainBanner{
-        left: 10%;
-        top: 62%;
-        position: absolute;
+        margin-top: 6%;
         text-transform: none;
         line-height: normal;
-        z-index: 2;
         border: 2px solid #FFF;
         border-radius: 0;
         background: #000;
@@ -104,6 +97,12 @@
     }
     .butMainBanner:hover {
         background: rgb(50, 50, 50);
+    }
+    .bannerBox1{
+        left: 10%;
+        top: 39%;
+        position: absolute;
+        z-index: 2;
     }
     
     .bannerTitle2{

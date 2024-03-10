@@ -10,8 +10,15 @@ public class ApplicationProfile : Profile
         CreateMap<Brand, BrandDto>().ReverseMap();
         CreateMap<Brand, CreateBrandDto>().ReverseMap();
 
-        CreateMap<Category, CategoryDto>().ReverseMap();
-        CreateMap<Category, CreateCategoryDto>().ReverseMap();
+        CreateMap<Category, CategoryDto>()
+            .ForMember(
+                dest => dest.Picture,
+                opts => opts.MapFrom(src => new PictureDto(src.Picture, EnvName == "Development"))
+            );
+        CreateMap<CreateCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
+        CreateMap<EditCategoryDto, Category>()
+            .ForMember(dest => dest.Picture, opt => opt.Ignore());
 
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
@@ -23,8 +30,8 @@ public class ApplicationProfile : Profile
             dest => dest.Volumes,
             opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
         );
-        CreateMap<CreateProductDto, ProductEntity>().ReverseMap();
-        CreateMap<EditProductDto, ProductEntity>().ReverseMap();
+        CreateMap<CreateProductDto, ProductEntity>();
+        CreateMap<EditProductDto, ProductEntity>();
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
@@ -82,8 +89,12 @@ public class ApplicationProfile : Profile
                 opt => opt.MapFrom(src => src.ProductPiece.Product.Brand.Name)
             )
             .ForMember(
-                dest => dest.CategoryName,
-                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.Name)
+                dest => dest.CategoryNameEn,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameEn)
+            )
+            .ForMember(
+                dest => dest.CategoryNameUa,
+                opt => opt.MapFrom(src => src.ProductPiece.Product.Category.NameUa)
             )
             .ForMember(
                 dest => dest.Price,

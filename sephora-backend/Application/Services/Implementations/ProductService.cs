@@ -6,6 +6,7 @@ public class ProductService(
     IRepository<Favorite> favRepo,
     IPieceService pieceService,
     UserManager<UserEntity> userManager,
+    ISearchService<ProductEntity> searchService,
     IMapper mapper
 ) : IProductService
 {
@@ -17,27 +18,22 @@ public class ProductService(
         var userId = userManager.GetUserId(user);
         if (userId is null)
             return false;
-        
+
         var favorite = await favRepo.GetItemBySpec(
             new Favorites.Get(userId, productId)
         );
         return favorite?.IsActive ?? false;
     }
-    
+
     public async Task Create(CreateProductDto createProductDto)
     {
         var entity = mapper.Map<ProductEntity>(createProductDto);
         await productRepo.Insert(entity);
         await productRepo.Save();
 
-        foreach (var charDto in createProductDto.Characteristics)
-        {
-            var charEntity = mapper.Map<Characteristic>(charDto);
-            charEntity.ProductId = entity.Id;
-            await charRepo.Insert(charEntity);
-        }
-
-        await charRepo.Save();
+        // index the product
+        entity = await productRepo.GetItemBySpec(new Products.GetById(entity.Id));
+        searchService.Index(entity!);
     }
 
     public async Task Delete(long id)
@@ -60,41 +56,60 @@ public class ProductService(
 
         await productRepo.Delete(product);
         await productRepo.Save();
+
+        // remove from index
+        searchService.Remove(product);
     }
 
     public async Task Edit(EditProductDto editProductDto)
     {
-        var entity = mapper.Map<ProductEntity>(editProductDto);
-        await productRepo.Update(entity);
-
-        foreach (var c in entity.Characteristics)
+        foreach (var characteristic in editProductDto.Characteristics)
         {
+            var c = mapper.Map<Characteristic>(characteristic);
             c.ProductId = editProductDto.Id;
-            switch (entity.Id)
+            switch (c.Id)
             {
                 case 0:
                     await charRepo.Insert(c);
                     break;
-                case -1:
-                    await charRepo.Delete(c);
-                    break;
-                default:
+                case < 0:
+                    throw new ArgumentException(
+                        "Characteristic with the ID less than 0 is not allowed"
+                    );
+                default: // any positive value
                     await charRepo.Update(c);
                     break;
             }
         }
 
+        foreach (var charId in editProductDto.DeleteCharacteristics)
+            await charRepo.Delete(charId);
+
+        await charRepo.Save();
+        
+        var entity = await productRepo.GetById(editProductDto.Id);
+        if (entity is null)
+            throw new ArgumentException(
+                $"Product with the id={{{editProductDto.Id}}} is not found"
+            );
+
+        // remove from index
+        searchService.Remove(entity);
+
+        mapper.Map(editProductDto, entity);
+        await productRepo.Update(entity);
         await productRepo.Save();
+
+        // index the product
+        entity = await productRepo.GetItemBySpec(new Products.GetById(entity.Id));
+        searchService.Index(entity!);
     }
 
     public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null)
     {
         var products = productRepo.GetListBySpec(new Products.GetAll())
             .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
-        await products.ForEachAsync(async x =>
-        {
-            x.IsFavorite = await IsFavorite(user, x.Id);
-        });
+        await products.ForEachAsync(x => x.IsFavorite = IsFavorite(user, x.Id).Result);
         return products;
     }
 
@@ -105,9 +120,14 @@ public class ProductService(
         );
 
         if (entity is null)
-            throw new ArgumentException(
-                $"Product with the id={{{id}}} is not found"
-            );
+            return null;
+
+        entity.ProductPieces = entity.ProductPieces
+            .OrderByDescending(x => x.CreatedAt)
+            .ToList();
+
+        foreach (var piece in entity.ProductPieces)
+            piece.Product = null!;
 
         var dto = mapper.Map<ProductDto>(entity);
         dto.IsFavorite = await IsFavorite(user, entity.Id);

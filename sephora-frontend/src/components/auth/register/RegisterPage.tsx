@@ -25,6 +25,8 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import "./RegisterPage.scss";
 import { useTranslation } from "react-i18next";
+import textFieldStyle from '../../../common/textFieldStyle';
+import PhoneMask from "../../../common/phoneMask";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -106,36 +108,39 @@ const RegisterPage = () => {
           password: values.password,
         });
 
-        const { data } = result;
-        const token = data.token;
-        localStorage.token = token;
-        const user: IUser = jwtDecode(token);
-        dispatch({
-          type: AuthUserActionType.LOGIN_USER,
-          payload: {
-            id: user.id,
-            userName: user.userName,
-            email: user.email,
-            profilePicture: user.profilePicture,
-            registrationDate: user.registrationDate,
-            phoneNumber: user.phoneNumber,
-            roles: user.roles,
-          },
-        });
-        navigate(-1);
-      });
-    } catch (error) {
-      console.error("Error during register: ", error);
-    }
-  };
-  const formik = useFormik({
-    initialValues: initialValues,
-    validationSchema: registerSchema,
-    onSubmit: onHandleSubmit,
-  });
-  const [showPassword, setShowPassword] = React.useState(false);
+                const { data } = result;
+                const token = data.token;
+                localStorage.token = token;
+                const user: IUser = jwtDecode(token);
+                dispatch({
+                    type: AuthUserActionType.LOGIN_USER,
+                    payload: {
+                        id: user.id,
+                        userName: user.userName,
+                        email: user.email,
+                        profilePicture: user.profilePicture,
+                        registrationDate: user.registrationDate,
+                        phoneNumber: user.phoneNumber,
+                        roles: user.roles,
+                    },
+                });
+                navigate(-1);
+            });
+        } catch (error) {
+            console.error("Error during register: ", error);
+        }
+    };
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: registerSchema,
+        onSubmit: onHandleSubmit,
+    });
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+
+    const [showPassword2, setShowPassword2] = React.useState<boolean>(false);
+    const handleClickShowPassword2 = () => setShowPassword2(!showPassword2);
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -147,164 +152,168 @@ const RegisterPage = () => {
 
   const { t } = useTranslation();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 5,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h3">
-          {t("register")}
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
-          <Grid container spacing={2}>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+                sx={{
+                    marginTop: 5,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
             >
-              <TextField
-                required
-                fullWidth
-                id="firstName" // Corrected ID
-                label={t("name")}
-                name="firstName" // Corrected name
-                onChange={handleChange}
-                value={values.firstName}
-                autoComplete="username"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <TextField
-                required
-                fullWidth
-                id="surname" // Corrected ID
-                label={t("surname")}
-                name="surname"
-                onChange={handleChange}
-                value={values.lastName}
-                autoComplete="surname"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <TextField
-                required
-                fullWidth
-                id="phoneNumber"
-                label={t("phoneNumber")}
-                name="phoneNumber"
-                onChange={handleChange}
-                value={values.phoneNumber}
-                autoComplete="tel"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <TextField
-                required
-                fullWidth
-                name="date"
-                label={t('register.birthdate')}
-                type="date"
-                id="date"
-                onChange={handleChange}
-                autoComplete="date"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <TextField
-                required
-                fullWidth
-                id="email"
-                label="E-mail"
-                name="email"
-                onChange={handleChange}
-                value={values.email}
-                autoComplete="email"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-password">
-                {t("registerPass")}
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                onChange={handleChange}
-                value={values.password}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label={t("registerPass")} // Corrected label
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: "670px", height: "50px" }}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-password">
-                {t("registerPassConfirm")}
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password-confirm" // Changed ID
-                type="password"
-                onChange={handleChange}
-                value={values.passwordConfirmation} // Corrected value
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label={t("registerPassConfirm")} // Corrected label
-              />
-            </FormControl>
-          </Grid>
-        </Box>
-        <Button
-          id="registationButton"
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 5, mb: 5 }}
-        >
-          {t("registerBtn")}
-        </Button>
-      </Box>
-    </Container>
-  );
+                <Typography component="h1" variant="h3">
+                    {t('registration')}
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 5 }}>
+                    <Grid container spacing={2}>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <TextField
+                                required
+                                fullWidth
+                                id="username"
+                                label={t('name')}
+                                name="username"
+                                onChange={handleChange}
+                                value={values.userName}
+                                autoComplete="username"
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <TextField
+                                required
+                                fullWidth
+                                id="surname"
+                                label={t('surname')}
+                                name="surname"
+                                onChange={handleChange}
+                                // value={values.}
+                                autoComplete="surname"
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <TextField
+                                required
+                                fullWidth
+                                id="phoneNumber"
+                                label={t('phone')}
+                                name="phoneNumber"
+                                onChange={handleChange}
+                                value={values.phoneNumber}
+                                autoComplete="tel"
+                                InputProps={{
+                                    inputComponent: PhoneMask as any
+                                }}
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <TextField
+                                required
+                                fullWidth
+                                name="date"
+                                label=""
+                                type="date" // Changed from "data" to "date"
+                                id="date"
+                                onChange={handleChange}
+                                // value={values.birthdayData}
+                                autoComplete="date" // Changed from "data" to "date"
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px", }}
+                            variant="outlined"
+                        >
+                            <TextField
+                                required
+                                fullWidth
+                                id="email"
+                                label="E-mail"
+                                name="email"
+                                onChange={handleChange}
+                                value={values.email}
+                                autoComplete="email"
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                                {t('password')}*
+                            </InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={showPassword ? "text" : "password"}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onChange={handleChange}
+                                            onMouseDown={handleMouseDownPassword}
+                                            value={values.password}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
+                        <FormControl
+                            sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                            variant="outlined"
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                                {t('registerPassConfirm')}
+                            </InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={showPassword2 ? "text" : "password"}
+                                // value={values.password}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword2}
+                                            onChange={handleChange}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label={t('registerPassConfirm')}
+                            />
+                        </FormControl>
+                    </Grid>
+                </Box>
+                <Button
+                    id="registationButton"
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 5, mb: 5, textTransform: 'none' }}
+                >
+                    {t('registerBtn')}
+                </Button>
+            </Box>
+        </Container>
+    );
 };
 export default RegisterPage;

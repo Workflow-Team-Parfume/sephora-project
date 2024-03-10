@@ -7,16 +7,24 @@ string? connStr = builder.Environment.IsDevelopment()
 if (connStr is null)
     throw new ApplicationException("Connection string is null");
 
+string? envIndexPath = builder.Configuration.GetValue<string>("IndexPath");
+string? indexPath = builder.Environment.IsDevelopment() && envIndexPath is not null
+    ? Path.Combine(Directory.GetCurrentDirectory(), envIndexPath)
+    : Environment.GetEnvironmentVariable("IndexPath");
+
+if (indexPath is null)
+    throw new ApplicationException("Index path is null");
+
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson(opts => 
-        opts.SerializerSettings.Formatting = Formatting.Indented);
+builder.Services.AddControllers().AddNewtonsoftJson(opts =>
+    opts.SerializerSettings.Formatting = Formatting.Indented);
 
 // Add JWT tokens
 JwtOptions? opts = null;
 if (builder.Environment.IsDevelopment())
     opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
-else if (builder.Environment.IsDevelopment() || opts is null)
+else if (!builder.Environment.IsDevelopment() || opts is null)
     opts = new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
@@ -57,6 +65,9 @@ builder.Services.AddFileService(builder.Environment.IsDevelopment());
 // add exception handler
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+// add search service
+builder.Services.AddSearchService(indexPath);
 
 var app = builder.Build();
 

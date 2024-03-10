@@ -2,6 +2,7 @@
   color: #fff;
   font-size: 20px;
   font-family: 'Lato', sans-serif;
+  text-transform: none;
 }
 
 .main_footer {
@@ -10,11 +11,16 @@
 }
 
 .main_footer button {
-  font-size: 16px;
   text-align: start;
   text-transform: none;
   text-wrap: nowrap;
   font-family: 'Lato', sans-serif;
   padding: 0;
+  color: white;
+}
+
+.main_footer .text{
+  font-size: 18px;
+  font-family: 'Lato', sans-serif;
   color: white;
 }

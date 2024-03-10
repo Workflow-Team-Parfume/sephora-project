@@ -40,8 +40,11 @@ const Reviews: React.FC<{ title: string, reviews: IMPReview[] }>
                             </Stack>
 
                             <Grid container spacing={4}>
-                                <Grid item lg={6} sx={{backgroundSize:'contain'}}>
+                                <Grid item lg={6}>
+                                    <Stack sx={{backgroundSize:'contain'}}>
+
                                     <img className="productImage" src={review.productImage} alt={review.productName}/>
+                                    </Stack>
                                 </Grid>
                                 <Grid item lg={6} paddingBottom='15%'>
                                     <Stack justifyContent='center' height='100%' spacing={1}>

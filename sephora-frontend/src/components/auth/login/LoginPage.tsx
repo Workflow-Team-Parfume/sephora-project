@@ -71,14 +71,14 @@ const LoginPage = () => {
   const onHandleSubmit = async (values: ILogin) => {
     try {
       await loginSchema.validate(values);
-
+      console.log(values);
       const result = await http_common.post("Account/login", values);
       const { data } = result;
-
+  
       const token = data.token;
-      localStorage.token = token;
+      localStorage.setItem('token', token); 
       const user = jwtDecode(token) as IUser;
-
+  
       dispatch({
         type: AuthUserActionType.LOGIN_USER,
         payload: {
@@ -92,11 +92,18 @@ const LoginPage = () => {
         },
       });
       navigate("/");
-    } catch (error) {
+    } catch (error: any) { // Updated to any to check for response status
       console.error("Error during login:", error);
-      // Add code to show an error message to the user.
+      if (error.response && error.response.status === 409) {
+        alert("A conflict occurred. Please try again."); // Customized message based on status code
+        // Ideally, use more user-friendly feedback mechanism here
+      } else {
+        // Handle other errors or show a generic error message
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
+  
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: (codeResponse: any) => {
@@ -235,6 +242,9 @@ const LoginPage = () => {
                       name="password"
                       error={touched.password && !!errors.password}
                       helperText={<ErrorMessage name="password" />}
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
@@ -256,9 +266,6 @@ const LoginPage = () => {
                       label="Password"
                       variant="outlined"
                       fullWidth
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                   </FormControl>
                 </Grid>

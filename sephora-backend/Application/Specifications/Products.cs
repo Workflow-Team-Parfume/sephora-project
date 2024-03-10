@@ -23,6 +23,8 @@ public static class Products
                 .Where(x => x.Id == id)
                 .Include(x => x.Brand)
                 .Include(x => x.Category)
+                .Include(x => x.Characteristics)
+                .Include(x => x.Ratings)
                 .Include(x => x.ProductPieces)
                 .ThenInclude(piece => piece.ProductPictures)
                 .Include(prod => prod.ProductPieces)

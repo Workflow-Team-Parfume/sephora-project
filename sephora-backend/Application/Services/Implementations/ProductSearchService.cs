@@ -2,7 +2,7 @@ using Directory = System.IO.Directory;
 
 namespace CleanArchitecture.Application.Services.Implementations;
 
-public class ProductSearchService : ISearchService<ProductDto>
+public class ProductSearchService : ISearchService<ProductEntity>
 {
     private const LuceneVersion Version = LuceneVersion.LUCENE_48;
 
@@ -19,20 +19,20 @@ public class ProductSearchService : ISearchService<ProductDto>
     ];
 
     private readonly SimpleFSDirectory _directory;
-    private readonly IProductService _productService;
+    private readonly IRepository<ProductEntity> _productRepo;
     private readonly MultiFieldQueryParser _queryParser;
     private readonly IndexWriterConfig _config;
 
     public ProductSearchService(
         string indexPath,
-        IProductService productService
+        IRepository<ProductEntity> productRepo
     )
     {
         var analyzer = new StandardAnalyzer(Version);
 
         _config = new IndexWriterConfig(Version, analyzer);
         _directory = new SimpleFSDirectory(indexPath);
-        _productService = productService;
+        _productRepo = productRepo;
         _queryParser = new MultiFieldQueryParser(Version, Fields, analyzer)
         {
             DefaultOperator = Operator.OR,
@@ -49,32 +49,32 @@ public class ProductSearchService : ISearchService<ProductDto>
         if (!Directory.EnumerateFileSystemEntries(indexPath).IsNullOrEmpty())
             return;
 
-        var products = await _productService.Get();
+        var products = await _productRepo.GetAll().ToListAsync();
         Index(products);
     }
 
-    private static Document IndexItem(ProductDto item) =>
+    private static Document IndexItem(ProductEntity item) =>
     [
         new StringField(
-            nameof(ProductDto.Id),
+            nameof(ProductEntity.Id),
             item.Id.ToString(),
             Field.Store.YES
         ),
 
         new TextField(
-            nameof(ProductDto.Name),
+            nameof(ProductEntity.Name),
             item.Name,
             Field.Store.YES
         ),
 
         new TextField(
-            nameof(ProductDto.DescriptionEn),
+            nameof(ProductEntity.DescriptionEn),
             item.DescriptionEn,
             Field.Store.YES
         ),
 
         new TextField(
-            nameof(ProductDto.DescriptionUa),
+            nameof(ProductEntity.DescriptionUa),
             item.DescriptionUa,
             Field.Store.YES
         ),
@@ -110,16 +110,23 @@ public class ProductSearchService : ISearchService<ProductDto>
         )
     ];
 
-    public void Index(ProductDto item)
+    public void Index(ProductEntity item)
     {
-        using var writer = new IndexWriter(_directory, _config);
+        using var writer = new IndexWriter(
+            _directory,
+            (IndexWriterConfig)_config.Clone()
+        );
         writer.AddDocument(IndexItem(item));
         writer.Commit();
     }
 
-    public void Index(IEnumerable<ProductDto> items)
+    public void Index(IEnumerable<ProductEntity> items)
     {
-        using var writer = new IndexWriter(_directory, _config);
+        using var writer = new IndexWriter(
+            _directory,
+            (IndexWriterConfig)_config.Clone()
+        );
+        
         foreach (var item in items)
         {
             Document doc = IndexItem(item);
@@ -129,15 +136,18 @@ public class ProductSearchService : ISearchService<ProductDto>
         writer.Commit();
     }
 
-    public void Remove(ProductDto dto)
+    public void Remove(ProductEntity entity)
     {
-        using var writer = new IndexWriter(_directory, _config);
-        var term = new Term(nameof(ProductDto.Id), dto.Id.ToString());
+        using var writer = new IndexWriter(
+            _directory,
+            (IndexWriterConfig)_config.Clone()
+        );
+        var term = new Term(nameof(ProductEntity.Id), entity.Id.ToString());
         writer.DeleteDocuments(term);
         writer.Commit();
     }
 
-    public async Task<PagedListInfo<ProductDto>> Search(
+    public async Task<PagedListInfo<ProductEntity>> Search(
         string searchTerm,
         int pageNumber = 1,
         int pageSize = 10
@@ -146,13 +156,13 @@ public class ProductSearchService : ISearchService<ProductDto>
         // Validate the input
         if (pageNumber < 1)
             throw new ArgumentException("Invalid page number");
-        
+
         if (pageSize < 1)
             throw new ArgumentException("Invalid page size");
-        
+
         if (string.IsNullOrWhiteSpace(searchTerm))
             throw new ArgumentException("Search term is null or empty");
-        
+
         // Open the directory, create a searcher and a query
         using var directoryReader = DirectoryReader.Open(_directory);
         IndexSearcher searcher = new(directoryReader);
@@ -164,7 +174,7 @@ public class ProductSearchService : ISearchService<ProductDto>
         double totalHits = totalCntCollector.TotalHits;
 
         if (totalHits == 0)
-            return new PagedListInfo<ProductDto>();
+            return new PagedListInfo<ProductEntity>();
 
         // Perform the search of preceding results with the collector
         int from = (pageNumber - 1) * pageSize;
@@ -177,20 +187,20 @@ public class ProductSearchService : ISearchService<ProductDto>
         searcher.Search(query, collector);
         var hits = collector.GetTopDocs().ScoreDocs;
 
-        IList<ProductDto> prods = [];
+        IList<ProductEntity> prods = [];
         foreach (var hit in hits)
         {
             var document = searcher.Doc(hit.Doc);
             long id = Convert.ToInt64(
-                document.GetField(nameof(ProductDto.Id)).GetStringValue()
+                document.GetField(nameof(ProductEntity.Id)).GetStringValue()
             );
-            var dto = await _productService.GetById(id);
-            if (dto is not null)
-                prods.Add(dto);
+            var entity = await _productRepo.GetById(id);
+            if (entity is not null)
+                prods.Add(entity);
         }
 
         int totalPages = Convert.ToInt32(Math.Ceiling(totalHits / pageSize));
-        return new PagedListInfo<ProductDto>
+        return new PagedListInfo<ProductEntity>
         (
             Items: prods,
             CurrentPage: pageNumber,

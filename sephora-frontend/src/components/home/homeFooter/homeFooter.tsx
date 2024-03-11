@@ -48,7 +48,7 @@ const HomeFooter = () => {
               ...boxStyle,
             }}
           >
-            <Button href="aboutUs" disableTouchRipple id="links" sx={{paddingBottom: 2}}>
+            <Button href={routes.aboutUs} disableTouchRipple id="links" sx={{paddingBottom: 2}}>
             {t('footer.aboutUs')}
             </Button>
             {/* <Button>{t('footer.addition')}</Button>

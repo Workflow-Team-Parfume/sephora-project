@@ -69,13 +69,13 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpGet("my"), Authorize]
+    [HttpGet("profile"), Authorize]
     public async Task<IActionResult> GetMy()
         => Ok(await accountsService.Get(
             userManager.GetUserId(User) ?? String.Empty
         ));
 
-    [HttpDelete("my"), Authorize]
+    [HttpDelete("profile"), Authorize]
     public async Task<IActionResult> DeleteMy()
     {
         await accountsService.Delete(
@@ -84,7 +84,7 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpPut("my"), Authorize]
+    [HttpPut("profile"), Authorize]
     public async Task<IActionResult> EditMy([FromForm] EditUserDto user)
     {
         if (!ModelState.IsValid)

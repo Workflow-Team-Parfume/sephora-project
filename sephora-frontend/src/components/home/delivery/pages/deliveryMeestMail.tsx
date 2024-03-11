@@ -14,16 +14,17 @@ const DeliveryMeestMail = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "start",
-        marginTop: 15
+        marginY: 15,
+        marginX: "12%"
       }}
     >
-        <Typography variant="h6" fontSize={32} textAlign={"center"} gutterBottom>
+        <Typography className="title" gutterBottom>
           {t('deliveryMeestMail_line0')}
         </Typography>
         <Stack className="fontStyleStack" direction={"row"} alignItems={"center"} justifyContent={"center"}>
-          <Button className="fontStyleStack" href={routes.home}>{t('main')}</Button>/
-          <Button className="fontStyleStack" href={routes.deliveryMain}>{t('payment_and_delivery')}</Button>/
-          <Button className="fontStyleStack" href={routes.deliveryMeestMail}>{t('deliveryMeestMail_line0')}</Button>
+          <Button disableTouchRipple className="fontStyleStack" href={routes.home}>{t('main')}</Button>/
+          <Button disableTouchRipple className="fontStyleStack" href={routes.deliveryMain}>{t('payment_and_delivery')}</Button>/
+          <Button disableTouchRipple className="fontStyleStack" href={routes.deliveryMeestMail}>{t('deliveryMeestMail_line0')}</Button>
         </Stack><br /> <br />
         <Typography className="text">
           {t("deliveryMeestMail_line1")}
@@ -48,8 +49,7 @@ const DeliveryMeestMail = () => {
         </Typography> <br /><br />
         <Typography className="text" fontWeight={"bold"}>
           {t("deliveryMeestMail_line7")}
-        </Typography> <br /> <br />
-        <br /><br /><br /><br /><br />
+        </Typography>
     </Container>
   );
 }

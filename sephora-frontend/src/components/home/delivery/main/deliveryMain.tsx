@@ -101,7 +101,7 @@ const deliveries = [
             <Grid container spacing={2}>
               {deliveries.map((delivery) => (
                 <Grid item xs={12} md={6} lg={4}>
-                  <Button href={delivery.link} style={{textDecoration:'none'}}>
+                  <Button href={delivery.link} disableTouchRipple style={{textDecoration:'none'}}>
                     <Stack alignItems="center" className="delivery" justifyContent='center' spacing={4}>
                       <Stack sx={{height: '94px', justifyContent: 'center'}}>
                         <img src={delivery.image} alt={delivery.title} />

@@ -12,7 +12,8 @@ const CarePage: React.FC = () => {
         title={t('header.care')}
         filters={Filters}
         mainFilter={Filter}
-        link={routes.api.care}/>;
+        link={routes.api.care}
+        navigateLink={routes.care}/>;
 };
 
 export default CarePage;

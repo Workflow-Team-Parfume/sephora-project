@@ -223,6 +223,15 @@ i18n.use(initReactI18next)
                     'deliveryByCourierInUkraine_line3': "Також зверніть будь-ласка увагу: згідно з Законом України №№361-IX, при отриманні замовлення на суму від 5 000 грн кур’єр служби «Нова пошта» може попросити вас надати копію сторінок паспорта, що посвідчують особу одержувача.",
                     'deliveryByCourierInUkraine_line4': "При оплаті картою зазначений в замовленні отримувач має показати документ, що засвідчує особу. ",
 
+                    //AboutUs
+                    'aboutUs.line0': "Краса на яку ви заслуговуєте!",
+                    'aboutUs.line1': "Ласкаво просимо у дивовижний світ парфумерії та доглядової косметики Luxury Hub!",
+                    'aboutUs.line2': "Наш інтернет — магазин спеціалізується на продажу оригінальної парфумерії та доглядової косметики в Україні. Ми пропонуємо великий вибір ароматів популярних та відомих брендів, якість яких не викликає сумнівів. Працюємо виключно з офіційними дистриб`юторами та перевіреними партнерами. Наші ціни приємно здивують Вас!",
+                    'aboutUs.line3': "Ми не перестаємо радувати вас найцікавішими новими продуктами світу парфумів та вашими улюбленими, протестованими часом",
+                    'aboutUs.line4': "У нас ви можете придбати не тільки оригінальний аромат у повнорозмірному форматі, але спробувати новинки у зручному форматі розпиву.",
+                    'aboutUs.line5': "У Luxury Hub ви отримуєте гарантію оригінальності продуктів, найгарячіших нових продуктів та приємних подарунків.",
+                    'aboutUs.line6': "Наш бізнес - це наше хобі. Ми дуже любимо парфуми та наших клієнтів",
+
                     'deliveryOptions': 'Варіанти доставки',
                     'deliveryOptions.freeByCourier': 'Безкоштовно кур’єром (Luxury Hub)',
                     'deliveryOptions.pickup': 'Самовивіз',
@@ -461,6 +470,15 @@ i18n.use(initReactI18next)
                     'deliveryByCourierInUkraine_line2': "No hidden payments, payment for the services of transport companies, fees for transferring funds, commissions and more! You pay only the amount of your order.",
                     'deliveryByCourierInUkraine_line3': "Also, please pay attention: in accordance with the Law of Ukraine No. 361-IX, when receiving an order for the amount of UAH 5,000 or more, the courier of the «Nova Poshta» service may ask you to provide a copy of the passport pages proving the identity of the recipient.",
                     'deliveryByCourierInUkraine_line4': "When paying by card, the recipient specified in the order must show an identity document.",
+
+                    //AboutUs
+                    'aboutUs.line0': "The beauty you deserve!",
+                    'aboutUs.line1': "Welcome to the amazing world of perfumery and cosmetics Luxury Hub!",
+                    'aboutUs.line2': "Our online store specializes in the sale of original perfumery and care cosmetics in Ukraine. We offer a large selection of fragrances of popular and well-known brands, the quality of which is beyond doubt. We work exclusively with official distributors and verified partners. Our prices will pleasantly surprise you!",
+                    'aboutUs.line3': "We never stop delighting you with the most exciting new products in the world of perfumes and your time-tested favourites.",
+                    'aboutUs.line4': "From us, you can buy not only the original aroma in a full-size format, but also try new products in a convenient drinking format.",
+                    'aboutUs.line5': "At Luxury Hub, you get the guarantee of original products, the hottest new products and nice gifts.",
+                    'aboutUs.line6': "Our business is our hobby. We love perfumes and our customers very much",
 
                     'deliveryOptions': 'Delivery options',
                     'deliveryOptions.freeByCourier': 'Free by courier (Luxury Hub)',

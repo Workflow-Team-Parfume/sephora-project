@@ -12,7 +12,8 @@ const FullSizedPage : React.FC = () => {
         title={t('header.fullSizePerfume')}
         filters={Filters}
         mainFilter={Filter}
-        link={routes.api.full_sized}/>;
+        link={routes.api.full_sized}
+        navigateLink={routes.full_sized}/>;
 };
 
 export default FullSizedPage;

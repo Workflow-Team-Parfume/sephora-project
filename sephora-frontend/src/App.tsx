@@ -27,7 +27,7 @@ import Profile from "./components/home/profile/Profile.tsx";
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
-import BottledPage from "./models/piece/BottledPage.tsx";
+import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 
 function App() {

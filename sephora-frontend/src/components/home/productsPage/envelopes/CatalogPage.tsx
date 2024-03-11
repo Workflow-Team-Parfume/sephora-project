@@ -12,7 +12,8 @@ const CatalogPage: React.FC = () => {
         title={t('header.catalogue')}
         filters={Filters}
         mainFilter={Filter}
-        link={routes.api.pieces}/>;
+        link={routes.api.pieces}
+        navigateLink={routes.products}/>;
 };
 
 export default CatalogPage;

@@ -16,4 +16,6 @@ export default interface EditProductDto {
     get categoryId(): number;
 
     get characteristics(): CharacteristicDto[];
+
+    get deletedCharacteristics(): number[];
 }

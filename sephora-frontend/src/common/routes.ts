@@ -16,6 +16,14 @@ const routes = {
     thank: '/thank',
     detailsOrder: '/order-details',
 
+    deliveryMain: '/deliveryMain',
+    deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
+    deliveryPickup: '/deliveryPickup',
+    deliveryNewPost: '/deliveryNewPost',
+    deliveryUkrPoshta: '/deliveryUkrPoshta',
+    deliveryMeestMail: '/deliveryMeestMail',
+    deliveryByCourierInUkraine: '/deliveryByCourierInUkraine',
+
     admin: '/admin',
     adminCategoriesList: '/admin/category',
     createCategory: '/admin/category/create',

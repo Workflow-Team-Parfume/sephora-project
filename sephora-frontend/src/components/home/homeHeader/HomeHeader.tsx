@@ -128,7 +128,7 @@ const HomeHeader = () => {
                         {t("header.catalogue")}
                     </Button>
                     <Button disableTouchRipple>{t("header.aboutUs")}</Button>
-                    <Button disableTouchRipple>{t("header.paymentAndDelivery")}</Button>
+                    <Button href={routes.deliveryMain} disableTouchRipple>{t("header.paymentAndDelivery")}</Button>
                 </Box>
             </div>
         </div>

@@ -23,9 +23,9 @@ import StarIcon from "@mui/icons-material/Star";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Reviews from "../../reviews/ReviewsProduct";
 import "./details.scss";
-import novaPoshta from "../../../../assets/images/novaPoshta.png";
-import ukrPoshta from "../../../../assets/images/ukrPoshta.png";
-import meest from "../../../../assets/images/meest.png";
+import novaPoshta from "../../../../assets/images/delivery/deliveryNewPost.svg";
+import ukrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg";
+import meest from "../../../../assets/images/delivery/deliveryMeestMail.svg";
 import textFieldStyle from '../../../../common/textFieldStyle';
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
 

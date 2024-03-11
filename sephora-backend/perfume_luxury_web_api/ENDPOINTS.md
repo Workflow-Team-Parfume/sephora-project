@@ -20,12 +20,12 @@
 * **/all**
     * ***GET***
         * Get all accounts
-        * Admin only
+        * SudoAdmin only
         * Returns: List of all accounts
 * **/**
     * ***GET***
         * Get paged accounts
-        * Admin only
+        * SudoAdmin only
         * page: int
         * size: int
         * order: string | null
@@ -33,7 +33,7 @@
         * Returns: Paged list of accounts
 * **/{id}**
     * id: string
-    * Admin only
+    * SudoAdmin only
     * ***GET***
         * Get account by id
         * Returns: AccountDto
@@ -177,7 +177,7 @@
 * **/{id}**
     * id: int
     * ***GET***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Get cart item by id
         * Returns: CartDto
     * ***DELETE***
@@ -226,7 +226,7 @@
 
 * **/unauthed**
     * ***POST***
-        * Create an order (for unauthenticated users and admins,
+        * Create an order (for unauthenticated users and SudoAdmins,
         * who want to create an order for someone else,
         * like for a customer who called them)
         * Request body: CheckoutDto
@@ -242,28 +242,28 @@
     * ***PUT***
         * Cancel order
         * Returns: 200 OK
-* **/admin/status**
-    * Admin & mod only
+* **/SudoAdmin/status**
+    * SudoAdmin & mod only
     * ***PUT***
         * Change status of order
         * Request body: ChangeStatusDto
         * Returns: 200 OK
-* **/admin/{orderId}**
+* **/SudoAdmin/{orderId}**
     * orderId: long
-    * Admin & mod only
+    * SudoAdmin & mod only
     * ***GET***
         * Get order by id
         * Returns: OrderDto
     * ***DELETE***
         * Delete order by id
         * Returns: 200 OK
-* **/admin/all**
-    * Admin & mod only
+* **/SudoAdmin/all**
+    * SudoAdmin & mod only
     * ***GET***
         * Get all orders
         * Returns: List of all orders
-* **/admin**
-    * Admin & mod only
+* **/SudoAdmin**
+    * SudoAdmin & mod only
     * ***PUT***
         * Edit order
         * Request body: OrderDto
@@ -282,7 +282,7 @@
         * Get image by file name
         * Returns: File
     * ***DELETE***
-        * Admin only
+        * SudoAdmin only
         * Delete image by file name
         * Returns: 200 OK
 * **/**
@@ -307,12 +307,12 @@
         * filter: string | null
         * Returns: Paged list of pieces
     * ***POST***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Create piece
         * Request body: CreateProductPieceDto
         * Returns: 200 OK
     * ***PUT***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Edit piece
         * Request body: EditProductPieceDto
         * Returns: 200 OK
@@ -322,7 +322,7 @@
         * Get piece by id
         * Returns: ProductPieceDto
     * ***DELETE***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Delete piece by id
         * Returns: 200 OK
 
@@ -344,12 +344,12 @@
         * filter: string | null
         * Returns: Paged list of products
     * ***POST***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Create product
         * Request body: CreateProductDto
         * Returns: 200 OK
     * ***PUT***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Edit product
         * Request body: EditProductDto
         * Returns: 200 OK
@@ -359,7 +359,7 @@
         * Get product by id
         * Returns: ProductDto
     * ***DELETE***
-        * Admin & mod only
+        * SudoAdmin & mod only
         * Delete product by id
         * Returns: 200 OK
 
@@ -407,30 +407,30 @@
 
 * **/all**
     * ***GET***
-        * Admin only
+        * SudoAdmin only
         * Get all roles
         * Returns: List of all roles
 * **/**
     * ***POST***
-        * Admin only
+        * SudoAdmin only
         * Create role
         * Request body: string
         * Returns: 200 OK
 * **/addToRole**
     * ***POST***
-        * Admin only
+        * SudoAdmin only
         * Add user to role
         * Route params: userId, roleName
         * Returns: 200 OK
 * **/removeFromRole**
     * ***POST***
-        * Admin only
+        * SudoAdmin only
         * Remove user from role
         * Route params: userId, roleName
         * Returns: 200 OK
 * **/{roleName}**
     * ***DELETE***
-        * Admin only
+        * SudoAdmin only
         * Delete role by name
         * Route params: roleName
         * Returns: 200 OK

@@ -35,6 +35,10 @@ else if (!builder.Environment.IsDevelopment() || opts is null)
     };
 builder.Services.AddJwt(opts!);
 
+builder.Services.SwagerConfig();
+
+builder.Services.NewtonsoftJsonConfig();
+
 builder.Services.AddEndpointsApiExplorer();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -87,7 +91,9 @@ app.UseCors(options =>
 });
 
 app.UseAuthorization();
+
 app.UseAuthentication();
+
 
 app.MapControllers();
 

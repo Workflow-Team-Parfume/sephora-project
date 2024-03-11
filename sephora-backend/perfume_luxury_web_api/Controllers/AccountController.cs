@@ -6,11 +6,11 @@ public class AccountController(
     UserManager<UserEntity> userManager
 ) : ControllerBase
 {
-    [HttpGet("all"), Authorize(Roles = "Admin")]
+    [HttpGet("all"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Get()
         => Ok(await accountsService.Get().ToListAsync());
 
-    [HttpGet, Authorize(Roles = "Admin")]
+    [HttpGet, Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
@@ -18,12 +18,12 @@ public class AccountController(
         [FromQuery] string? filter = null
     ) => Ok(await accountsService.Get(page, size, sort, filter));
 
-    [HttpGet("{id}"), Authorize(Roles = "Admin")]
+    [HttpGet("{id}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Get(string id)
         => Ok(await accountsService.Get(id));
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+    public async Task<IActionResult> Register([FromForm] RegisterDto dto)
     {
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
@@ -49,14 +49,14 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+    [HttpDelete("{id}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Delete([FromRoute] string id)
     {
         await accountsService.Delete(id);
         return Ok();
     }
 
-    [HttpPut("{id}"), Authorize(Roles = "Admin")]
+    [HttpPut("{id}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Edit(
         string id,
         [FromForm] EditUserDto user
@@ -69,13 +69,13 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpGet("my"), Authorize]
+    [HttpGet("profile"), Authorize]
     public async Task<IActionResult> GetMy()
         => Ok(await accountsService.Get(
             userManager.GetUserId(User) ?? String.Empty
         ));
 
-    [HttpDelete("my"), Authorize]
+    [HttpDelete("profile"), Authorize]
     public async Task<IActionResult> DeleteMy()
     {
         await accountsService.Delete(
@@ -84,7 +84,7 @@ public class AccountController(
         return Ok();
     }
 
-    [HttpPut("my"), Authorize]
+    [HttpPut("profile"), Authorize]
     public async Task<IActionResult> EditMy([FromForm] EditUserDto user)
     {
         if (!ModelState.IsValid)

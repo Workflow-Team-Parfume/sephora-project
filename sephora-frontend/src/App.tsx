@@ -1,4 +1,3 @@
-import React from "react";
 import {Route, Routes} from "react-router-dom";
 import CategoryListPage from "./components/admin/category/CategoryListPage.tsx";
 import CategoryCreatePage from "./components/admin/category/CategoryCreatePage.tsx";
@@ -15,17 +14,20 @@ import routes from './common/routes';
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
-import DeliveryMain from "./components/home/delivery/main/deliveryMain";
-import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub";
-import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup";
-import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost";
-import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta";
-import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail";
-import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine";
+import Profile from "./components/home/profile/Profile";
+// import { useSelector } from "react-redux";
+// import { IAuthUser } from "./components/auth/types.ts";
 import NotFound from "./components/home/404/NotFound.tsx";
-import Profile from "./components/home/profile/Profile.tsx";
-import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
+import DeliveryMain from "./components/home/delivery/main/deliveryMain.tsx";
+import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine.tsx";
+import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub.tsx";
+import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail.tsx";
+import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost.tsx";
+import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup.tsx";
+import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
+import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
+import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
@@ -33,58 +35,6 @@ import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-
-    React.useEffect(() => {
-        console.log(localStorage.token);
-
-        // if (localStorage.token) {
-        //   const token = localStorage.token;
-        //   var user = jwtDecode(token) as IUser;
-        //   store.dispatch({
-        //     type: AuthUserActionType.LOGIN_USER,
-        //     payload: {
-        //       id: user.id,
-        //       userName: user.userName,
-        //       email: user.email,
-        //       profilePicture: user.profilePicture,
-        //       registrationDate: user.registrationDate,
-        //       phoneNumber: user.phoneNumber,
-        //       roles: user.roles,
-        //     },
-        //   });
-        // }
-
-        // if (localStorage.access_token) {
-        //   const access_token = localStorage.access_token;
-        //   axios
-        //     .get(
-        //       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`,
-        //       {
-        //         headers: {
-        //           Authorization: `Bearer ${access_token}`,
-        //           Accept: "application/json",
-        //         },
-        //       }
-        //     )
-        //     .then((res) => {
-        //       if (res.data) {
-        //         store.dispatch({
-        //           type: AuthUserActionType.LOGIN_GOOGLE_USER,
-        //           payload: {
-        //             id: res.data.id,
-        //             userName: res.data.name,
-        //             email: res.data.email,
-        //             profilePicture: res.data.picture,
-        //             registrationDate: "",
-        //             phoneNumber: "",
-        //             roles: ["user"],
-        //           },
-        //         });
-        //       }
-        //     })
-        //     .catch((err) => console.log(err));
-        // }
-    }, [])
 
     return (
         <>
@@ -121,7 +71,7 @@ function App() {
                     <Route path='*' element={<NotFound/>}/>
                 </Route>
 
-                {/* {user?.role === "admin" && isAuth ? ( */}
+                {/* {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? ( */}
                 <Route path={routes.admin} element={<AdminLayout/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={routes.adminCategoriesList}>

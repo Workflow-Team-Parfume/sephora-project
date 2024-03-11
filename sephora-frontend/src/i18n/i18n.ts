@@ -249,7 +249,9 @@ i18n.use(initReactI18next)
                     'delivery.search': 'Введіть ваше місто',
                     'delivery.weMakeYouHappy': 'Робимо вас щасливими. Безкоштовно',
                     'delivery.enterTheName': 'Введіть назву вашого населеного пункту, і ми запропонуємо варіанти доставки вашого щастя',
-                }
+        
+                    'register.birthdate': 'Дата народження',
+        }
             },
 
             en: {
@@ -495,7 +497,9 @@ i18n.use(initReactI18next)
                     'delivery.search': 'Enter your city',
                     'delivery.weMakeYouHappy': 'We make you happy. Free',
                     'delivery.enterTheName': 'Enter the name of your locality, and we will offer options for the delivery of your happiness',
-                }
+        
+                    'register.birthdate': 'Date of birth',
+        }
             }
         },
         lng: 'uk', // мова за замовчуванням

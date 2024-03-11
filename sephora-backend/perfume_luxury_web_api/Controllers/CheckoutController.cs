@@ -6,7 +6,7 @@ public class CheckoutController(
 ) : ControllerBase
 {
     /**
-     * Create an order (for unauthenticated users and admins,
+     * Create an order (for unauthenticated users and SudoAdmins,
      * who want to create an order for someone else,
      * like for a customer who called them)
      */
@@ -31,23 +31,23 @@ public class CheckoutController(
         return Ok();
     }
 
-    [HttpPut("admin/status"), Authorize(Roles = "Admin,Moderator")]
+    [HttpPut("SudoAdmin/status"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> ChangeStatus([FromBody] ChangeStatusDto dto)
     {
         await checkoutService.ChangeStatus(dto);
         return Ok();
     }
 
-    [HttpGet("admin/{orderId:long}"), Authorize(Roles = "Admin,Moderator")]
+    [HttpGet("SudoAdmin/{orderId:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> GetById(long orderId)
         => Ok(await checkoutService.GetById(orderId));
 
-    [HttpGet("admin/all"), Authorize(Roles = "Admin,Moderator")]
+    [HttpGet("SudoAdmin/all"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> GetAll()
         => Ok(await checkoutService.Get().ToListAsync());
 
-    // Manipulate status of orders via this method in admin panel
-    [HttpPut("admin"), Authorize(Roles = "Admin,Moderator")]
+    // Manipulate status of orders via this method in SudoAdmin panel
+    [HttpPut("SudoAdmin"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Edit([FromBody] OrderDto orderDto)
     {
         if (!ModelState.IsValid) 
@@ -57,7 +57,7 @@ public class CheckoutController(
         return Ok();
     }
 
-    [HttpDelete("admin/{orderId:long}"), Authorize(Roles = "Admin,Moderator")]
+    [HttpDelete("SudoAdmin/{orderId:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Delete(long orderId)
     {
         await checkoutService.Delete(orderId);

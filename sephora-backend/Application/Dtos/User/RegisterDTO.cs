@@ -9,10 +9,13 @@ public class RegisterDto
     public string LastName { get; set; } = String.Empty;
     
     public string Email { get; set; } = String.Empty;
+
     public string? PhoneNumber { get; set; }
+
     public string Password { get; set; } = String.Empty; 
+
     public string PasswordConfirmation { get; set; } = String.Empty;
-    
+
     public IFormFile? ProfilePicture { get; set; }
 
     //[EnumDataType(typeof(Gender))]

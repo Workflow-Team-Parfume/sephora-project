@@ -22,7 +22,7 @@ public interface ICheckoutService
      */
     Task CheckoutAuthed(ClaimsPrincipal user);
 
-    // ADMIN ONLY
+    // SudoAdmin ONLY
 
     /**
      * <summary>

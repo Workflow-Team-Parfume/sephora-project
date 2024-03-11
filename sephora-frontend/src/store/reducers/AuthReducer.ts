@@ -26,7 +26,11 @@ export const AuthReducer = (state = initState, action: UnknownAction): IAuthUser
       };
     }
     case AuthUserActionType.LOGOUT_USER: {
-      return initState;
+      return {
+        user: undefined,
+        isGoogle: false,
+        isAuth: false,
+      };
     }
   }
   return state;

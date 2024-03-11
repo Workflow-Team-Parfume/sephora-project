@@ -14,26 +14,25 @@ import routes from './common/routes';
 import Order from "./components/home/order/Order";
 import Thank from "./components/home/order/thank/Thank";
 import YourOrder from "./components/home/order/yourOrder/YourOrder";
-import DeliveryMain from "./components/home/delivery/main/deliveryMain";
-import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub";
-import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup";
-import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost";
-import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta";
-import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail";
-import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine";
+import Profile from "./components/home/profile/Profile";
+// import { useSelector } from "react-redux";
+// import { IAuthUser } from "./components/auth/types.ts";
 import NotFound from "./components/home/404/NotFound.tsx";
-import Profile from "./components/home/profile/Profile.tsx";
-import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
+import DeliveryMain from "./components/home/delivery/main/deliveryMain.tsx";
+import DeliveryByCourierInUkraine from "./components/home/delivery/pages/deliveryByCourierInUkraine.tsx";
+import DeliveryFreeLuxuryHub from "./components/home/delivery/pages/deliveryFreeLuxuryHub.tsx";
+import DeliveryMeestMail from "./components/home/delivery/pages/deliveryMeestMail.tsx";
+import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost.tsx";
+import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup.tsx";
+import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
+import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
+import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./models/piece/BottledPage.tsx";
-import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
-import { useSelector } from "react-redux";
-import {IAuthUser } from "./components/auth/types";
-
 
 function App() {
-    const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+    // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
     return (
         <>
@@ -69,7 +68,7 @@ function App() {
                     <Route path='*' element={<NotFound/>}/>
                 </Route>
 
-                {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? (
+                {/* {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? ( */}
                 <Route path={routes.admin} element={<AdminLayout/>}>
                     <Route index element={<AdminDashboard/>}/>
                     <Route path={routes.adminCategoriesList}>
@@ -80,9 +79,9 @@ function App() {
 
                     <Route path='*' element={<NotFound/>}/>
                 </Route>
-                ) : (
+                {/* ) : (
                   <Route path="admin" element={<LoginPage />} />
-                )}
+                )} */}
             </Routes>
         </>
     );

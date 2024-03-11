@@ -26,6 +26,11 @@ const Product: React.FC<{ piece: ProductPieceDto }>
     const {t} = useTranslation();
     const isAuthed = useSelector((store: RootState) => store.auth.isAuth);
 
+    const handleFavClick = () => {
+        // TODO: change styling
+        changeFavStatus(piece.product.id, isAuthed);
+    };
+
     // TODO: Change link
     return (
         <Link href={`/details/${piece.product.id}?piece=${piece.id}`} underline="none">
@@ -33,10 +38,7 @@ const Product: React.FC<{ piece: ProductPieceDto }>
             <Card className="productMainContainer"
                   sx={{height: '95%'}}>
                 {IsNew(piece.isNew)}
-                <Button className="favorite" onClick={() => {
-                    // TODO: change styling
-                    changeFavStatus(piece.product.id, isAuthed);
-                }}>
+                <Button className="favorite" onClick={handleFavClick}>
                     <FavoriteBorderIcon className="favorite"/>
                 </Button>
                 {/* <FavoriteIcon className="favorite"/> */}

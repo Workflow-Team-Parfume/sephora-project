@@ -3,11 +3,11 @@ namespace perfume_luxury_web_api.Controllers;
 [Authorize, ApiController, Route("[controller]")]
 public class CartController(ICartService cartService) : ControllerBase
 {
-    [HttpGet("all")]
+    [HttpGet("all"), Authorize]
     public async Task<IActionResult> Get()
         => Ok(await cartService.Get(User).ToListAsync());
     
-    [HttpGet]
+    [HttpGet, Authorize]
     public async Task<IActionResult> GetPaged(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
@@ -18,8 +18,12 @@ public class CartController(ICartService cartService) : ControllerBase
     [HttpGet("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Get([FromRoute] long id)
         => Ok(await cartService.GetById(id));
+    
+    [HttpGet("contains/{id:long}"), Authorize]
+    public async Task<IActionResult> Contains([FromRoute] long id)
+        => Ok(await cartService.GetById(id) != null);
 
-    [HttpPost]
+    [HttpPost, Authorize]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)
     {
         if (!ModelState.IsValid) 
@@ -29,7 +33,7 @@ public class CartController(ICartService cartService) : ControllerBase
         return Ok();
     }
     
-    [HttpPut]
+    [HttpPut, Authorize]
     public async Task<IActionResult> Update([FromBody] CartDto cartItem)
     {
         if (!ModelState.IsValid) 
@@ -39,7 +43,7 @@ public class CartController(ICartService cartService) : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id:long}")]
+    [HttpDelete("{id:long}"), Authorize]
     public async Task<IActionResult> Remove([FromRoute] long id)
     {
         await cartService.Delete(id, User);

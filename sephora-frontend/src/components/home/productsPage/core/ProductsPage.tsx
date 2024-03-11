@@ -2,6 +2,7 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Button,
     CircularProgress,
     Container,
     Grid,
@@ -22,6 +23,7 @@ import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../../http_common.ts";
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
 import SortingOrder, {Directions, Orders} from "./SortingOrder.ts";
+import routes from "../../../../common/routes.ts";
 
 const itemsPerPage = 9;
 
@@ -31,8 +33,9 @@ const ProductsPage: React.FC<{
     mainFilter: IFilter,
     filters: IFilter[],
     defaultOrder: SortingOrder | null | undefined,
-    defaultDirection: SortingOrder | null | undefined
-}> = ({title, mainFilter, filters, link, defaultOrder = null, defaultDirection = null}) => {
+    defaultDirection: SortingOrder | null | undefined,
+    navigateLink?: string
+}> = ({title, mainFilter, filters, link, defaultOrder = null, defaultDirection = null, navigateLink = ''}) => {
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
@@ -77,7 +80,29 @@ const ProductsPage: React.FC<{
     return products
         ? (
             <Container className="productsPage"
-                       style={{maxWidth: "100%", justifyContent: "center", margin: '40px 0'}}>
+                       style={{maxWidth: "100%", justifyContent: "center"}}>
+                {navigateLink && 
+                    <Stack 
+                        direction='row' 
+                        className="navigate" 
+                        alignItems='center' 
+                        sx={{padding: "40px 8px"}}>
+                        <Button 
+                            disableTouchRipple
+                            href={routes.home} 
+                            style={{color: "#646464"}}
+                        >
+                            {t('main')}
+                        </Button>
+                        /
+                        <Button
+                            disableTouchRipple
+                            href={navigateLink}
+                        >
+                            {title}
+                        </Button>
+                    </Stack>
+                }
                 <Grid container>
                     <Grid item lg={3}>
                         <Stack className='filter' spacing={2.5} sx={{padding: '0 16px'}}>
@@ -140,7 +165,7 @@ const ProductsPage: React.FC<{
                                 <Grid container spacing={2}>
                                     {products?.items.map((piece, i) => (
                                         <Grid key={i} item xs={12} sm={6} lg={4}>
-                                            <Product piece={piece}/>
+                                            <Product piece={piece} />
                                         </Grid>
                                     ))}
                                 </Grid>

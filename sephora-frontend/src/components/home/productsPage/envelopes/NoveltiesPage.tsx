@@ -13,7 +13,8 @@ const NoveltiesPage : React.FC = () => {
         title={t('header.novelty')}
         filters={Filters}
         mainFilter={Filter}
-        link={routes.api.novelties}/>;
+        link={routes.api.novelties}
+        navigateLink={routes.novelties}/>;
 }
 
 export default NoveltiesPage;

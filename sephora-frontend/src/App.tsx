@@ -29,6 +29,7 @@ import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
+import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -115,6 +116,7 @@ function App() {
                     <Route path={routes.deliveryUkrPoshta} element={<DeliveryUkrPoshta />}/>
                     <Route path={routes.deliveryMeestMail} element={<DeliveryMeestMail />}/>
                     <Route path={routes.deliveryByCourierInUkraine} element={<DeliveryByCourierInUkraine />}/>
+                    <Route path={routes.aboutUs} element={<AboutUs />}/>
                     
                     <Route path='*' element={<NotFound/>}/>
                 </Route>

@@ -33,4 +33,6 @@ export default interface ProductDto {
     get createdAt(): Date;
 
     get isNew(): boolean;
+
+    get isFavorite(): boolean;
 }

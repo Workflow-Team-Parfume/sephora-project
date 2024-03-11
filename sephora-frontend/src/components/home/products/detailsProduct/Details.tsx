@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-    Button,
-    Container,
-    FormControl,
-    MenuItem,
-    Rating,
-    Select,
-    Stack,
-    Typography
-} from "@mui/material";
+import {Button, Container, FormControl, MenuItem, Rating, Select, Stack, Typography} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
@@ -28,12 +19,16 @@ import ukrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg"
 import meest from "../../../../assets/images/delivery/deliveryMeestMail.svg";
 import textFieldStyle from '../../../../common/textFieldStyle';
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../store/store.ts";
+import changeFavStatus from "../ChangeFavStatus.ts";
 
 const Details: React.FC = () => {
-    const {t} = useTranslation();
     const {id} = useParams();
-    const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
+    const navigate = useNavigate();
+    const {t} = useTranslation();
+    const isAuthed = useSelector((store: RootState) => store.auth.isAuth);
 
     const [product, setProduct] = useState<ProductDto>();
     const [reviews, setReviews] = useState<PagedList<RatingDto>>();
@@ -71,6 +66,8 @@ const Details: React.FC = () => {
             .then(resp => setReviews(resp.data))
             .catch(e => console.error(e));
     }, [id]);
+
+    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
@@ -195,7 +192,7 @@ const Details: React.FC = () => {
                                 </Typography>
 
                                 {product.volumes.length != 0 ?
-                                    <FormControl fullWidth sx={{...textFieldStyle}} >
+                                    <FormControl fullWidth sx={{...textFieldStyle}}>
                                         <Select
                                             sx={{width: '450px'}}
                                             value={pieceId}
@@ -216,7 +213,10 @@ const Details: React.FC = () => {
                                 <Stack
                                     spacing={1} sx={{width: '450px'}}
                                     style={{marginTop: '40px'}}>
-                                    <Button className="butFavorites">
+                                    <Button className="butFavorites" onClick={() => {
+                                        changeFavStatus(product?.id, isAuthed)
+                                        setIsFavorite(!isFavorite)
+                                    }}>
                                         {t('details.addToFavorites')}
                                         <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
                                         {/* {t('details.addedToFavorites')}

@@ -30,7 +30,6 @@ import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.ts
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
-import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 
 function App() {

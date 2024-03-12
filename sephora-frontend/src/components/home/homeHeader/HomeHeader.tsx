@@ -50,9 +50,7 @@ const HomeHeader = () => {
     setAnchorElUser(null);
   };
 
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language).catch((e) => console.error(e));
-  };
+
   const boxStyleHeader = {
     display: "flex",
     flexDirection: { xs: "column", sm: "row" },

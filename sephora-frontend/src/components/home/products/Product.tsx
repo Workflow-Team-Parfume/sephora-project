@@ -1,4 +1,4 @@
-import {Card, CardMedia, Link, Rating, Stack, Typography} from "@mui/material";
+import {Button, Card, CardMedia, Link, Rating, Stack, Typography} from "@mui/material";
 import "./products.scss"
 import StarIcon from "@mui/icons-material/Star";
 import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
@@ -7,6 +7,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useTranslation} from "react-i18next";
 import routes from "../../../common/routes.ts";
 import i18n from "i18next";
+import changeFavStatus from "./ChangeFavStatus.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store/store.ts";
 
 function IsNew(isNew: boolean) {
     if (isNew) {
@@ -21,14 +24,23 @@ function IsNew(isNew: boolean) {
 const Product: React.FC<{ piece: ProductPieceDto }>
     = ({piece}) => {
     const {t} = useTranslation();
+    const isAuthed = useSelector((store: RootState) => store.auth.isAuth);
 
+    const handleFavClick = () => {
+        // TODO: change styling
+        changeFavStatus(piece.product.id, isAuthed);
+    };
+
+    // TODO: Change link
     return (
-        <Link href={`/details/${piece.product.id}/?piece=${piece.id}`} underline="none">
+        <Link href={`/details/${piece.product.id}?piece=${piece.id}`} underline="none">
 
             <Card className="productMainContainer"
                   sx={{height: '95%'}}>
                 {IsNew(piece.isNew)}
-                <FavoriteBorderIcon className="favorite"/>
+                <Button className="favorite" onClick={handleFavClick}>
+                    <FavoriteBorderIcon className="favorite"/>
+                </Button>
                 {/* <FavoriteIcon className="favorite"/> */}
                 <Stack spacing={2} direction='column'>
 

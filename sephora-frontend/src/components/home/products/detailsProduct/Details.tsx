@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
     Button,
+    CircularProgress,
     Container,
     FormControl,
     MenuItem,
@@ -28,12 +29,17 @@ import ukrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg"
 import meest from "../../../../assets/images/delivery/deliveryMeestMail.svg";
 import textFieldStyle from '../../../../common/textFieldStyle';
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../store/store.ts";
+import changeFavStatus from "../ChangeFavStatus.ts";
+import CreateCartItem from "../../../../models/Cart/CreateCartItem.ts";
 
 const Details: React.FC = () => {
-    const {t} = useTranslation();
     const {id} = useParams();
-    const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
+    const navigate = useNavigate();
+    const {t} = useTranslation();
+    const isAuthed = useSelector((store: RootState) => store.auth.isAuth);
 
     const [product, setProduct] = useState<ProductDto>();
     const [reviews, setReviews] = useState<PagedList<RatingDto>>();
@@ -75,6 +81,52 @@ const Details: React.FC = () => {
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
+
+    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
+
+    const handleFavClick = () => {
+        // TODO: add toast/other notification
+
+        changeFavStatus(product?.id ?? 0, isAuthed);
+        setIsFavorite(!isFavorite);
+    }
+
+    const handleBuyClick = async () => {
+        // TODO: add toast/other notification
+        if (isAuthed) {
+            const item: CreateCartItem = {
+                productPieceId: pieceId,
+                quantity: 1
+            }
+            const isInCart = (await http_common
+                .get<boolean>(`cart/contains/${id}`)
+            ).data
+            if (isInCart) {
+                http_common.delete(`cart/${id}`)
+                    .catch(e => console.error(e))
+            }
+            else {
+                http_common.post(`cart`, item, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    // TODO: add toast/other notification
+                    .catch(e => console.error(e))
+            }
+        } else {
+            const items = JSON.parse(localStorage.getItem('cart') ?? '[]');
+            if (items.includes(pieceId)) {
+                items.splice(items.indexOf(pieceId), 1);
+                console.info('Removed from local storage'); // todo: remove log
+            } else {
+                items.push(pieceId);
+                console.info('Added to local storage');
+            }
+            localStorage.setItem('cart', JSON.stringify(items));
+            console.info(JSON.parse(localStorage.getItem('cart') ?? '[]'));
+        }
+    }
 
     const handleChangeClick = (click: string) => {
         setClick(click);
@@ -195,7 +247,7 @@ const Details: React.FC = () => {
                                 </Typography>
 
                                 {product.volumes.length != 0 ?
-                                    <FormControl fullWidth sx={{...textFieldStyle}} >
+                                    <FormControl fullWidth sx={{...textFieldStyle}}>
                                         <Select
                                             sx={{width: '450px'}}
                                             value={pieceId}
@@ -216,13 +268,13 @@ const Details: React.FC = () => {
                                 <Stack
                                     spacing={1} sx={{width: '450px'}}
                                     style={{marginTop: '40px'}}>
-                                    <Button className="butFavorites">
+                                    <Button className="butFavorites" onClick={handleFavClick}>
                                         {t('details.addToFavorites')}
                                         <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
                                         {/* {t('details.addedToFavorites')}
                                 <FavoriteIcon style={{marginLeft: '10px'}}/> */}
                                     </Button>
-                                    <Button className="butBuy">{t('details.buy')}</Button>
+                                    <Button className="butBuy" onClick={handleBuyClick}>{t('details.buy')}</Button>
                                 </Stack>
                             </Stack>
                         </Stack>
@@ -269,7 +321,9 @@ const Details: React.FC = () => {
                     </Stack>
                 </Container>
             </>
-            : <>{/*TODO: Add spinner*/}</>
+            : <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
+                <CircularProgress color="inherit"/>
+            </Stack>
     );
 }
 

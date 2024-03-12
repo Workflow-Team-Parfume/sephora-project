@@ -68,6 +68,7 @@ export const newProducts: ProductDto[] = ([
         createdAt: new Date('23.02.2024'),
         isNew: true,
         characteristics: [],
+        isFavorite: false,
     },
     {
         id: 2,
@@ -91,6 +92,7 @@ export const newProducts: ProductDto[] = ([
         createdAt: new Date('23.02.2024'),
         isNew: true,
         characteristics: [],
+        isFavorite: false,
     },
     {
         id: 3,
@@ -114,6 +116,7 @@ export const newProducts: ProductDto[] = ([
         createdAt: new Date('23.02.2024'),
         isNew: true,
         characteristics: [],
+        isFavorite: false,
     },
     {
         id: 4,
@@ -137,6 +140,7 @@ export const newProducts: ProductDto[] = ([
         createdAt: new Date('23.02.2024'),
         isNew: true,
         characteristics: [],
+        isFavorite: false,
     }
 ]);
 

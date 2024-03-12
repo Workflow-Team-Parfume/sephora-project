@@ -114,7 +114,7 @@ const RegisterPage = () => {
             id: user.id,
             userName: user.userName,
             email: user.email,
-            profilePicture: user.profilePicture[0],
+            profilePicture: user.profilePicture,
             registrationDate: user.registrationDate,
             phoneNumber: user.phoneNumber,
             roles: user.roles,

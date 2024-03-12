@@ -26,15 +26,24 @@ import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost.ts
 import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup.tsx";
 import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
+import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
-import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
+import i18n from "./i18n/i18n.ts";
+import React from "react";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+    React.useEffect(() => {
+        const selectedLanguage = localStorage.getItem('selectedLanguage');
 
+        i18n.changeLanguage(selectedLanguage==null ? "uk" : selectedLanguage)
+            .catch(e => console.error(e));
+
+        localStorage.setItem('selectedLanguage', selectedLanguage==null?"uk":selectedLanguage);
+    },[])
     return (
         <>
             <Loader/>

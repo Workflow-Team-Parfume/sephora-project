@@ -14,6 +14,7 @@
 10. [Rating controller](#ratingcontroller)
 11. [Role controller](#rolecontroller)
 12. [Favorites controller](#favoritescontroller)
+13. [Search controller](#searchcontroller)
 
 ### AccountController
 
@@ -184,6 +185,12 @@
         * Requires authentication
         * Delete cart item by id
         * Returns: 200 OK
+* **contains/{productId}**
+    * productId: long
+    * ***GET***
+        * Requires authentication
+        * Check if product is in cart
+        * Returns: bool
 
 **[⬆ Back to CartController](#cartcontroller)**  
 **[⬆ Back to Table of Contents](#table-of-contents)**
@@ -468,6 +475,18 @@
         * Check if product is in favorites
         * Route params: long
         * Returns: bool
+
+**[⬆ Back to FavoritesController](#favoritescontroller)**
+**[⬆ Back to Table of Contents](#table-of-contents)**
+
+### SearchController
+* **/**
+    * ***GET***
+        * Search products
+        * q: string (search query)
+        * page: int
+        * count: int
+        * Returns: Paged list of products
 
 **[⬆ Back to Table of Contents](#table-of-contents)**
 **[⬆ Back to Top](#endpoints)**  

@@ -24,7 +24,7 @@ const routes = {
     deliveryMeestMail: '/deliveryMeestMail',
     deliveryByCourierInUkraine: '/deliveryByCourierInUkraine',
 
-    aboutUs: '/aboutUs',
+    aboutUs: '/about',
 
     admin: '/admin',
     adminCategoriesList: '/admin/category',

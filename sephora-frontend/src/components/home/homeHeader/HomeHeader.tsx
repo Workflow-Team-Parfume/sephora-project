@@ -3,34 +3,79 @@ import "./homeHeader.scss";
 import {
   Box,
   Button,
+<<<<<<< HEAD
   OutlinedInput,
   Stack,
+=======
+  Menu,
+  MenuItem,
+  OutlinedInput,
+  Stack,
+  Typography,
+>>>>>>> main
 } from "@mui/material";
 import logo from "../../../assets/images/Group.svg";
 import input_main_icon from "../../../assets/images/input_main_icon.svg";
 // import icon1 from "../../../assets/images/icon1.svg";
 import { useTranslation } from "react-i18next";
 import { Basket } from "../basket/Basket";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
+=======
+import { AuthUserActionType, IAuthUser } from "../../auth/types";
+import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+>>>>>>> main
 import routes from "../../../common/routes.ts";
 import LoginPage from "../../auth/login/LoginPage.tsx";
 
 const HomeHeader = () => {
+<<<<<<< HEAD
   const { t, i18n } = useTranslation();
 
 
 
 
+=======
+    const {t, i18n} = useTranslation();
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language)
+            .catch(e => console.error(e));
+        localStorage.setItem('selectedLanguage', language);
+    };
+
+  const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  const dispatch = useDispatch();
+
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+>>>>>>> main
 
   // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
   //   setAnchorElUser(event.currentTarget);
   // };
 
+<<<<<<< HEAD
 
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language).catch((e) => console.error(e));
   };
+=======
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const onLogoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    dispatch({ type: AuthUserActionType.LOGOUT_USER });
+    setAnchorElUser(null);
+  };
+
+
+>>>>>>> main
   const boxStyleHeader = {
     display: "flex",
     flexDirection: { xs: "column", sm: "row" },
@@ -104,6 +149,10 @@ const HomeHeader = () => {
               УКР
             </Button>
           </Box>
+<<<<<<< HEAD
+=======
+          {isAuth ? (
+>>>>>>> main
             <Box
             sx={{
               ...boxStyleHeader,
@@ -116,7 +165,47 @@ const HomeHeader = () => {
                         </Button> */}
             {Basket()}
           </Box>
+<<<<<<< HEAD
           
+=======
+          ) : (
+            <Box
+            sx={{
+              ...boxStyleHeader,
+              gap: 2,
+            }}
+          >
+            {LoginPage()}
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem
+                  key={"Profile"}
+                  href="/profile"
+                  onClick={handleCloseUserMenu}
+                >
+                  <Typography textAlign="center">{"Profile"}</Typography>
+                </MenuItem>
+                <MenuItem key={"Logout"} onClick={onLogoutHandler}>
+                  <Typography textAlign="center">{"Logout"}</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
+>>>>>>> main
         </Box>
       </Stack>
       <div className="mainNav">

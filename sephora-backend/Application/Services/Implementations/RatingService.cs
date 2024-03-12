@@ -13,7 +13,7 @@ public class RatingService(
                ErrorMessages.UserNotFound
            );
 
-    private static void CheckRating(int rate)
+    private static void CheckRating(decimal rate)
     {
         if (rate is < 1 or > 5)
             throw new ArgumentException(

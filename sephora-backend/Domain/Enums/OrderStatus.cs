@@ -5,7 +5,7 @@ public enum OrderStatus
     INDETERMINATE,
     PENDING,
     CANCELLED_BY_USER,
-    CANCELLED_BY_ADMIN,
+    CANCELLED_BY_SudoAdmin,
     CONFIRMED,
     DELIVERING,
     DELIVERED,

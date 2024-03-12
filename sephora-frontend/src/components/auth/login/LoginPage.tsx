@@ -201,7 +201,7 @@ const LoginPage = () => {
         handleSubmit,
       }) => (
         <div>
-          {isAuth ?(
+          {!isAuth ?(
 
             <Button onClick={handleOpen}>
             <img src={icon1} alt="" />

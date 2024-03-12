@@ -1,19 +1,15 @@
 import Typography from "@mui/material/Typography";
 import "./deliveryPages.scss";
 import { useTranslation } from "react-i18next";
-import { Button, Container, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import routes from "../../../../common/routes";
 
 const DeliveryFreeLuxuryHub = () => {
   const { t } = useTranslation();
 
   return (
-    <Container className="deliveryFontStyle"
+    <Stack className="deliveryFontStyle"
       sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "start",
         marginY: 15,
         marginX: "12%"
       }}
@@ -68,7 +64,7 @@ const DeliveryFreeLuxuryHub = () => {
         <Typography className="text">
           {t("deliveryFreeLuxuryHub_line14")}
         </Typography>
-    </Container>
+    </Stack>
   );
 };
 

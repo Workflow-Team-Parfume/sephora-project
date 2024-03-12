@@ -21,7 +21,12 @@ import routes from "../../../common/routes.ts";
 import LoginPage from "../../auth/login/LoginPage.tsx";
 
 const HomeHeader = () => {
-  const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language)
+            .catch(e => console.error(e));
+        localStorage.setItem('selectedLanguage', language);
+    };
 
   const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
   const dispatch = useDispatch();

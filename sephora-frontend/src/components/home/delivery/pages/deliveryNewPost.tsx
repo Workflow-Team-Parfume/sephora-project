@@ -1,4 +1,4 @@
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import './deliveryPages.scss';
 import { useTranslation } from "react-i18next";
 import routes from '../../../../common/routes';
@@ -9,12 +9,8 @@ const DeliveryNewPost = () => {
   const { t } = useTranslation();
   
   return (
-    <Container className="deliveryFontStyle"
+    <Stack className="deliveryFontStyle"
     sx={{
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "start",
       marginY: 15,
       marginX: "12%"
     }}
@@ -69,7 +65,7 @@ const DeliveryNewPost = () => {
         <Typography className="text">
           {t("deliveryNewPost_line11")}
         </Typography>
-  </Container>
+  </Stack>
   );
 }
 

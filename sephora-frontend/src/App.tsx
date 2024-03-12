@@ -31,10 +31,18 @@ import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPag
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
+import i18n from "./i18n/i18n.ts";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+    React.useEffect(() => {
+        const selectedLanguage = localStorage.getItem('selectedLanguage');
 
+        i18n.changeLanguage(selectedLanguage==null ? "uk" : selectedLanguage)
+            .catch(e => console.error(e));
+
+        localStorage.setItem('selectedLanguage', selectedLanguage==null?"uk":selectedLanguage);
+    },[])
     return (
         <>
             <Loader/>

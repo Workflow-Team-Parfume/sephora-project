@@ -118,50 +118,56 @@ const ProductsPage: React.FC<{
                     <Grid item lg={9}>
                         <Container style={{maxWidth: "100%", justifyContent: "center"}}>
                             <Typography className="title">{title}</Typography>
-                            <Stack sx={{alignItems: 'end'}}>
-                                <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                                        <Typography className='sortName'>
-                                            {t('sortBy.title')}
-                                            <span className="checked">
-                                                {t(order.key)}
-                                            </span>
-                                        </Typography>
-                                    </AccordionSummary>
-                                    <AccordionDetails sx={{p: "0", margin: "0 40px"}}>
-                                        <List component="div" role="list">
-                                            {Orders.map((value, i) => (
-                                                <ListItemButton
-                                                    key={i}
-                                                    role="listitem"
-                                                    onClick={handleToggle1(value)}
-                                                    sx={{p: "0"}}>
-                                                    <Typography className={
-                                                        order == value
-                                                            ? 'checked'
-                                                            : 'check'
-                                                    }>{t(value.key)}</Typography>
-                                                </ListItemButton>
-                                            ))}
-                                            {Directions.map((value, i) => (
-                                                <ListItemButton
-                                                    key={i}
-                                                    role="listitem"
-                                                    onClick={handleToggle2(value)}
-                                                    sx={{p: "0"}}>
-                                                    <Typography className={
-                                                        direction == value
-                                                            ? 'checked'
-                                                            : 'check'
-                                                    }>{t(value.key)}</Typography>
-                                                </ListItemButton>
-                                            ))}
-                                        </List>
-                                    </AccordionDetails>
-                                </Accordion>
-                            </Stack>
+                            <Container sx={{ height: '50px', mt: 5, position: "relative"}}>
+                                <Stack sx={{ position: "absolute",
+                                    top: 0,
+                                    right: 25,
+                                    zIndex: 1,}}
+                                >
+                                    <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                                            <Typography className='sortName'>
+                                                {t('sortBy.title')}
+                                                <span className="checked">
+                                                    {t(order.key)}
+                                                </span>
+                                            </Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails sx={{p: "0", margin: "0 40px"}}>
+                                            <List component="div" role="list">
+                                                {Orders.map((value, i) => (
+                                                    <ListItemButton
+                                                        key={i}
+                                                        role="listitem"
+                                                        onClick={handleToggle1(value)}
+                                                        sx={{p: "0"}}>
+                                                        <Typography className={
+                                                            order == value
+                                                                ? 'checked'
+                                                                : 'check'
+                                                        }>{t(value.key)}</Typography>
+                                                    </ListItemButton>
+                                                ))}
+                                                {Directions.map((value, i) => (
+                                                    <ListItemButton
+                                                        key={i}
+                                                        role="listitem"
+                                                        onClick={handleToggle2(value)}
+                                                        sx={{p: "0"}}>
+                                                        <Typography className={
+                                                            direction == value
+                                                                ? 'checked'
+                                                                : 'check'
+                                                        }>{t(value.key)}</Typography>
+                                                    </ListItemButton>
+                                                ))}
+                                            </List>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </Stack>
+                            </Container>
 
-                            <Container sx={{pt: 5, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
+                            <Container sx={{pt: 3, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                                 <Grid container spacing={2}>
                                     {products?.items.map((piece, i) => (
                                         <Grid key={i} item xs={12} sm={6} lg={4}>

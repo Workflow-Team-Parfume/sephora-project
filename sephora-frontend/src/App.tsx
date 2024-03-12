@@ -30,12 +30,21 @@ import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPag
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
+import i18n from "./i18n/i18n.ts";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-
     React.useEffect(() => {
-        console.log(localStorage.token);
+        const selectedLanguage = localStorage.getItem('selectedLanguage');
+
+        i18n.changeLanguage(selectedLanguage==null ? "uk" : selectedLanguage)
+            .catch(e => console.error(e));
+
+        localStorage.setItem('selectedLanguage', selectedLanguage==null?"uk":selectedLanguage);
+    },[])
+    React.useEffect(() => {
+        console.log(localStorage.token);;
+
 
         // if (localStorage.token) {
         //   const token = localStorage.token;

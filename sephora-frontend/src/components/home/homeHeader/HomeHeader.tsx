@@ -14,6 +14,7 @@ const HomeHeader = () => {
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language)
             .catch(e => console.error(e));
+        localStorage.setItem('selectedLanguage', language);
     };
     const boxStyleHeader = {
         display: "flex",

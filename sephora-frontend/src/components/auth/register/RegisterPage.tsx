@@ -1,16 +1,15 @@
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useState } from "react";
-import { Form, Formik } from "formik";
+import { ChangeEvent, useState } from "react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import {
+  Avatar,
   Box,
   Button,
   Container,
@@ -27,9 +26,17 @@ import "./RegisterPage.scss";
 import { useTranslation } from "react-i18next";
 import textFieldStyle from "../../../common/textFieldStyle";
 import PhoneMask from "../../../common/phoneMask";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import { PhotoCamera } from "@mui/icons-material";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [profilePic, setProfilePic] = useState('');
 
   const initialValues: IRegister = {
     firstName: "",
@@ -39,28 +46,14 @@ const RegisterPage = () => {
     password: "",
     passwordConfirmation: "",
     dateOfBirth: new Date(),
+    profilePicture: null,
+    userName: ""
   };
 
+  
   const registerSchema = Yup.object().shape({
-    userName: Yup.string()
-      .required("Name is required")
-      .min(3, "Name must be at least 3 characters")
-      .max(16, "Name must be at most 16 characters")
-      .test("checkUsername", "Name already exists", async (value) => {
-        if (isSubmit) {
-          setIsSubmit(false);
-          try {
-            const result = await http_common.get(
-              `Account/checkUsernameExists/${value}`
-            );
-            const { data } = result;
-            return !data;
-          } catch (error) {
-            console.error("Error during userName validation:", error);
-            return false;
-          }
-        } else return true;
-      }),
+    firstName: Yup.string().required("Firstname is required"),
+    lastName: Yup.string().required("Lastname required"),
     email: Yup.string()
       .required("Email is required")
       .email("Invalid email")
@@ -96,14 +89,17 @@ const RegisterPage = () => {
       .oneOf([Yup.ref("password")], "Passwords must match"),
   });
 
-  const navigate = useNavigate();
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const onHandleSubmit = async (values: IRegister) => {
     try {
+      values.userName = values.firstName + values.lastName;
+
       await registerSchema.validate(values);
-      await http_common.post("api/Users/register", values).then(async () => {
-        const result = await http_common.post("api/Users/login", {
+      await http_common.post("Account/register", values,
+        {headers: {
+          "Content-Type": "multipart/form-data",
+        }}).then(async () => {
+        const result = await http_common.post("Account/login", {
           email: values.email,
           password: values.password,
         });
@@ -118,7 +114,7 @@ const RegisterPage = () => {
             id: user.id,
             userName: user.userName,
             email: user.email,
-            profilePicture: user.profilePicture,
+            profilePicture: user.profilePicture[0],
             registrationDate: user.registrationDate,
             phoneNumber: user.phoneNumber,
             roles: user.roles,
@@ -145,6 +141,25 @@ const RegisterPage = () => {
 
   const { t } = useTranslation();
 
+  const handleProfilePicChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const file = files[0];
+      if (file) {
+        //Перевірка на тип обраного файлу - допустимий тип jpeg, png, gif
+        const allowedTypes = [
+          "image/jpeg",
+          "image/jpg",
+          "image/png",
+        ];
+        if (!allowedTypes.includes(file.type)) {
+          alert("Не допустимий тип файлу");
+          return;
+        }
+        setProfilePic(URL.createObjectURL(file));
+      }
+    }
+  };
   return (
     <Formik
       initialValues={initialValues}
@@ -153,11 +168,12 @@ const RegisterPage = () => {
     >
       {({
         values,
-        // errors,
-        // touched,
+        errors,
+        touched,
         handleChange,
-        // handleBlur,
+        handleBlur,
         handleSubmit,
+        setFieldValue
       }) => (
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -172,52 +188,87 @@ const RegisterPage = () => {
             <Typography component="h1" variant="h3">
               {t("registration")}
             </Typography>
-            <Form onSubmit={handleSubmit}>
-              <Box sx={{ mt: 5 }}>
+            <Box sx={{ mt: 5 }}>
+              <Form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
+                <Grid item xs={12} style={{ textAlign: 'center' }}>
+                  <input
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    id="profile-pic"
+                    type="file"
+                    onChange={(event) => {handleProfilePicChange(event); setFieldValue("profilePicture", event.target.files?.item(0));}}
+                  />
+                  <label htmlFor="profile-pic">
+                    <IconButton color="primary" aria-label="upload picture" component="span">
+                      <PhotoCamera />
+                    </IconButton>
+                  </label>
+                  {profilePic && (
+                    <Box mt={2} textAlign="center">
+                      <Avatar src={profilePic} sx={{ width: 56, height: 56, margin: 'auto' }} />
+                    </Box>
+                  )}
+                </Grid>
+
                   <FormControl
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <TextField
-                      required
+                    <Field
+                      as={TextField}
+                      margin="normal"
                       fullWidth
-                      id="username"
+                      id="firstName"
                       label={t("name")}
-                      name="username"
-                      onChange={handleChange}
-                      value={values.firstName}
+                      name="firstName"
                       autoComplete="username"
-                    />
-                  </FormControl>
-                  <FormControl
-                    sx={{ ...textFieldStyle, m: 1, width: "670px" }}
-                    variant="outlined"
-                  >
-                    <TextField
-                      required
-                      fullWidth
-                      id="surname"
-                      label={t("surname")}
-                      name="surname"
+                      autoFocus
+                      error={touched.firstName && !!errors.firstName}
+                      helperText={<ErrorMessage name="firstName" />}
+                      value={values.firstName}
                       onChange={handleChange}
-                      value={values.lastName}
-                      autoComplete="surname"
+                      onBlur={handleBlur}
                     />
                   </FormControl>
                   <FormControl
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <TextField
-                      required
+                    <Field
+                      as={TextField}
+                      margin="normal"
+                      fullWidth
+                      id="lastName"
+                      label={t("surname")}
+                      name="lastName"
+                      autoComplete="lastName"
+                      autoFocus
+                      error={touched.lastName && !!errors.lastName}
+                      helperText={<ErrorMessage name="lastName" />}
+                      value={values.lastName}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </FormControl>
+                  <FormControl
+                    sx={{ ...textFieldStyle, m: 1, width: "670px" }}
+                    variant="outlined"
+                  >
+                    <Field
+                      as={TextField}
+                      margin="normal"
                       fullWidth
                       id="phoneNumber"
                       label={t("phone")}
                       name="phoneNumber"
-                      onChange={handleChange}
-                      value={values.phoneNumber}
                       autoComplete="tel"
+                      autoFocus
+                      error={touched.phoneNumber && !!errors.phoneNumber}
+                      helperText={<ErrorMessage name="phoneNumber" />}
+                      value={values.phoneNumber}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       InputProps={{
                         inputComponent: PhoneMask as any,
                       }}
@@ -227,85 +278,119 @@ const RegisterPage = () => {
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <TextField
-                      required
-                      fullWidth
-                      name="date"
-                      label=""
-                      type="date" // Changed from "data" to "date"
-                      id="date"
-                      onChange={handleChange}
-                      value={values.dateOfBirth}
-                      autoComplete="date" // Changed from "data" to "date"
-                    />
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Field
+                        as={DatePicker}
+                        margin="normal"
+                        fullWidth
+                        id="dateOfBirth"
+                        label={t("date")}
+                        name="dateOfBirth"
+                        autoComplete="dateOfBirth"
+                        autoFocus
+                        error={touched.dateOfBirth && !!errors.dateOfBirth}
+                        helperText={<ErrorMessage name="dateOfBirth" />}
+                        onChange={handleChange}
+                        value={dayjs(values.dateOfBirth)}
+                        onBlur={handleBlur}
+                      />
+                    </LocalizationProvider>
                   </FormControl>
                   <FormControl
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <TextField
-                      required
+                    <Field
+                      as={TextField}
+                      margin="normal"
                       fullWidth
                       id="email"
-                      label="E-mail"
+                      label={t("email")}
                       name="email"
-                      onChange={handleChange}
-                      value={values.email}
                       autoComplete="email"
+                      autoFocus
+                      error={touched.email && !!errors.email}
+                      helperText={<ErrorMessage name="email" />}
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormControl>
                   <FormControl
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      {t("password")}*
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
+                    <Field
+                      as={TextField}
+                      id="password"
                       type={showPassword ? "text" : "password"}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onChange={handleChange}
-                            onMouseDown={handleMouseDownPassword}
-                            value={values.password}
-                            edge="end"
-                          >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
+                      name="password"
+                      error={touched.password && !!errors.password}
+                      helperText={<ErrorMessage name="password" />}
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                       label="Password"
+                      variant="outlined"
+                      fullWidth
                     />
                   </FormControl>
                   <FormControl
                     sx={{ ...textFieldStyle, m: 1, width: "670px" }}
                     variant="outlined"
                   >
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      {t("registerPassConfirm")}
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
+                    <Field
+                      as={TextField}
+                      id="passwordConfirmation"
                       type={showPassword2 ? "text" : "password"}
-                      // value={values.password}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword2}
-                            onChange={handleChange}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword2 ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
+                      name="passwordConfirmation"
+                      error={
+                        touched.passwordConfirmation &&
+                        !!errors.passwordConfirmation
                       }
+                      helperText={<ErrorMessage name="password" />}
+                      value={values.passwordConfirmation}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword2}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {showPassword2 ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                       label={t("registerPassConfirm")}
+                      variant="outlined"
+                      fullWidth
                     />
                   </FormControl>
                   <Button
@@ -313,6 +398,9 @@ const RegisterPage = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
+                    onClick={() => {
+                      setIsSubmit(true);
+                    }}
                     sx={{
                       mt: 5,
                       mb: 5,
@@ -322,8 +410,8 @@ const RegisterPage = () => {
                     {t("registerBtn")}
                   </Button>
                 </Grid>
-              </Box>
-            </Form>
+              </Form>
+            </Box>
           </Box>
         </Container>
       )}
@@ -331,3 +419,4 @@ const RegisterPage = () => {
   );
 };
 export default RegisterPage;
+

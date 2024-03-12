@@ -104,6 +104,7 @@ public class AccountsService(
         string? pfp = dto.ProfilePicture is null
             ? null
             : await pictureService.SaveImage(dto.ProfilePicture);
+
         var user = mapper.Map<UserEntity>(dto);
         user.ProfilePicture = pfp;
 

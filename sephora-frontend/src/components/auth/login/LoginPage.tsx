@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Button,
@@ -9,12 +9,14 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Menu,
+  MenuItem,
   Modal,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import { AuthUserActionType, IUser, ILogin } from "../types";
+import { AuthUserActionType, IUser, ILogin, IAuthUser } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
 import "./LoginPage.scss";
@@ -35,7 +37,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "55%",
+  width: "52,5%",
   height: "75%",
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -48,8 +50,25 @@ const LoginPage = () => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = React.useState(false);
-
+  const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const onLogoutHandler = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    dispatch({ type: AuthUserActionType.LOGOUT_USER });
+    setAnchorElUser(null);
+  };
 
   const initialValues: ILogin = {
     email: "",
@@ -182,9 +201,45 @@ const LoginPage = () => {
         handleSubmit,
       }) => (
         <div>
-          <Button onClick={handleOpen}>
+          {isAuth ?(
+
+            <Button onClick={handleOpen}>
             <img src={icon1} alt="" />
           </Button>
+            ) : (<>
+              <Button onClick={handleOpenUserMenu}>
+              <img src={icon1} alt="" />
+            </Button>
+              
+              <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+                >
+                <MenuItem
+                  key={"Profile"}
+                  href="/profile"
+                  onClick={handleCloseUserMenu}
+                  >
+                  <Typography textAlign="center">{"Profile"}</Typography>
+                </MenuItem>
+                <MenuItem key={"Logout"} onClick={onLogoutHandler}>
+                  <Typography textAlign="center">{"Logout"}</Typography>
+                </MenuItem>
+              </Menu>
+                    </>
+                    )}
           <Modal
             open={open}
             onClose={handleClose}

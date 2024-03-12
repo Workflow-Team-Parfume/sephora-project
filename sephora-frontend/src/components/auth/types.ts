@@ -27,6 +27,7 @@ export enum AuthUserActionType {
     user?: IUser;
   }
 export interface IRegister {
+    userName: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -34,6 +35,7 @@ export interface IRegister {
     phoneNumber: string;
     password: string;
     passwordConfirmation: string;
+    profilePicture: File | null;
   }
   
   export interface ILogin {

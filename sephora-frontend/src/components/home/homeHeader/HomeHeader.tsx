@@ -3,47 +3,30 @@ import "./homeHeader.scss";
 import {
   Box,
   Button,
-  Menu,
-  MenuItem,
   OutlinedInput,
   Stack,
-  Typography,
 } from "@mui/material";
 import logo from "../../../assets/images/Group.svg";
 import input_main_icon from "../../../assets/images/input_main_icon.svg";
 // import icon1 from "../../../assets/images/icon1.svg";
 import { useTranslation } from "react-i18next";
 import { Basket } from "../basket/Basket";
-import { AuthUserActionType, IAuthUser } from "../../auth/types";
-import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import { useDispatch } from "react-redux";
 import routes from "../../../common/routes.ts";
 import LoginPage from "../../auth/login/LoginPage.tsx";
 
 const HomeHeader = () => {
   const { t, i18n } = useTranslation();
 
-  const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-  const dispatch = useDispatch();
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+
+
 
   // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
   //   setAnchorElUser(event.currentTarget);
   // };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
-  const onLogoutHandler = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("access_token");
-    dispatch({ type: AuthUserActionType.LOGOUT_USER });
-    setAnchorElUser(null);
-  };
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language).catch((e) => console.error(e));
@@ -121,7 +104,6 @@ const HomeHeader = () => {
               УКР
             </Button>
           </Box>
-          {isAuth ? (
             <Box
             sx={{
               ...boxStyleHeader,
@@ -134,43 +116,7 @@ const HomeHeader = () => {
                         </Button> */}
             {Basket()}
           </Box>
-          ) : (
-            <Box
-            sx={{
-              ...boxStyleHeader,
-              gap: 2,
-            }}
-          >
-            {LoginPage()}
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem
-                  key={"Profile"}
-                  href="/profile"
-                  onClick={handleCloseUserMenu}
-                >
-                  <Typography textAlign="center">{"Profile"}</Typography>
-                </MenuItem>
-                <MenuItem key={"Logout"} onClick={onLogoutHandler}>
-                  <Typography textAlign="center">{"Logout"}</Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-          )}
+          
         </Box>
       </Stack>
       <div className="mainNav">

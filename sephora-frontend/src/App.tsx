@@ -26,7 +26,6 @@ import DeliveryNewPost from "./components/home/delivery/pages/deliveryNewPost.ts
 import DeliveryPickup from "./components/home/delivery/pages/deliveryPickup.tsx";
 import DeliveryUkrPoshta from "./components/home/delivery/pages/deliveryUkrPoshta.tsx";
 import CarePage from "./components/home/productsPage/envelopes/CarePage.tsx";
-import CatalogPage from "./components/home/productsPage/envelopes/CatalogPage.tsx";
 import FullSizedPage from "./components/home/productsPage/envelopes/FullSizedPage.tsx";
 import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPage.tsx";
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";

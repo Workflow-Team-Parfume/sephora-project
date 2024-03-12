@@ -32,6 +32,7 @@ import NoveltiesPage from "./components/home/productsPage/envelopes/NoveltiesPag
 import BottledPage from "./components/home/productsPage/envelopes/BottledPage.tsx";
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 import i18n from "./i18n/i18n.ts";
+import React from "react";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);

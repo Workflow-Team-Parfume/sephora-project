@@ -61,6 +61,7 @@ public class ApplicationProfile : Profile
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
+
         CreateMap<UserEntity, GetUserDto>()
             .ForMember(
                 dest => dest.ProfilePicture,
@@ -68,6 +69,7 @@ public class ApplicationProfile : Profile
                     ? new PictureDto(src.ProfilePicture, EnvName == "Development")
                     : null
                 ));
+
         CreateMap<RegisterDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
 

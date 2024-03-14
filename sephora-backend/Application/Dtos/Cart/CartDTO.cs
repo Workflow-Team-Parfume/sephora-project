@@ -26,6 +26,8 @@ public class CartDto
     
     public string CategoryNameUa { get; set; } = String.Empty;
 
+    public int Milliliters { get; set; }
+
     public decimal Price { get; set; }
 
     public decimal? Discount { get; set; }

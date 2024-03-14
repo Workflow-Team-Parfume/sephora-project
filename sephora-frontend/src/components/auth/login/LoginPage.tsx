@@ -31,9 +31,10 @@ import { useGoogleLogin } from "@react-oauth/google";
 import textFieldStyle from "../../../common/textFieldStyle";
 import routes from "../../../common/routes";
 import icon1 from "../../../assets/images/icon1.svg";
+import {RootState} from "../../../store/store.ts";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute" as const,
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -50,7 +51,7 @@ const LoginPage = () => {
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = React.useState(false);
-  const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+  const { isAuth } = useSelector((store: RootState) => store.auth as IAuthUser);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -125,14 +126,14 @@ const LoginPage = () => {
         },
       });
       handleClose();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error during login:", error);
         alert("An error occurred. Please try again later.");
     }
   };
 
   const loginWithGoogle = useGoogleLogin({
-    onSuccess: (codeResponse: any) => {
+    onSuccess: (codeResponse) => {
       axios
         .get(
           `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`,

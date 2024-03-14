@@ -5,11 +5,11 @@ import {useTranslation} from "react-i18next";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import i18n from "i18next";
 import routes from "../../../../common/routes.ts";
+import CartItem from "../../../../models/Cart/CartItem.ts";
 
-const BasketProduct: React.FC<{ piece: ProductPieceDto }>
+const BasketProduct: React.FC<{ piece: CartItem }>
     = ({piece}) => {
     const {t} = useTranslation();
 
@@ -24,20 +24,20 @@ const BasketProduct: React.FC<{ piece: ProductPieceDto }>
                 <Stack spacing={2} direction='row'>
                     <Stack width='80px' alignItems='center'>
                         <img className="productImg"
-                             src={piece.pictures[0].url ?? routes.picPlaceholder}
+                             src={piece.productImage ?? routes.picPlaceholder}
                              alt="Product image"/>
                     </Stack>
 
                     <Stack justifyContent='space-between'>
                         <Typography className="productName">
-                            {piece.product.name}
+                            {piece.productName}
                         </Typography>
                         <Stack>
                             <Typography className="productCategory">
                                 {
                                     i18n.language === "en"
-                                        ? piece.product.category.nameEn
-                                        : piece.product.category.nameUa
+                                        ? piece.categoryNameEn
+                                        : piece.categoryNameUa
                                 }
                             </Typography>
                             <Typography className="productCategory">

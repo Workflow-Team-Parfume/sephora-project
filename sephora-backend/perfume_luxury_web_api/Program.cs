@@ -24,18 +24,20 @@ builder.Services.AddControllers().AddNewtonsoftJson(opts =>
 JwtOptions? opts = null;
 if (builder.Environment.IsDevelopment())
     opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
-else if (!builder.Environment.IsDevelopment() || opts is null)
+if (!builder.Environment.IsDevelopment() || opts is null)
     opts = new JwtOptions
     {
         Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
         Key = Environment.GetEnvironmentVariable("JwtKey"),
         Lifetime = Convert.ToInt32(
             Environment.GetEnvironmentVariable("JwtLifetime")
-        )
+        ),
+        GoogleClientId = Environment.GetEnvironmentVariable("GoogleClientId"),
+        GoogleClientSecret = Environment.GetEnvironmentVariable("GoogleClientSecret")
     };
-builder.Services.AddJwt(opts!);
+builder.Services.AddJwt(opts);
 
-builder.Services.SwagerConfig();
+builder.Services.SwaggerConfig();
 
 builder.Services.NewtonsoftJsonConfig();
 

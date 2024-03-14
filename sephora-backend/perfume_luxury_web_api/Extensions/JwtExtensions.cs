@@ -12,44 +12,57 @@ public static class JwtExtensions
     {
         if (!jwtOpts.AreValid)
             throw new SecurityException("Invalid JWT options provided");
-
+        
+        // https://medium.com/c-sharp-progarmming/asp-net-core-google-authentication-4c0aa8feebbc
         services.AddAuthentication(
-        CertificateAuthenticationDefaults.AuthenticationScheme)
-        .AddCertificate();
+                CertificateAuthenticationDefaults.AuthenticationScheme
+            )
+            .AddCertificate()
+            .AddGoogle(options =>
+            {
+                options.ClientId = jwtOpts.GoogleClientId 
+                    ?? throw new ApplicationException("Google client ID is null");
+                options.ClientSecret = jwtOpts.GoogleClientSecret
+                    ?? throw new ApplicationException("Google client secret is null");
+            });
 
         services.AddAuthentication(options =>
-        {
-
-            options.DefaultAuthenticateScheme
-                = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme
-                = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultScheme
-                = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(o =>
-        {
-            o.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtOpts.Issuer,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtOpts.Key ?? String.Empty)),
-                ClockSkew = TimeSpan.Zero
-            };
-        });
-    }
-        public static void SwagerConfig(this IServiceCollection services)
-        {
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                options.DefaultAuthenticateScheme
+                    = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme
+                    = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme
+                    = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
                 {
-                    Title = "AdsPlatform",
-                    Version = "v1"
-                });
-                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtOpts.Issuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtOpts.Key ?? String.Empty)),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+    }
+
+    public static void SwaggerConfig(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "AdsPlatform",
+                Version = "v1"
+            });
+            c.AddSecurityDefinition(
+                JwtBearerDefaults.AuthenticationScheme,
+                new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
                     Description = "Please enter JWT with Bearer into field",
@@ -62,27 +75,29 @@ public static class JwtExtensions
                         Id = JwtBearerDefaults.AuthenticationScheme
                     }
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
                 {
+                    new OpenApiSecurityScheme
                     {
-                        new OpenApiSecurityScheme
+                        Reference = new OpenApiReference
                         {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = JwtBearerDefaults.AuthenticationScheme
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
+                            Type = ReferenceType.SecurityScheme,
+                            Id = JwtBearerDefaults.AuthenticationScheme
+                        }
+                    },
+                    Array.Empty<string>()
+                }
             });
-        }
-        public static void NewtonsoftJsonConfig(this IServiceCollection services)
-        {
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        });
+    }
+
+    public static void NewtonsoftJsonConfig(this IServiceCollection services)
+    {
+        services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling
+                    = ReferenceLoopHandling.Ignore
             );
-        }
+    }
 }

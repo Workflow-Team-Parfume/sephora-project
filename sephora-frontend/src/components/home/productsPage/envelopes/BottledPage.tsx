@@ -1,8 +1,8 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 import ProductsPage from "../core/ProductsPage.tsx";
-import {Filter, Filters} from "../../data.ts";
 import routes from "../../../../common/routes.ts";
+import { BottlePageFilter, BottlePageFilters } from "../../data.ts";
 
 const BottledPage: React.FC = () => {
     const {t} = useTranslation();
@@ -10,8 +10,8 @@ const BottledPage: React.FC = () => {
         defaultOrder={null}
         defaultDirection={null}
         title={t('header.bottled')}
-        filters={Filters}
-        mainFilter={Filter}
+        filters={BottlePageFilters}
+        mainFilter={BottlePageFilter}
         link={routes.api.bottled}
         navigateLink={routes.bottled}/>;
 };

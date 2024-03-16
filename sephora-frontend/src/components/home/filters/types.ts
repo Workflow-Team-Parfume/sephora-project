@@ -1,4 +1,9 @@
 export interface IFilter{
-    name: string;
-    filters: string[];
+    nameUa: string;
+    nameEn: string;
+    filters: filter[];
+}
+interface filter{
+    nameUa: string;
+    nameEn: string;
 }

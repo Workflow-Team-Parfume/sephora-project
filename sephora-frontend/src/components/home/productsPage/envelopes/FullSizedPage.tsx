@@ -1,8 +1,8 @@
 import React from "react";
 import ProductsPage from "../core/ProductsPage.tsx";
-import {Filter, Filters} from "../../data.ts";
 import routes from "../../../../common/routes.ts";
 import {useTranslation} from "react-i18next";
+import { FullSizedPageFilter, FullSizedPageFilters } from "../../data.ts";
 
 const FullSizedPage : React.FC = () => {
     const {t} = useTranslation();
@@ -10,8 +10,8 @@ const FullSizedPage : React.FC = () => {
         defaultOrder={null}
         defaultDirection={null}
         title={t('header.fullSizePerfume')}
-        filters={Filters}
-        mainFilter={Filter}
+        filters={FullSizedPageFilters}
+        mainFilter={FullSizedPageFilter}
         link={routes.api.full_sized}
         navigateLink={routes.full_sized}/>;
 };

@@ -7,8 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {IFilter} from './types';
 import {Checkbox, List, ListItemButton, ListItemIcon} from '@mui/material';
-
 import './filter.scss'
+import i18n from '../../../i18n/i18n';
 
 const Filter: React.FC<{ expanded: string | false, handleChange: any, filter: IFilter }>
     = ({expanded, handleChange, filter}) => {
@@ -28,33 +28,43 @@ const Filter: React.FC<{ expanded: string | false, handleChange: any, filter: IF
         setChecked(newChecked);
     };
     return (
-        <Accordion className='filter' expanded={expanded === filter.name} onChange={handleChange(filter.name)}
+        <Accordion className='filter' expanded={expanded === filter.nameEn} onChange={handleChange(filter.nameEn)}
                    sx={{boxShadow: 'none'}}>
             <AccordionSummary
-                expandIcon={expanded === filter.name ? <RemoveIcon/> : <AddIcon/>}
+                expandIcon={expanded === filter.nameEn ? <RemoveIcon/> : <AddIcon/>}
             >
                 <Typography className='filterName'>
-                    {filter.name}
+                    {
+                        i18n.language === "en"
+                        ? filter.nameEn
+                        : filter.nameUa
+                    }
                 </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{p: "0", margin: "0"}}>
                 <List dense component="div" role="list">
                     {filter.filters.map((value) => (
                         <ListItemButton
-                            key={value}
+                            key={value.nameEn}
                             role="listitem"
-                            onClick={handleToggle(value)}
+                            onClick={handleToggle(value.nameEn)}
                             sx={{p: "0"}}
                         >
                             <ListItemIcon
                                 sx={{minWidth: "0"}}>
                                 <Checkbox
-                                    checked={checked.indexOf(value) !== -1}
+                                    checked={checked.indexOf(value.nameEn) !== -1}
                                     tabIndex={-1}
                                     disableRipple
                                 />
                             </ListItemIcon>
-                            <Typography className='filterText'>{value}</Typography>
+                            <Typography className='filterText'>
+                                {
+                                    i18n.language === "en"
+                                    ? value.nameEn
+                                    : value.nameUa
+                                }
+                            </Typography>
                         </ListItemButton>
                     ))}
                 </List>

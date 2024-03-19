@@ -1,13 +1,20 @@
-﻿namespace CleanArchitecture.Application.Services.Implementations;
+﻿using Google.Apis.Auth;
+
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,
     SignInManager<UserEntity> signInManager,
     IJwtService jwtService,
     IPictureService pictureService,
-    IMapper mapper)
+    IMapper mapper,
+    IConfiguration configuration
+)
     : IAccountsService
 {
+    private static string? EnvName =>
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
     public IQueryable<GetUserDto> Get()
         => userManager.Users
             .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
@@ -83,6 +90,41 @@ public class AccountsService(
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))
         };
+    }
+
+    public async Task<LoginResponseDto> GoogleAuth(string token)
+    {
+        bool isDev = EnvName == "Development";
+        var settings = new GoogleJsonWebSignature.ValidationSettings
+        {
+            Audience =
+            [   // Google Client ID
+                isDev
+                    ? configuration["JwtOptions:GoogleClientId"]
+                    : Environment.GetEnvironmentVariable("GoogleClientId")
+            ]
+        };
+        
+
+        GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
+        // return new LoginResponseDto
+        // {
+        //     Token = jwtService.CreateToken(
+        //         [
+        //             new Claim(ClaimTypes.Email, payload.Email),
+        //             new Claim(ClaimTypes.Name, payload.Name),
+        //             new Claim(ClaimTypes.Uri, payload.Picture),
+        //             new Claim(ClaimTypes.NameIdentifier, payload.Subject),
+        //             new Claim(ClaimTypes.Role, "User"),
+        //             new Claim(ClaimTypes.Authentication, "Google"),
+        //             new Claim(ClaimTypes.Expiration, payload.ExpirationTimeSeconds?.ToString() ?? "0"),
+        //             new Claim(ClaimTypes.GivenName, payload.GivenName),
+        //             new Claim(ClaimTypes.Surname, payload.FamilyName),
+        //             new Claim(ClaimTypes.Locality, payload.Locale),
+        //         ]
+        //     ),
+        // };
+        return null!;
     }
 
     public async Task Logout()

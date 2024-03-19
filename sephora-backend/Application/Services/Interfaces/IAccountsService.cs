@@ -13,6 +13,7 @@ public interface IAccountsService
 
     Task<GetUserDto> Get(string id);
     Task<LoginResponseDto> Login(LoginDto dto);
+    Task<LoginResponseDto> GoogleAuth(string token);
     Task Register(RegisterDto dto);
     Task Logout();
     Task Delete(string id);

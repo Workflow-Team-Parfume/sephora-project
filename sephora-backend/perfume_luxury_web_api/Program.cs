@@ -53,7 +53,7 @@ builder.Services.AddIdentity();
 builder.Services.AddRepository();
 
 // add custom services
-builder.Services.AddCustomServices();
+builder.Services.AddCustomServices(opts);
 
 // add auto mapper
 builder.Services.AddAutoMapper();
@@ -92,10 +92,8 @@ app.UseCors(options =>
     options.AllowAnyOrigin();
 });
 
-app.UseAuthorization();
-
 app.UseAuthentication();
-
+app.UseAuthorization();
 
 app.MapControllers();
 

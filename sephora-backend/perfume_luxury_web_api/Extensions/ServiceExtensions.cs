@@ -41,10 +41,12 @@ public static class ServiceExtensions
         });
     }
 
-    public static void AddCustomServices(this IServiceCollection services)
+    public static void AddCustomServices(this IServiceCollection services, JwtOptions opts)
     {
         services.AddScoped<IAccountsService, AccountsService>();
-        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IJwtService, JwtService>(
+            o => new JwtService(o.GetRequiredService<UserManager<UserEntity>>(), opts)
+            );
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IBrandService, BrandService>();
         services.AddScoped<IAmountService, AmountService>();

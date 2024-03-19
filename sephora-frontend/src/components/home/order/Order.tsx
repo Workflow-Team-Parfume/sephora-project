@@ -9,12 +9,13 @@ import ProductPieceDto from "../../../models/piece/ProductPieceDto"
 import { CalculateProductTotal } from "../../../common/calculateTotal";
 import { useSelector } from "react-redux";
 import { IAuthUser } from "../../auth/types";
+import {RootState} from "../../../store/store.ts";
 
 
 const Order = () => {
     const {t} = useTranslation();
     const pieces:ProductPieceDto[] = newPieces;
-    const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+    const { isAuth } = useSelector((store: RootState) => store.auth as IAuthUser);
 
     const total: number = CalculateProductTotal(pieces);
     const discount = 0;

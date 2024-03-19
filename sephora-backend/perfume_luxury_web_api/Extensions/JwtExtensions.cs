@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.OpenApi.Models;
-
-namespace perfume_luxury_web_api.Extensions;
+﻿namespace perfume_luxury_web_api.Extensions;
 
 public static class JwtExtensions
 {
@@ -12,19 +9,11 @@ public static class JwtExtensions
     {
         if (!jwtOpts.AreValid)
             throw new SecurityException("Invalid JWT options provided");
-        
+
         // https://medium.com/c-sharp-progarmming/asp-net-core-google-authentication-4c0aa8feebbc
         services.AddAuthentication(
-                CertificateAuthenticationDefaults.AuthenticationScheme
-            )
-            .AddCertificate()
-            .AddGoogle(options =>
-            {
-                options.ClientId = jwtOpts.GoogleClientId 
-                    ?? throw new ApplicationException("Google client ID is null");
-                options.ClientSecret = jwtOpts.GoogleClientSecret
-                    ?? throw new ApplicationException("Google client secret is null");
-            });
+            CertificateAuthenticationDefaults.AuthenticationScheme
+        ).AddCertificate();
 
         services.AddAuthentication(options =>
             {
@@ -37,6 +26,8 @@ public static class JwtExtensions
             })
             .AddJwtBearer(o =>
             {
+                o.SaveToken = true;
+                o.RequireHttpsMetadata = false;
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -49,6 +40,13 @@ public static class JwtExtensions
                     ClockSkew = TimeSpan.Zero
                 };
             });
+        // .AddGoogle(options =>
+        // {
+        //     options.ClientId = jwtOpts.GoogleClientId
+        //                        ?? throw new ApplicationException("Google client ID is null");
+        //     options.ClientSecret = jwtOpts.GoogleClientSecret
+        //                            ?? throw new ApplicationException("Google client secret is null");
+        // });
     }
 
     public static void SwaggerConfig(this IServiceCollection services)

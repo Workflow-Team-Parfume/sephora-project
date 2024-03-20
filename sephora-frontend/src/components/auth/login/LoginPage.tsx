@@ -202,19 +202,18 @@ const LoginPage = () => {
       }) => (
         <div>
           {!isAuth ?(
-
             <Button onClick={handleOpen}>
-            <img src={icon1} alt="" />
-          </Button>
-            ) : (<>
-              <Button onClick={handleOpenUserMenu}>
               <img src={icon1} alt="" />
             </Button>
+            ) : (<>
+              <Button onClick={handleOpenUserMenu}>
+                <img src={icon1} alt="" />
+              </Button>
               
               <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
@@ -226,20 +225,25 @@ const LoginPage = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
-                >
+              >
                 <MenuItem
                   key={"Profile"}
-                  href="/profile"
                   onClick={handleCloseUserMenu}
+                >
+                  <Button
+                    href={routes.profile}
+                    className="text"
+                    sx={{justifyContent:'start'}}
                   >
-                  <Typography textAlign="center">{"Profile"}</Typography>
+                    {t('profile')}
+                  </Button>
                 </MenuItem>
-                <MenuItem key={"Logout"} onClick={onLogoutHandler}>
-                  <Typography textAlign="center">{"Logout"}</Typography>
+                <MenuItem key={"Logout"} onClick={onLogoutHandler} sx={{justifyContent:'start'}}>
+                  <Typography textAlign="center" className="text">{t('logout')}</Typography>
                 </MenuItem>
               </Menu>
-                    </>
-                    )}
+                </>
+                )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -346,12 +350,13 @@ const LoginPage = () => {
                           </InputAdornment>
                         ),
                       }}
-                      label="Password"
+                      label={t('password')}
                       variant="outlined"
                       fullWidth
                     />
                   </FormControl>
                   <Button
+                    disableTouchRipple
                     className="registationButton"
                     type="submit"
                     sx={{ mt: 3, mb: 2, alignItems: "center",}}

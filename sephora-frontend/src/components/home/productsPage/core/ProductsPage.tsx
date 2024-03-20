@@ -24,6 +24,8 @@ import http_common from "../../../../http_common.ts";
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
 import SortingOrder, {Directions, Orders} from "./SortingOrder.ts";
 import routes from "../../../../common/routes.ts";
+import i18n from "../../../../i18n/i18n.ts";
+import "./productsPage.scss";
 
 const itemsPerPage = 9;
 
@@ -107,10 +109,18 @@ const ProductsPage: React.FC<{
                     <Grid item lg={3}>
                         <Stack className='filter' spacing={2.5} sx={{padding: '0 16px'}}>
                             <Typography className='filterName'>
-                                {mainFilter.name}
+                                {
+                                    i18n.language === "en"
+                                        ? mainFilter.nameEn
+                                        : mainFilter.nameUa
+                                }
                             </Typography>
                             {mainFilter.filters.map((filter, i) => (
-                                <Typography key={i} className='filterText'>{filter}</Typography>
+                                <Button key={i} className='filterText'>
+                                    {i18n.language === "en"
+                                        ? filter.nameEn
+                                        : filter.nameUa}
+                                </Button>
                             ))}
                         </Stack>
                         <Filters filters={filters}/>

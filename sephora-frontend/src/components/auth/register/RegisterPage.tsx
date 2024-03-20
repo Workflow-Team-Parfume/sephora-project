@@ -13,7 +13,6 @@ import {
   Box,
   Button,
   Container,
-  CssBaseline,
   Grid,
   TextField,
   Typography,
@@ -176,7 +175,6 @@ const RegisterPage = () => {
         setFieldValue
       }) => (
         <Container component="main" maxWidth="xs">
-          <CssBaseline />
           <Box
             sx={{
               marginTop: 5,
@@ -190,7 +188,7 @@ const RegisterPage = () => {
             </Typography>
             <Box sx={{ mt: 5 }}>
               <Form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} justifyContent='center'>
                 <Grid item xs={12} style={{ textAlign: 'center' }}>
                   <input
                     accept="image/*"
@@ -223,6 +221,7 @@ const RegisterPage = () => {
                       label={t("name")}
                       name="firstName"
                       autoComplete="username"
+                      required
                       autoFocus
                       error={touched.firstName && !!errors.firstName}
                       helperText={<ErrorMessage name="firstName" />}
@@ -243,7 +242,7 @@ const RegisterPage = () => {
                       label={t("surname")}
                       name="lastName"
                       autoComplete="lastName"
-                      autoFocus
+                      required
                       error={touched.lastName && !!errors.lastName}
                       helperText={<ErrorMessage name="lastName" />}
                       value={values.lastName}
@@ -263,7 +262,7 @@ const RegisterPage = () => {
                       label={t("phone")}
                       name="phoneNumber"
                       autoComplete="tel"
-                      autoFocus
+                      required
                       error={touched.phoneNumber && !!errors.phoneNumber}
                       helperText={<ErrorMessage name="phoneNumber" />}
                       value={values.phoneNumber}
@@ -287,7 +286,6 @@ const RegisterPage = () => {
                         label={t("date")}
                         name="dateOfBirth"
                         autoComplete="dateOfBirth"
-                        autoFocus
                         error={touched.dateOfBirth && !!errors.dateOfBirth}
                         helperText={<ErrorMessage name="dateOfBirth" />}
                         onChange={handleChange}
@@ -308,7 +306,7 @@ const RegisterPage = () => {
                       label={t("email")}
                       name="email"
                       autoComplete="email"
-                      autoFocus
+                      required
                       error={touched.email && !!errors.email}
                       helperText={<ErrorMessage name="email" />}
                       value={values.email}
@@ -325,6 +323,7 @@ const RegisterPage = () => {
                       id="password"
                       type={showPassword ? "text" : "password"}
                       name="password"
+                      required
                       error={touched.password && !!errors.password}
                       helperText={<ErrorMessage name="password" />}
                       value={values.password}
@@ -348,7 +347,7 @@ const RegisterPage = () => {
                           </InputAdornment>
                         ),
                       }}
-                      label="Password"
+                      label={t('password')}
                       variant="outlined"
                       fullWidth
                     />
@@ -362,6 +361,7 @@ const RegisterPage = () => {
                       id="passwordConfirmation"
                       type={showPassword2 ? "text" : "password"}
                       name="passwordConfirmation"
+                      required
                       error={
                         touched.passwordConfirmation &&
                         !!errors.passwordConfirmation
@@ -396,15 +396,9 @@ const RegisterPage = () => {
                   <Button
                     id="registationButton"
                     type="submit"
-                    fullWidth
                     variant="contained"
                     onClick={() => {
                       setIsSubmit(true);
-                    }}
-                    sx={{
-                      mt: 5,
-                      mb: 5,
-                      textTransform: "none",
                     }}
                   >
                     {t("registerBtn")}

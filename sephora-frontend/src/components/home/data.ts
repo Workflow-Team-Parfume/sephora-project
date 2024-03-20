@@ -35,6 +35,7 @@ import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
 import ProductDto from "../../models/product/ProductDto.ts";
 import PictureDto from "../../models/picture/PictureDto.ts";
 import routes from "../../common/routes.ts";
+import { IFilter } from "./filters/types.ts";
 
 const placeholderPic : PictureDto = {
     name: 'placeholder',
@@ -692,14 +693,209 @@ export const especiallyForYou = ([
     },
 ])
 
-export const Filters = ([
-    {name: 'Група товару', filters: ['Гель для вмивання', 'Крем для обличчя']},
-    {name: 'Бренд', filters: ['La Roche-Posay', 'Sane']},
-    {name: 'Вартість', filters: ['500 - 750грн', '750 - 1000 грн']},
-    {name: 'Вік', filters: ['18+', '25+']},
+export const Filters:IFilter[] = ([
+    {
+        nameUa: 'Група товару',
+        nameEn: 'Product group',
+        filters: [{nameUa: 'Гель для вмивання', nameEn: 'Gel for washing'},
+            {nameUa: 'Крем для обличчя', nameEn: 'Cream for face'},
+            {nameUa: 'Маска для обличчя', nameEn: 'Mask for face'},
+            {nameUa: 'Пінка для вмивання', nameEn: 'Foam for washing'},
+            {nameUa: 'Сироватка для обличчя',nameEn: 'Serum for face'},
+            {nameUa: 'Тонік для обличчя', nameEn: 'Face toner'},
+            {nameUa: 'BB-крем', nameEn: 'BB cream'},
+            {nameUa: 'CC-крем', nameEn: 'CC cream'},
+            {nameUa: 'Travel Size', nameEn: 'Travel Size'}],
+    },
+    {
+        nameUa: 'Бренд',
+        nameEn: 'Brands',
+        filters: [
+            {nameUa: 'La Roche-Posay', nameEn: 'La Roche-Posay'},
+            {nameUa: 'Sane', nameEn: 'Sane'},
+            {nameUa: 'Vichy', nameEn: 'Vichy'},
+            {nameUa: 'L’Oreal Paris', nameEn: 'L’Oreal Paris'},
+            {nameUa: 'Bioderma', nameEn: 'Bioderma'},
+            {nameUa: 'The Ordinary', nameEn: 'The Ordinary'},
+            {nameUa: 'Medi–Peel', nameEn: 'Medi–Peel'},
+            {nameUa: 'Cerave', nameEn: 'Cerave'},
+            {nameUa: 'Dr.Jart +', nameEn: 'Dr.Jart +'},
+            {nameUa: 'Laneige', nameEn: 'Laneige'}]
+    },
+    {
+        nameUa: 'Вартість',
+        nameEn: 'Cost',
+        filters: [
+            {nameUa: 'Менше 500 грн', nameEn: 'Less than 500 UAH'},
+            {nameUa: '500 – 750 грн', nameEn: '500 – 750 UAH'},
+            {nameUa: '750 – 1000 грн', nameEn: '750 - 1000 UAH'},
+            {nameUa: '1000 – 5000 грн', nameEn: '1000 - 5000 UAH'},
+            {nameUa: 'Більше 5000 грн', nameEn: 'More than 5000 UAH'}]
+    },{
+        nameUa: 'Вік',
+        nameEn: 'Age',
+        filters: [
+            {nameUa: '18+', nameEn: '18+'},
+            {nameUa: '25+', nameEn: '25+'},
+            {nameUa: '30+', nameEn: '30+'},
+            {nameUa: '40+', nameEn: '40+'},
+            {nameUa: '50+', nameEn: '50+'}]
+    },{
+        nameUa: 'Класифікація',
+        nameEn: 'Classification',
+        filters: [
+            {nameUa: 'Аптечна', nameEn: 'v'},
+            {nameUa: 'Дерматокосметика', nameEn: 'Dermatocosmetics'},
+            {nameUa: 'Елітна', nameEn: 'Elite'},
+            {nameUa: 'Мас маркет', nameEn: 'Mass market'},
+            {nameUa: 'Міддл ап', nameEn: 'Middle up'},
+            {nameUa: 'Міддл маркет', nameEn: 'Middle market'},
+            {nameUa: 'Натуральна', nameEn: 'Natural'},
+            {nameUa: 'Органічна', nameEn: 'Organic'},
+            {nameUa: 'Професійна', nameEn: 'Professional'}]
+    },{
+        nameUa: 'Тип шкіри',
+        nameEn: 'Skin type',
+        filters: [
+            {nameUa: 'Всі типи', nameEn: 'All types'},
+            {nameUa: 'Жирна', nameEn: 'Oily'},
+            {nameUa: 'Комбінована', nameEn: 'Combination'},
+            {nameUa: 'Нормальна', nameEn: 'Normal'},
+            {nameUa: 'Суха', nameEn: 'Dry'},
+            {nameUa: 'Чутлива', nameEn: 'Sensitive'}]
+    },{
+        nameUa: 'Форма',
+        nameEn: 'Form',
+        filters: [
+            {nameUa: 'Гель', nameEn: 'Gel'},
+            {nameUa: 'Желе', nameEn: 'Jelly'},
+            {nameUa: 'З помпою', nameEn: 'With pump'},
+            {nameUa: 'Крем', nameEn: 'Cream'},
+            {nameUa: 'Пудра', nameEn: 'Powder'},
+            {nameUa: 'Сироватка', nameEn: 'Serum'},
+            {nameUa: 'Спрей', nameEn: 'Spray'},
+            {nameUa: 'Стік', nameEn: 'Stick'},
+            {nameUa: 'Флюїд', nameEn: 'Fluid'}]
+    },
+    {
+        nameUa: 'Призначення',
+        nameEn: 'Appointment',
+        filters: [
+            {nameUa: 'Антивіковий', nameEn: 'Anti-aging'},
+            {nameUa: 'Антибактеріальне', nameEn: 'Antibacterial'},
+            {nameUa: 'Від зморшок', nameEn: 'From wrinkles'},
+            {nameUa: 'Відновлення', nameEn: 'Restoration'},
+            {nameUa: 'Від перших ознак старіння', nameEn: 'From the first signs of aging'},
+            {nameUa: 'Демакіяж', nameEn: 'Makeup removal'},
+            {nameUa: 'Заспокоєння', nameEn: 'Comfort'},
+            {nameUa: 'Живлення', nameEn: 'Feeding'},
+            {nameUa: 'Зволоження', nameEn: 'Moisturization'},
+            {nameUa: 'Очищення', nameEn: 'Cleaning'},
+            {nameUa: 'Пом’якшення', nameEn: 'Mitigating'},
+            {nameUa: 'Тонізування', nameEn: 'Toning'}],
+    },
 ])
 
-export const Filter = ({
-    name: 'Новинки',
-    filters: ['Макіяж', 'Догляд за обличчям', 'Волосся']
+export const BottlePageFilters = [Filters[0],Filters[2],Filters[3],Filters[4],Filters[7],]
+export const BottlePageFilter = ({
+    nameUa: 'Бренди',
+    nameEn: 'Brands',
+    filters: [
+        {nameUa: 'Tom Ford', nameEn: 'Tom Ford'},
+        {nameUa: 'Elixir de Bombe', nameEn: 'Elixir de Bombe'},
+        {nameUa: 'Aqua Universalis Cologne Forte', nameEn: 'Aqua Universalis Cologne Forte'},
+        {nameUa: 'ArteOlfatto Black Hashish', nameEn: 'ArteOlfatto Black Hashish'},
+        {nameUa: 'Arabesque Perfumes Majesty', nameEn: 'Arabesque Perfumes Majesty'},
+        {nameUa: 'Atelier Cologne Pacific Lime', nameEn: 'Atelier Cologne Pacific Lime'},
+        {nameUa: 'Lalique — Encre Noire', nameEn: 'Lalique — Encre Noire'},
+        {nameUa: 'BDK Pas Ce Soir Extrait', nameEn: 'BDK Pas Ce Soir Extrait'},
+        {nameUa: 'BeauFort London Lignum Vitae', nameEn: 'BeauFort London Lignum Vitae'},
+        {nameUa: 'Trussardi Donna', nameEn: 'Trussardi Donna'},
+        {nameUa: 'MONTALE', nameEn: 'MONTALE'},
+        {nameUa: 'BDK Rouge Smoking', nameEn: 'BDK Rouge Smoking'},
+        {nameUa: 'Bois 1920', nameEn: 'Bois 1920'},
+        {nameUa: 'Fondentarancio', nameEn: 'Fondentarancio'},
+        {nameUa: 'Bvlgari Tygar', nameEn: 'Bvlgari Tygar'},
+        {nameUa: 'Byredo Bal d\'Afrique', nameEn: 'Byredo Bal d\'Afrique'},
+        {nameUa: 'Carolina Herrera Very Good girl', nameEn: 'Carolina Herrera Very Good girl'},
+        {nameUa: 'Carolina Herrera Good girl', nameEn: 'Carolina Herrera Good girl'},
+        {nameUa: 'Celine Black Tie', nameEn: 'Celine Black Tie'},
+        {nameUa: 'Celine Rimbaud', nameEn: 'Celine Rimbaud'},
+        {nameUa: 'Chopard Wish', nameEn: 'Chopard Wish'},
+        {nameUa: 'Chopard Vanille de Madagascar', nameEn: 'Chopard Vanille de Madagascar'},
+        {nameUa: 'Coquillete Vesevius', nameEn: 'Coquillete Vesevius'},
+        {nameUa: 'Mancera Saharian Wind', nameEn: 'Mancera Saharian Wind'},
+        {nameUa: 'D&G L’imperatrice', nameEn: 'D&G L’imperatrice'},
+        {nameUa: 'Creed Aventus', nameEn: 'Creed Aventus'},
+        {nameUa: 'Etat Libre d\'Orange Frustration', nameEn: 'Etat Libre d\'Orange Frustration'},
+        {nameUa: 'Ex Nihilo Atlas Fever', nameEn: 'Ex Nihilo Atlas Fever'},
+        {nameUa: 'Fig Infusion', nameEn:'Fig Infusion'},
+        {nameUa: 'Oud Satin Mood', nameEn: 'Oud Satin Mood'},
+        {nameUa: 'Santal 33',  nameEn: 'Santal 33'}]
+})
+export const FullSizedPageFilters = [Filters[0],Filters[2],Filters[3],Filters[4],Filters[7],]
+
+export const FullSizedPageFilter = ({
+    nameUa: 'Бренди',
+    nameEn: 'Brands',
+    filters: [
+        {nameUa: 'Tom Ford', nameEn: 'Tom Ford'},
+        {nameUa: 'Yves Saint', nameEn: 'Yves Saint'},
+        {nameUa: 'Blue Seduction', nameEn: 'Blue Seduction'},
+        {nameUa: 'Maison Francis Kurkdjian Baccarat', nameEn: 'Maison Francis Kurkdjian Baccarat'},
+        {nameUa: 'Premiere Note', nameEn: 'Premiere Note'},
+        {nameUa: 'BURBERRY', nameEn: 'BURBERRY'},
+        {nameUa: 'Encre Noire', nameEn: 'Encre Noire'},
+        {nameUa: 'Carolina Herrera Good', nameEn: 'Carolina Herrera Good'},
+        {nameUa: 'Terre dHermes', nameEn: 'Terre dHermes'},
+        {nameUa: 'Trussardi', nameEn: 'Trussardi'},
+        {nameUa: 'MONTALE', nameEn: 'MONTALE'},
+        {nameUa: 'LM PARFUMS', nameEn: 'LM PARFUMS'},
+        {nameUa: 'Untold Absolu', nameEn: 'Untold Absolu'},
+        {nameUa: 'Zen', nameEn: 'Zen'},
+        {nameUa: 'Derby', nameEn: 'Derby'},
+        {nameUa: 'Prada', nameEn: 'Prada'},
+        {nameUa: 'Bleu de Chanel', nameEn: 'Bleu de Chanel'},
+        {nameUa: '1 Million', nameEn: '1 Million'},
+        {nameUa: 'DIOR', nameEn: 'DIOR'},
+        {nameUa: 'Le Bain', nameEn: 'Le Bain'},
+        {nameUa: 'Mancera Saharian Wind', nameEn: 'Mancera Saharian Wind'},
+        {nameUa: 'Calvin Klein', nameEn: 'Calvin Klein'},
+        {nameUa: 'Creed', nameEn: 'Creed'},
+        {nameUa: 'Moschino', nameEn: 'Moschino'},
+        {nameUa: 'Genetic Bliss', nameEn: 'Genetic Bliss'},
+        {nameUa: 'LA MARTINA', nameEn: 'LA MARTINA'}],
+})
+
+export const CarePageFilters = [Filters[0],Filters[1],Filters[2],Filters[3],Filters[4],Filters[5],Filters[6],Filters[7],]
+
+export const CarePageFilter = ({
+    nameUa: 'Догляд за шкірою',
+    nameEn: 'Skin care',
+    filters: [
+        {nameUa: 'Зволожувачі', nameEn: 'Moisturizers'},
+        {nameUa: 'Засоби для вмивання', nameEn: 'Detergents'},
+        {nameUa: 'Маски', nameEn: 'Masks'},
+        {nameUa: 'Догляд за очима', nameEn: 'Eye care'},
+        {nameUa: 'Бальзами, догляд за губами', nameEn: 'Balms, lip care'},
+        {nameUa: 'Сонцезахисний крем', nameEn: 'Sunscreen cream'},
+        {nameUa: 'Високотехнологічні інстременти', nameEn: 'High-tech instruments'},
+        {nameUa: 'Веганський', nameEn: 'Vegan'},
+        {nameUa: 'Подарункові набори', nameEn: 'Gift sets'},
+        {nameUa: 'Міні розміри', nameEn: 'Mini sizes'}],
+})
+
+export const NovelitiesPageFilters = [Filters[0],Filters[1],Filters[2],Filters[3],Filters[4],Filters[5],Filters[6],Filters[7],]
+
+export const NovelitiesPageFilter = ({
+    nameUa: 'Новинки',
+    nameEn: 'Novelty',
+    filters: [
+        {nameUa: 'Макіяж', nameEn: 'Makeup'},
+        {nameUa: 'Догляд за обличчям', nameEn: 'Facial'},
+        {nameUa: 'Волосся', nameEn: 'Hair'},
+        {nameUa: 'Тіло', nameEn: 'Body'},
+        {nameUa: 'Догляд', nameEn: 'Care'},
+        {nameUa: 'Акції', nameEn: 'Actions'},
+    ]
 })

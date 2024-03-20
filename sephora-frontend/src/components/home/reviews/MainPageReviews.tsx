@@ -13,7 +13,7 @@ const Reviews: React.FC<{ title: string, reviews: IMPReview[] }>
             <Container sx={{py: 8}} style={{maxWidth: "100%"}}>
                 <Grid container spacing={2.5}>
                     {reviews.map((review, index) => (
-                        <Grid key={index} item xs={12} sm={6} md={4} spacing={1.5}>
+                        <Grid key={index} item xs={12} sm={6} md={4} spacing={1.5} container={true}>
                             <Stack spacing={3.5}>
                                 <Stack spacing={4} direction="row">
                                     {review.userImage != null ?

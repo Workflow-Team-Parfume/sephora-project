@@ -9,17 +9,18 @@ import "./i18n/i18n.ts";
 import {ThemeProvider} from "@mui/material";
 import theme from "./common/themeBreakpoints.ts";
 import {GoogleOAuthProvider} from "@react-oauth/google";
-import GrabInfo from "./components/auth/common.ts";
+import {APP_ENV} from "./env";
+import { GrabInfo } from "./components/auth/common.ts";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 
-GrabInfo().catch(e => console.error(e));
+GrabInfo();
 
 root.render(
     <ThemeProvider theme={theme}>
-        <GoogleOAuthProvider clientId="797576004258-c9tuljbakbj0ec9u1roe4eeqtuesuous.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={APP_ENV.GOOGLE_CLIENT_ID}>
             <Provider store={store}>
                 <PersistGate persistor={persistor}>
                     <BrowserRouter>

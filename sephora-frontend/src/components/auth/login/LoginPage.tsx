@@ -25,7 +25,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import {PasswordRecovery} from "../../common/password_recovery/PasswordRecovery";
 import {useTranslation} from "react-i18next";
-import {GoogleLogin, useGoogleLogin, useGoogleOAuth} from "@react-oauth/google";
+import {GoogleLogin} from "@react-oauth/google";
 import textFieldStyle from "../../../common/textFieldStyle";
 import routes from "../../../common/routes";
 import icon1 from "../../../assets/images/icon1.svg";
@@ -233,9 +233,7 @@ const LoginPage = () => {
                                         http_common.post("account/auth/google", credentialResponse.credential)
                                             .then((response) => {
                                                 const {data} = response;
-                                                localStorage.token = data.token;
-                                                const user = jwtDecode(data.token) as IUser;
-                                                console.log("Google One Tap login user:", user);
+                                                localStorage.gtoken = data.token;
                                             })
                                     }}
                                     onError={() => console.error("Google One Tap login error")}/>

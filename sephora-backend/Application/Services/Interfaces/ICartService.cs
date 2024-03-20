@@ -30,9 +30,9 @@ public interface ICartService
         .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
 
     /**
-     * <summary>Get the cart item by its id</summary>
-     * <param name="id">The id of the cart item</param>
-     * <returns>The cart item with the specified id</returns>
+     * <summary>Get the cart item by its ID</summary>
+     * <param name="id">The ID of the cart item</param>
+     * <returns>The cart item with the specified ID</returns>
      */
     Task<CartDto?> GetById(long id);
 

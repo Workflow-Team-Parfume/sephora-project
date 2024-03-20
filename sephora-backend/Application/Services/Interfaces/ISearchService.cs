@@ -1,5 +1,10 @@
 namespace CleanArchitecture.Application.Services.Interfaces;
 
+/**
+ * <summary>
+ * The search service (powers our search engine on the website).
+ * </summary>
+ */
 public interface ISearchService<T>
 {
     /**

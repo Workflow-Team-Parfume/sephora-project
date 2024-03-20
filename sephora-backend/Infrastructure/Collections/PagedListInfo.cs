@@ -1,5 +1,13 @@
 namespace Infrastructure.Collections;
 
+/**
+ * <summary>
+ * The paged list info.
+ * </summary>
+ * <typeparam name="T">
+ * The type of the items.
+ * </typeparam>
+ */
 public record PagedListInfo<T>
 (
     IEnumerable<T> Items = default!,

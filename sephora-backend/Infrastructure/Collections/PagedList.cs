@@ -1,5 +1,10 @@
 namespace Infrastructure.Collections;
 
+/**
+ * <summary>
+ * The paged list implementation.
+ * </summary>
+ */
 public class PagedList<T> : List<T>, IPagedList<T>
 {
     public int CurrentPage { get; }

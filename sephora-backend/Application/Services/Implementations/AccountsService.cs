@@ -1,6 +1,4 @@
-﻿using Google.Apis.Auth;
-
-namespace CleanArchitecture.Application.Services.Implementations;
+﻿namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,
@@ -9,11 +7,19 @@ public class AccountsService(
     IPictureService pictureService,
     IMapper mapper,
     IConfiguration configuration
-)
-    : IAccountsService
+) : IAccountsService
 {
     private static string? EnvName =>
         Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    
+    private static void EnsureResultSucceeded(IdentityResult result)
+    {
+        if (!result.Succeeded)
+            throw new HttpException(
+                String.Join(", ", result.Errors.Select(x => x.Description)),
+                HttpStatusCode.BadRequest
+            );
+    }
 
     public IQueryable<GetUserDto> Get()
         => userManager.Users
@@ -77,7 +83,6 @@ public class AccountsService(
     public async Task<LoginResponseDto> Login(LoginDto dto)
     {
         var user = await userManager.FindByEmailAsync(dto.Email);
-
         if (user is null ||
             !await userManager.CheckPasswordAsync(user, dto.Password))
             throw new HttpException(
@@ -85,6 +90,7 @@ public class AccountsService(
                 HttpStatusCode.BadRequest
             );
 
+        // Login and return token
         await signInManager.SignInAsync(user, true);
         return new LoginResponseDto
         {
@@ -105,26 +111,45 @@ public class AccountsService(
             ]
         };
         
-
         GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
-        // return new LoginResponseDto
-        // {
-        //     Token = jwtService.CreateToken(
-        //         [
-        //             new Claim(ClaimTypes.Email, payload.Email),
-        //             new Claim(ClaimTypes.Name, payload.Name),
-        //             new Claim(ClaimTypes.Uri, payload.Picture),
-        //             new Claim(ClaimTypes.NameIdentifier, payload.Subject),
-        //             new Claim(ClaimTypes.Role, "User"),
-        //             new Claim(ClaimTypes.Authentication, "Google"),
-        //             new Claim(ClaimTypes.Expiration, payload.ExpirationTimeSeconds?.ToString() ?? "0"),
-        //             new Claim(ClaimTypes.GivenName, payload.GivenName),
-        //             new Claim(ClaimTypes.Surname, payload.FamilyName),
-        //             new Claim(ClaimTypes.Locality, payload.Locale),
-        //         ]
-        //     ),
-        // };
-        return null!;
+        UserEntity? user = await userManager.FindByEmailAsync(payload.Email);
+        
+        if (user is null)
+        {
+            // Prepare claims and create user if not exists
+            IList<Claim> claims = [
+                new Claim(ClaimTypes.Email, payload.Email),
+                new Claim(ClaimTypes.Name, payload.Name),
+                new Claim(ClaimTypes.Uri, payload.Picture),
+                new Claim(ClaimTypes.NameIdentifier, payload.Subject),
+                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Authentication, "Google"),
+                new Claim(ClaimTypes.Expiration, payload.ExpirationTimeSeconds?.ToString() ?? "0"),
+                new Claim(ClaimTypes.GivenName, payload.GivenName),
+                new Claim(ClaimTypes.Surname, payload.FamilyName),
+                new Claim(ClaimTypes.Locality, payload.Locale),
+            ];
+            user = new UserEntity
+            {
+                Email = payload.Email,
+                UserName = payload.Name,
+            };
+            
+            // Add user to database, add claims and roles
+            var result = await userManager.CreateAsync(user);
+            EnsureResultSucceeded(result);
+            result = await userManager.AddToRoleAsync(user, "User");
+            EnsureResultSucceeded(result);
+            result = await userManager.AddClaimsAsync(user, claims);
+            EnsureResultSucceeded(result);
+        }
+        
+        // Login and return token
+        await signInManager.SignInAsync(user, true);
+        return new LoginResponseDto
+        {
+            Token = jwtService.CreateToken(jwtService.GetClaims(user))
+        };
     }
 
     public async Task Logout()

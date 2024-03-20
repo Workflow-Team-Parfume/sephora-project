@@ -19,11 +19,14 @@ i18n.use(initReactI18next)
                     'phone': 'Номер телефона',
                     'date': 'Дата народження',
 
+                    'profile': 'Профіль',
+                    'logout': 'Вихід',
+
                     'passwordRecovery': 'Відновлення паролю',
                     'passwordRecoveryText': 'На Вашу електронну адресу надсилається лист, який дозволить вам автоматично увійти до системи.',
                     'send': 'Надіслати',
                     'or': 'АБО',
-                    'registerPassConfirm': 'Підтвердження пароля*',
+                    'registerPassConfirm': 'Підтвердження пароля',
                     'registerBtn': 'Зареєструватися',
                     'dontHaveAnAccount': 'Не маєте акаунта?',
                     'registration': ' Реєстрація',
@@ -199,7 +202,7 @@ i18n.use(initReactI18next)
                     // DeliveryUkrPoshta
                     'deliveryUkrPoshta_line0': "Укрпошта",
                     'deliveryUkrPoshta_line1': "Спеціальні тарифи! ",
-                    'deliveryUkrPoshta_line2': "Спеціальні тарифи! При сумі замовлення до 299 грн доставка коштує всього 28 грн, при сумі замовлення понад 299 грн — доставка безкоштовна! Мінімальна сума замовлення  — 169 грн.",
+                    'deliveryUkrPoshta_line2': "При сумі замовлення до 299 грн доставка коштує всього 28 грн, при сумі замовлення понад 299 грн — доставка безкоштовна! Мінімальна сума замовлення  — 169 грн.",
                     'deliveryUkrPoshta_line3': "За умови доставки замовлення компанією Укрпошта, його буде відправлено наступного дня після оформлення. Доставка Укрпоштою займає від 1 до 3 днів. Оплатити замовлення ви можете за допомогою карт VISA/Mastercard під час оформлення замовлення або готівкою у відділенні Укрпошти",
                     'deliveryUkrPoshta_line4': "Жодних прихованих платежів, оплати послуг транспортних компаній, плати за переказ коштів, комісій та іншого! Ви оплачуєте тільки суму вашого замовлення.",
                     'deliveryUkrPoshta_line5': "Замовлення зберігається на складі відділення протягом 5 днів, починаючи з 6-го дня знімається плата у розмірі 3 грн. 80 коп. за кожний наступний день зберігання. Ці послуги оплачуєте ви!",
@@ -266,6 +269,9 @@ i18n.use(initReactI18next)
                     'surname': 'Surname',
                     'phone': 'Phone number',
                     'date': 'Date of birth',
+
+                    'profile': 'Profile',
+                    'logout': 'Logout',
 
                     'passwordRecovery': 'Password recovery',
                     'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',

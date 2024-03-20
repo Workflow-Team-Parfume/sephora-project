@@ -116,11 +116,11 @@ const ProductsPage: React.FC<{
                                 }
                             </Typography>
                             {mainFilter.filters.map((filter, i) => (
-                                <Typography key={i} className='filterText'>
+                                <Button key={i} className='filterText'>
                                     {i18n.language === "en"
                                         ? filter.nameEn
                                         : filter.nameUa}
-                                </Typography>
+                                </Button>
                             ))}
                         </Stack>
                         <Filters filters={filters}/>

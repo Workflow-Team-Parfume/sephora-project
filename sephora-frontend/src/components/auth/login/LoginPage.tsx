@@ -16,7 +16,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { AuthUserActionType, IUser, ILogin, IAuthUser } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
 import "./LoginPage.scss";
@@ -31,6 +30,9 @@ import { useGoogleLogin } from "@react-oauth/google";
 import textFieldStyle from "../../../common/textFieldStyle";
 import routes from "../../../common/routes";
 import icon1 from "../../../assets/images/icon1.svg";
+import { AuthUserActionType, IAuthUser } from "../types";
+import LoginDto from "../../../models/user/LoginDto";
+import GetUserDto from "../../../models/user/GetUserDto";
 
 const style = {
   position: "absolute" as "absolute",
@@ -70,7 +72,7 @@ const LoginPage = () => {
     setAnchorElUser(null);
   };
 
-  const initialValues: ILogin = {
+  const initialValues: LoginDto = {
     email: "",
     password: "",
   };
@@ -101,7 +103,7 @@ const LoginPage = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const onHandleSubmit = async (values: ILogin) => {
+  const onHandleSubmit = async (values: LoginDto) => {
     try {
       await loginSchema.validate(values);
       console.log(values);
@@ -110,18 +112,22 @@ const LoginPage = () => {
 
       const token = data.token;
       localStorage.setItem("token", token);
-      const user = jwtDecode(token) as IUser;
+      const user = jwtDecode(token) as GetUserDto;
 
       dispatch({
         type: AuthUserActionType.LOGIN_USER,
         payload: {
           id: user.id,
-          userName: user.userName,
-          email: user.email,
-          profilePicture: user.profilePicture,
-          registrationDate: user.registrationDate,
-          phoneNumber: user.phoneNumber,
-          roles: user.roles,
+            fistName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            profilePicture: user.profilePicture,
+            registrationDate: user.registrationDate,
+            phoneNumber: user.phoneNumber,
+            roles: user.roles,
+            ratings: user.ratings,
+            orders: user.orders,
+            cartItems: user.cartItems,
         },
       });
       handleClose();
@@ -202,19 +208,18 @@ const LoginPage = () => {
       }) => (
         <div>
           {!isAuth ?(
-
             <Button onClick={handleOpen}>
-            <img src={icon1} alt="" />
-          </Button>
-            ) : (<>
-              <Button onClick={handleOpenUserMenu}>
               <img src={icon1} alt="" />
             </Button>
+            ) : (<>
+              <Button onClick={handleOpenUserMenu}>
+                <img src={icon1} alt="" />
+              </Button>
               
               <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "right",
@@ -226,20 +231,25 @@ const LoginPage = () => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
-                >
+              >
                 <MenuItem
                   key={"Profile"}
-                  href="/profile"
                   onClick={handleCloseUserMenu}
+                >
+                  <Button
+                    href={routes.profile}
+                    className="text"
+                    sx={{justifyContent:'start'}}
                   >
-                  <Typography textAlign="center">{"Profile"}</Typography>
+                    {t('profile')}
+                  </Button>
                 </MenuItem>
-                <MenuItem key={"Logout"} onClick={onLogoutHandler}>
-                  <Typography textAlign="center">{"Logout"}</Typography>
+                <MenuItem key={"Logout"} onClick={onLogoutHandler} sx={{justifyContent:'start'}}>
+                  <Typography textAlign="center" className="text">{t('logout')}</Typography>
                 </MenuItem>
               </Menu>
-                    </>
-                    )}
+                </>
+                )}
           <Modal
             open={open}
             onClose={handleClose}
@@ -346,12 +356,13 @@ const LoginPage = () => {
                           </InputAdornment>
                         ),
                       }}
-                      label="Password"
+                      label={t('password')}
                       variant="outlined"
                       fullWidth
                     />
                   </FormControl>
                   <Button
+                    disableTouchRipple
                     className="registationButton"
                     type="submit"
                     sx={{ mt: 3, mb: 2, alignItems: "center",}}

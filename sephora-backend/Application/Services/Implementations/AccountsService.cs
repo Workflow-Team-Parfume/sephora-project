@@ -118,21 +118,19 @@ public class AccountsService(
         {
             // Prepare claims and create user if not exists
             IList<Claim> claims = [
-                new Claim(ClaimTypes.Email, payload.Email),
-                new Claim(ClaimTypes.Name, payload.Name),
-                new Claim(ClaimTypes.Uri, payload.Picture),
-                new Claim(ClaimTypes.NameIdentifier, payload.Subject),
-                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.NameIdentifier, payload.Subject ?? String.Empty),
                 new Claim(ClaimTypes.Authentication, "Google"),
                 new Claim(ClaimTypes.Expiration, payload.ExpirationTimeSeconds?.ToString() ?? "0"),
-                new Claim(ClaimTypes.GivenName, payload.GivenName),
-                new Claim(ClaimTypes.Surname, payload.FamilyName),
-                new Claim(ClaimTypes.Locality, payload.Locale),
+                new Claim(ClaimTypes.Locality, payload.Locale ?? String.Empty),
             ];
             user = new UserEntity
             {
-                Email = payload.Email,
-                UserName = payload.Name,
+                Email = payload.Email ?? String.Empty,
+                UserName = payload.Name ?? String.Empty,
+                FirstName = payload.GivenName ?? String.Empty,
+                LastName = payload.FamilyName ?? String.Empty,
+                ProfilePicture = payload.Picture ?? String.Empty,
+                EmailConfirmed = payload.EmailVerified
             };
             
             // Add user to database, add claims and roles
@@ -146,6 +144,18 @@ public class AccountsService(
         
         // Login and return token
         await signInManager.SignInAsync(user, true);
+        if (payload.Email is null)
+            throw new HttpException(
+                ErrorMessages.UserNotFound,
+                HttpStatusCode.NotFound
+            );
+        user = await userManager.FindByEmailAsync(payload.Email);
+        if (user is null)
+            throw new HttpException(
+                ErrorMessages.UserNotFound,
+                HttpStatusCode.NotFound
+            );
+        
         return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))

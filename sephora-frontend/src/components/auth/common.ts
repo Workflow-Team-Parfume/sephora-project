@@ -1,6 +1,7 @@
 import {store} from "../../store/store.ts";
 import {AuthUserActionType, IGoogleUser, IUser} from "./types.ts";
 import {jwtDecode} from "jwt-decode";
+import http_common from "../../http_common.ts";
 
 function GrabInfo() {
     const gToken = localStorage.gtoken,
@@ -15,6 +16,15 @@ function GrabInfo() {
             localStorage.removeItem('gtoken');
             return;
         }
+
+        if (!token)
+            http_common.post("account/auth/google", gToken)
+                .then(r => {
+                    localStorage.token = r.data.token
+                    console.log(jwtDecode(r.data.token) as IUser)
+                });
+        else console.log(jwtDecode( token) as IUser)
+
 
         store.dispatch({
             type: AuthUserActionType.LOGIN_GOOGLE_USER,

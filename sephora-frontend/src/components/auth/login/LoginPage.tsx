@@ -30,6 +30,7 @@ import textFieldStyle from "../../../common/textFieldStyle";
 import routes from "../../../common/routes";
 import icon1 from "../../../assets/images/icon1.svg";
 import {RootState} from "../../../store/store.ts";
+import {GrabInfo} from "../common.ts";
 
 const style = {
     position: "absolute" as const,
@@ -141,85 +142,85 @@ const LoginPage = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
-  return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onHandleSubmit}
-      validationSchema={loginSchema}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-      }) => (
-        <div>
-          {!isAuth ?(
-            <Button onClick={handleOpen}>
-              <img src={icon1} alt="" />
-            </Button>
-            ) : (<>
-              <Button onClick={handleOpenUserMenu}>
-                <img src={icon1} alt="" />
-              </Button>
-              
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem
-                  key={"Profile"}
-                  onClick={handleCloseUserMenu}
-                >
-                  <Button
-                    href={routes.profile}
-                    className="text"
-                    sx={{justifyContent:'start'}}
-                  >
-                    {t('profile')}
-                  </Button>
-                </MenuItem>
-                <MenuItem key={"Logout"} onClick={onLogoutHandler} sx={{justifyContent:'start'}}>
-                  <Typography textAlign="center" className="text">{t('logout')}</Typography>
-                </MenuItem>
-              </Menu>
-                </>
-                )}
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Stack
-              sx={style}
-              className="login"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: 5,
-                }}
-              >
-                {/*<Button*/}
+
+    return (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={onHandleSubmit}
+            validationSchema={loginSchema}
+        >
+            {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+              }) => (
+                <div>
+                    {!isAuth ? (
+                        <Button onClick={handleOpen}>
+                            <img src={icon1} alt=""/>
+                        </Button>
+                    ) : (<>
+                            <Button onClick={handleOpenUserMenu}>
+                                <img src={icon1} alt=""/>
+                            </Button>
+
+                            <Menu
+                                sx={{mt: "45px"}}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: "top",
+                                    horizontal: "right",
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                <MenuItem
+                                    key={"Profile"}
+                                    onClick={handleCloseUserMenu}
+                                >
+                                    <Button
+                                        href={routes.profile}
+                                        className="text"
+                                        sx={{justifyContent: 'start'}}
+                                    >
+                                        {t('profile')}
+                                    </Button>
+                                </MenuItem>
+                                <MenuItem key={"Logout"} onClick={onLogoutHandler} sx={{justifyContent: 'start'}}>
+                                    <Typography textAlign="center" className="text">{t('logout')}</Typography>
+                                </MenuItem>
+                            </Menu>
+                        </>
+                    )}
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Stack
+                            sx={style}
+                            className="login"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    gap: 5,
+                                }}
+                            >
+                                {/*<Button*/}
                                 {/*    id="buttonGoogleFacebook"*/}
                                 {/*    variant="outlined"*/}
                                 {/*    startIcon={*/}
@@ -233,130 +234,126 @@ const LoginPage = () => {
                                     onSuccess={(credentialResponse) => {
                                         localStorage.gtoken = credentialResponse.credential;
                                         console.log("Google One Tap login response:", credentialResponse);
-
-                                        http_common.post("account/auth/google", credentialResponse.credential)
-                                            .then((response) => {
-                                                const {data} = response;
-                                                localStorage.gtoken = data.token;
-                                            })
+                                        GrabInfo();
+                                        handleClose();
                                     }}
                                     onError={() => console.error("Google One Tap login error")}/>
-                <Button
-                  id="buttonGoogleFacebook"
-                  variant="outlined"
-                  startIcon={
-                    <FacebookIcon sx={{ width: "36px", height: "36px" }} />
-                  }
-                >
-                  Facebook
-                </Button>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 7,
-                  mt: 5,
-                }}
-              >
-                <hr color="#514C4C" />
-                <Typography className="or">{t("or")}</Typography>
-                <hr color="#514C4C" />
-              </Box>
-              <Form onSubmit={handleSubmit}>
-                <Grid container spacing={2} sx={{ justifyContent: "center", mt: 5,}}>
-                  <FormControl
-                    sx={{ ...textFieldStyle, width: "670px", mb: 2.5 }}
-                    variant="outlined"
-                  >
-                    <Field
-                      as={TextField}
-                      margin="normal"
-                      fullWidth
-                      id="email"
-                      label={t("email/login")}
-                      name="email"
-                      autoComplete="email"
-                      autoFocus
-                      error={touched.email && !!errors.email}
-                      helperText={<ErrorMessage name="email" />}
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  </FormControl>
-                  <FormControl
-                    sx={{ ...textFieldStyle, width: "670px" }}
-                    variant="outlined"
-                  >
-                    <Field
-                      as={TextField}
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      error={touched.password && !!errors.password}
-                      helperText={<ErrorMessage name="password" />}
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
+                                <Button
+                                    id="buttonGoogleFacebook"
+                                    variant="outlined"
+                                    startIcon={
+                                        <FacebookIcon sx={{width: "36px", height: "36px"}}/>
+                                    }
+                                >
+                                    Facebook
+                                </Button>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: 7,
+                                    mt: 5,
+                                }}
                             >
-                              {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                      label={t('password')}
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </FormControl>
-                  <Button
-                    disableTouchRipple
-                    className="registationButton"
-                    type="submit"
-                    sx={{ mt: 3, mb: 2, alignItems: "center",}}
-                    onClick={() => {
-                      setIsSubmit(true);
-                    }}
-                  >
-                    {t("signIn")}
-                  </Button>
-                </Grid>
-              </Form>
-              <Box>
-                {PasswordRecovery()}
-                <Typography className="regBut">
-                  {t("dontHaveAnAccount")}
-                  <Button
-                    disableTouchRipple
-                    href={routes.register}
-                    className="regBut"
-                    sx={{ borderBottom: "1px solid black" }}
-                  >
-                    {" "}
-                    {t("registration")}
-                  </Button>
-                </Typography>
-              </Box>
-            </Stack>
-          </Modal>
-        </div>
-      )}
-    </Formik>
-  );
+                                <hr color="#514C4C"/>
+                                <Typography className="or">{t("or")}</Typography>
+                                <hr color="#514C4C"/>
+                            </Box>
+                            <Form onSubmit={handleSubmit}>
+                                <Grid container spacing={2} sx={{justifyContent: "center", mt: 5,}}>
+                                    <FormControl
+                                        sx={{...textFieldStyle, width: "670px", mb: 2.5}}
+                                        variant="outlined"
+                                    >
+                                        <Field
+                                            as={TextField}
+                                            margin="normal"
+                                            fullWidth
+                                            id="email"
+                                            label={t("email/login")}
+                                            name="email"
+                                            autoComplete="email"
+                                            autoFocus
+                                            error={touched.email && !!errors.email}
+                                            helperText={<ErrorMessage name="email"/>}
+                                            value={values.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        />
+                                    </FormControl>
+                                    <FormControl
+                                        sx={{...textFieldStyle, width: "670px"}}
+                                        variant="outlined"
+                                    >
+                                        <Field
+                                            as={TextField}
+                                            id="password"
+                                            type={showPassword ? "text" : "password"}
+                                            name="password"
+                                            error={touched.password && !!errors.password}
+                                            helperText={<ErrorMessage name="password"/>}
+                                            value={values.password}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? (
+                                                                <VisibilityOff/>
+                                                            ) : (
+                                                                <Visibility/>
+                                                            )}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                            label={t('password')}
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                    </FormControl>
+                                    <Button
+                                        disableTouchRipple
+                                        className="registationButton"
+                                        type="submit"
+                                        sx={{mt: 3, mb: 2, alignItems: "center",}}
+                                        onClick={() => {
+                                            setIsSubmit(true);
+                                        }}
+                                    >
+                                        {t("signIn")}
+                                    </Button>
+                                </Grid>
+                            </Form>
+                            <Box>
+                                {PasswordRecovery()}
+                                <Typography className="regBut">
+                                    {t("dontHaveAnAccount")}
+                                    <Button
+                                        disableTouchRipple
+                                        href={routes.register}
+                                        className="regBut"
+                                        sx={{borderBottom: "1px solid black"}}
+                                    >
+                                        {" "}
+                                        {t("registration")}
+                                    </Button>
+                                </Typography>
+                            </Box>
+                        </Stack>
+                    </Modal>
+                </div>
+            )}
+        </Formik>
+    );
 };
 
 export default LoginPage;

@@ -43,7 +43,7 @@ const ContactInformation = () => {
                 }}
                 onSubmit={(values) => handleSaveClick(values)}
             >
-                {({ values, setFieldValue }) => (
+                {({ values, handleChange, setFieldValue }) => (
                 <Form style={{width:'100%'}}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -54,6 +54,8 @@ const ContactInformation = () => {
                                         as={TextField}
                                         sx={{ ...textFieldStyle }}
                                         name="name"
+                                        value={values.name}
+                                        onChange={handleChange}
                                     />
                                 </Stack>
                                 <Stack>
@@ -62,6 +64,8 @@ const ContactInformation = () => {
                                         as={TextField}
                                         sx={{ ...textFieldStyle }}
                                         name="surname"
+                                        value={values.surname}
+                                        onChange={handleChange}
                                     />
                                 </Stack>
                                 <Stack>
@@ -70,6 +74,8 @@ const ContactInformation = () => {
                                         as={TextField}
                                         sx={{ ...textFieldStyle }}
                                         name="email"
+                                        value={values.email}
+                                        onChange={handleChange}
                                     />
                                 </Stack>
                                 <Stack>
@@ -79,6 +85,8 @@ const ContactInformation = () => {
                                         sx={{ ...textFieldStyle }}
                                         type="date"
                                         name="date"
+                                        value={values.date}
+                                        onChange={handleChange}
                                     />
                                 </Stack>
                                 <Stack>
@@ -87,6 +95,8 @@ const ContactInformation = () => {
                                         as={TextField}
                                         sx={{ ...textFieldStyle }}
                                         name="phone"
+                                        value={values.phone}
+                                        onChange={handleChange}
                                         InputProps={{
                                             inputComponent: PhoneMask as any
                                         }}
@@ -104,6 +114,8 @@ const ContactInformation = () => {
                                         variant="outlined"
                                         name="oldPassword"
                                         error={false} 
+                                        value={values.oldPassword}
+                                        onChange={handleChange}
                                     >
                                         <OutlinedInput
                                             type={showOldPassword ? 'text' : 'password'}
@@ -130,6 +142,8 @@ const ContactInformation = () => {
                                         variant="outlined"
                                         name="newPassword"
                                         error={false} 
+                                        value={values.newPassword}
+                                        onChange={handleChange}
                                     >
                                         <OutlinedInput
                                             type={showNewPassword ? 'text' : 'password'}
@@ -156,6 +170,8 @@ const ContactInformation = () => {
                                         variant="outlined"
                                         name="newPassword2"
                                         error={false} 
+                                        value={values.newPassword2}
+                                        onChange={handleChange}
                                     >
                                         <OutlinedInput
                                             type={showNewPassword2 ? 'text' : 'password'}

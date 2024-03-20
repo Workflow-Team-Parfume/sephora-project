@@ -27,19 +27,18 @@ const Reviews: React.FC<{ title: string, reviews: RatingDto[] }> = ({ title, rev
             <Typography className="title">{title}</Typography>
 
             <Container sx={{ py: 8 }}>
-            <Formik
+                <Formik
                     initialValues={{
                         name: '',
                         rate: null,
                         comment: '',
                     }}
                     onSubmit={(values, { resetForm }) => {
-                        // Handle form submission here
                         console.log(values);
                         resetForm();
                     }}
                 >
-                    {() => (
+                    {({ values, handleChange }) => (
                         <Form>
                             <Stack spacing={2}>
                                 <Stack direction="row" spacing={4} alignItems="center">
@@ -49,11 +48,15 @@ const Reviews: React.FC<{ title: string, reviews: RatingDto[] }> = ({ title, rev
                                         sx={{ ...textFieldStyle }}
                                         placeholder={t('details.reviews.name')}
                                         name="name"
+                                        value={values.name}
+                                        onChange={handleChange}
                                     />
                                     <Field
                                         as={Rating}
                                         name="rate"
                                         precision={0.5}
+                                        value={values.rate}
+                                        onChange={handleChange}
                                         icon={<StarIcon style={{ color: '#000000', fontSize: '29px' }} />}
                                         emptyIcon={<StarIcon style={{ color: '#9D9D9D', fontSize: '29px' }} />}
                                     />
@@ -66,6 +69,8 @@ const Reviews: React.FC<{ title: string, reviews: RatingDto[] }> = ({ title, rev
                                     multiline
                                     rows={4}
                                     name="comment"
+                                    value={values.comment}
+                                    onChange={handleChange}
                                 />
                                 <Stack alignItems="center">
                                     <Button type="submit" className="addComment">

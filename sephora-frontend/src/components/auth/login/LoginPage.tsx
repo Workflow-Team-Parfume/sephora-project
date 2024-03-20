@@ -16,6 +16,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { AuthUserActionType, IUser, ILogin, IAuthUser } from "../types";
 import http_common from "../../../http_common";
 import { jwtDecode } from "jwt-decode";
 import "./LoginPage.scss";
@@ -30,9 +31,6 @@ import { useGoogleLogin } from "@react-oauth/google";
 import textFieldStyle from "../../../common/textFieldStyle";
 import routes from "../../../common/routes";
 import icon1 from "../../../assets/images/icon1.svg";
-import { AuthUserActionType, IAuthUser } from "../types";
-import LoginDto from "../../../models/user/LoginDto";
-import GetUserDto from "../../../models/user/GetUserDto";
 
 const style = {
   position: "absolute" as "absolute",
@@ -72,7 +70,7 @@ const LoginPage = () => {
     setAnchorElUser(null);
   };
 
-  const initialValues: LoginDto = {
+  const initialValues: ILogin = {
     email: "",
     password: "",
   };
@@ -103,7 +101,7 @@ const LoginPage = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const onHandleSubmit = async (values: LoginDto) => {
+  const onHandleSubmit = async (values: ILogin) => {
     try {
       await loginSchema.validate(values);
       console.log(values);
@@ -112,22 +110,18 @@ const LoginPage = () => {
 
       const token = data.token;
       localStorage.setItem("token", token);
-      const user = jwtDecode(token) as GetUserDto;
+      const user = jwtDecode(token) as IUser;
 
       dispatch({
         type: AuthUserActionType.LOGIN_USER,
         payload: {
           id: user.id,
-            fistName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            profilePicture: user.profilePicture,
-            registrationDate: user.registrationDate,
-            phoneNumber: user.phoneNumber,
-            roles: user.roles,
-            ratings: user.ratings,
-            orders: user.orders,
-            cartItems: user.cartItems,
+          userName: user.userName,
+          email: user.email,
+          profilePicture: user.profilePicture,
+          registrationDate: user.registrationDate,
+          phoneNumber: user.phoneNumber,
+          roles: user.roles,
         },
       });
       handleClose();

@@ -8,6 +8,16 @@
     border-radius: 0;
 }
 
+#menu-appbar{
+    .text{
+        text-transform: none;
+        font-family: "Lato", sans-serif;
+        font-size: 20px;
+        color: black;
+        padding: 0;
+    }
+}
+
 hr{
     width: 350px;
     height: 1px;
@@ -29,6 +39,9 @@ hr{
         color: white;
         background: black;
         line-height: 1;
+    }
+    .registationButton:hover{
+        background: black;
     }
     .regBut{
         font-family: "Lato", sans-serif;

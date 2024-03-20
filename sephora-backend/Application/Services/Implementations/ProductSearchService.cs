@@ -49,7 +49,9 @@ public class ProductSearchService : ISearchService<ProductEntity>
         if (!Directory.EnumerateFileSystemEntries(indexPath).IsNullOrEmpty())
             return;
 
-        var products = await _productRepo.GetAll().ToListAsync();
+        var products = await _productRepo
+            .GetListBySpec(new Products.GetAll())
+            .ToListAsync();
         Index(products);
     }
 

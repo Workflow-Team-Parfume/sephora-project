@@ -4,14 +4,17 @@ import {useTranslation} from "react-i18next";
 import { newPieces } from "../data";
 import OrderProduct from "../products/orderProduct/OrderProduct";
 import OrderBuyer from "./orderBuyer/OrderBuyer";
-// import OrderDelivery from "./orderDelivery/OrderDelivery";
+import OrderDelivery from "./orderDelivery/OrderDelivery";
 import ProductPieceDto from "../../../models/piece/ProductPieceDto"
 import { CalculateProductTotal } from "../../../common/calculateTotal";
+import { useSelector } from "react-redux";
+import { IAuthUser } from "../../auth/types";
 
 
 const Order = () => {
     const {t} = useTranslation();
     const pieces:ProductPieceDto[] = newPieces;
+    const { isAuth } = useSelector((store: any) => store.auth as IAuthUser);
 
     const total: number = CalculateProductTotal(pieces);
     const discount = 0;
@@ -53,8 +56,11 @@ const Order = () => {
                 </Grid>
 
                 <Grid item sm={12} lg={6}>
-                    <OrderBuyer/>
-                    {/* <OrderDelivery/> */}
+                    {isAuth ?
+                        <OrderDelivery/> 
+                        :
+                        <OrderBuyer/>
+                    }
                 </Grid>
             </Grid>
         </Container>

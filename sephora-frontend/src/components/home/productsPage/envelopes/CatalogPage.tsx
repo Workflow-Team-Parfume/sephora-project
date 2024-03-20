@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 import ProductsPage from "../core/ProductsPage.tsx";
-import {Filter, Filters} from "../../data.ts";
+import {CarePageFilter, CarePageFilters} from "../../data.ts";
 import routes from "../../../../common/routes.ts";
 import React from "react";
 
@@ -10,8 +10,8 @@ const CatalogPage: React.FC = () => {
         defaultOrder={null}
         defaultDirection={null}
         title={t('header.catalogue')}
-        filters={Filters}
-        mainFilter={Filter}
+        filters={CarePageFilters}
+        mainFilter={CarePageFilter}
         link={routes.api.pieces}
         navigateLink={routes.products}/>;
 };

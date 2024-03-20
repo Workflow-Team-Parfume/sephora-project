@@ -22,6 +22,7 @@ import routes from "../../../../common/routes.ts";
 
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 import Reviews from "../../reviews/ReviewsProduct";
 import "./details.scss";
 import novaPoshta from "../../../../assets/images/delivery/deliveryNewPost.svg";

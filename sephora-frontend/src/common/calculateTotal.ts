@@ -7,5 +7,6 @@ export function CalculateOrderTotal(order: OrderDto): number {
 }
 
 export function CalculateProductTotal(pieces: ProductPieceDto[] | CartItem[] | undefined): number {
+    console.log(pieces)
     return pieces ? pieces.reduce((acc, piece) => acc + piece.price, 0) : 0;
 }

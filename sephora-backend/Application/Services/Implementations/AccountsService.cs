@@ -23,6 +23,8 @@ public class AccountsService(
 
     public IQueryable<GetUserDto> Get()
         => userManager.Users
+            .Include(x => x.CartItems)
+            .Include(x => x.Orders)
             .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
 
     public async Task<GetUserDto> Get(string id)

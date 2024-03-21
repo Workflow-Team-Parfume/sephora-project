@@ -1,4 +1,4 @@
-import {Box, Button, Grid, Modal, Stack, Typography} from "@mui/material";
+import {Box, Button, CircularProgress, Grid, Modal, Stack, Typography} from "@mui/material";
 import "./basket.scss"
 import {useTranslation} from "react-i18next";
 import {newPieces} from "../data";
@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../store/store.ts";
 import http_common from "../../../http_common.ts";
 import CartItem from "../../../models/Cart/CartItem.ts";
+import PagedList from "../../../models/pagedlist/PagedList.ts";
 
 const style = {
     position: 'absolute' as const,
@@ -32,11 +33,11 @@ export function Basket() {
     const handleClose = () => setOpen(false);
 
     const {t} = useTranslation();
-    const [products, setProducts] = React.useState<CartItem[]>();
+    const [products, setProducts] = React.useState<PagedList<CartItem>>();
 
     React.useEffect(() => {
         if (isAuth) {
-            http_common.get<CartItem[]>("/cart")
+            http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setProducts(r.data))
                 .catch(e => console.log(e));
         } else {
@@ -46,10 +47,12 @@ export function Basket() {
 
     const discount = 0;
 
-    const total: number = CalculateProductTotal(products);
+    const total: number = CalculateProductTotal(products?.items);
 
     return !products
-        ? <div>Loading...</div>
+        ? <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
+            <CircularProgress color="inherit"/>
+        </Stack>
         : (
             <div>
                 <Button disableTouchRipple onClick={handleOpen}><img src={icon2} alt=""/></Button>
@@ -72,7 +75,7 @@ export function Basket() {
                             <Grid container justifyContent='space-between'>
                                 <Grid item sm={12} lg={8} className="containerScroll">
                                     <Stack spacing={2} sx={{margin: '8px'}}>
-                                        {products.map((piece) => (
+                                        {products.items.map((piece) => (
                                             <BasketProduct piece={piece} key={piece.id}/>
                                         ))}
                                     </Stack>
@@ -104,7 +107,7 @@ export function Basket() {
                                 </Grid>
                             </Grid>
                         </Box>
-                        {(products.length <= 3 && window.outerWidth >= 1600) && (
+                        {(products.items.length <= 3 && window.outerWidth >= 1600) && (
                             <Box margin={4}>
                                 <Typography className="recProductsTitle">{t('basket.recomProducts')}</Typography>
                                 <Grid container spacing={2} columns={15}>

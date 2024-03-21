@@ -32,6 +32,7 @@ public class JwtService(
         var claims = new List<Claim>
         {
             new(CustomClaimTypes.Id, user.Id),
+            new(ClaimTypes.NameIdentifier, user.Id),
             new(CustomClaimTypes.UserName, user.UserName ?? ""),
             new(CustomClaimTypes.Email, user.Email ?? ""),
             new(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),

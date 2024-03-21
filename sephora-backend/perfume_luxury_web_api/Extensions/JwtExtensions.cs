@@ -10,7 +10,6 @@ public static class JwtExtensions
         if (!jwtOpts.AreValid)
             throw new SecurityException("Invalid JWT options provided");
 
-        // https://medium.com/c-sharp-progarmming/asp-net-core-google-authentication-4c0aa8feebbc
         services.AddAuthentication(
             CertificateAuthenticationDefaults.AuthenticationScheme
         ).AddCertificate();
@@ -27,26 +26,27 @@ public static class JwtExtensions
             .AddJwtBearer(o =>
             {
                 o.SaveToken = true;
-                o.RequireHttpsMetadata = false;
+                o.RequireHttpsMetadata = false; // true on production
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidateAudience = false,
+                    ValidateAudience = false, // true on production
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtOpts.Issuer,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtOpts.Key ?? String.Empty)),
+                        Encoding.UTF8.GetBytes(jwtOpts.Key ?? String.Empty)
+                    ),
                     ClockSkew = TimeSpan.Zero
                 };
+            })
+            .AddGoogle(options =>
+            {
+                options.ClientId = jwtOpts.GoogleClientId
+                                   ?? throw new ApplicationException("Google client ID is null");
+                options.ClientSecret = jwtOpts.GoogleClientSecret
+                                       ?? throw new ApplicationException("Google client secret is null");
             });
-        // .AddGoogle(options =>
-        // {
-        //     options.ClientId = jwtOpts.GoogleClientId
-        //                        ?? throw new ApplicationException("Google client ID is null");
-        //     options.ClientSecret = jwtOpts.GoogleClientSecret
-        //                            ?? throw new ApplicationException("Google client secret is null");
-        // });
     }
 
     public static void SwaggerConfig(this IServiceCollection services)
@@ -55,7 +55,7 @@ public static class JwtExtensions
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "AdsPlatform",
+                Title = "Luxury Hub API",
                 Version = "v1"
             });
             c.AddSecurityDefinition(
@@ -65,8 +65,9 @@ public static class JwtExtensions
                     In = ParameterLocation.Header,
                     Description = "Please enter JWT with Bearer into field",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "Bearer",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    BearerFormat = "JWT",
                     Reference = new OpenApiReference
                     {
                         Type = ReferenceType.SecurityScheme,
@@ -78,6 +79,8 @@ public static class JwtExtensions
                 {
                     new OpenApiSecurityScheme
                     {
+                        Name = JwtBearerDefaults.AuthenticationScheme,
+                        In = ParameterLocation.Header,
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,

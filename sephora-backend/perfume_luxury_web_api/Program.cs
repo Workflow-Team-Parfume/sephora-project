@@ -20,6 +20,23 @@ if (indexPath is null)
 builder.Services.AddControllers().AddNewtonsoftJson(opts =>
     opts.SerializerSettings.Formatting = Formatting.Indented);
 
+builder.Services.AddCors();
+
+builder.Services.SwaggerConfig();
+
+builder.Services.NewtonsoftJsonConfig();
+
+builder.Services.AddEndpointsApiExplorer();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext(connStr);
+
+builder.Services.AddIdentity();
+
+builder.Services.AddRepository();
+
 // Add JWT tokens
 JwtOptions? opts = null;
 if (builder.Environment.IsDevelopment())
@@ -36,21 +53,7 @@ if (!builder.Environment.IsDevelopment() || opts is null)
         GoogleClientSecret = Environment.GetEnvironmentVariable("GoogleClientSecret")
     };
 builder.Services.AddJwt(opts);
-
-builder.Services.SwaggerConfig();
-
-builder.Services.NewtonsoftJsonConfig();
-
-builder.Services.AddEndpointsApiExplorer();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext(connStr);
-
-builder.Services.AddIdentity();
-
-builder.Services.AddRepository();
+builder.Services.AddAuthorization();
 
 // add custom services
 builder.Services.AddCustomServices(opts);

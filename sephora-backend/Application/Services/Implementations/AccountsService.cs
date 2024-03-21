@@ -30,7 +30,7 @@ public class AccountsService(
         var user = await userManager.FindByIdAsync(id);
         if (user is null)
             throw new HttpException(
-                ErrorMessages.UserByIDNotFound,
+                $"User with ID={{{id}}} is not found",
                 HttpStatusCode.NotFound
             );
 
@@ -111,18 +111,12 @@ public class AccountsService(
             ]
         };
         
-        GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
+        var payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
         UserEntity? user = await userManager.FindByEmailAsync(payload.Email);
         
         if (user is null)
         {
-            // Prepare claims and create user if not exists
-            IList<Claim> claims = [
-                new Claim(ClaimTypes.NameIdentifier, payload.Subject ?? String.Empty),
-                new Claim(ClaimTypes.Authentication, "Google"),
-                new Claim(ClaimTypes.Expiration, payload.ExpirationTimeSeconds?.ToString() ?? "0"),
-                new Claim(ClaimTypes.Locality, payload.Locale ?? String.Empty),
-            ];
+            // Prepare user if not exists
             user = new UserEntity
             {
                 Email = payload.Email ?? String.Empty,
@@ -138,12 +132,9 @@ public class AccountsService(
             EnsureResultSucceeded(result);
             result = await userManager.AddToRoleAsync(user, "User");
             EnsureResultSucceeded(result);
-            result = await userManager.AddClaimsAsync(user, claims);
-            EnsureResultSucceeded(result);
         }
         
         // Login and return token
-        await signInManager.SignInAsync(user, true);
         if (payload.Email is null)
             throw new HttpException(
                 ErrorMessages.UserNotFound,
@@ -156,6 +147,7 @@ public class AccountsService(
                 HttpStatusCode.NotFound
             );
         
+        await signInManager.SignInAsync(user, true, "Google");
         return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))

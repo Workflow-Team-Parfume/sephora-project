@@ -25,7 +25,6 @@ const style = {
     p: 4,
 };
 
-
 export function Basket() {
     const isAuth = useSelector((store: RootState) => store.auth.isAuth);
     const [open, setOpen] = React.useState<boolean>(false);

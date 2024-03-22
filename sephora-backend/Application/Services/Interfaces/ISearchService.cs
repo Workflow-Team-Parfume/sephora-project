@@ -5,7 +5,7 @@ namespace CleanArchitecture.Application.Services.Interfaces;
  * The search service (powers our search engine on the website).
  * </summary>
  */
-public interface ISearchService<T>
+public interface ISearchService<in T, TDto>
 {
     /**
      * <summary>Indexes the entity in the search engine</summary>
@@ -32,7 +32,7 @@ public interface ISearchService<T>
      * <param name="pageSize">The page size</param>
      * <returns>The search results</returns>
      */
-    Task<PagedListInfo<T>> Search(
+    Task<PagedListInfo<TDto>> Search(
         string searchTerm,
         int pageNumber = 1,
         int pageSize = 10

@@ -2,7 +2,7 @@ using Directory = System.IO.Directory;
 
 namespace CleanArchitecture.Application.Services.Implementations;
 
-public class ProductSearchService : ISearchService<ProductEntity>
+public class ProductSearchService : ISearchService<ProductEntity, ProductDto>
 {
     private const LuceneVersion Version = LuceneVersion.LUCENE_48;
 
@@ -23,9 +23,12 @@ public class ProductSearchService : ISearchService<ProductEntity>
     private readonly MultiFieldQueryParser _queryParser;
     private readonly IndexWriterConfig _config;
 
+    private readonly IMapper _mapper;
+
     public ProductSearchService(
         string indexPath,
-        IRepository<ProductEntity> productRepo
+        IRepository<ProductEntity> productRepo,
+        IMapper mapper
     )
     {
         var analyzer = new StandardAnalyzer(Version);
@@ -39,6 +42,8 @@ public class ProductSearchService : ISearchService<ProductEntity>
             // for wildcard search (slow)
             // AllowLeadingWildcard = true 
         };
+
+        _mapper = mapper;
 
         InitialIndex(indexPath).Wait();
     }
@@ -128,7 +133,7 @@ public class ProductSearchService : ISearchService<ProductEntity>
             _directory,
             (IndexWriterConfig)_config.Clone()
         );
-        
+
         foreach (var item in items)
         {
             Document doc = IndexItem(item);
@@ -149,7 +154,7 @@ public class ProductSearchService : ISearchService<ProductEntity>
         writer.Commit();
     }
 
-    public async Task<PagedListInfo<ProductEntity>> Search(
+    public async Task<PagedListInfo<ProductDto>> Search(
         string searchTerm,
         int pageNumber = 1,
         int pageSize = 10
@@ -176,7 +181,7 @@ public class ProductSearchService : ISearchService<ProductEntity>
         double totalHits = totalCntCollector.TotalHits;
 
         if (totalHits == 0)
-            return new PagedListInfo<ProductEntity>();
+            return new PagedListInfo<ProductDto>();
 
         // Perform the search of preceding results with the collector
         int from = (pageNumber - 1) * pageSize;
@@ -193,18 +198,22 @@ public class ProductSearchService : ISearchService<ProductEntity>
         foreach (var hit in hits)
         {
             var document = searcher.Doc(hit.Doc);
+            
             long id = Convert.ToInt64(
                 document.GetField(nameof(ProductEntity.Id)).GetStringValue()
             );
-            var entity = await _productRepo.GetById(id);
+            ProductEntity? entity = await _productRepo.GetItemBySpec(
+                new Products.GetById(id)
+            );
+            
             if (entity is not null)
                 prods.Add(entity);
         }
 
         int totalPages = Convert.ToInt32(Math.Ceiling(totalHits / pageSize));
-        return new PagedListInfo<ProductEntity>
+        return new PagedListInfo<ProductDto>
         (
-            Items: prods,
+            Items: _mapper.Map<IList<ProductDto>>(prods),
             CurrentPage: pageNumber,
             PageSize: pageSize,
             TotalPages: totalPages,

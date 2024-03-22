@@ -15,31 +15,17 @@ const Search: React.FC = () => {
     // TODO: commit search logic here
     const [params] = useSearchParams();
     const q = params.get('q'), link = routes.api.search + q;
-    console.log(q)
     if (typeof q === "undefined" || q === null || q.trim().length === 0) {
         navigate('/');
     }
-
-    // return (
-    //     <ProductsPage
-    //         defaultOrder={null}
-    //         defaultDirection={null}
-    //         title={t('search')}
-    //         link={routes.api.search + q}
-    //         filters={null}
-    //         mainFilter={null}
-    //         navigateLink={routes.search}
-    //         enableOrderAndDirection={false}
-    //     />
-    // );
 
     const [products, setProducts] = useState<PagedList<ProductDto>>();
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        http_common.get(`${link}
-            &size=10
-            &page=${currentPage}`)
+        http_common.get<PagedList<ProductDto>>(
+            `${link}&size=10&page=${currentPage}`
+        )
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     }, [currentPage, link]);
@@ -87,21 +73,13 @@ const Search: React.FC = () => {
                         <Container sx={{pt: 3, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                             <Grid container spacing={2}>
                                 {products?.items.map((product, i) => (
+                                    product.pieces &&
                                     <Grid key={i} item xs={12} sm={6} lg={4}>
-                                        <Product piece={product}/>
+                                        <Product piece={{...product.pieces[0], product: product}}/>
                                     </Grid>
                                 ))}
                             </Grid>
                         </Container>
-
-                        {/*<Button className={`
-                            link$
-                            {
-                                products?.hasNextPage || ' invisible'
-                            }
-                            `} variant="outlined">*/}
-                        {/*    {t('common.button.moreProducts')}*/}
-                        {/*</Button>*/}
                         <Stack sx={{margin: '40px', alignItems: 'center'}}>
                             <Pagination
                                 sx={{display: 'flex'}}

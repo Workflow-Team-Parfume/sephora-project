@@ -6,15 +6,11 @@ const changeFavStatus = (id: number, isAuthed: boolean) => {
             .catch(e => console.error(e));
     } else {
         const items = JSON.parse(localStorage.getItem('favorites') ?? '[]');
-        if (items.includes(id)) {
-            items.splice(items.indexOf(id), 1);
-            console.info('Removed from local storage') // todo: remove log
-        } else {
-            items.push(id);
-            console.info('Added to local storage')
-        }
+
+        if (items.includes(id)) items.splice(items.indexOf(id), 1);
+        else items.push(id);
+
         localStorage.setItem('favorites', JSON.stringify(items));
-        console.info(JSON.parse(localStorage.getItem('favorites') ?? '[]'));
     }
 }
 

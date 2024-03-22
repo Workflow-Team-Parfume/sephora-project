@@ -33,8 +33,7 @@ const Reviews: React.FC<{ title: string, reviews: RatingDto[] }> = ({ title, rev
                         rate: null,
                         comment: '',
                     }}
-                    onSubmit={(values, { resetForm }) => {
-                        console.log(values);
+                    onSubmit={(_values, { resetForm }) => {
                         resetForm();
                     }}
                 >

@@ -42,8 +42,8 @@ const CategoryEditPage = () => {
                 },
             });
             navigate("../..");
-        } catch {
-            console.log("Server error");
+        } catch (e) {
+            console.error("Server error:", e);
         }
     };
 

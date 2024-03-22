@@ -57,7 +57,6 @@ const ProductsPage: React.FC<{
     };
 
     useEffect(() => {
-        console.log(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${order.value} ${direction.value}`)
         http_common.get(
             `${link}
             &size=${itemsPerPage}

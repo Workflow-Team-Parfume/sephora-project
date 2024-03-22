@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../store/store.ts";
 import http_common from "../../../http_common.ts";
 import CartItem from "../../../models/Cart/CartItem.ts";
-import PagedList, {DefaultPagedList} from "../../../models/pagedlist/PagedList.ts";
+import PagedList, {EmptyPagedList} from "../../../models/pagedlist/PagedList.ts";
 
 const style = {
     position: 'absolute' as const,
@@ -39,20 +39,18 @@ export function Basket() {
         if (isAuth) {
             http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setProducts(r.data))
-                .catch(e => console.log(e));
+                .catch(e => console.error(e));
         } else {
             setProducts(
                 JSON.parse(localStorage.getItem("cart")!)
-                ?? DefaultPagedList
+                ?? EmptyPagedList
             );
         }
     }, [setProducts, isAuth]);
 
     const discount = 0;
-
     const total: number = CalculateProductTotal(products?.items);
 
-    console.info(products)
     return products
         ? (
             <div>

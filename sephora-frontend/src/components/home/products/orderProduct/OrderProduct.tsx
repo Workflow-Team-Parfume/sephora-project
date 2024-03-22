@@ -13,8 +13,6 @@ const OrderProduct: React.FC<{ piece: CartItem }>
     = ({piece}) => {
     const {t} = useTranslation();
 
-    console.info("OrderProduct", piece)
-
     const [count, setCount] = useState(1);
     const handleCountChange = (count: number) => {
         if (count != 0)

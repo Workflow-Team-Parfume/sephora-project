@@ -9,6 +9,8 @@ public class PerfumeDbContext(DbContextOptions<PerfumeDbContext> options)
 
         // ----------- Set Configurations -----------
         modelBuilder.ApplyConfiguration(new UserConfigurations());
+        modelBuilder.ApplyConfiguration(new ProductConfigurations());
+        modelBuilder.ApplyConfiguration(new OrderConfigurations());
     }
 
     // ---------------- Data Collections ----------------

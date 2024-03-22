@@ -9,7 +9,7 @@ import {CalculateProductTotal} from "../../../common/calculateTotal";
 import {useSelector} from "react-redux";
 import {IAuthUser} from "../../auth/types";
 import {RootState} from "../../../store/store.ts";
-import PagedList from "../../../models/pagedlist/PagedList.ts";
+import PagedList, {EmptyPagedList} from "../../../models/pagedlist/PagedList.ts";
 import http_common from "../../../http_common.ts";
 import CartItem from "../../../models/Cart/CartItem.ts";
 
@@ -24,7 +24,10 @@ const Order = () => {
                 .then(r => setPieces(r.data))
                 .catch(e => console.log(e));
         } else {
-            setPieces(JSON.parse(localStorage.getItem("cart") || "[]"));
+            setPieces(
+                JSON.parse(localStorage.getItem("cart")!)
+                ?? EmptyPagedList
+            );
         }
     }, [setPieces, isAuth]);
 

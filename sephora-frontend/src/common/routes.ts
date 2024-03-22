@@ -16,6 +16,8 @@ const routes = {
     thank: '/thank',
     detailsOrder: '/order-details',
 
+    search: '/search',
+
     deliveryMain: '/deliveryMain',
     deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
     deliveryPickup: '/deliveryPickup',
@@ -45,6 +47,7 @@ const routes = {
         care: '/pieces?filter=product.category.nameEn = "Care"',
         bottled: '/pieces?filter=isBottledParfume = true',
         full_sized: '/pieces?filter=isBottledParfume = false',
+        search: '/search?q=',
     }
 }
 

@@ -485,7 +485,7 @@
         * Search products
         * q: string (search query)
         * page: int
-        * count: int
+        * size: int
         * Returns: Paged list of products
 
 **[⬆ Back to Table of Contents](#table-of-contents)**

@@ -8,12 +8,16 @@ export default interface PagedList<T> {
     hasNextPage: boolean,
 }
 
-export const DefaultPagedList: PagedList<never> = {
-    items: [],
-    currentPage: 1,
-    pageSize: 0,
-    totalCount: 1,
-    totalPages: 1,
-    hasPreviousPage: false,
-    hasNextPage: false,
+export const EmptyPagedList = DefaultPagedList<never>();
+
+export function DefaultPagedList<T>(): PagedList<T> {
+    return {
+        items: [],
+        currentPage: 1,
+        pageSize: 0,
+        totalCount: 1,
+        totalPages: 1,
+        hasPreviousPage: false,
+        hasNextPage: false,
+    };
 }

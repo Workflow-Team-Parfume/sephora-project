@@ -104,8 +104,7 @@ const LoginPage = () => {
     const onHandleSubmit = async (values: ILogin) => {
         try {
             await loginSchema.validate(values);
-            console.log(values);
-            const result = await http_common.post("Account/login", values);
+            const result = await http_common.post("account/login", values);
             const {data} = result;
 
             const token = data.token;
@@ -233,7 +232,6 @@ const LoginPage = () => {
                                 <GoogleLogin
                                     onSuccess={(credentialResponse) => {
                                         localStorage.gtoken = credentialResponse.credential;
-                                        console.log("Google One Tap login response:", credentialResponse);
                                         GrabInfo();
                                         handleClose();
                                     }}

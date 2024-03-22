@@ -11,7 +11,6 @@ function GrabInfo() {
 
     if (gToken) {
         const user = jwtDecode(gToken) as IGoogleUser;
-        console.log('As google user:', user)
         if (!user || user.exp * 1000 < Date.now()) {
             localStorage.removeItem('gtoken');
             return;
@@ -19,11 +18,7 @@ function GrabInfo() {
 
         if (!token)
             http_common.post("account/auth/google", gToken)
-                .then(r => {
-                    localStorage.token = r.data.token
-                    console.log(jwtDecode(r.data.token) as IUser)
-                });
-        else console.log('As user:', jwtDecode(token) as IUser)
+                .then(r => localStorage.token = r.data.token);
 
 
         store.dispatch({

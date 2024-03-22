@@ -6,7 +6,7 @@ public class ProductService(
     IRepository<Favorite> favRepo,
     IPieceService pieceService,
     UserManager<UserEntity> userManager,
-    ISearchService<ProductEntity> searchService,
+    ISearchService<ProductEntity, ProductDto> searchService,
     IMapper mapper
 ) : IProductService
 {

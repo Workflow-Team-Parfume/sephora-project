@@ -36,8 +36,16 @@ const ProductsPage: React.FC<{
     filters: IFilter[],
     defaultOrder: SortingOrder | null | undefined,
     defaultDirection: SortingOrder | null | undefined,
-    navigateLink?: string
-}> = ({title, mainFilter, filters, link, defaultOrder = null, defaultDirection = null, navigateLink = ''}) => {
+    navigateLink: string | null | undefined
+}> = ({
+          title,
+          mainFilter,
+          filters,
+          link,
+          defaultOrder,
+          defaultDirection,
+          navigateLink
+      }) => {
     const {t} = useTranslation();
     const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
 
@@ -57,13 +65,10 @@ const ProductsPage: React.FC<{
     };
 
     useEffect(() => {
-        console.log(`${link}&size=${itemsPerPage}&page=${currentPage}&sort=${order.value} ${direction.value}`)
-        http_common.get(
-            `${link}
+        http_common.get(`${link}
             &size=${itemsPerPage}
             &page=${currentPage}
-            &sort=${order.value} ${direction.value}
-            `)
+            &sort=${order.value} ${direction.value}`)
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     }, [currentPage, link, order.value, direction.value]);
@@ -83,24 +88,22 @@ const ProductsPage: React.FC<{
         ? (
             <Container className="productsPage"
                        style={{maxWidth: "100%", justifyContent: "center"}}>
-                {navigateLink && 
-                    <Stack 
-                        direction='row' 
-                        className="navigate" 
-                        alignItems='center' 
+                {navigateLink &&
+                    <Stack
+                        direction='row'
+                        className="navigate"
+                        alignItems='center'
                         sx={{padding: "40px 8px"}}>
-                        <Button 
+                        <Button
                             disableTouchRipple
-                            href={routes.home} 
-                            style={{color: "#646464"}}
-                        >
+                            href={routes.home}
+                            style={{color: "#646464"}}>
                             {t('main')}
                         </Button>
                         /
                         <Button
                             disableTouchRipple
-                            href={navigateLink}
-                        >
+                            href={navigateLink}>
                             {title}
                         </Button>
                     </Stack>
@@ -128,11 +131,13 @@ const ProductsPage: React.FC<{
                     <Grid item lg={9}>
                         <Container style={{maxWidth: "100%", justifyContent: "center"}}>
                             <Typography className="title">{title}</Typography>
-                            <Container sx={{ height: '50px', mt: 5, position: "relative"}}>
-                                <Stack sx={{ position: "absolute",
+                            <Container sx={{height: '50px', mt: 5, position: "relative"}}>
+                                <Stack sx={{
+                                    position: "absolute",
                                     top: 0,
                                     right: 25,
-                                    zIndex: 1,}}
+                                    zIndex: 1,
+                                }}
                                 >
                                     <Accordion className='sort' expanded={expanded} onChange={handleChange(true)}>
                                         <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
@@ -181,13 +186,18 @@ const ProductsPage: React.FC<{
                                 <Grid container spacing={2}>
                                     {products?.items.map((piece, i) => (
                                         <Grid key={i} item xs={12} sm={6} lg={4}>
-                                            <Product piece={piece} />
+                                            <Product piece={piece}/>
                                         </Grid>
                                     ))}
                                 </Grid>
                             </Container>
 
-                            {/*<Button className={`link${products?.hasNextPage || ' invisible'}`} variant="outlined">*/}
+                            {/*<Button className={`
+                            link$
+                            {
+                                products?.hasNextPage || ' invisible'
+                            }
+                            `} variant="outlined">*/}
                             {/*    {t('common.button.moreProducts')}*/}
                             {/*</Button>*/}
                             <Stack sx={{margin: '40px', alignItems: 'center'}}>

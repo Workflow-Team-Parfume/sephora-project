@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import CategoryListPage from "./components/admin/category/CategoryListPage.tsx";
 import CategoryCreatePage from "./components/admin/category/CategoryCreatePage.tsx";
 import CategoryEditPage from "./components/admin/category/CategoryEditPage.tsx";
@@ -33,97 +33,86 @@ import BottledPage from "./components/home/productsPage/envelopes/BottledPage.ts
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 import i18n from "./i18n/i18n.ts";
 import React from "react";
+import Search from "./components/home/search/Search.tsx";
 import ProductListPage from "./components/admin/product/ProductListPage.tsx";
 import ProductCreatePage from "./components/admin/product/ProductCreatePage.tsx";
 
 function App() {
-  // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
-  React.useEffect(() => {
-    const selectedLanguage = localStorage.getItem("selectedLanguage");
+    // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
+    React.useEffect(() => {
+        const selectedLanguage = localStorage.getItem("selectedLanguage");
+        i18n.changeLanguage(selectedLanguage == null ? "uk" : selectedLanguage)
+            .catch((e) => console.error(e));
+        localStorage.setItem(
+            "selectedLanguage",
+            selectedLanguage == null ? "uk" : selectedLanguage
+        );
+    }, []);
+    return (
+        <>
+            <Loader/>
+            <Routes>
+                <Route path={routes.home} element={<DefaultLayout/>}>
+                    <Route index element={<HomePage/>}/>
+                    <Route path={routes.login} element={<LoginPage/>}/>
+                    <Route path={routes.register} element={<RegisterPage/>}/>
+                    <Route path={routes.productDetails} element={<Details/>}/>
 
-    i18n
-      .changeLanguage(selectedLanguage == null ? "uk" : selectedLanguage)
-      .catch((e) => console.error(e));
+                    <Route path={routes.products} element={<CatalogPage/>}/>
+                    <Route path={routes.novelties} element={<NoveltiesPage/>}/>
+                    <Route path={routes.care} element={<CarePage/>}/>
+                    <Route path={routes.bottled} element={<BottledPage/>}/>
+                    <Route path={routes.full_sized} element={<FullSizedPage/>}/>
 
-    localStorage.setItem(
-      "selectedLanguage",
-      selectedLanguage == null ? "uk" : selectedLanguage
-    );
-  }, []);
-  return (
-    <>
-      <Loader />
-      <Routes>
-        <Route path={routes.home} element={<DefaultLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path={routes.login} element={<LoginPage />} />
-          <Route path={routes.register} element={<RegisterPage />} />
-          <Route path={routes.productDetails} element={<Details />} />
+                    <Route path={routes.order} element={<Order/>}/>
+                    <Route path={routes.thank} element={<Thank/>}/>
+                    <Route path={routes.detailsOrder} element={<YourOrder/>}/>
 
-          <Route path={routes.products} element={<CatalogPage />} />
-          <Route path={routes.novelties} element={<NoveltiesPage />} />
-          <Route path={routes.care} element={<CarePage />} />
-          <Route path={routes.bottled} element={<BottledPage />} />
-          <Route path={routes.full_sized} element={<FullSizedPage />} />
+                    <Route path={routes.profile} element={<Profile/>}/>
 
-          <Route path={routes.order} element={<Order />} />
-          <Route path={routes.thank} element={<Thank />} />
-          <Route path={routes.detailsOrder} element={<YourOrder />} />
+                    <Route path={routes.profile} element={<Profile/>}/>
 
-          <Route path={routes.profile} element={<Profile />} />
+                    <Route path={routes.deliveryMain} element={<DeliveryMain/>}/>
+                    <Route path={routes.deliveryFreeLuxuryHub} element={<DeliveryFreeLuxuryHub/>}/>
+                    <Route path={routes.deliveryPickup} element={<DeliveryPickup/>}/>
+                    <Route path={routes.deliveryNewPost} element={<DeliveryNewPost/>}/>
+                    <Route path={routes.deliveryUkrPoshta} element={<DeliveryUkrPoshta/>}/>
+                    <Route path={routes.deliveryMeestMail} element={<DeliveryMeestMail/>}/>
+                    <Route path={routes.deliveryByCourierInUkraine} element={<DeliveryByCourierInUkraine/>}/>
 
-          <Route path={routes.deliveryMain} element={<DeliveryMain />} />
+                    <Route path={routes.aboutUs} element={<AboutUs/>}/>
 
-          <Route
-            path={routes.deliveryFreeLuxuryHub}
-            element={<DeliveryFreeLuxuryHub />}
-          />
-          <Route path={routes.deliveryPickup} element={<DeliveryPickup />} />
-          <Route path={routes.deliveryNewPost} element={<DeliveryNewPost />} />
-          <Route
-            path={routes.deliveryUkrPoshta}
-            element={<DeliveryUkrPoshta />}
-          />
-          <Route
-            path={routes.deliveryMeestMail}
-            element={<DeliveryMeestMail />}
-          />
-          <Route
-            path={routes.deliveryByCourierInUkraine}
-            element={<DeliveryByCourierInUkraine />}
-          />
-          <Route path={routes.aboutUs} element={<AboutUs />} />
+                    <Route path={routes.search} element={<Search/>}/>
 
-          <Route path="*" element={<NotFound />} />
-        </Route>
+                    <Route path="*" element={<NotFound/>}/>
+                </Route>
 
-        {/* {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? ( */}
-        <Route path={routes.admin} element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path={routes.adminCategoriesList}>
-            <Route index element={<CategoryListPage />} />
-            <Route
-              path={routes.createCategory}
-              element={<CategoryCreatePage />}
-            />
-            <Route path={routes.editCategory} element={<CategoryEditPage />} />
-          </Route>
-          <Route path={routes.adminProductsList}>
-            <Route index element={<ProductListPage />} />
-            <Route
-              path={routes.createProducts}
-              element={<ProductCreatePage />}
-            />
-          </Route>
+                {/* {user?.roles.find(x => x === "sudoAdmin")  && isAuth ? ( */}
+                <Route path={routes.admin} element={<AdminLayout/>}>
+                    <Route index element={<AdminDashboard/>}/>
+                    <Route path={routes.adminCategoriesList}>
+                        <Route index element={<CategoryListPage/>}/>
+                        <Route
+                            path={routes.createCategory}
+                            element={<CategoryCreatePage/>}
+                        />
+                        <Route path={routes.editCategory} element={<CategoryEditPage/>}/>
+                    </Route>
+                    <Route path={routes.adminProductsList}>
+                        <Route index element={<ProductListPage/>}/>
+                        <Route
+                            path={routes.createProducts}
+                            element={<ProductCreatePage/>}/>
+                    </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Route>
-        {/* ) : (
-                  <Route path="admin" element={<LoginPage />} />
+                    <Route path="*" element={<NotFound/>}/>
+                </Route>
+                {/* ) : (
+                  <Route path={routes.admin} element={<LoginPage />} />
                 )} */}
-      </Routes>
-    </>
-  );
+            </Routes>
+        </>
+    );
 }
 
 export default App;

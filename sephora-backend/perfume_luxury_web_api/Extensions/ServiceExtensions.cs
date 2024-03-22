@@ -64,10 +64,11 @@ public static class ServiceExtensions
     public static void AddSearchService(this IServiceCollection services, string indexPath)
     {
         Directory.CreateDirectory(indexPath);
-        services.AddScoped<ISearchService<ProductEntity>>(
+        services.AddScoped<ISearchService<ProductEntity, ProductDto>>(
             provider => new ProductSearchService(
                 indexPath,
-                provider.GetRequiredService<IRepository<ProductEntity>>()
+                provider.GetRequiredService<IRepository<ProductEntity>>(),
+                provider.GetRequiredService<IMapper>()
             )
         );
     }

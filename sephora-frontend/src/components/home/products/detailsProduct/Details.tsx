@@ -29,7 +29,7 @@ import novaPoshta from "../../../../assets/images/delivery/deliveryNewPost.svg";
 import ukrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg";
 import meest from "../../../../assets/images/delivery/deliveryMeestMail.svg";
 import textFieldStyle from '../../../../common/textFieldStyle';
-import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import PagedList, {EmptyPagedList} from "../../../../models/pagedlist/PagedList.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../store/store.ts";
 import changeFavStatus from "../ChangeFavStatus.ts";
@@ -99,29 +99,25 @@ const Details: React.FC = () => {
                 productPieceId: pieceId,
                 quantity: 1
             }
-            const isInCart = (await http_common
-                .get<boolean>(`cart/contains/${id}`)
-            ).data
-            if (isInCart) {
+            const inCart = (await http_common.get<boolean>(`cart/contains/${id}`)).data;
+            if (inCart) {
                 http_common.delete(`cart/${id}`)
                     .catch(e => console.error(e))
-            }
-            else {
+            } else {
                 http_common.post(`cart`, item)
                     // TODO: add toast/other notification
                     .catch(e => console.error(e))
             }
         } else {
-            const items = JSON.parse(localStorage.getItem('cart') ?? '[]');
-            if (items.includes(pieceId)) {
-                items.splice(items.indexOf(pieceId), 1);
-                console.info('Removed from local storage'); // todo: remove log
-            } else {
-                items.push(pieceId);
-                console.info('Added to local storage');
-            }
-            localStorage.setItem('cart', JSON.stringify(items));
-            console.info(JSON.parse(localStorage.getItem('cart') ?? '[]'));
+            const cart = JSON.parse(localStorage.getItem("cart") ?? "undefined")
+                ?? EmptyPagedList;
+
+            if (cart.items.includes(pieceId))
+                cart.items.splice(cart.items.indexOf(pieceId), 1);
+            else
+                cart.items.push(pieceId);
+
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
     }
 

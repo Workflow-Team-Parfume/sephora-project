@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../store/store.ts";
 import http_common from "../../../http_common.ts";
 import CartItem from "../../../models/Cart/CartItem.ts";
-import PagedList from "../../../models/pagedlist/PagedList.ts";
+import PagedList, {EmptyPagedList} from "../../../models/pagedlist/PagedList.ts";
 
 const style = {
     position: 'absolute' as const,
@@ -24,7 +24,6 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
 
 export function Basket() {
     const isAuth = useSelector((store: RootState) => store.auth.isAuth);
@@ -39,21 +38,20 @@ export function Basket() {
         if (isAuth) {
             http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setProducts(r.data))
-                .catch(e => console.log(e));
+                .catch(e => console.error(e));
         } else {
-            setProducts(JSON.parse(localStorage.getItem("cart") || "[]"));
+            setProducts(
+                JSON.parse(localStorage.getItem("cart")!)
+                ?? EmptyPagedList
+            );
         }
     }, [setProducts, isAuth]);
 
     const discount = 0;
-
     const total: number = CalculateProductTotal(products?.items);
 
-    return !products
-        ? <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
-            <CircularProgress color="inherit"/>
-        </Stack>
-        : (
+    return products
+        ? (
             <div>
                 <Button disableTouchRipple onClick={handleOpen}><img src={icon2} alt=""/></Button>
                 <Modal
@@ -109,7 +107,7 @@ export function Basket() {
                         </Box>
                         {(products.items.length <= 3 && window.outerWidth >= 1600) && (
                             <Box margin={4}>
-                                <Typography className="recProductsTitle">{t('basket.recomProducts')}</Typography>
+                                <Typography className="recProductsTitle">{t('basket.recommendedProducts')}</Typography>
                                 <Grid container spacing={2} columns={15}>
                                     {newPieces.map((product) => (
                                         <Grid key={product.id} item xs={7.5} sm={5} md={3} lg={3}>
@@ -124,4 +122,7 @@ export function Basket() {
                 </Modal>
             </div>
         )
+        : <Stack sx={{alignItems: 'center', justifyContent: 'center'}}>
+            <CircularProgress color="inherit"/>
+        </Stack>
 }

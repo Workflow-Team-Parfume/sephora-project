@@ -1,7 +1,6 @@
 import axios from "axios";
 import {APP_ENV} from "./env";
 
-
 const auth = localStorage.token
     ? `Bearer ${localStorage.token}`
     : undefined;
@@ -12,7 +11,6 @@ const http_common = axios.create({
         Authorization: auth,
     },
 });
-console.log(auth)
 
 // http_common.interceptors.request.use(
 //     (config) => {

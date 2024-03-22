@@ -1,6 +1,6 @@
 import {Stack, Tab, Tabs} from "@mui/material";
 import {useTranslation} from "react-i18next";
-import {useState} from "react";
+import React, {useState} from "react";
 import a11yProps from "../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../common/tabPanel/tabsStyle";
@@ -10,23 +10,20 @@ import AddressBook from "./addressBook/AddressBook";
 import OrderHistory from "./orderHistory/OrderHistory";
 import './profile.scss'
 
-
-
 const Profile = () => {
-    const {t} = useTranslation();    
+    const {t} = useTranslation();
 
     const [value, setValue] = useState(0);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setValue(newValue); event;
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
     };
-
 
     return (
         <Stack className='profile'>
             <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="buyer" 
+                aria-label="buyer"
                 sx={{
                     "& .MuiTabs-indicator": {
                         display: 'none'
@@ -34,18 +31,18 @@ const Profile = () => {
                     margin: '30px 12%'
                 }}
             >
-                <Tab label={t('profile.contactInformation')} 
-                    sx={{ ...tabsStyle }}
-                    {...a11yProps(0)}/>
+                <Tab label={t('profile.contactInformation')}
+                     sx={{...tabsStyle}}
+                     {...a11yProps(0)}/>
                 <Tab label={t('profile.addressBook')}
-                    sx={{ ...tabsStyle }} 
-                    {...a11yProps(1)}/>
-                <Tab label={t('profile.wishlist')} 
-                    sx={{ ...tabsStyle }}
-                    {...a11yProps(2)}/>
+                     sx={{...tabsStyle}}
+                     {...a11yProps(1)}/>
+                <Tab label={t('profile.wishlist')}
+                     sx={{...tabsStyle}}
+                     {...a11yProps(2)}/>
                 <Tab label={t('profile.orderHistory')}
-                    sx={{ ...tabsStyle }} 
-                    {...a11yProps(3)}/>
+                     sx={{...tabsStyle}}
+                     {...a11yProps(3)}/>
             </Tabs>
 
             <Stack>

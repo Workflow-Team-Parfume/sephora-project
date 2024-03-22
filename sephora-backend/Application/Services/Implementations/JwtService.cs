@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.Services.Implementations;
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class JwtService(
     UserManager<UserEntity> userManager,

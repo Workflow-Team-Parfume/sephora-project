@@ -5,13 +5,15 @@ import {useTranslation} from "react-i18next";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import i18n from "i18next";
 import routes from "../../../../common/routes.ts";
+import CartItem from "../../../../models/Cart/CartItem.ts";
 
-const OrderProduct: React.FC<{ piece: ProductPieceDto }>
+const OrderProduct: React.FC<{ piece: CartItem }>
     = ({piece}) => {
     const {t} = useTranslation();
+
+    console.info("OrderProduct", piece)
 
     const [count, setCount] = useState(1);
     const handleCountChange = (count: number) => {
@@ -30,20 +32,20 @@ const OrderProduct: React.FC<{ piece: ProductPieceDto }>
                 <Link href={'/details/' + piece.id} underline="none">
                     <Stack width='80px' alignItems='center'>
                         <img className="productImg"
-                             src={piece.pictures[0].url ?? routes.picPlaceholder}
+                             src={piece.productImage ?? routes.picPlaceholder}
                              alt="Product image"/>
                     </Stack>
                 </Link>
                 <Stack justifyContent='space-between'>
                     <Link href={'/details/' + piece.id} underline="none">
                         <Typography className="productName">
-                            {piece.product.name}
+                            {piece.productName}
                         </Typography>
                         <Typography className="productCategory">
                             {
                                 i18n.language === "en"
-                                    ? piece.product.category.nameEn
-                                    : piece.product.category.nameUa
+                                    ? piece.categoryNameEn
+                                    : piece.categoryNameUa
                             }
                         </Typography>
                         <Typography className="productCategory">

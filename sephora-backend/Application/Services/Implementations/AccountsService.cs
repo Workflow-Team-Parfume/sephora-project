@@ -5,11 +5,26 @@ public class AccountsService(
     SignInManager<UserEntity> signInManager,
     IJwtService jwtService,
     IPictureService pictureService,
-    IMapper mapper)
-    : IAccountsService
+    IMapper mapper,
+    IConfiguration configuration
+) : IAccountsService
 {
+    private static string? EnvName =>
+        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+    
+    private static void EnsureResultSucceeded(IdentityResult result)
+    {
+        if (!result.Succeeded)
+            throw new HttpException(
+                String.Join(", ", result.Errors.Select(x => x.Description)),
+                HttpStatusCode.BadRequest
+            );
+    }
+
     public IQueryable<GetUserDto> Get()
         => userManager.Users
+            .Include(x => x.CartItems)
+            .Include(x => x.Orders)
             .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
 
     public async Task<GetUserDto> Get(string id)
@@ -17,7 +32,7 @@ public class AccountsService(
         var user = await userManager.FindByIdAsync(id);
         if (user is null)
             throw new HttpException(
-                ErrorMessages.UserByIDNotFound,
+                $"User with ID={{{id}}} is not found",
                 HttpStatusCode.NotFound
             );
 
@@ -70,7 +85,6 @@ public class AccountsService(
     public async Task<LoginResponseDto> Login(LoginDto dto)
     {
         var user = await userManager.FindByEmailAsync(dto.Email);
-
         if (user is null ||
             !await userManager.CheckPasswordAsync(user, dto.Password))
             throw new HttpException(
@@ -78,7 +92,64 @@ public class AccountsService(
                 HttpStatusCode.BadRequest
             );
 
+        // Login and return token
         await signInManager.SignInAsync(user, true);
+        return new LoginResponseDto
+        {
+            Token = jwtService.CreateToken(jwtService.GetClaims(user))
+        };
+    }
+
+    public async Task<LoginResponseDto> GoogleAuth(string token)
+    {
+        bool isDev = EnvName == "Development";
+        var settings = new GoogleJsonWebSignature.ValidationSettings
+        {
+            Audience =
+            [   // Google Client ID
+                isDev
+                    ? configuration["JwtOptions:GoogleClientId"]
+                    : Environment.GetEnvironmentVariable("GoogleClientId")
+            ]
+        };
+        
+        var payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
+        UserEntity? user = await userManager.FindByEmailAsync(payload.Email);
+        
+        if (user is null)
+        {
+            // Prepare user if not exists
+            user = new UserEntity
+            {
+                Email = payload.Email ?? String.Empty,
+                UserName = payload.Name ?? String.Empty,
+                FirstName = payload.GivenName ?? String.Empty,
+                LastName = payload.FamilyName ?? String.Empty,
+                ProfilePicture = payload.Picture ?? String.Empty,
+                EmailConfirmed = payload.EmailVerified
+            };
+            
+            // Add user to database, add claims and roles
+            var result = await userManager.CreateAsync(user);
+            EnsureResultSucceeded(result);
+            result = await userManager.AddToRoleAsync(user, "User");
+            EnsureResultSucceeded(result);
+        }
+        
+        // Login and return token
+        if (payload.Email is null)
+            throw new HttpException(
+                ErrorMessages.UserNotFound,
+                HttpStatusCode.NotFound
+            );
+        user = await userManager.FindByEmailAsync(payload.Email);
+        if (user is null)
+            throw new HttpException(
+                ErrorMessages.UserNotFound,
+                HttpStatusCode.NotFound
+            );
+        
+        await signInManager.SignInAsync(user, true, "Google");
         return new LoginResponseDto
         {
             Token = jwtService.CreateToken(jwtService.GetClaims(user))

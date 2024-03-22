@@ -1,9 +1,12 @@
 namespace CleanArchitecture.Application.Services.Interfaces;
 
+/**
+ * <summary>
+ * The checkout service.
+ * </summary>
+ */
 public interface ICheckoutService
 {
-    // Task Create(CreateCheckoutDto checkoutDto);
-
     /**
      * <summary>
      * Places an order for an unauthenticated user. <br/>

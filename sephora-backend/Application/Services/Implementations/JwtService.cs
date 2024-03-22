@@ -1,28 +1,28 @@
-﻿namespace CleanArchitecture.Application.Services.Implementations;
+namespace CleanArchitecture.Application.Services.Implementations;
 
-public class JwtService(IConfiguration configuration, UserManager<UserEntity> userManager) : IJwtService
+public class JwtService(
+    UserManager<UserEntity> userManager,
+    JwtOptions jwtOpts
+) : IJwtService
 {
     public string CreateToken(IEnumerable<Claim> claims)
     {
-        var jwtOpts = configuration
-            .GetSection(nameof(JwtOptions))
-            .Get<JwtOptions>();
-
         var keyBytes = Encoding.UTF8.GetBytes(
-            jwtOpts?.Key ?? 
+            jwtOpts.Key ??
             throw new InvalidOperationException()
-            );
+        );
         var securityKey = new SymmetricSecurityKey(keyBytes);
         var credentials = new SigningCredentials(
-            securityKey, 
+            securityKey,
             SecurityAlgorithms.HmacSha256
-            );
+        );
 
         var token = new JwtSecurityToken(
             issuer: jwtOpts.Issuer,
             claims: claims,
             expires: DateTime.UtcNow.AddMinutes(jwtOpts.Lifetime),
-            signingCredentials: credentials);
+            signingCredentials: credentials
+        );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
@@ -32,13 +32,14 @@ public class JwtService(IConfiguration configuration, UserManager<UserEntity> us
         var claims = new List<Claim>
         {
             new(CustomClaimTypes.Id, user.Id),
+            new(ClaimTypes.NameIdentifier, user.Id),
             new(CustomClaimTypes.UserName, user.UserName ?? ""),
             new(CustomClaimTypes.Email, user.Email ?? ""),
             new(CustomClaimTypes.ProfilePicture, user.ProfilePicture ?? ""),
             new(
-                CustomClaimTypes.RegistrationDate, 
+                CustomClaimTypes.RegistrationDate,
                 user.RegistrationDate.ToString(CultureInfo.InvariantCulture)
-                )
+            ),
         };
 
         var roles = userManager.GetRolesAsync(user).Result;

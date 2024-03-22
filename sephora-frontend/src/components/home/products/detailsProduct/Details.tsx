@@ -107,11 +107,7 @@ const Details: React.FC = () => {
                     .catch(e => console.error(e))
             }
             else {
-                http_common.post(`cart`, item, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+                http_common.post(`cart`, item)
                     // TODO: add toast/other notification
                     .catch(e => console.error(e))
             }

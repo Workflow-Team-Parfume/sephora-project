@@ -13,6 +13,16 @@ export enum AuthUserActionType {
     phoneNumber: string;
     roles: string[];
   }
+
+  export interface IGoogleUser {
+    sub: string;
+    name: string;
+    given_name: string;
+    family_name: string;
+    email: string;
+    picture: string;
+    exp: number;
+  }
   
   export interface IUserEdit {
     userName: string;
@@ -44,5 +54,5 @@ export interface IRegister {
   }
   
   export interface ILoginResult {
-    access_token: string;
+    gtoken: string;
   }

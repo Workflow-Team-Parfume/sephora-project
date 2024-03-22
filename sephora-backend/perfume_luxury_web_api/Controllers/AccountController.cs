@@ -18,7 +18,7 @@ public class AccountController(
         [FromQuery] string? filter = null
     ) => Ok(await accountsService.Get(page, size, sort, filter));
 
-    [HttpGet("{id}"), Authorize(Roles = "SudoAdmin")]
+    [HttpGet("/get/{id}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Get(string id)
         => Ok(await accountsService.Get(id));
 
@@ -31,7 +31,7 @@ public class AccountController(
         await accountsService.Register(dto);
         return Ok();
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
@@ -40,6 +40,13 @@ public class AccountController(
 
         var response = await accountsService.Login(dto);
         return Ok(response);
+    }
+
+    [HttpPost("auth/google"), AllowAnonymous]
+    public async Task<IActionResult> GoogleAuth([FromBody] string gToken)
+    {
+        var payload = await accountsService.GoogleAuth(gToken);
+        return Ok(payload);
     }
 
     [HttpPost("logout")]

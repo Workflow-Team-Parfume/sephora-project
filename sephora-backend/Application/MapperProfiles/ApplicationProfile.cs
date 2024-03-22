@@ -23,25 +23,29 @@ public class ApplicationProfile : Profile
         CreateMap<Amount, AmountDto>().ReverseMap();
         CreateMap<Amount, CreateAmountDto>().ReverseMap();
 
-        CreateMap<ProductEntity, ProductDto>().ForMember(
-            dest => dest.Pieces,
-            opts => opts.MapFrom(src => src.ProductPieces)
-        ).ForMember(
-            dest => dest.Volumes,
-            opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
-        );
+        CreateMap<ProductEntity, ProductDto>()
+            .ForMember(
+                dest => dest.Pieces,
+                opts => opts.MapFrom(src => src.ProductPieces)
+            )
+            .ForMember(
+                dest => dest.Volumes,
+                opts => opts.MapFrom(src => src.ProductPieces.Select(x => x.Amount))
+            );
         CreateMap<CreateProductDto, ProductEntity>();
         CreateMap<EditProductDto, ProductEntity>();
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
-        CreateMap<ProductPiece, ProductPieceDto>().ForMember(
-            dest => dest.Milliliters,
-            opts => opts.MapFrom(src => src.Amount!.Milliliters)
-        ).ForMember(
-            dest => dest.Pictures,
-            opts => opts.MapFrom(src => src.ProductPictures)
-        );
+        CreateMap<ProductPiece, ProductPieceDto>()
+            .ForMember(
+                dest => dest.Milliliters,
+                opts => opts.MapFrom(src => src.Amount!.Milliliters)
+            )
+            .ForMember(
+                dest => dest.Pictures,
+                opts => opts.MapFrom(src => src.ProductPictures)
+            );
         CreateMap<EditProductPieceDto, ProductPiece>();
 
         CreateMap<Order, OrderDto>();
@@ -55,9 +59,18 @@ public class ApplicationProfile : Profile
         CreateMap<CreateRatingDto, Rating>();
         CreateMap<EditRatingDto, Rating>();
         CreateMap<Rating, RatingDto>()
-            .ForMember(dest => dest.UserPfp, opts => opts.MapFrom(src => src.User.ProfilePicture))
-            .ForMember(dest => dest.FirstName, opts => opts.MapFrom(src => src.User.FirstName))
-            .ForMember(dest => dest.LastName, opts => opts.MapFrom(src => src.User.LastName));
+            .ForMember(
+                dest => dest.UserPfp,
+                opts => opts.MapFrom(src => src.User.ProfilePicture)
+            )
+            .ForMember(
+                dest => dest.FirstName,
+                opts => opts.MapFrom(src => src.User.FirstName)
+            )
+            .ForMember(
+                dest => dest.LastName,
+                opts => opts.MapFrom(src => src.User.LastName)
+            );
 
         CreateMap<EditUserDto, UserEntity>()
             .ForMember(dest => dest.ProfilePicture, opt => opt.Ignore());
@@ -101,6 +114,10 @@ public class ApplicationProfile : Profile
             .ForMember(
                 dest => dest.Price,
                 opt => opt.MapFrom(src => src.ProductPiece.Price)
+            )
+            .ForMember(
+                dest => dest.Milliliters,
+                opt => opt.MapFrom(src => src.ProductPiece.Amount!.Milliliters)
             )
             .ReverseMap();
 

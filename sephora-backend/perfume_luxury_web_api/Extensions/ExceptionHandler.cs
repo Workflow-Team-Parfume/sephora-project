@@ -43,11 +43,11 @@ public class ExceptionHandler : IExceptionHandler
     )
     {
         // TODO: Add more robust logging
-//         Console.WriteLine($"""
-//                            Exception occurred:
-//                            {exception.Message}
-//                            {exception.StackTrace}
-//                            """);
+//          Console.WriteLine($"""
+//                             Exception occurred:
+//                             {exception.Message}
+//                             {exception.StackTrace}
+//                             """);
 
         int statusCode = exception switch
         {

@@ -35,8 +35,6 @@ else if (!builder.Environment.IsDevelopment() || opts is null)
     };
 builder.Services.AddJwt(opts!);
 
-builder.Services.SwagerConfig();
-
 builder.Services.NewtonsoftJsonConfig();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -44,11 +42,16 @@ builder.Services.AddEndpointsApiExplorer();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen();
 
+builder.Services.SwagerConfig();
+
 builder.Services.AddDbContext(connStr);
 
 builder.Services.AddIdentity();
 
 builder.Services.AddRepository();
+
+
+
 
 // add custom services
 builder.Services.AddCustomServices();
@@ -73,12 +76,6 @@ var app = builder.Build();
 
 app.UseExceptionHandler();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHsts();
 app.UseHttpsRedirection();
@@ -90,10 +87,15 @@ app.UseCors(options =>
     options.AllowAnyOrigin();
 });
 
-app.UseAuthorization();
-
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 app.UseAuthentication();
 
+app.UseAuthorization();
 
 app.MapControllers();
 

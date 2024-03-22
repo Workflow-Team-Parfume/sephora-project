@@ -1,6 +1,6 @@
 ﻿namespace CleanArchitecture.Application.Services.Implementations;
 
-public class JwtService(IConfiguration configuration) : IJwtService
+public class JwtService(IConfiguration configuration, UserManager<UserEntity> userManager) : IJwtService
 {
     public string CreateToken(IEnumerable<Claim> claims)
     {
@@ -41,8 +41,8 @@ public class JwtService(IConfiguration configuration) : IJwtService
                 )
         };
 
-        // var roles = userManager.GetRolesAsync(user).Result;
-        // claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+        var roles = userManager.GetRolesAsync(user).Result;
+        claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
         return claims;
     }

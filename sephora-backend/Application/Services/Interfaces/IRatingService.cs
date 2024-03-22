@@ -1,5 +1,10 @@
 namespace CleanArchitecture.Application.Services.Interfaces;
 
+/**
+ * <summary>
+ * The rating service.
+ * </summary>
+ */
 public interface IRatingService
 {
     /**

@@ -1,29 +1,36 @@
 ﻿namespace Infrastructure;
 
-public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity>
+/**
+ * <summary>
+ * The repository class represents a generic repository
+ * of the entity type in the database.
+ * </summary>
+ */
+public sealed class Repository<TEntity>(PerfumeDbContext context) 
+    : IRepository<TEntity>
     where TEntity : class
 {
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
     public async Task Save() => await context.SaveChangesAsync();
 
-    public virtual IQueryable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAll()
         => _dbSet.AsQueryable();
 
-    public virtual async Task<TEntity?> GetById(object id)
+    public async Task<TEntity?> GetById(object id)
         => await _dbSet.FindAsync(id);
 
-    public virtual async Task Insert(TEntity entity)
+    public async Task Insert(TEntity entity)
         => await _dbSet.AddAsync(entity);
 
-    public virtual async Task Delete(object id)
+    public async Task Delete(object id)
     {
         TEntity? entityToDelete = await _dbSet.FindAsync(id);
         if (entityToDelete != null)
             await Delete(entityToDelete);
     }
 
-    public virtual async Task Delete(TEntity entityToDelete)
+    public async Task Delete(TEntity entityToDelete)
     {
         await Task.Run(() =>
         {
@@ -34,7 +41,7 @@ public class Repository<TEntity>(PerfumeDbContext context) : IRepository<TEntity
         });
     }
 
-    public virtual async Task Update(TEntity entityToUpdate)
+    public async Task Update(TEntity entityToUpdate)
     {
         await Task.Run(() =>
         {

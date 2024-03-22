@@ -1,5 +1,10 @@
 ﻿namespace CleanArchitecture.Application.Services.Interfaces;
 
+/**
+ * <summary>
+ * The product service.
+ * </summary>
+ */
 public interface IProductService
 {
     /**

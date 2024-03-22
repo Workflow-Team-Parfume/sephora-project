@@ -20,22 +20,9 @@ if (indexPath is null)
 builder.Services.AddControllers().AddNewtonsoftJson(opts =>
     opts.SerializerSettings.Formatting = Formatting.Indented);
 
-// Add JWT tokens
-JwtOptions? opts = null;
-if (builder.Environment.IsDevelopment())
-    opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
-else if (!builder.Environment.IsDevelopment() || opts is null)
-    opts = new JwtOptions
-    {
-        Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
-        Key = Environment.GetEnvironmentVariable("JwtKey"),
-        Lifetime = Convert.ToInt32(
-            Environment.GetEnvironmentVariable("JwtLifetime")
-        )
-    };
-builder.Services.AddJwt(opts!);
+builder.Services.AddCors();
 
-builder.Services.SwagerConfig();
+builder.Services.SwaggerConfig();
 
 builder.Services.NewtonsoftJsonConfig();
 
@@ -50,8 +37,26 @@ builder.Services.AddIdentity();
 
 builder.Services.AddRepository();
 
+// Add JWT tokens
+JwtOptions? opts = null;
+if (builder.Environment.IsDevelopment())
+    opts = builder.Configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>();
+if (!builder.Environment.IsDevelopment() || opts is null)
+    opts = new JwtOptions
+    {
+        Issuer = Environment.GetEnvironmentVariable("JwtIssuer"),
+        Key = Environment.GetEnvironmentVariable("JwtKey"),
+        Lifetime = Convert.ToInt32(
+            Environment.GetEnvironmentVariable("JwtLifetime")
+        ),
+        GoogleClientId = Environment.GetEnvironmentVariable("GoogleClientId"),
+        GoogleClientSecret = Environment.GetEnvironmentVariable("GoogleClientSecret")
+    };
+builder.Services.AddJwt(opts);
+builder.Services.AddAuthorization();
+
 // add custom services
-builder.Services.AddCustomServices();
+builder.Services.AddCustomServices(opts);
 
 // add auto mapper
 builder.Services.AddAutoMapper();
@@ -90,10 +95,8 @@ app.UseCors(options =>
     options.AllowAnyOrigin();
 });
 
-app.UseAuthorization();
-
 app.UseAuthentication();
-
+app.UseAuthorization();
 
 app.MapControllers();
 

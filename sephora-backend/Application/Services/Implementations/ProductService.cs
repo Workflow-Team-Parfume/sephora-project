@@ -105,6 +105,7 @@ public class ProductService(
         searchService.Index(entity!);
     }
 
+    // TODO: Fix the issue with the favorites
     public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null)
     {
         var products = productRepo.GetListBySpec(new Products.GetAll())

@@ -1,11 +1,12 @@
 import OrderDto from "../models/order/OrderDto";
-import ProductPieceDto from "../models/piece/ProductPieceDto";
+import CartItem from "../models/Cart/CartItem.ts";
+import ProductPieceDto from "../models/piece/ProductPieceDto.ts";
 
-export function CalculateOrderTotal(order:OrderDto): number {
-    const total: number = order.products.reduce((acc, piece) => acc + piece.productPiece.price * piece.quantity, 0);
-    return total;
+export function CalculateOrderTotal(order: OrderDto): number {
+    return order.products.reduce((acc, piece) => acc + piece.productPiece.price * piece.quantity, 0);
 }
-export function CalculateProductTotal(pieces: ProductPieceDto[]): number {
-    const total: number = pieces.reduce((acc, piece) => acc + piece.price, 0);
-    return total;
+
+export function CalculateProductTotal(pieces: ProductPieceDto[] | CartItem[] | undefined): number {
+    console.log(pieces)
+    return pieces ? pieces.reduce((acc, piece) => acc + piece.price, 0) : 0;
 }

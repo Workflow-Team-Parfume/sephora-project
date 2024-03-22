@@ -22,8 +22,8 @@ public static class ServiceExtensions
 
         services.ConfigureApplicationCookie(options =>
         {
-            options.AccessDeniedPath = "";
-            options.LoginPath = "";
+            options.AccessDeniedPath = PathString.Empty;
+            options.LoginPath = PathString.Empty;
             options.Cookie.HttpOnly = true;
             options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
             options.Events.OnRedirectToLogin = async context =>
@@ -36,15 +36,18 @@ public static class ServiceExtensions
                         Status = 401,
                         Title = "Unauthorized",
                         Detail = "You are not authorized to access this resource."
-                    }));
+                    })
+                );
             };
         });
     }
 
-    public static void AddCustomServices(this IServiceCollection services)
+    public static void AddCustomServices(this IServiceCollection services, JwtOptions opts)
     {
         services.AddScoped<IAccountsService, AccountsService>();
-        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IJwtService, JwtService>(
+            o => new JwtService(o.GetRequiredService<UserManager<UserEntity>>(), opts)
+        );
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IBrandService, BrandService>();
         services.AddScoped<IAmountService, AmountService>();
@@ -57,7 +60,7 @@ public static class ServiceExtensions
         services.AddScoped<IRatingService, RatingService>();
         services.AddScoped<IFavoritesService, FavoritesService>();
     }
-    
+
     public static void AddSearchService(this IServiceCollection services, string indexPath)
     {
         Directory.CreateDirectory(indexPath);

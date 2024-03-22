@@ -1,5 +1,10 @@
 namespace CleanArchitecture.Application.Services.Interfaces;
 
+/**
+ * <summary>
+ * The picture service.
+ * </summary>
+ */
 public interface IPictureService
 {
     /**

@@ -21,6 +21,7 @@ i18n.use(initReactI18next)
 
                     'profile': 'Профіль',
                     'logout': 'Вихід',
+                    'search': 'Пошук',
 
                     'passwordRecovery': 'Відновлення паролю',
                     'passwordRecoveryText': 'На Вашу електронну адресу надсилається лист, який дозволить вам автоматично увійти до системи.',
@@ -272,6 +273,7 @@ i18n.use(initReactI18next)
 
                     'profile': 'Profile',
                     'logout': 'Logout',
+                    'search': 'Search',
 
                     'passwordRecovery': 'Password recovery',
                     'passwordRecoveryText': 'An email will be sent to your e-mail address, which will allow you to automatically log in to the system.',

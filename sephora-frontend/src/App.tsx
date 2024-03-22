@@ -33,6 +33,7 @@ import BottledPage from "./components/home/productsPage/envelopes/BottledPage.ts
 import AboutUs from "./components/home/aboutUs/AboutUs.tsx";
 import i18n from "./i18n/i18n.ts";
 import React from "react";
+import Search from "./components/home/search/Search.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -67,15 +68,17 @@ function App() {
                     <Route path={routes.profile} element={<Profile/>}/>
                   
                     <Route path={routes.deliveryMain} element={<DeliveryMain />}/>
-
                     <Route path={routes.deliveryFreeLuxuryHub} element={<DeliveryFreeLuxuryHub />}/>
                     <Route path={routes.deliveryPickup} element={<DeliveryPickup />}/>
                     <Route path={routes.deliveryNewPost} element={<DeliveryNewPost />}/>
                     <Route path={routes.deliveryUkrPoshta} element={<DeliveryUkrPoshta />}/>
                     <Route path={routes.deliveryMeestMail} element={<DeliveryMeestMail />}/>
                     <Route path={routes.deliveryByCourierInUkraine} element={<DeliveryByCourierInUkraine />}/>
+
                     <Route path={routes.aboutUs} element={<AboutUs />}/>
-                    
+
+                    <Route path={routes.search} element={<Search/>}/>
+
                     <Route path='*' element={<NotFound/>}/>
                 </Route>
 
@@ -91,7 +94,7 @@ function App() {
                     <Route path='*' element={<NotFound/>}/>
                 </Route>
                 {/* ) : (
-                  <Route path="admin" element={<LoginPage />} />
+                  <Route path={routes.admin} element={<LoginPage />} />
                 )} */}
             </Routes>
         </>

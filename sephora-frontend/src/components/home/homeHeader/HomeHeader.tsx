@@ -10,9 +10,9 @@ import logo from "../../../assets/images/Group.svg";
 import input_main_icon from "../../../assets/images/input_main_icon.svg";
 // import icon1 from "../../../assets/images/icon1.svg";
 import { useTranslation } from "react-i18next";
-import { Basket } from "../basket/Basket";
 import routes from "../../../common/routes.ts";
 import LoginPage from "../../auth/login/LoginPage.tsx";
+import {Basket} from "../basket/Basket.tsx";
 
 const HomeHeader = () => {
   const { t, i18n } = useTranslation();

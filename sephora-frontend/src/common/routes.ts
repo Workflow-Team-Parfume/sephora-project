@@ -31,6 +31,10 @@ const routes = {
     createCategory: '/admin/category/create',
     editCategory: '/admin/category/edit/:id',
 
+    adminProductsList: '/admin/products',
+    createProducts: '/admin/products/create',
+
+
     picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
 
     api: {

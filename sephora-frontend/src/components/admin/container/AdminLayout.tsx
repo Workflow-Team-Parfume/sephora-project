@@ -6,7 +6,6 @@ import AdminHeader from "./AdminHeader";
 const AdminLayout = () => {
   return (
     <>
-      <AdminHeader />
       <Container  sx={{ flexGrow: 1, p: 3 }}>
             <AdminHeader />
         <Grid container>

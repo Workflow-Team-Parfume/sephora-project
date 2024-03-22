@@ -29,7 +29,7 @@ import novaPoshta from "../../../../assets/images/delivery/deliveryNewPost.svg";
 import ukrPoshta from "../../../../assets/images/delivery/deliveryUkrPoshta.svg";
 import meest from "../../../../assets/images/delivery/deliveryMeestMail.svg";
 import textFieldStyle from '../../../../common/textFieldStyle';
-import PagedList from "../../../../models/pagedlist/PagedList.ts";
+import PagedList, {DefaultPagedList} from "../../../../models/pagedlist/PagedList.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../store/store.ts";
 import changeFavStatus from "../ChangeFavStatus.ts";
@@ -100,24 +100,24 @@ const Details: React.FC = () => {
                 quantity: 1
             }
             const isInCart = (await http_common
-                .get<boolean>(`cart/contains/${id}`)
+                    .get<boolean>(`cart/contains/${id}`)
             ).data
             if (isInCart) {
                 http_common.delete(`cart/${id}`)
                     .catch(e => console.error(e))
-            }
-            else {
+            } else {
                 http_common.post(`cart`, item)
                     // TODO: add toast/other notification
                     .catch(e => console.error(e))
             }
         } else {
-            const items = JSON.parse(localStorage.getItem('cart') ?? '[]');
-            if (items.includes(pieceId)) {
-                items.splice(items.indexOf(pieceId), 1);
+            const items = JSON.parse(localStorage.getItem("cart") ?? "undefined")
+                ?? DefaultPagedList;
+            if (items.items.includes(pieceId)) {
+                items.items.splice(items.items.indexOf(pieceId), 1);
                 console.info('Removed from local storage'); // todo: remove log
             } else {
-                items.push(pieceId);
+                items.items.push(pieceId);
                 console.info('Added to local storage');
             }
             localStorage.setItem('cart', JSON.stringify(items));

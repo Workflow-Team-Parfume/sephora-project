@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../store/store.ts";
 import http_common from "../../../http_common.ts";
 import CartItem from "../../../models/Cart/CartItem.ts";
-import PagedList from "../../../models/pagedlist/PagedList.ts";
+import PagedList, {DefaultPagedList} from "../../../models/pagedlist/PagedList.ts";
 
 const style = {
     position: 'absolute' as const,
@@ -41,7 +41,10 @@ export function Basket() {
                 .then(r => setProducts(r.data))
                 .catch(e => console.log(e));
         } else {
-            setProducts(JSON.parse(localStorage.getItem("cart") || "[]"));
+            setProducts(
+                JSON.parse(localStorage.getItem("cart")!)
+                ?? DefaultPagedList
+            );
         }
     }, [setProducts, isAuth]);
 
@@ -49,11 +52,9 @@ export function Basket() {
 
     const total: number = CalculateProductTotal(products?.items);
 
-    return !products
-        ? <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
-            <CircularProgress color="inherit"/>
-        </Stack>
-        : (
+    console.info(products)
+    return products
+        ? (
             <div>
                 <Button disableTouchRipple onClick={handleOpen}><img src={icon2} alt=""/></Button>
                 <Modal
@@ -109,7 +110,7 @@ export function Basket() {
                         </Box>
                         {(products.items.length <= 3 && window.outerWidth >= 1600) && (
                             <Box margin={4}>
-                                <Typography className="recProductsTitle">{t('basket.recomProducts')}</Typography>
+                                <Typography className="recProductsTitle">{t('basket.recommendedProducts')}</Typography>
                                 <Grid container spacing={2} columns={15}>
                                     {newPieces.map((product) => (
                                         <Grid key={product.id} item xs={7.5} sm={5} md={3} lg={3}>
@@ -124,4 +125,7 @@ export function Basket() {
                 </Modal>
             </div>
         )
+        : <Stack sx={{alignItems: 'center', justifyContent: 'center'}}>
+            <CircularProgress color="inherit"/>
+        </Stack>
 }

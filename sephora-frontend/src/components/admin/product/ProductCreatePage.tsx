@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import { Button, MenuItem, Select, TextField, Typography, Box, Paper, Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import http_common from "../../../http_common.ts";
 import CategoryDto from "../../../models/category/CategoryDto.ts";
 import BrandDto from "../../../models/brand/BrandDto.ts";
 import CreateProductPieceDto from "../../../models/piece/CreateProductPieceDto.ts";
-import onChangeFileHandler from "../category/fileHnd.ts";
+//import onChangeFileHandler from "../category/fileHnd.ts";
 import AmountDto from "../../../models/amount/AmountDto.ts";
 
 const CreateProductPage = () => {
@@ -75,7 +75,7 @@ const CreateProductPage = () => {
         setFieldValue
     } = formik;
 
-    const fileHnd = (e: ChangeEvent<HTMLInputElement>) => onChangeFileHandler(e, setFieldValue);
+    //const fileHnd = (e: ChangeEvent<HTMLInputElement>) => onChangeFileHandler(e, setFieldValue);
 
     const handlePieceChange = (index: number) => (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;

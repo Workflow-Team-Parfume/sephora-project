@@ -49,9 +49,9 @@ const AdminSidebar = () => {
               <ListItemText primary={"Category"} />
             </ListItemButton>
           </ListItem>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["Products", "Brands", "Categories"].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton component={Link} to="/admin">
+              <ListItemButton component={Link} to="/admin/products">
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>

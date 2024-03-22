@@ -1,4 +1,4 @@
-﻿namespace perfume_luxury_web_api.Extensions;
+namespace perfume_luxury_web_api.Extensions;
 
 public static class JwtExtensions
 {

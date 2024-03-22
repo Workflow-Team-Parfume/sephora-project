@@ -17,7 +17,7 @@ public class RoleController(IRoleService roleService) : ControllerBase
         return Ok();
     }
     
-    [HttpPost("removeFromRole"), Authorize(Roles = "SudoAdmin")]
+    [HttpPost("removeFromRole")]
     public async Task<IActionResult> RemoveFromRole(string userId, string roleName)
     {
         await roleService.RemoveFromRole(userId, roleName);

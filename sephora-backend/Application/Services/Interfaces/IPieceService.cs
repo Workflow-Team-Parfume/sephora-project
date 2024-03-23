@@ -15,7 +15,7 @@ public interface IPieceService
      * Query of all product pieces.
      * </returns>
      */
-    IQueryable<ProductPieceDto> Get();
+    IQueryable<LightProductPieceDto> Get();
 
     /**
      * <summary>
@@ -37,7 +37,7 @@ public interface IPieceService
      * <see cref="PagedListInfo{T}"/> of product pieces.
      * </returns>
      */
-    Task<PagedListInfo<ProductPieceDto>> Get(
+    Task<PagedListInfo<LightProductPieceDto>> Get(
      int pageNumber,
      int pageSize,
      string? orderBy = null,

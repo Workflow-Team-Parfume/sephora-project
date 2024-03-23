@@ -47,7 +47,7 @@ public interface ICartService
      * <param name="dto">The cart item to update</param>
      * <param name="user">The owner of a cart item</param>
      */
-    public Task Update(CartDto dto, ClaimsPrincipal user);
+    public Task Update(UpdateCartDto dto, ClaimsPrincipal user);
 
     /**
      * <summary>Edits the specified cart item</summary>

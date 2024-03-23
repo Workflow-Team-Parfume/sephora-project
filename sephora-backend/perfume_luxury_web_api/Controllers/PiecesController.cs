@@ -9,8 +9,6 @@ public class PiecesController(
     public async Task<IActionResult> GetAll()
     {
         var items = await pieceService.Get().ToListAsync();
-        foreach (var i in items)
-            i.Product.Pieces = [];
         return Ok(items);
     }
 
@@ -23,8 +21,6 @@ public class PiecesController(
     )
     {
         var items = await pieceService.Get(page, size, sort, filter);
-        foreach (var i in items.Items)
-            i.Product.Pieces = [];
         return Ok(items);
     }
 

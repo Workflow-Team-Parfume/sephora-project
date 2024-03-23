@@ -7,11 +7,11 @@ public class PieceService(
     IMapper mapper
 ) : IPieceService
 {
-    public IQueryable<ProductPieceDto> Get()
+    public IQueryable<LightProductPieceDto> Get()
         => repository.GetListBySpec(new ProductPieces.GetAll())
-            .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider);
+            .ProjectTo<LightProductPieceDto>(mapper.ConfigurationProvider);
 
-    public async Task<PagedListInfo<ProductPieceDto>> Get(
+    public async Task<PagedListInfo<LightProductPieceDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
@@ -21,7 +21,7 @@ public class PieceService(
         var count = await repository.Count();
         var list = await repository
             .GetRange(pageNumber, pageSize, orderBy, selectBy)
-            .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider)
+            .ProjectTo<LightProductPieceDto>(mapper.ConfigurationProvider)
             .ToListAsync();
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);

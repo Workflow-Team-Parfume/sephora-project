@@ -11,7 +11,7 @@ public interface IProductService
      * <summary>Gets the products</summary>
      * <param name="user">The user to map the favorites</param>
      */
-    Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null);
+    Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal? user = null);
 
     /**
      * <summary>Gets the products</summary>
@@ -21,7 +21,7 @@ public interface IProductService
      * <param name="selectBy">The select by</param>
      * <param name="user">The user to map the favorites</param>
      */
-    Task<PagedListInfo<ProductDto>> Get(
+    Task<PagedListInfo<LightProductDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,

@@ -82,7 +82,7 @@ public class CartService(
         await cartRepository.Save();
     }
 
-    public async Task Update(CartDto dto, ClaimsPrincipal user)
+    public async Task Update(UpdateCartDto dto, ClaimsPrincipal user)
     {
         var entity = await cartRepository.GetById(dto.Id);
         string userId = GetUserIdOrThrow(user);
@@ -92,6 +92,7 @@ public class CartService(
             );
 
         mapper.Map(dto, entity);
+        entity.ProductPiece = null!;
 
         await cartRepository.Update(entity);
         await cartRepository.Save();

@@ -62,10 +62,10 @@ public class FavoritesService(
         }
     }
 
-    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal user)
+    public async Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal user)
         => (await productService.Get(user)).Where(x => x.IsFavorite);
 
-    public async Task<PagedListInfo<ProductDto>> Get(
+    public async Task<PagedListInfo<LightProductDto>> Get(
         ClaimsPrincipal user, 
         int pageNumber, 
         int pageSize, 

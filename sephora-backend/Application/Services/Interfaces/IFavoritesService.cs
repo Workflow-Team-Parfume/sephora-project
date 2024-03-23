@@ -47,7 +47,7 @@ public interface IFavoritesService
      * Query of all favorite products.
      * </returns>
      */
-    Task<IQueryable<ProductDto>> Get(ClaimsPrincipal user);
+    Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal user);
 
     /**
      * <summary>
@@ -72,7 +72,7 @@ public interface IFavoritesService
      * <see cref="PagedListInfo{T}"/> of favorite products.
      * </returns>
      */
-    Task<PagedListInfo<ProductDto>> Get(
+    Task<PagedListInfo<LightProductDto>> Get(
         ClaimsPrincipal user,
         int pageNumber,
         int pageSize,

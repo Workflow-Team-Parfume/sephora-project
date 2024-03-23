@@ -46,7 +46,7 @@ public class PiecesController(
 
     [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Update(
-        [FromBody] EditProductPieceDto dto
+        [FromForm] EditProductPieceDto dto
     )
     {
         if (!ModelState.IsValid) 

@@ -1,13 +1,23 @@
-import { useState, useEffect } from "react";
-import { Button, MenuItem, Select, TextField, Typography, Box, Paper, Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import {useState, useEffect} from "react";
+import {
+    Button,
+    MenuItem,
+    Select,
+    TextField,
+    Typography,
+    Box,
+    Paper,
+    Grid,
+    ToggleButton,
+    ToggleButtonGroup
+} from "@mui/material";
+import {useFormik} from "formik";
+import {useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 import http_common from "../../../http_common.ts";
 import CategoryDto from "../../../models/category/CategoryDto.ts";
 import BrandDto from "../../../models/brand/BrandDto.ts";
 import CreateProductPieceDto from "../../../models/piece/CreateProductPieceDto.ts";
-//import onChangeFileHandler from "../category/fileHnd.ts";
 import AmountDto from "../../../models/amount/AmountDto.ts";
 
 const CreateProductPage = () => {
@@ -17,7 +27,6 @@ const CreateProductPage = () => {
     const [categories, setCategories] = useState<CategoryDto[]>([]);
     const [productPieces, setProductPieces] = useState<CreateProductPieceDto[]>([]);
     const [amounts, setAmounts] = useState<AmountDto[]>([]);
-
 
     useEffect(() => {
         // Fetch brands and categories from API
@@ -47,7 +56,7 @@ const CreateProductPage = () => {
             descriptionUa: "",
             brandId: "",
             categoryId: "",
-            characteristics: [{ nameEn: "", nameUa: "", valueEn: "", valueUa: "" }],
+            characteristics: [{nameEn: "", nameUa: "", valueEn: "", valueUa: ""}],
         },
         validationSchema,
         onSubmit: async (values) => {
@@ -55,10 +64,18 @@ const CreateProductPage = () => {
                 const response = await http_common.post("/products", values);
                 const productId = response.data.id;
                 for (const piece of productPieces) {
-                    const pieceData = { ...piece, productId };
-                    await http_common.post(`/products/${productId}/productPieces`, pieceData);
+                    const pieceData = {...piece, productId};
+                    await http_common.post(
+                        `/products/${productId}/productPieces`,
+                        pieceData,
+                        {
+                            headers: {
+                                "Content-Type": "multipart/form-data",
+                            },
+                        }
+                    );
                 }
-                navigate("..");
+                navigate("../");
             } catch (error) {
                 console.error("Error while submitting form:", error);
                 // Handle error appropriately, such as showing a toast message to the user
@@ -77,19 +94,21 @@ const CreateProductPage = () => {
 
     //const fileHnd = (e: ChangeEvent<HTMLInputElement>) => onChangeFileHandler(e, setFieldValue);
 
-    const handlePieceChange = (index: number) => (e: { target: { name: any; value: any; }; }) => {
-        const { name, value } = e.target;
-        const updatedPieces = [...productPieces];
-        updatedPieces[index] = { ...updatedPieces[index], [name]: value };
-        setProductPieces(updatedPieces);
-    };
+    const handlePieceChange = (index: number) =>
+        (e: { target: { name: any; value: any; }; }) => {
+            const {name, value} = e.target;
+            const updatedPieces = [...productPieces];
+            updatedPieces[index] = {...updatedPieces[index], [name]: value};
+            setProductPieces(updatedPieces);
+        };
 
-    const handlePieceFileChange = (index: number) => (e: { target: { name: any; files: any; }; }) => {
-        const { name, files } = e.target;
-        const updatedPieces = [...productPieces];
-        updatedPieces[index] = { ...updatedPieces[index], [name]: files };
-        setProductPieces(updatedPieces);
-    };
+    const handlePieceFileChange = (index: number) =>
+        (e: { target: { name: any; files: any; }; }) => {
+            const {name, files} = e.target;
+            const updatedPieces = [...productPieces];
+            updatedPieces[index] = {...updatedPieces[index], [name]: files};
+            setProductPieces(updatedPieces);
+        };
 
     const addProductPiece = () => {
         const newPiece: CreateProductPieceDto = {
@@ -104,8 +123,8 @@ const CreateProductPage = () => {
     };
 
     return (
-        <Box sx={{ maxWidth: 800, mx: "auto", mt: 4 }}>
-            <Paper elevation={3} sx={{ p: 3 }}>
+        <Box sx={{maxWidth: 800, mx: "auto", mt: 4}}>
+            <Paper elevation={3} sx={{p: 3}}>
                 <Typography variant="h4" align="center" gutterBottom>
                     Add Product
                 </Typography>
@@ -120,8 +139,7 @@ const CreateProductPage = () => {
                                 name="name"
                                 variant="outlined"
                                 error={touched.name && !!errors.name}
-                                helperText={touched.name && errors.name}
-                            />
+                                helperText={touched.name && errors.name}/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
@@ -131,9 +149,14 @@ const CreateProductPage = () => {
                                 onChange={handleChange}
                                 name="descriptionEn"
                                 variant="outlined"
-                                error={touched.descriptionEn && !!errors.descriptionEn}
-                                helperText={touched.descriptionEn && errors.descriptionEn}
-                            />
+                                error={
+                                    touched.descriptionEn
+                                    && !!errors.descriptionEn
+                                }
+                                helperText={
+                                    touched.descriptionEn
+                                    && errors.descriptionEn
+                                }/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField
@@ -143,9 +166,14 @@ const CreateProductPage = () => {
                                 onChange={handleChange}
                                 name="descriptionUa"
                                 variant="outlined"
-                                error={touched.descriptionUa && !!errors.descriptionUa}
-                                helperText={touched.descriptionUa && errors.descriptionUa}
-                            />
+                                error={
+                                    touched.descriptionUa
+                                    && !!errors.descriptionUa
+                                }
+                                helperText={
+                                    touched.descriptionUa
+                                    && errors.descriptionUa
+                                }/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <Select
@@ -155,8 +183,7 @@ const CreateProductPage = () => {
                                 name="brandId"
                                 fullWidth
                                 variant="outlined"
-                                error={touched.brandId && !!errors.brandId}
-                            >
+                                error={touched.brandId && !!errors.brandId}>
                                 <MenuItem value="" disabled>
                                     Select Brand
                                 </MenuItem>
@@ -175,8 +202,7 @@ const CreateProductPage = () => {
                                 name="categoryId"
                                 fullWidth
                                 variant="outlined"
-                                error={touched.categoryId && !!errors.categoryId}
-                            >
+                                error={touched.categoryId && !!errors.categoryId}>
                                 <MenuItem value="" disabled>
                                     Select Category
                                 </MenuItem>
@@ -198,36 +224,34 @@ const CreateProductPage = () => {
                                     value={char.nameEn}
                                     onChange={handleChange}
                                     name={`characteristics[${index}].nameEn`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                                 <TextField
                                     label="Name (Ukrainian)"
                                     fullWidth
                                     value={char.nameUa}
                                     onChange={handleChange}
                                     name={`characteristics[${index}].nameUa`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                                 <TextField
                                     label="Value (English)"
                                     fullWidth
                                     value={char.valueEn}
                                     onChange={handleChange}
                                     name={`characteristics[${index}].valueEn`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                                 <TextField
                                     label="Value (Ukrainian)"
                                     fullWidth
                                     value={char.valueUa}
                                     onChange={handleChange}
                                     name={`characteristics[${index}].valueUa`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                             </Grid>
                         ))}
                         <Grid item xs={12}>
-                            <Button onClick={addProductPiece} variant="contained" color="primary">
+                            <Button onClick={addProductPiece}
+                                    variant="contained"
+                                    color="primary">
                                 Add Product Piece
                             </Button>
                         </Grid>
@@ -242,55 +266,58 @@ const CreateProductPage = () => {
                                     value={piece.productId}
                                     onChange={handlePieceChange(index)}
                                     name={`productPieces[${index}].productId`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                                 <TextField
                                     label="In Stock"
                                     fullWidth
                                     value={piece.inStock}
                                     onChange={handlePieceChange(index)}
                                     name={`productPieces[${index}].inStock`}
-                                    variant="outlined"
-                                />
+                                    variant="outlined"/>
                                 <TextField
                                     label="Price"
                                     fullWidth
                                     value={piece.price}
                                     onChange={handlePieceChange(index)}
                                     name={`productPieces[${index}].price`}
-                                    variant="outlined"
-                                />
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Amount
-                                    </Typography>
-                                    <Select
-                                        value={piece.amountId}
-                                        onChange={handlePieceChange(index)}
-                                        name={`productPieces[${index}].amountId`}
-                                        fullWidth
-                                        variant="outlined"
-                                    >
-                                        <MenuItem value="" disabled>
-                                            Select Amount
+                                    variant="outlined"/>
+                                <Typography variant="subtitle1" gutterBottom>
+                                    Amount
+                                </Typography>
+                                <Select
+                                    value={piece.amountId}
+                                    onChange={handlePieceChange(index)}
+                                    name={`productPieces[${index}].amountId`}
+                                    fullWidth
+                                    variant="outlined">
+                                    <MenuItem value="" disabled>
+                                        Select Amount
+                                    </MenuItem>
+                                    {Array.isArray(amounts) && amounts.map((amount) => (
+                                        <MenuItem key={amount.id} value={amount.id}>
+                                            {amount.milliliters} ml
                                         </MenuItem>
-                                        {Array.isArray(amounts) && amounts.map((amount) => (
-                                            <MenuItem key={amount.id} value={amount.id}>
-                                                {amount.milliliters} ml
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
+                                    ))}
+                                </Select>
 
-                                    <Typography variant="subtitle1" gutterBottom>
-                                        Bottled Parfume
-                                    </Typography>
-                                    <ToggleButtonGroup
-                                        value={piece.isBottledParfume}
-                                        exclusive
-                                        onChange={(_event, newValue) => setFieldValue("isBottledParfume", newValue)}
-                                    >
-                                        <ToggleButton value={true} sx={{ borderRadius: 10 }}>Yes</ToggleButton>
-                                        <ToggleButton value={false} sx={{ borderRadius: 10 }}>No</ToggleButton>
-                                    </ToggleButtonGroup>
+                                <Typography variant="subtitle1" gutterBottom>
+                                    Bottled Perfume
+                                </Typography>
+                                <ToggleButtonGroup
+                                    value={piece.isBottledParfume}
+                                    exclusive
+                                    onChange={(_event, newValue) =>
+                                        setFieldValue("isBottledParfume", newValue)
+                                    }>
+                                    <ToggleButton value={true}
+                                                  sx={{borderRadius: 10}}>
+                                        Yes
+                                    </ToggleButton>
+                                    <ToggleButton value={false}
+                                                  sx={{borderRadius: 10}}>
+                                        No
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
 
                                 <input
                                     type="file"
@@ -301,7 +328,9 @@ const CreateProductPage = () => {
                             </Grid>
                         ))}
                         <Grid item xs={12}>
-                            <Button type="submit" variant="contained" color="primary">
+                            <Button type="submit"
+                                    variant="contained"
+                                    color="primary">
                                 Add Product
                             </Button>
                         </Grid>

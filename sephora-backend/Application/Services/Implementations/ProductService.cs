@@ -123,12 +123,10 @@ public class ProductService(
     )
     {
         var count = await productRepo.Count();
-        var list = await productRepo.GetRange(
-            pageNumber,
-            pageSize,
-            orderBy,
-            selectBy
-        ).ProjectTo<ProductDto>(mapper.ConfigurationProvider).ToListAsync();
+        var list = await productRepo
+            .GetRange(pageNumber, pageSize, orderBy, selectBy)
+            .ProjectTo<ProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
 
         foreach (var product in list)
             product.IsFavorite = await IsFavorite(user, product.Id);

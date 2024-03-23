@@ -31,16 +31,12 @@ public class CartService(
     )
     {
         string userId = GetUserIdOrThrow(user);
-        var specification = new CartItems.GetByUserId(userId);
+        var spec = new CartItems.GetByUserId(userId);
 
-        var count = await cartRepository.CountBySpec(specification);
-        var list = await cartRepository.GetRangeBySpec(
-            specification,
-            pageNumber,
-            pageSize,
-            orderBy,
-            selectBy
-        ).ProjectTo<CartDto>(mapper.ConfigurationProvider).ToListAsync();
+        var count = await cartRepository.CountBySpec(spec);
+        var list = await cartRepository
+            .GetRangeBySpec(spec, pageNumber, pageSize, orderBy, selectBy)
+            .ProjectTo<CartDto>(mapper.ConfigurationProvider).ToListAsync();
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

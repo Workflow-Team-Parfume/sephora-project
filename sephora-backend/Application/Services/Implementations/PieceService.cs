@@ -19,12 +19,10 @@ public class PieceService(
     )
     {
         var count = await repository.Count();
-        var list = await repository.GetRange(
-            pageNumber,
-            pageSize,
-            orderBy,
-            selectBy
-        ).ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider).ToListAsync();
+        var list = await repository
+            .GetRange(pageNumber, pageSize, orderBy, selectBy)
+            .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

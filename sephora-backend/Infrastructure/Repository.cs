@@ -30,10 +30,10 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
     )
     {
         var query = _dbSet.AsQueryable();
-        if (!String.IsNullOrWhiteSpace(orderBy))
-            query = query.OrderBy(orderBy);
         if (!String.IsNullOrWhiteSpace(selectBy))
             query = query.Where(selectBy);
+        if (!String.IsNullOrWhiteSpace(orderBy))
+            query = query.OrderBy(orderBy);
         query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         return query;
     }
@@ -85,10 +85,10 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
     )
     {
         var query = ApplySpecification(specification);
-        if (!String.IsNullOrWhiteSpace(orderBy))
-            query = query.OrderBy(orderBy);
         if (!String.IsNullOrWhiteSpace(selectBy))
             query = query.Where(selectBy);
+        if (!String.IsNullOrWhiteSpace(orderBy))
+            query = query.OrderBy(orderBy);
         query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
         return query;
     }

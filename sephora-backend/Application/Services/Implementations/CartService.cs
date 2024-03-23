@@ -31,8 +31,16 @@ public class CartService(
     public async Task Create(CreateCartDto cartDto, ClaimsPrincipal user)
     {
         string userId = GetUserIdOrThrow(user);
+        CartItem? dbEntry = await cartRepository.GetItemBySpec(
+            new CartItems.GetByUserAndPiece(
+                userId,
+                cartDto.ProductPieceId
+            ));
+        
+        if (dbEntry is not null)
+            return; // the item already exists
 
-        CartItem dbEntry = mapper.Map<CartItem>(cartDto);
+        dbEntry = mapper.Map<CartItem>(cartDto);
         dbEntry.UserId = userId;
 
         await cartRepository.Insert(dbEntry);

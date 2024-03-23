@@ -96,14 +96,8 @@ const Product: React.FC<{ piece: ProductPieceDto }>
             </Link>
             {isHovered && (
                 <Stack
-                    sx={{
-                        display: isHovered ? 'block' : 'none',
-                        position: 'absolute',
-                        bottom: '-25%',
-                        zIndex: 1,
-                        width: '100%',
-                        padding: "-10px",
-                    }}>
+                    sx={{display: isHovered ? 'block' : 'none'}}
+                    className={`hoverBox ${isHovered ? 'show' : ''}`}>
                     <Stack 
                         className="hoverProd"
                         spacing={1}

@@ -1,13 +1,13 @@
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, /*Button,*/ Container, Grid, Stack, Typography } from "@mui/material";
 import "./banner.scss";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import React from "react";
 import { IMainBanner } from "./types";
 import i18n from "i18next";
 
 const MainBanner: React.FC<{ banners: IMainBanner[] }>
 = ({banners}) => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
   return (
         <Container className="mainBanner" style={{maxWidth:"100%"}} >
@@ -21,7 +21,7 @@ const MainBanner: React.FC<{ banners: IMainBanner[] }>
                         ? <Typography className='bannerTitle1'>{banners[0].titleEn}</Typography>
                         : <Typography className='bannerTitle1'>{banners[0].titleUa}</Typography>
                     }
-                <Button className='butMainBanner' href={banners[0].link}>{t('common.button.moreDetails')}</Button>
+                {/* <Button className='butMainBanner' href={banners[0].link}>{t('common.button.moreDetails')}</Button> */}
                 </Box>
             </Grid>
 

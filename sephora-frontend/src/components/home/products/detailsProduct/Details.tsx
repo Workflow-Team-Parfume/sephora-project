@@ -22,7 +22,7 @@ import routes from "../../../../common/routes.ts";
 
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Reviews from "../../reviews/ReviewsProduct";
 import "./details.scss";
 import novaPoshta from "../../../../assets/images/delivery/deliveryNewPost.svg";
@@ -59,6 +59,7 @@ const Details: React.FC = () => {
 
         navigate(`/details/${id}?piece=${pId}`);
     }
+    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     useEffect(() => {
         http_common.get<ProductDto>(`products/${id}`)
@@ -77,13 +78,12 @@ const Details: React.FC = () => {
         http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
             .then(resp => setReviews(resp.data))
             .catch(e => console.error(e));
-    }, [id]);
+    }, [id, isFavorite]);
 
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
 
-    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     const handleFavClick = () => {
         // TODO: add toast/other notification
@@ -261,13 +261,18 @@ const Details: React.FC = () => {
                                 <Stack
                                     spacing={1} sx={{width: '450px'}}
                                     style={{marginTop: '40px'}}>
-                                    <Button className="butFavorites" onClick={handleFavClick}>
-                                        {t('details.addToFavorites')}
-                                        <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
-                                        {/* {t('details.addedToFavorites')}
-                                <FavoriteIcon style={{marginLeft: '10px'}}/> */}
-                                    </Button>
+                                        {isFavorite
+                                            ? <Button className="butFavorites" onClick={handleFavClick}>
+                                                {t('details.addToFavorites')}
+                                                <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
+                                            </Button>
+                                            : <Button className="butFavorites" onClick={handleFavClick}>
+                                                {t('details.addedToFavorites')}
+                                                <FavoriteIcon style={{marginLeft: '10px'}}/>
+                                            </Button>
+                                    }
                                     <Button className="butBuy" onClick={handleBuyClick}>{t('details.buy')}</Button>
+                                    {/* <Button className="butBuy" onClick={handleBuyClick}>{t('details.addedToCart')}</Button> */}
                                 </Stack>
                             </Stack>
                         </Stack>

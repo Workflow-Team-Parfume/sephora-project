@@ -37,12 +37,12 @@ public interface IPieceService
      * <see cref="PagedListInfo{T}"/> of product pieces.
      * </returns>
      */
-    async Task<PagedListInfo<ProductPieceDto>> Get(
-        int pageNumber,
-        int pageSize,
-        string? orderBy = null,
-        string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    Task<PagedListInfo<ProductPieceDto>> Get(
+     int pageNumber,
+     int pageSize,
+     string? orderBy = null,
+     string? selectBy = null
+    );
 
     /**
      * <summary>

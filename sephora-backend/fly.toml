@@ -17,9 +17,9 @@ primary_region = "waw"
   processes = ["app"]
 
 [[vm]]
-  cpu_kind = "shared"
+  cpu_kind = "performance"
   cpus = 2
-  memory_mb = 512
+  memory_mb = 4096
 
 [mounts]
   source="luxuryhub_assets"

@@ -22,6 +22,29 @@ public class CartService(
             .ProjectTo<CartDto>(mapper.ConfigurationProvider);
     }
 
+    public async Task<PagedListInfo<CartDto>> Get(
+        ClaimsPrincipal user,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        string userId = GetUserIdOrThrow(user);
+        var specification = new CartItems.GetByUserId(userId);
+
+        var count = await cartRepository.CountBySpec(specification);
+        var list = await cartRepository.GetRangeBySpec(
+            specification,
+            pageNumber,
+            pageSize,
+            orderBy,
+            selectBy
+        ).ProjectTo<CartDto>(mapper.ConfigurationProvider).ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<CartDto?> GetById(long id)
     {
         CartItem? entry = await cartRepository.GetById(id);
@@ -36,7 +59,7 @@ public class CartService(
                 userId,
                 cartDto.ProductPieceId
             ));
-        
+
         if (dbEntry is not null)
             return; // the item already exists
 

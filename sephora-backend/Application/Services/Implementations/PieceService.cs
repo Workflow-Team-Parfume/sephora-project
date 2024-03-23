@@ -11,6 +11,24 @@ public class PieceService(
         => repository.GetListBySpec(new ProductPieces.GetAll())
             .ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<ProductPieceDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var count = await repository.Count();
+        var list = await repository.GetRange(
+            pageNumber,
+            pageSize,
+            orderBy,
+            selectBy
+        ).ProjectTo<ProductPieceDto>(mapper.ConfigurationProvider).ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<ProductPieceDto?> GetById(long id)
         => mapper.Map<ProductPieceDto?>(
             await repository.GetItemBySpec(new ProductPieces.GetById(id))

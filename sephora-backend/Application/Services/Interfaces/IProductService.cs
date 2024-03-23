@@ -21,14 +21,13 @@ public interface IProductService
      * <param name="selectBy">The select by</param>
      * <param name="user">The user to map the favorites</param>
      */
-    async Task<PagedListInfo<ProductDto>> Get(
+    Task<PagedListInfo<ProductDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null,
         ClaimsPrincipal? user = null
-    ) => await (await Get(user))
-        .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>Gets the product by its id</summary>

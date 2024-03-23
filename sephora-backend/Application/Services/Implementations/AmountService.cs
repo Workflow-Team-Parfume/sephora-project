@@ -30,6 +30,22 @@ public class AmountService(
         => amountRepository.GetAll()
             .ProjectTo<AmountDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<AmountDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var count = await amountRepository.Count();
+        var list = await amountRepository
+            .GetRange(pageNumber, pageSize)
+            .ProjectTo<AmountDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<AmountDto?> GetById(int id)
     {
         Amount? amount = await amountRepository.GetItemBySpec(

@@ -6,7 +6,7 @@
  * of the entity type in the database.
  * </summary>
  */
-public sealed class Repository<TEntity>(PerfumeDbContext context) 
+public sealed class Repository<TEntity>(PerfumeDbContext context)
     : IRepository<TEntity>
     where TEntity : class
 {
@@ -16,6 +16,27 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
 
     public IQueryable<TEntity> GetAll()
         => _dbSet.AsQueryable();
+
+    public async Task<long> Count() => await _dbSet.LongCountAsync();
+
+    public async Task<long> CountBySpec(ISpecification<TEntity> specification)
+        => await ApplySpecification(specification).LongCountAsync();
+
+    public IQueryable<TEntity> GetRange(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var query = _dbSet.AsQueryable();
+        if (!String.IsNullOrWhiteSpace(orderBy))
+            query = query.OrderBy(orderBy);
+        if (!String.IsNullOrWhiteSpace(selectBy))
+            query = query.Where(selectBy);
+        query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        return query;
+    }
 
     public async Task<TEntity?> GetById(object id)
         => await _dbSet.FindAsync(id);
@@ -55,15 +76,30 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
         ISpecification<TEntity> specification
     ) => ApplySpecification(specification);
 
+    public IQueryable<TEntity> GetRangeBySpec(
+        ISpecification<TEntity> specification,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var query = ApplySpecification(specification);
+        if (!String.IsNullOrWhiteSpace(orderBy))
+            query = query.OrderBy(orderBy);
+        if (!String.IsNullOrWhiteSpace(selectBy))
+            query = query.Where(selectBy);
+        query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        return query;
+    }
+
     public async Task<TEntity?> GetItemBySpec(
         ISpecification<TEntity> specification
-    )
-        => await ApplySpecification(specification).FirstOrDefaultAsync();
+    ) => await ApplySpecification(specification).FirstOrDefaultAsync();
 
     public async Task<int> DeleteBySpec(
         ISpecification<TEntity> specification
-    )
-        => await ApplySpecification(specification).ExecuteDeleteAsync();
+    ) => await ApplySpecification(specification).ExecuteDeleteAsync();
 
 
     private IQueryable<TEntity> ApplySpecification(

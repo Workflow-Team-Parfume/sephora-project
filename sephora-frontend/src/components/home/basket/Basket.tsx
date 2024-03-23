@@ -41,10 +41,6 @@ export function Basket() {
                 .then(r => setProducts(r.data))
                 .catch(e => console.error(e));
         } else {
-            console.log(
-                JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList
-            );
             setProducts(
                 JSON.parse(localStorage.getItem("cart")!)
                 ?? EmptyPagedList

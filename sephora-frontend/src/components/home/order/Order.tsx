@@ -77,10 +77,10 @@ const Order = () => {
                     </Grid>
 
                     <Grid item sm={12} lg={6}>
-                        {isAuth ?
-                            <OrderDelivery/>
-                            :
-                            <OrderBuyer/>
+                        {
+                            isAuth
+                                ? <OrderDelivery/>
+                                : <OrderBuyer/>
                         }
                     </Grid>
                 </Grid>

@@ -37,12 +37,12 @@ public interface ICategoryService
      * <see cref="PagedListInfo{T}"/> of categories.
      * </returns>
      */
-    async Task<PagedListInfo<CategoryDto>> Get(
+    Task<PagedListInfo<CategoryDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>

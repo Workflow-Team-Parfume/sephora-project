@@ -86,7 +86,7 @@ public class ProductService(
             await charRepo.Delete(charId);
 
         await charRepo.Save();
-        
+
         var entity = await productRepo.GetById(editProductDto.Id);
         if (entity is null)
             throw new ArgumentException(
@@ -112,6 +112,28 @@ public class ProductService(
             .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
         await products.ForEachAsync(x => x.IsFavorite = IsFavorite(user, x.Id).Result);
         return products;
+    }
+
+    public async Task<PagedListInfo<ProductDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null,
+        ClaimsPrincipal? user = null
+    )
+    {
+        var count = await productRepo.Count();
+        var list = await productRepo.GetRange(
+            pageNumber,
+            pageSize,
+            orderBy,
+            selectBy
+        ).ProjectTo<ProductDto>(mapper.ConfigurationProvider).ToListAsync();
+
+        foreach (var product in list)
+            product.IsFavorite = await IsFavorite(user, product.Id);
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }
 
     public async Task<ProductDto?> GetById(long id, ClaimsPrincipal? user = null)

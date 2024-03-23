@@ -60,12 +60,12 @@ public interface ICheckoutService
      * <param name="selectBy">The select by clause (orders by property)</param>
      * <returns>A paginated list of orders.</returns>
      */
-    async Task<PagedListInfo<OrderDto>> Get(
+    Task<PagedListInfo<OrderDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>Gets the order with the specified ID.</summary>

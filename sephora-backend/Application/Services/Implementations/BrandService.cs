@@ -30,6 +30,22 @@ public class BrandService(
         => brandRepository.GetAll()
             .ProjectTo<BrandDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<BrandDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var count = await brandRepository.Count();
+        var list = await brandRepository
+            .GetRange(pageNumber, pageSize)
+            .ProjectTo<BrandDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<BrandDto?> GetById(int id)
     {
         Brand? brand = await brandRepository.GetItemBySpec(new Brands.GetById(id));

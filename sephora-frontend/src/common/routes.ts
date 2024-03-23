@@ -18,13 +18,13 @@ const routes = {
 
     search: '/search',
 
-    deliveryMain: '/deliveryMain',
-    deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
-    deliveryPickup: '/deliveryPickup',
-    deliveryNewPost: '/deliveryNewPost',
-    deliveryUkrPoshta: '/deliveryUkrPoshta',
-    deliveryMeestMail: '/deliveryMeestMail',
-    deliveryByCourierInUkraine: '/deliveryByCourierInUkraine',
+    deliveryMain: '/delivery',
+    deliveryFreeLuxuryHub: '/delivery/courier',
+    deliveryPickup: '/delivery/pickup',
+    deliveryNewPost: '/delivery/novaposhta',
+    deliveryUkrPoshta: '/delivery/ukrposhta',
+    deliveryMeestMail: '/delivery/meest',
+    deliveryByCourierInUkraine: '/delivery/courier-ua',
 
     aboutUs: '/about',
 

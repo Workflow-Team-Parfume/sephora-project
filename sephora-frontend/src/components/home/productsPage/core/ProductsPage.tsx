@@ -66,9 +66,10 @@ const ProductsPage: React.FC<{
 
     useEffect(() => {
         http_common.get(`${link}
-            &size=${itemsPerPage}
-            &page=${currentPage}
-            &sort=${order.value} ${direction.value}`)
+        &size=${itemsPerPage}
+        &page=${currentPage}
+        &sort=${order.value} ${direction.value}`
+        )
             .then(r => setProducts(r.data))
             .catch(e => console.error(e));
     }, [currentPage, link, order.value, direction.value]);

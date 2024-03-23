@@ -486,9 +486,9 @@ export const mainBanner = ([
     },
     {
         titleUa: "Відкрийте унікальні продукти Cosmed!",
-        titleEn: "Discover unique productsCosmed!",
+        titleEn: "Discover unique Cosmed products!",
         descriptionUa: "Це бренд космецевтики, яка подбає про найвибагливішу шкіру",
-        descriptionEn: "This is a cosmeceutical brand that takes care of the most demanding skin",
+        descriptionEn: "This is a cosmeceuticals brand that takes care of the most demanding skin",
         link: "",
         image: main2,
         width: "400px"

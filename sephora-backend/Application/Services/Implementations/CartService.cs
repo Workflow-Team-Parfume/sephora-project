@@ -70,8 +70,9 @@ public class CartService(
     {
         CartItem? entity = await cartRepository.GetById(id);
         if (entity is null)
-            throw new KeyNotFoundException(
-                "The cart item with the specified ID was not found"
+            throw new HttpException(
+                "The cart item with the specified ID was not found",
+                HttpStatusCode.NotFound
             );
         if (entity.UserId != GetUserIdOrThrow(user))
             throw new UnauthorizedAccessException(

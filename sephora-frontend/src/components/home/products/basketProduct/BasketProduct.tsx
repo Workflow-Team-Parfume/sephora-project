@@ -8,18 +8,64 @@ import AddIcon from '@mui/icons-material/Add';
 import i18n from "i18next";
 import routes from "../../../../common/routes.ts";
 import CartItem from "../../../../models/Cart/CartItem.ts";
+import http_common from "../../../../http_common.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../store/store.ts";
+import {IAuthUser} from "../../../auth/types.ts";
 
-const BasketProduct: React.FC<{ piece: CartItem }>
-    = ({piece}) => {
+const BasketProduct: React.FC<{
+    piece: CartItem,
+    onUpdate: (() => void) | (() => Promise<void>)
+}>
+    = ({piece, onUpdate}) => {
     const {t} = useTranslation();
 
-    const [count, setCount] = useState(1);
+    const {isAuth} = useSelector((store: RootState) => store.auth as IAuthUser);
+
+    const [count, setCount] = useState(piece.quantity);
     const handleCountChange = (count: number) => {
-        if (count != 0)
+        if (count != 0) {
             setCount(count);
+
+            if (isAuth) {
+                console.log('Change count on server');
+                http_common.put(`/cart`, {...piece, quantity: count})
+                    .catch(e => console.error(e));
+            } else {
+                console.log('Change count in localStorage')
+                const cart = JSON.parse(localStorage.getItem("cart")!);
+                cart.items = cart.items.map((item: CartItem) => {
+                    if (item.id === piece.id) {
+                        return {...item, quantity: count};
+                    }
+                    return item;
+                });
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+        } else handleDelete();
     };
+
+    const handleDelete = () => {
+        if (isAuth) {
+            console.log('Delete on server')
+            http_common.delete(`/cart/${piece.id}`)
+                .then(onUpdate)
+                .catch(e => console.error(e));
+        } else {
+            console.log('Delete in localStorage')
+            const cart = JSON.parse(localStorage.getItem("cart")!);
+            cart.items = cart.items.filter((item: CartItem) => item.id !== piece.id);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            onUpdate();
+        }
+    }
+
     return (
-        <Stack className="basketProduct" direction='row' justifyContent='space-between' alignItems='center' padding={'12px 20px'}>
+        <Stack className="basketProduct"
+               direction='row'
+               justifyContent='space-between'
+               alignItems='center'
+               padding={'12px 20px'}>
             <Link href={'/details/' + piece.id} underline="none">
                 <Stack spacing={2} direction='row'>
                     <Stack width='80px' alignItems='center'>
@@ -48,16 +94,23 @@ const BasketProduct: React.FC<{ piece: CartItem }>
                 </Stack>
             </Link>
 
-            <Stack direction='row' alignItems='center' justifyContent='space-between' minWidth='300px'>
+            <Stack direction='row'
+                   alignItems='center'
+                   justifyContent='space-between'
+                   minWidth='300px'>
                 <Stack direction='row' className="count" alignItems='center'>
-                    <Button onClick={() => (handleCountChange(count - 1))}><RemoveIcon className="img"/></Button>
+                    <Button onClick={() => (handleCountChange(count - 1))}>
+                        <RemoveIcon className="img"/>
+                    </Button>
                     <Typography className="text">{count}</Typography>
-                    <Button onClick={() => (handleCountChange(count + 1))}><AddIcon className="img"/></Button>
+                    <Button onClick={() => (handleCountChange(count + 1))}>
+                        <AddIcon className="img"/>
+                    </Button>
                 </Stack>
                 <Typography className="productPrice">
                     {piece.price} {t('uah')}
                 </Typography>
-                <Button>
+                <Button onClick={handleDelete}>
                     <DeleteOutlinedIcon sx={{color: '#646464'}}/>
                 </Button>
             </Stack>

@@ -40,13 +40,10 @@ import ProductCreatePage from "./components/admin/product/ProductCreatePage.tsx"
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
     React.useEffect(() => {
-        const selectedLanguage = localStorage.getItem("selectedLanguage");
-        i18n.changeLanguage(selectedLanguage == null ? "uk" : selectedLanguage)
+        const selectedLanguage = localStorage.selectedLanguage ?? "uk";
+        i18n.changeLanguage(selectedLanguage)
+            .then(() => localStorage.selectedLanguage = selectedLanguage)
             .catch((e) => console.error(e));
-        localStorage.setItem(
-            "selectedLanguage",
-            selectedLanguage == null ? "uk" : selectedLanguage
-        );
     }, []);
     return (
         <>

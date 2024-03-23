@@ -3,7 +3,7 @@ import "./basket.scss"
 import {useTranslation} from "react-i18next";
 import {newPieces} from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
-import React, { useCallback } from "react";
+import React, {useCallback} from "react";
 import Product from "../products/Product";
 import icon2 from "../../../assets/images/icon2.svg";
 import {CalculateProductTotal} from "../../../common/calculateTotal";
@@ -34,21 +34,21 @@ export function Basket() {
 
     const {t} = useTranslation();
     const [products, setProducts] = React.useState<PagedList<CartItem>>();
-    
+
     const refetch = useCallback(async () => {
         if (isAuth && open) {
             console.log('Get cart from server');
             try {
                 const r = await http_common.get<PagedList<CartItem>>("/cart");
                 setProducts(r.data)
-            }
-            catch (e) {
+            } catch (e) {
                 console.error(e);
             }
         } else {
             setProducts(
-                JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList
+                localStorage.cart
+                    ? JSON.parse(localStorage.cart)
+                    : EmptyPagedList
             );
         }
     }, [setProducts, isAuth, open])

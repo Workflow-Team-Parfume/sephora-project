@@ -108,7 +108,7 @@ const LoginPage = () => {
             const {data} = result;
 
             const token = data.token;
-            localStorage.setItem("token", token);
+            localStorage.token = token;
             const user = jwtDecode(token) as IUser;
 
             dispatch({

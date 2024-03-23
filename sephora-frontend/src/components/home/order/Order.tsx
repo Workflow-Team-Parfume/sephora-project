@@ -25,8 +25,9 @@ const Order = () => {
                 .catch(e => console.log(e));
         } else {
             setPieces(
-                JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList
+                localStorage.cart
+                    ? JSON.parse(localStorage.cart)
+                    : EmptyPagedList
             );
         }
     }, [setPieces, isAuth]);

@@ -12,6 +12,7 @@ import http_common from "../../../../http_common.ts";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../store/store.ts";
 import {IAuthUser} from "../../../auth/types.ts";
+import {EmptyPagedList} from "../../../../models/pagedlist/PagedList.ts";
 
 const BasketProduct: React.FC<{
     piece: CartItem,
@@ -33,14 +34,16 @@ const BasketProduct: React.FC<{
                     .catch(e => console.error(e));
             } else {
                 console.log('Change count in localStorage')
-                const cart = JSON.parse(localStorage.getItem("cart")!);
+                const cart = localStorage.cart
+                    ? JSON.parse(localStorage.cart)
+                    : EmptyPagedList;
                 cart.items = cart.items.map((item: CartItem) => {
                     if (item.id === piece.id) {
                         return {...item, quantity: count};
                     }
                     return item;
                 });
-                localStorage.setItem("cart", JSON.stringify(cart));
+                localStorage.cart = JSON.stringify(cart);
             }
         } else handleDelete();
     };
@@ -53,9 +56,11 @@ const BasketProduct: React.FC<{
                 .catch(e => console.error(e));
         } else {
             console.log('Delete in localStorage')
-            const cart = JSON.parse(localStorage.getItem("cart")!);
+            const cart = localStorage.cart
+                ? JSON.parse(localStorage.cart)
+                : EmptyPagedList;
             cart.items = cart.items.filter((item: CartItem) => item.id !== piece.id);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.cart = JSON.stringify(cart);
             onUpdate();
         }
     }

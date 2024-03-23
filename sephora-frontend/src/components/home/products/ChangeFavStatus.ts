@@ -5,12 +5,12 @@ const changeFavStatus = (id: number, isAuthed: boolean) => {
         http_common.put(`favorites/${id}`)
             .catch(e => console.error(e));
     } else {
-        const items = JSON.parse(localStorage.getItem('favorites') ?? '[]');
+        const items = JSON.parse(localStorage.favorites ?? '[]');
 
         if (items.includes(id)) items.splice(items.indexOf(id), 1);
         else items.push(id);
 
-        localStorage.setItem('favorites', JSON.stringify(items));
+        localStorage.favorites = JSON.stringify(items);
     }
 }
 

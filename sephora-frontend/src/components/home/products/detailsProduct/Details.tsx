@@ -110,8 +110,9 @@ const Details: React.FC = () => {
                     .catch(e => console.error(e))
             }
         } else {
-            const cart = JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList;
+            const cart = localStorage.cart
+                ? JSON.parse(localStorage.cart)
+                : EmptyPagedList;
 
             if (cart.items.find((i: CartItem) => i.productPieceId === pieceId))
                 cart.items.splice(cart.items.indexOf(pieceId), 1);
@@ -138,7 +139,7 @@ const Details: React.FC = () => {
                 cart.items.push(item);
             }
 
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.cart = JSON.stringify(cart);
         }
     }
 

@@ -29,11 +29,9 @@ const BasketProduct: React.FC<{
             setCount(count);
 
             if (isAuth) {
-                console.log('Change count on server');
                 http_common.put(`/cart`, {...piece, quantity: count})
-                    .catch(e => console.error(e));
+                    .catch(console.error);
             } else {
-                console.log('Change count in localStorage')
                 const cart = localStorage.cart
                     ? JSON.parse(localStorage.cart)
                     : EmptyPagedList;
@@ -50,12 +48,10 @@ const BasketProduct: React.FC<{
 
     const handleDelete = () => {
         if (isAuth) {
-            console.log('Delete on server')
             http_common.delete(`/cart/${piece.id}`)
                 .then(onUpdate)
-                .catch(e => console.error(e));
+                .catch(console.error);
         } else {
-            console.log('Delete in localStorage')
             const cart = localStorage.cart
                 ? JSON.parse(localStorage.cart)
                 : EmptyPagedList;

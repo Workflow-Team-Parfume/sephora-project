@@ -78,7 +78,7 @@ async function GrabInfo() {
                 roles: user.roles,
             },
         });
-        
+
         await PostLocalStorage();
     }
 }

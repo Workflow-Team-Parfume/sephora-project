@@ -15,7 +15,7 @@ const Wishlist = () => {
     // useEffect(() => {
     //     http_common.get("pieces?size=4&page=1&select=perfume")
     //         .then(r => setProducts(r.data))
-    //         .catch(e => console.error(e));
+    //         .catch(console.error);
     // });
 
     const itemsPerPage = 12;

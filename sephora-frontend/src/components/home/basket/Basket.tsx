@@ -37,7 +37,6 @@ export function Basket() {
 
     const refetch = useCallback(async () => {
         if (isAuth && open) {
-            console.log('Get cart from server');
             try {
                 const r = await http_common.get<PagedList<CartItem>>("/cart");
                 setProducts(r.data)
@@ -54,7 +53,7 @@ export function Basket() {
     }, [setProducts, isAuth, open])
 
     React.useEffect(() => {
-        refetch().catch(e => console.error(e));
+        refetch().catch(console.error);
     }, [refetch]);
 
     const discount = 0;

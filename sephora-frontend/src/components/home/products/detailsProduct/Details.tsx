@@ -73,11 +73,11 @@ const Details: React.FC = () => {
                 setProduct(resp.data);
                 changePiece(pieceId, resp.data);
             })
-            .catch(e => console.error(e));
+            .catch(console.error);
 
         http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
             .then(resp => setReviews(resp.data))
-            .catch(e => console.error(e));
+            .catch(console.error);
     }, [id]);
 
     const [image, setImage] = useState<PictureDto | undefined>(
@@ -103,11 +103,11 @@ const Details: React.FC = () => {
             const inCart = (await http_common.get<boolean>(`cart/contains/${id}`)).data;
             if (inCart) {
                 http_common.delete(`cart/${id}`)
-                    .catch(e => console.error(e))
+                    .catch(console.error)
             } else {
                 http_common.post(`cart`, item)
                     // TODO: add toast/other notification
-                    .catch(e => console.error(e))
+                    .catch(console.error)
             }
         } else {
             const cart = localStorage.cart

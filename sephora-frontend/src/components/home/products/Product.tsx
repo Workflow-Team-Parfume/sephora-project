@@ -34,8 +34,6 @@ const Product: React.FC<{ piece: ProductPieceDto }>
         changeFavStatus(piece.product.id, isAuthed);
     };
 
-    
-
     // TODO: Change link
     return (
         <Card className="productMainContainer"

@@ -71,7 +71,7 @@ const ProductsPage: React.FC<{
         &sort=${order.value} ${direction.value}`
         )
             .then(r => setProducts(r.data))
-            .catch(e => console.error(e));
+            .catch(console.error);
     }, [currentPage, link, order.value, direction.value]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {

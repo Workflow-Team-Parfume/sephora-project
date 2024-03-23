@@ -3,7 +3,7 @@ import http_common from "../../../http_common.ts";
 const changeFavStatus = (id: number, isAuthed: boolean) => {
     if (isAuthed) {
         http_common.put(`favorites/${id}`)
-            .catch(e => console.error(e));
+            .catch(console.error);
     } else {
         const items = JSON.parse(localStorage.favorites ?? '[]');
 

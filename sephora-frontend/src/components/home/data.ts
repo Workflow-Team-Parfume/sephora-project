@@ -476,7 +476,7 @@ export const Banner2 = ({
     image: banner2
 })
 
-export const Banner3 = ({image: banner3, link: ""})
+export const Banner3 = ({image: banner3, link: routes.care})
 
 export const mainBanner = ([
     {

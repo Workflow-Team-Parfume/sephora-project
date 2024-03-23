@@ -4,29 +4,26 @@ import Product from "./Product";
 import {useTranslation} from "react-i18next";
 import React, {useEffect} from "react";
 import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
-import PagedList from "../../../models/pagedlist/PagedList.ts";
 import http_common from "../../../http_common.ts";
 
 const pageSize = 4;
 
 const Products: React.FC<{
     title: string,
-    link: string
-}> = ({title, link}) => {
+    link: string,
+    linkBut: string
+}> = ({title, link, linkBut}) => {
     const {t} = useTranslation();
 
-    const [list, setList] = React.useState<PagedList<ProductPieceDto>>();
     const [products, setProducts] = React.useState<ProductPieceDto[]>([]);
-    const [page, setPage] = React.useState(1);
 
     useEffect(() => {
-        http_common.get(`${link}&page=${page}&size=${pageSize}`)
+        http_common.get(`${link}&page=${1}&size=${pageSize}`)
             .then(r => {
-                setList(r.data)
                 setProducts([...products, ...r.data.items])
             })
             .catch(e => console.error(e));
-    }, [link, page]);
+    }, [link]);
 
     return (
         <Container
@@ -51,10 +48,12 @@ const Products: React.FC<{
                 </Grid>
             </Container>
 
-            <Button className={`link${list && list.hasNextPage ? '' : ' invisible'}`}
-                    onClick={() => setPage(page + 1)}>
-                {t('common.button.moreProducts')}
-            </Button>
+            <Stack>
+                <Button className='link'
+                    href={linkBut}>
+                    {t('common.button.moreProducts')}
+                </Button>
+            </Stack>
         </Container>
     );
 }

@@ -35,11 +35,16 @@ export function Basket() {
     const [products, setProducts] = React.useState<PagedList<CartItem>>();
 
     React.useEffect(() => {
+        console.log(isAuth)
         if (isAuth) {
             http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setProducts(r.data))
                 .catch(e => console.error(e));
         } else {
+            console.log(
+                JSON.parse(localStorage.getItem("cart")!)
+                ?? EmptyPagedList
+            );
             setProducts(
                 JSON.parse(localStorage.getItem("cart")!)
                 ?? EmptyPagedList

@@ -22,6 +22,14 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
     public async Task<long> CountBySpec(ISpecification<TEntity> specification)
         => await ApplySpecification(specification).LongCountAsync();
 
+    public async Task<long> CountBySpec(string? selectBy = null)
+    {
+        var query = _dbSet.AsQueryable();
+        if (!String.IsNullOrWhiteSpace(selectBy))
+            query = query.Where(selectBy);
+        return await query.LongCountAsync();
+    }
+
     public IQueryable<TEntity> GetRange(
         int pageNumber,
         int pageSize,

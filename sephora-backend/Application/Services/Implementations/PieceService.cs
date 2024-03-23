@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore.DynamicLinq;
+
 namespace CleanArchitecture.Application.Services.Implementations;
 
 public class PieceService(
@@ -18,7 +20,7 @@ public class PieceService(
         string? selectBy = null
     )
     {
-        var count = await repository.Count();
+        var count = await repository.CountBySpec(selectBy);
         var list = await repository
             .GetRange(pageNumber, pageSize, orderBy, selectBy)
             .ProjectTo<LightProductPieceDto>(mapper.ConfigurationProvider)

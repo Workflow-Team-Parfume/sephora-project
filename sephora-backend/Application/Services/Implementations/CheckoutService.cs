@@ -88,7 +88,7 @@ public class CheckoutService(
         string? selectBy = null
     )
     {
-        var count = await orderRepository.Count();
+        var count = await orderRepository.CountBySpec(selectBy);
         var list = await orderRepository
             .GetRange(pageNumber, pageSize)
             .ProjectTo<OrderDto>(mapper.ConfigurationProvider)

@@ -37,7 +37,7 @@ public class BrandService(
         string? selectBy = null
     )
     {
-        var count = await brandRepository.Count();
+        var count = await brandRepository.CountBySpec(selectBy);
         var list = await brandRepository
             .GetRange(pageNumber, pageSize)
             .ProjectTo<BrandDto>(mapper.ConfigurationProvider)

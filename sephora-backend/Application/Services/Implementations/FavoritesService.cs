@@ -74,7 +74,7 @@ public class FavoritesService(
         )
     {
         var products = await productService.Get(user);
-        var count = products.Count();
+        var count = await products.LongCountAsync();
         var list = products
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)

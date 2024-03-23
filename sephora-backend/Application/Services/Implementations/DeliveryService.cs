@@ -16,7 +16,7 @@ public class DeliveryService(
         string? selectBy = null
     )
     {
-        var count = await deliveryRepository.Count();
+        var count = await deliveryRepository.CountBySpec(selectBy);
         var list = await deliveryRepository
             .GetRange(pageNumber, pageSize)
             .ProjectTo<DeliveryDto>(mapper.ConfigurationProvider)

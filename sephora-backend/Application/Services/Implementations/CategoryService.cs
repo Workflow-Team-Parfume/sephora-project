@@ -58,7 +58,7 @@ public class CategoryService(
         string? selectBy = null
     )
     {
-        var count = await categoryRepository.Count();
+        var count = await categoryRepository.CountBySpec(selectBy);
         var list = await categoryRepository
             .GetRange(pageNumber, pageSize, orderBy, selectBy)
             .ProjectTo<CategoryDto>(mapper.ConfigurationProvider)

@@ -41,6 +41,19 @@ public interface IRepository<TEntity> where TEntity : class
      * </returns>
      */
     Task<long> CountBySpec(ISpecification<TEntity> specification);
+    
+    /**
+     * <summary>
+     * Get the number of entities by a specification.
+     * </summary>
+     * <param name="selectBy">
+     * The criteria to select the entities.
+     * </param>
+     * <returns>
+     * The number of entities.
+     * </returns>
+     */
+    Task<long> CountBySpec(string? selectBy = null);
 
     /**
      * <summary>

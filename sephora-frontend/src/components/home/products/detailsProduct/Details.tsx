@@ -67,6 +67,8 @@ const Details: React.FC = () => {
             .then(resp => {
                 const pathId = Number(params.get("piece"));
                 const pieceIds = resp.data.pieces.map(p => p.id);
+                console.log(pieceIds)
+                console.info(resp.data)
                 const pieceId = pieceIds.includes(pathId)
                     ? pathId
                     : resp.data.pieces[0].id;

@@ -56,7 +56,7 @@ public class ProductService(
 
         foreach (var c in product.Characteristics)
             await charRepo.Delete(c);
-        
+
         var favorites = await favRepo.GetListBySpec(
             new Favorites.GetByProduct(id)
         ).ToListAsync();
@@ -116,18 +116,18 @@ public class ProductService(
 
     public async Task<IEnumerable<LightProductDto>> Get(
         ClaimsPrincipal? user = null
-        )
+    )
     {
         var products = await productRepo.GetListBySpec(new Products.GetAll())
             .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
             .ToListAsync();
-        
+
         if (user is null)
             return products;
 
         foreach (var product in products)
             product.IsFavorite = await IsFavorite(user, product.Id);
-        
+
         return products;
     }
 
@@ -141,7 +141,10 @@ public class ProductService(
     {
         long count = await productRepo.CountBySpec(selectBy);
         var list = await productRepo
-            .GetRange(pageNumber, pageSize, orderBy, selectBy)
+            .GetRangeBySpec(
+                new Products.GetAll(),
+                pageNumber, pageSize, orderBy, selectBy
+            )
             .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
             .ToListAsync();
 

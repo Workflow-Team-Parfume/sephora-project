@@ -1,7 +1,7 @@
 import {Box, Button, CircularProgress, Grid, Modal, Stack, Typography} from "@mui/material";
 import "./basket.scss"
 import {useTranslation} from "react-i18next";
-import {newPieces} from "../data";
+import {newProducts} from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
 import React, {useCallback} from "react";
 import Product from "../products/Product";
@@ -139,10 +139,10 @@ export function Basket() {
                                         {t('basket.recommendedProducts')}
                                     </Typography>
                                     <Grid container spacing={2} columns={15}>
-                                        {newPieces.map((product) => (
+                                        {newProducts.map((product) => (
                                             <Grid key={product.id}
                                                   item xs={7.5} sm={5} md={3} lg={3}>
-                                                <Product piece={product}/>
+                                                <Product product={product}/>
                                             </Grid>
                                         ))}
                                     </Grid>

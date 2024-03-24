@@ -44,7 +44,7 @@ const Wishlist = () => {
                                     {products.items.map((product) =>
                                         product.pieces[0] && (
                                             <Grid key={product.id} item xs={12} sm={6} lg={3}>
-                                                <Product piece={product.pieces[0]}/>
+                                                <Product product={product}/>
                                             </Grid>
                                         ))}
                                 </Grid>

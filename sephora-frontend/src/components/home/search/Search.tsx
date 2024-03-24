@@ -71,10 +71,11 @@ const Search: React.FC = () => {
                         <Container sx={{pt: 3, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                             <Grid container spacing={2}>
                                 {products?.items?.map((product, i) =>
-                                    product.pieces && product.pieces.length > 0 &&
+                                    product.pieces?.length > 0 &&
                                     <Grid key={i} item xs={12} sm={6} lg={4}>
-                                        <Product piece={{...product.pieces[0], product: product}}/>
-                                    </Grid>)}
+                                        <Product product={product}/>
+                                    </Grid>
+                                )}
                             </Grid>
                         </Container>
                         <Stack sx={{margin: '40px', alignItems: 'center'}}>

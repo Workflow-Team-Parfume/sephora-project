@@ -94,6 +94,19 @@ public interface IRepository<TEntity> where TEntity : class
      * </returns>
      */
     Task<TEntity?> GetById(object id);
+    
+    /**
+     * <summary>
+     * Check if an entity exists by its ID.
+     * </summary>
+     * <param name="id">
+     * The ID of an entity.
+     * </param>
+     * <returns>
+     * True if the entity exists, false otherwise.
+     * </returns>
+     */
+    Task<bool> Exists(object id);
 
     /**
      * <summary>

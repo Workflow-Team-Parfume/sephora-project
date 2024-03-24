@@ -49,6 +49,9 @@ public sealed class Repository<TEntity>(PerfumeDbContext context)
     public async Task<TEntity?> GetById(object id)
         => await _dbSet.FindAsync(id);
 
+    public async Task<bool> Exists(object id)
+        => await GetById(id) is not null;
+
     public async Task Insert(TEntity entity)
         => await _dbSet.AddAsync(entity);
 

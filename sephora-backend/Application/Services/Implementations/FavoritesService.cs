@@ -16,8 +16,8 @@ public class FavoritesService(
     public async Task ChangeFavoriteStatus(ClaimsPrincipal user, long productId)
     {
         var userId = GetUserIdOrThrow(user);
-        var product = await productRepository.GetById(productId);
-        if (product is null)
+        bool exists = await productRepository.Exists(productId);
+        if (!exists)
             throw new ArgumentException(
                 $"Product with the id={{{productId}}} is not found"
             );
@@ -52,9 +52,9 @@ public class FavoritesService(
         try
         {
             var userId = GetUserIdOrThrow(user);
-            return (await favoritesRepository.GetItemBySpec(
-                new Favorites.Get(userId, productId)
-            ))?.IsActive ?? false;
+            return await favoritesRepository.GetItemBySpec(
+                new Favorites.Find(userId, productId)
+            ) is not null;
         }
         catch
         {

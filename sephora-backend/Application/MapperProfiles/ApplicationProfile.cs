@@ -37,7 +37,7 @@ public class ApplicationProfile : Profile
         CreateMap<ProductEntity, LightProductDto>()
             .ForMember(
                 dest => dest.Pieces,
-                opts => opts.MapFrom(src => src.ProductPieces)
+                opts => opts.MapFrom(src => src.ProductPieces.Take(1))
             );
 
         CreateMap<CreateProductPieceDto, ProductPiece>()

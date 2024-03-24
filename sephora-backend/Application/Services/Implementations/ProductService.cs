@@ -20,7 +20,7 @@ public class ProductService(
             return false;
 
         var favorite = await favRepo.GetItemBySpec(
-            new Favorites.Get(userId, productId)
+            new Favorites.Find(userId, productId)
         );
         return favorite?.IsActive ?? false;
     }

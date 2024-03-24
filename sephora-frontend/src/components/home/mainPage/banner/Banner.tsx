@@ -1,14 +1,14 @@
-import { Button, Container, Grid, Stack } from "@mui/material";
+import { Container, Grid, Stack } from "@mui/material";
 import "./banner.scss"
 import { IBanner } from "./types";
 import React from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 
 const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}> 
 = ({ banner, color, isLeft=false}) => {
 
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
 
   return (
         <Container className="banner" style={{maxWidth:"100%"}} >
@@ -26,7 +26,7 @@ const Banner: React.FC<{banner:IBanner, color:string, isLeft?:boolean}>
                                 <div className="bannerDescription">{banner.descriptionUa}</div>
                             </Stack>
                         }
-                        <Button className="bannerLink" href={banner.link}>{t('common.button.review')}</Button>
+                        {/* <Button className="bannerLink" href={banner.link}>{t('common.button.review')}</Button> */}
                     </Stack>
                 </Grid>
 

@@ -37,6 +37,7 @@ const ContactInformation = () => {
     };
 
     const handleSaveClick = (values: any) => {
+        // TODO
         console.log(values);
     };
 
@@ -221,7 +222,7 @@ const ContactInformation = () => {
                                                     reader.onloadend = () => {
                                                         const result = reader.result as string;
                                                         setFieldValue('profilePicture', result)
-                                                            .catch(e => console.error(e));
+                                                            .catch(console.error);
                                                     };
                                                     reader.readAsDataURL(file);
                                                 }

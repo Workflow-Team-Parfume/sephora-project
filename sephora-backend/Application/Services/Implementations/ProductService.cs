@@ -86,7 +86,7 @@ public class ProductService(
             await charRepo.Delete(charId);
 
         await charRepo.Save();
-        
+
         var entity = await productRepo.GetById(editProductDto.Id);
         if (entity is null)
             throw new ArgumentException(
@@ -106,12 +106,32 @@ public class ProductService(
     }
 
     // TODO: Fix the issue with the favorites
-    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal? user = null)
+    public async Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal? user = null)
     {
         var products = productRepo.GetListBySpec(new Products.GetAll())
-            .ProjectTo<ProductDto>(mapper.ConfigurationProvider);
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider);
         await products.ForEachAsync(x => x.IsFavorite = IsFavorite(user, x.Id).Result);
         return products;
+    }
+
+    public async Task<PagedListInfo<LightProductDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null,
+        ClaimsPrincipal? user = null
+    )
+    {
+        var count = await productRepo.CountBySpec(selectBy);
+        var list = await productRepo
+            .GetRange(pageNumber, pageSize, orderBy, selectBy)
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        foreach (var product in list)
+            product.IsFavorite = await IsFavorite(user, product.Id);
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }
 
     public async Task<ProductDto?> GetById(long id, ClaimsPrincipal? user = null)

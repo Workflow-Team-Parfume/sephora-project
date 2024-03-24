@@ -9,8 +9,6 @@ public class PiecesController(
     public async Task<IActionResult> GetAll()
     {
         var items = await pieceService.Get().ToListAsync();
-        foreach (var i in items)
-            i.Product.Pieces = [];
         return Ok(items);
     }
 
@@ -23,8 +21,6 @@ public class PiecesController(
     )
     {
         var items = await pieceService.Get(page, size, sort, filter);
-        foreach (var i in items.Items)
-            i.Product.Pieces = [];
         return Ok(items);
     }
 
@@ -43,10 +39,28 @@ public class PiecesController(
         await pieceService.Create(dto);
         return Ok();
     }
+    
+    [HttpPost("add-pictures"), Authorize(Roles = "SudoAdmin,Admin")]
+    public async Task<IActionResult> AddPictures(
+        [FromForm] AddPiecePicturesDto dto
+    )
+    {
+        await pieceService.SavePictures(dto.Pictures, dto.PieceId);
+        return Ok();
+    }
+    
+    [HttpPost("delete-pictures"), Authorize(Roles="SudoAdmin,Admin")]
+    public async Task<IActionResult> DeletePictures(
+        [FromBody] DeletePiecePicturesDto dto
+    )
+    {
+        await pieceService.DeletePictures(dto);
+        return Ok();
+    }
 
     [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Update(
-        [FromBody] EditProductPieceDto dto
+        [FromForm] EditProductPieceDto dto
     )
     {
         if (!ModelState.IsValid) 

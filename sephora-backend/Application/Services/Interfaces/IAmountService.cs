@@ -37,12 +37,12 @@ public interface IAmountService
      * <see cref="PagedListInfo{T}"/> of amounts.
      * </returns>
      */
-    async Task<PagedListInfo<AmountDto>> Get(
+    Task<PagedListInfo<AmountDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>
@@ -56,7 +56,7 @@ public interface IAmountService
      * </returns>
      */
     Task<AmountDto?> GetById(int id);
-    
+
     /**
      * <summary>
      * Creates a new amount.
@@ -66,7 +66,7 @@ public interface IAmountService
      * </param>
      */
     Task Create(CreateAmountDto amountDto);
-    
+
     /**
      * <summary>
      * Updates an amount.
@@ -76,7 +76,7 @@ public interface IAmountService
      * </param>
      */
     Task Edit(AmountDto amountDto);
-    
+
     /**
      * <summary>
      * Deletes an amount.

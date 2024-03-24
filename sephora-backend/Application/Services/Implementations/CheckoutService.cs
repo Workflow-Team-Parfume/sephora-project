@@ -81,6 +81,22 @@ public class CheckoutService(
         => orderRepository.GetAll()
             .ProjectTo<OrderDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<OrderDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var count = await orderRepository.CountBySpec(selectBy);
+        var list = await orderRepository
+            .GetRange(pageNumber, pageSize)
+            .ProjectTo<OrderDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<CategoryDto?> GetById(long id)
     {
         Order? order = await orderRepository.GetById(id);

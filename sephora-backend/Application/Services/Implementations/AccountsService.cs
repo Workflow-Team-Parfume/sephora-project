@@ -1,4 +1,6 @@
-﻿namespace CleanArchitecture.Application.Services.Implementations;
+﻿using System.Linq.Dynamic.Core;
+
+namespace CleanArchitecture.Application.Services.Implementations;
 
 public class AccountsService(
     UserManager<UserEntity> userManager,
@@ -11,7 +13,7 @@ public class AccountsService(
 {
     private static string? EnvName =>
         Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-    
+
     private static void EnsureResultSucceeded(IdentityResult result)
     {
         if (!result.Succeeded)
@@ -26,6 +28,36 @@ public class AccountsService(
             .Include(x => x.CartItems)
             .Include(x => x.Orders)
             .ProjectTo<GetUserDto>(mapper.ConfigurationProvider);
+
+    public async Task<PagedListInfo<GetUserDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var query = userManager.Users
+            .Include(x => x.CartItems)
+            .Include(x => x.Orders)
+            .AsQueryable();
+        if (!String.IsNullOrWhiteSpace(orderBy))
+            query = query.OrderBy(orderBy);
+        if (!String.IsNullOrWhiteSpace(selectBy))
+            query = query.Where(selectBy);
+
+        var result = await query
+            .ProjectTo<GetUserDto>(mapper.ConfigurationProvider)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PagedListInfo.Create(
+            result,
+            pageNumber,
+            pageSize,
+            await userManager.Users.LongCountAsync()
+        );
+    }
 
     public async Task<GetUserDto> Get(string id)
     {
@@ -106,16 +138,16 @@ public class AccountsService(
         var settings = new GoogleJsonWebSignature.ValidationSettings
         {
             Audience =
-            [   // Google Client ID
+            [ // Google Client ID
                 isDev
                     ? configuration["JwtOptions:GoogleClientId"]
                     : Environment.GetEnvironmentVariable("GoogleClientId")
             ]
         };
-        
+
         var payload = await GoogleJsonWebSignature.ValidateAsync(token, settings);
         UserEntity? user = await userManager.FindByEmailAsync(payload.Email);
-        
+
         if (user is null)
         {
             // Prepare user if not exists
@@ -128,14 +160,14 @@ public class AccountsService(
                 ProfilePicture = payload.Picture ?? String.Empty,
                 EmailConfirmed = payload.EmailVerified
             };
-            
+
             // Add user to database, add claims and roles
             var result = await userManager.CreateAsync(user);
             EnsureResultSucceeded(result);
             result = await userManager.AddToRoleAsync(user, "User");
             EnsureResultSucceeded(result);
         }
-        
+
         // Login and return token
         if (payload.Email is null)
             throw new HttpException(
@@ -148,7 +180,7 @@ public class AccountsService(
                 ErrorMessages.UserNotFound,
                 HttpStatusCode.NotFound
             );
-        
+
         await signInManager.SignInAsync(user, true, "Google");
         return new LoginResponseDto
         {

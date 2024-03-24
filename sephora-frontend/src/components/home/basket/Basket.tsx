@@ -3,7 +3,7 @@ import "./basket.scss"
 import {useTranslation} from "react-i18next";
 import {newPieces} from "../data";
 import BasketProduct from "../products/basketProduct/BasketProduct";
-import React from "react";
+import React, {useCallback} from "react";
 import Product from "../products/Product";
 import icon2 from "../../../assets/images/icon2.svg";
 import {CalculateProductTotal} from "../../../common/calculateTotal";
@@ -27,6 +27,7 @@ const style = {
 
 export function Basket() {
     const isAuth = useSelector((store: RootState) => store.auth.isAuth);
+
     const [open, setOpen] = React.useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -34,18 +35,26 @@ export function Basket() {
     const {t} = useTranslation();
     const [products, setProducts] = React.useState<PagedList<CartItem>>();
 
-    React.useEffect(() => {
-        if (isAuth) {
-            http_common.get<PagedList<CartItem>>("/cart")
-                .then(r => setProducts(r.data))
-                .catch(e => console.error(e));
+    const refetch = useCallback(async () => {
+        if (isAuth && open) {
+            try {
+                const r = await http_common.get<PagedList<CartItem>>("/cart");
+                setProducts(r.data)
+            } catch (e) {
+                console.error(e);
+            }
         } else {
             setProducts(
-                JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList
+                localStorage.cart
+                    ? JSON.parse(localStorage.cart)
+                    : EmptyPagedList
             );
         }
-    }, [setProducts, isAuth]);
+    }, [setProducts, isAuth, open])
+
+    React.useEffect(() => {
+        refetch().catch(console.error);
+    }, [refetch]);
 
     const discount = 0;
     const total: number = CalculateProductTotal(products?.items);
@@ -53,19 +62,23 @@ export function Basket() {
     return products
         ? (
             <div>
-                <Button disableTouchRipple onClick={handleOpen}><img src={icon2} alt=""/></Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box
-                        sx={style}
-                        className="containerBasket"
-                        style={{maxWidth: "100%", justifyContent: "center", margin: '20px 0'}}
-                    >
-                        <Typography className="title">{t('basket')}</Typography>
+                <Button disableTouchRipple onClick={handleOpen}>
+                    <img src={icon2} alt=""/>
+                </Button>
+                <Modal open={open}
+                       onClose={handleClose}
+                       aria-labelledby="modal-modal-title"
+                       aria-describedby="modal-modal-description">
+                    <Box sx={style}
+                         className="containerBasket"
+                         style={{
+                             maxWidth: "100%",
+                             justifyContent: "center",
+                             margin: '20px 0'
+                         }}>
+                        <Typography className="title">
+                            {t('basket')}
+                        </Typography>
 
                         <Box className='line'/>
 
@@ -74,7 +87,9 @@ export function Basket() {
                                 <Grid item sm={12} lg={8} className="containerScroll">
                                     <Stack spacing={2} sx={{margin: '8px'}}>
                                         {products.items.map((piece) => (
-                                            <BasketProduct piece={piece} key={piece.id}/>
+                                            <BasketProduct key={piece.id}
+                                                           piece={piece}
+                                                           onUpdate={refetch}/>
                                         ))}
                                     </Stack>
                                 </Grid>
@@ -84,45 +99,62 @@ export function Basket() {
                                         <Stack
                                             margin='0 15px'
                                             justifyContent='space-between' direction='row'>
-                                            <Typography className="text">{t('basket/order.orderAmount')}</Typography>
-                                            <Typography className="text">{total} {t('uah')} </Typography>
+                                            <Typography className="text">
+                                                {t('basket/order.orderAmount')}
+                                            </Typography>
+                                            <Typography className="text">
+                                                {total} {t('uah')}
+                                            </Typography>
                                         </Stack>
-                                        <Stack
-                                            margin='15px'
-                                            justifyContent='space-between' direction='row'>
-                                            <Typography className="text">{t('basket/order.discount')}</Typography>
-                                            <Typography className="text">{discount} {t('uah')} </Typography>
+                                        <Stack margin='15px'
+                                               justifyContent='space-between' direction='row'>
+                                            <Typography className="text">
+                                                {t('basket/order.discount')}
+                                            </Typography>
+                                            <Typography className="text">
+                                                {discount} {t('uah')}
+                                            </Typography>
                                         </Stack>
                                         <Box className='line'/>
-                                        <Stack
-                                            margin='15px'
-                                            justifyContent='space-between' direction='row'>
-                                            <Typography className="total">{t('basket/order.total')}</Typography>
-                                            <Typography className="total">{total - discount} {t('uah')} </Typography>
+                                        <Stack margin='15px'
+                                               justifyContent='space-between' direction='row'>
+                                            <Typography className="total">
+                                                {t('basket/order.total')}
+                                            </Typography>
+                                            <Typography className="total">
+                                                {total - discount} {t('uah')}
+                                            </Typography>
                                         </Stack>
-                                        <Button href="/order" className="button">{t('basket/order.toOrder')}</Button>
+                                        <Button href="/order" className="button">
+                                            {t('basket/order.toOrder')}
+                                        </Button>
                                     </Stack>
                                 </Grid>
                             </Grid>
                         </Box>
-                        {(products.items.length <= 3 && window.outerWidth >= 1600) && (
-                            <Box margin={4}>
-                                <Typography className="recProductsTitle">{t('basket.recommendedProducts')}</Typography>
-                                <Grid container spacing={2} columns={15}>
-                                    {newPieces.map((product) => (
-                                        <Grid key={product.id} item xs={7.5} sm={5} md={3} lg={3}>
-                                            <Product piece={product}/>
-                                        </Grid>
-                                    ))
-                                    }
-                                </Grid>
-                            </Box>
-                        )}
+                        {(products.items.length <= 3 && window.outerWidth >= 1600)
+                            && (
+                                <Box margin={4}>
+                                    <Typography className="recProductsTitle">
+                                        {t('basket.recommendedProducts')}
+                                    </Typography>
+                                    <Grid container spacing={2} columns={15}>
+                                        {newPieces.map((product) => (
+                                            <Grid key={product.id}
+                                                  item xs={7.5} sm={5} md={3} lg={3}>
+                                                <Product piece={product}/>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </Box>
+                            )}
                     </Box>
                 </Modal>
             </div>
         )
-        : <Stack sx={{alignItems: 'center', justifyContent: 'center'}}>
-            <CircularProgress color="inherit"/>
-        </Stack>
+        : (
+            <Stack sx={{alignItems: 'center', justifyContent: 'center'}}>
+                <CircularProgress color="inherit"/>
+            </Stack>
+        )
 }

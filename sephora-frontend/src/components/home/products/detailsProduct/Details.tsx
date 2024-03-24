@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {
     Button,
     CircularProgress,
@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {Link, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import http_common from "../../../../http_common.ts";
 
 import ProductDto from "../../../../models/product/ProductDto.ts";
@@ -53,13 +53,13 @@ const Details: React.FC = () => {
     );
 
     const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
-    const changePiece = (pId: number, curProduct: ProductDto) => {
+    const changePiece = useCallback((pId: number, curProduct: ProductDto) => {
         setPieceId(pId);
         setParams({piece: pId.toString()});
         setImage(curProduct.pieces.find(p => p.id === pId)?.pictures[0]);
 
         navigate(`/details/${id}?piece=${pId}`);
-    }
+    }, [id, navigate, setParams]);
     const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     useEffect(() => {
@@ -67,19 +67,22 @@ const Details: React.FC = () => {
             .then(resp => {
                 const pathId = Number(params.get("piece"));
                 const pieceIds = resp.data.pieces.map(p => p.id);
+                console.log(pieceIds)
+                console.info(resp.data)
                 const pieceId = pieceIds.includes(pathId)
                     ? pathId
                     : resp.data.pieces[0].id;
 
                 setProduct(resp.data);
+                setIsFavorite(resp.data.isFavorite);
                 changePiece(pieceId, resp.data);
             })
             .catch(console.error);
 
         http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
             .then(resp => setReviews(resp.data))
-            .catch(e => console.error(e));
-    }, [id, isFavorite]);
+            .catch(console.error);
+    }, [changePiece, id, isFavorite, params]);
 
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
@@ -87,10 +90,8 @@ const Details: React.FC = () => {
 
 
     const handleFavClick = () => {
-        // TODO: add toast/other notification
-
-        changeFavStatus(product?.id ?? 0, isAuthed);
-        setIsFavorite(!isFavorite);
+        changeFavStatus(product?.id ?? 0, isAuthed)
+            .then(() => setIsFavorite(!isFavorite));
     }
 
     const handleBuyClick = async () => {
@@ -173,8 +174,8 @@ const Details: React.FC = () => {
                             className="characteristic">
                             {
                                 i18n.language === "en"
-                                    ? characteristic.descriptionEn
-                                    : characteristic.descriptionUa
+                                    ? characteristic.valueEn
+                                    : characteristic.valueUa
                             }
                         </Typography>
                     </Stack>
@@ -199,9 +200,15 @@ const Details: React.FC = () => {
                     direction='row'
                     spacing={4}
                     sx={{height: '66px'}}>
-                    <img alt="nova poshta" src={novaPoshta}/>
-                    <img alt="ukr poshta" src={ukrPoshta}/>
-                    <img style={{height: '60px'}} alt="meest" src={meest}/>
+                    <Link to={routes.deliveryNewPost}>
+                        <img alt="nova poshta" src={novaPoshta}/>
+                    </Link>
+                    <Link to={routes.deliveryUkrPoshta}>
+                        <img alt="ukr poshta" src={ukrPoshta}/>
+                    </Link>
+                    <Link to={routes.deliveryMeestMail}>
+                        <img style={{height: '60px'}} alt="meest" src={meest}/>
+                    </Link>
                 </Stack>
             </Stack>
         }
@@ -209,8 +216,7 @@ const Details: React.FC = () => {
 
     return (
         product && currentPiece()
-            ?
-            <>
+            ? (
                 <Container style={{maxWidth: "90%", alignItems: 'center'}}>
                     <Container
                         style={{maxWidth: "100%", alignItems: 'center'}}
@@ -283,15 +289,15 @@ const Details: React.FC = () => {
                                 <Stack
                                     spacing={1} sx={{width: '450px'}}
                                     style={{marginTop: '40px'}}>
-                                        {isFavorite
-                                            ? <Button className="butFavorites" onClick={handleFavClick}>
-                                                {t('details.addToFavorites')}
-                                                <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
-                                            </Button>
-                                            : <Button className="butFavorites" onClick={handleFavClick}>
-                                                {t('details.addedToFavorites')}
-                                                <FavoriteIcon style={{marginLeft: '10px'}}/>
-                                            </Button>
+                                    {isFavorite
+                                        ? <Button className="butFavorites" onClick={handleFavClick}>
+                                            {t('details.addedToFavorites')}
+                                            <FavoriteIcon style={{marginLeft: '10px'}}/>
+                                        </Button>
+                                        : <Button className="butFavorites" onClick={handleFavClick}>
+                                            {t('details.addToFavorites')}
+                                            <FavoriteBorderIcon style={{marginLeft: '10px'}}/>
+                                        </Button>
                                     }
                                     <Button className="butBuy" onClick={handleBuyClick}>{t('details.buy')}</Button>
                                     {/* <Button className="butBuy" onClick={handleBuyClick}>{t('details.addedToCart')}</Button> */}
@@ -340,10 +346,12 @@ const Details: React.FC = () => {
                         {/*<Products title={t('common.title.especiallyForYou')} products={especiallyForYou}/>*/}
                     </Stack>
                 </Container>
-            </>
-            : <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
-                <CircularProgress color="inherit"/>
-            </Stack>
+
+            ) : (
+                <Stack sx={{alignItems: 'center', justifyContent: 'center', marginY: 10}}>
+                    <CircularProgress color="inherit"/>
+                </Stack>
+            )
     );
 }
 

@@ -36,17 +36,19 @@ const routes = {
     adminProductsList: '/admin/products',
     createProducts: '/admin/products/create',
 
+    wishlist: '/wishlist',
 
     picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
 
     api: {
-        novelties: '/pieces?filter=createdAt > DateTime.UtcNow.AddDays(-14)',
-        dateOrdered: '/pieces?sort=createdAt desc',
+        novelties: '/products?filter=createdAt > DateTime.UtcNow.AddDays(-14)',
+        dateOrdered: '/products?sort=createdAt desc',
+        products: '/products?',
         pieces: '/pieces?',
-        popularity: '/pieces?&sort=product.AverageRating desc',
-        care: '/pieces?filter=product.category.nameEn = "Care"',
-        bottled: '/pieces?filter=isBottledParfume = true',
-        full_sized: '/pieces?filter=isBottledParfume = false',
+        popularity: '/products?&sort=AverageRating desc',
+        care: '/products?filter=category.nameEn = "Care"',
+        bottled: '/products?filter=isBottledParfume = true',
+        full_sized: '/products?filter=isBottledParfume = false',
         search: '/search?q=',
     }
 }

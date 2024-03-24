@@ -20,7 +20,7 @@ public class ProductService(
             return false;
 
         var favorite = await favRepo.GetItemBySpec(
-            new Favorites.Get(userId, productId)
+            new Favorites.Find(userId, productId)
         );
         return favorite?.IsActive ?? false;
     }
@@ -53,6 +53,15 @@ public class ProductService(
 
         foreach (var c in product.Characteristics)
             await charRepo.Delete(c);
+
+        foreach (var c in product.Characteristics)
+            await charRepo.Delete(c);
+
+        var favorites = await favRepo.GetListBySpec(
+            new Favorites.GetByProduct(id)
+        ).ToListAsync();
+        foreach (var favorite in favorites)
+            await favRepo.Delete(favorite);
 
         await productRepo.Delete(product);
         await productRepo.Save();
@@ -105,12 +114,20 @@ public class ProductService(
         searchService.Index(entity!);
     }
 
-    // TODO: Fix the issue with the favorites
-    public async Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal? user = null)
+    public async Task<IEnumerable<LightProductDto>> Get(
+        ClaimsPrincipal? user = null
+    )
     {
-        var products = productRepo.GetListBySpec(new Products.GetAll())
-            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider);
-        await products.ForEachAsync(x => x.IsFavorite = IsFavorite(user, x.Id).Result);
+        var products = await productRepo.GetListBySpec(new Products.GetAll())
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        if (user is null)
+            return products;
+
+        foreach (var product in products)
+            product.IsFavorite = await IsFavorite(user, product.Id);
+
         return products;
     }
 
@@ -122,9 +139,12 @@ public class ProductService(
         ClaimsPrincipal? user = null
     )
     {
-        var count = await productRepo.CountBySpec(selectBy);
+        long count = await productRepo.CountBySpec(selectBy);
         var list = await productRepo
-            .GetRange(pageNumber, pageSize, orderBy, selectBy)
+            .GetRangeBySpec(
+                new Products.GetAll(),
+                pageNumber, pageSize, orderBy, selectBy
+            )
             .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
             .ToListAsync();
 

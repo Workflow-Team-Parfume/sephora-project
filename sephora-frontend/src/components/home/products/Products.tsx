@@ -3,8 +3,8 @@ import "./products.scss"
 import Product from "./Product";
 import {useTranslation} from "react-i18next";
 import React, {useEffect} from "react";
-import ProductPieceDto from "../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../http_common.ts";
+import ProductDto from "../../../models/product/ProductDto.ts";
 
 const pageSize = 4;
 
@@ -15,14 +15,13 @@ const Products: React.FC<{
 }> = ({title, link, linkBut}) => {
     const {t} = useTranslation();
 
-    const [products, setProducts] = React.useState<ProductPieceDto[]>([]);
+    const [products, setProducts] = React.useState<ProductDto[]>([]);
 
+    // TODO: paging
     useEffect(() => {
         http_common.get(`${link}&page=${1}&size=${pageSize}`)
-            .then(r => {
-                setProducts([...products, ...r.data.items])
-            })
-            .catch(e => console.error(e));
+            .then(r => setProducts([...products, ...r.data.items]))
+            .catch(console.error);
     }, [link]);
 
     return (
@@ -36,7 +35,7 @@ const Products: React.FC<{
                     {products.length > 0 ?
                         products.map((product) => (
                             <Grid key={product.id} item xs={6} sm={6} md={4} lg={3}>
-                                <Product key={product.id} piece={product}/>
+                                <Product key={product.id} product={product}/>
                             </Grid>
                         ))
                         : <Grid item xs={12}>

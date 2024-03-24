@@ -37,7 +37,7 @@ public class AmountService(
         string? selectBy = null
     )
     {
-        var count = await amountRepository.CountBySpec(selectBy);
+        long count = await amountRepository.CountBySpec(selectBy);
         var list = await amountRepository
             .GetRange(pageNumber, pageSize)
             .ProjectTo<AmountDto>(mapper.ConfigurationProvider)

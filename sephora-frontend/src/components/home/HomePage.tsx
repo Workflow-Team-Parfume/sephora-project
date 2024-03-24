@@ -51,7 +51,7 @@ const HomePage = () => {
                 />
                 <Banner banner={Banner1} color="#688F74"/>
                 <Products title={t('common.title.perfumes')}
-                    link={routes.api.pieces}
+                    link={routes.api.products}
                     linkBut={routes.full_sized}
                 />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>

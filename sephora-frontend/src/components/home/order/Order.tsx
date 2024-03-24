@@ -22,7 +22,7 @@ const Order = () => {
         if (isAuth) {
             http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setPieces(r.data))
-                .catch(e => console.log(e));
+                .catch(console.error);
         } else {
             setPieces(
                 localStorage.cart

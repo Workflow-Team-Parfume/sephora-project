@@ -1,9 +1,8 @@
 import http_common from "../../../http_common.ts";
 
-const changeFavStatus = (id: number, isAuthed: boolean) => {
+const changeFavStatus = async (id: number, isAuthed: boolean) => {
     if (isAuthed) {
-        http_common.put(`favorites/${id}`)
-            .catch(console.error);
+        await http_common.put(`favorites/${id}`);
     } else {
         const items = JSON.parse(localStorage.favorites ?? '[]');
 

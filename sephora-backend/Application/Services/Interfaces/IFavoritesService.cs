@@ -47,7 +47,7 @@ public interface IFavoritesService
      * Query of all favorite products.
      * </returns>
      */
-    Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal user);
+    Task<IEnumerable<LightProductDto>> Get(ClaimsPrincipal user);
 
     /**
      * <summary>

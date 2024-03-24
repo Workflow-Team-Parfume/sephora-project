@@ -31,5 +31,5 @@ public class ProductDto
     // Publication was less than 14 days ago
     public bool IsNew => CreatedAt > DateTime.UtcNow.AddDays(-14);
 
-    public bool IsFavorite { get; set; } = false;
+    public bool IsFavorite { get; set; }
 }

@@ -15,11 +15,13 @@ public class LightProductDto
     public decimal AverageRating { get; set; }
 
     public IEnumerable<AmountDto> Volumes { get; set; } = [];
+    
+    public IEnumerable<LightProductPieceDto> Pieces { get; set; } = [];
 
     public DateTime CreatedAt { get; set; }
 
     // Publication was less than 14 days ago
     public bool IsNew => CreatedAt > DateTime.UtcNow.AddDays(-14);
-
-    public bool IsFavorite { get; set; } = false;
+    
+    public bool IsFavorite { get; set; }
 }

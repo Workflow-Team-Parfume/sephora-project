@@ -34,7 +34,11 @@ public class ApplicationProfile : Profile
             );
         CreateMap<CreateProductDto, ProductEntity>();
         CreateMap<EditProductDto, ProductEntity>();
-        CreateMap<ProductEntity, LightProductDto>();
+        CreateMap<ProductEntity, LightProductDto>()
+            .ForMember(
+                dest => dest.Pieces,
+                opts => opts.MapFrom(src => src.ProductPieces.Take(1))
+            );
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
@@ -57,7 +61,6 @@ public class ApplicationProfile : Profile
                 dest => dest.Pictures,
                 opts => opts.MapFrom(src => src.ProductPictures)
             );
-        ;
 
         CreateMap<Order, OrderDto>();
         CreateMap<OrderItem, OrderItemDto>();

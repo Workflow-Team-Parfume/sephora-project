@@ -18,7 +18,7 @@ public class AccountController(
         [FromQuery] string? filter = null
     ) => Ok(await accountsService.Get(page, size, sort, filter));
 
-    [HttpGet("/get/{id}"), Authorize(Roles = "SudoAdmin")]
+    [HttpGet("get/{id}"), Authorize(Roles = "SudoAdmin")]
     public async Task<IActionResult> Get(string id)
         => Ok(await accountsService.Get(id));
 

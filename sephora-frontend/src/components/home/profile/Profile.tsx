@@ -53,7 +53,7 @@ const Profile = () => {
                     <AddressBook/>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={2}>
-                    <Wishlist/>
+                    <div className={`wishlist-wrapper`}><Wishlist/></div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
                     <OrderHistory/>

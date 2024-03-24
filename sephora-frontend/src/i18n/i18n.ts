@@ -40,6 +40,7 @@ i18n.use(initReactI18next)
                     'header.aboutUs': 'Про нас',
                     'header.paymentAndDelivery': 'Оплата та доставка',
                     'header.novelty': 'Новинки',
+                    'header.wishlist': 'Улюблені',
 
                     'common.button.moreDetails': 'Детальніше',
                     'common.button.moreProducts': 'Більше товарів',
@@ -129,7 +130,7 @@ i18n.use(initReactI18next)
                     'order.paymentByCard.cardNumber': 'Номер карти',
                     'order.paymentByCard.saveTheCard': 'Зберегти карту',
                     'order.paymentByCard.pay': 'Оплатити',
-                  
+
                     'address.city': 'Місто',
                     'address.street': 'Вулиця',
                     'address.house': 'Будинок',
@@ -186,7 +187,7 @@ i18n.use(initReactI18next)
                     'deliveryPickup_line2': "Замовлення, оформлені у робочі дні до 4:00 години ранку в м. Києві зазвичай Через повітряну тривогу доставка замовлення в пункт видачі може затриматися. Будь ласка, в цьому випадку дайте нам трохи додаткового часу на доставку замовлення після закінчення тривоги. Перед візитом до нас дочекайтеся повідомлення про те, що посилка прибула до нашого пункту видачі замовлень. в той же день.",
                     'deliveryPickup_line3': "Замовлення зберігається на пункті самовивозу протягом 3х робочих днів, після цього замовлення відправляється назад.",
                     'deliveryPickup_line4': "Будь-ласка, зверніть увагу: вибираючи оплату готівкою, ви не зможете скористатися платіжною карткою на точці самовивозу. Оплатити замовлення в такому випадку можливо лише готівкою. Розрахуватись платіжною карткою ви можете під час оформлення замовлення на сайті. При оплаті картою вказаний у замовленні одержувач повинен буде показати документ, що посвідчує особу.",
-                
+
                     // DeliveryNewPost
                     'deliveryNewPost_line0': 'Нова пошта',
                     'deliveryNewPost_line1': "При сумі замовлення до 849 грн доставка коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна!",
@@ -200,7 +201,7 @@ i18n.use(initReactI18next)
                     'deliveryNewPost_line9': "Самовивіз",
                     'deliveryNewPost_line10': "Замовлення зберігається на складі транспортної компанії не більше 4 робочих днів, після вичерпання цього терміну відправляється назад. При оплаті картою на сайті зазначений в замовленні отримувач має показати документ, що засвідчує особу, або штрихкод одержувача у додатку «Нова пошта» (для заказів на суму до 5 000 грн). ",
                     'deliveryNewPost_line11': "Будь ласка, обов'язково перевірте посилку при отриманні у відділенні «Нова пошта». У разі, якщо ви помітили пошкодження посилки або недостачу будь-яких позицій, ви можете відмовитися від посилки, склавши з представником компанії «Нова пошта» відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий — візьме представник компанії—перевізника.",
-                
+
                     // DeliveryUkrPoshta
                     'deliveryUkrPoshta_line0': "Укрпошта",
                     'deliveryUkrPoshta_line1': "Спеціальні тарифи! ",
@@ -210,7 +211,7 @@ i18n.use(initReactI18next)
                     'deliveryUkrPoshta_line5': "Замовлення зберігається на складі відділення протягом 5 днів, починаючи з 6-го дня знімається плата у розмірі 3 грн. 80 коп. за кожний наступний день зберігання. Ці послуги оплачуєте ви!",
                     'deliveryUkrPoshta_line6': "Будь ласка, обов'язково перевірте посилку при отриманні в присутності представника компанії «Укрпошта». У разі, якщо ви помітили пошкодження посилки або недостачу будь—яких позицій, ви можете відмовитися від посилки, склавши з представником компанії відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий — візьме представник компанії «Укрпошта».",
                     'deliveryUkrPoshta_line7': "Отримати замовлення може лише людина, вказана у транспортній декларації як отримувач. При собі необхідно мати документ, що засвідчує особу.",
-                
+
                     // DeliveryMeestMail
                     'deliveryMeestMail_line0': "Meest ПОШТА (Самовивіз)",
                     'deliveryMeestMail_line1': "При сумі замовлення до 849 грн доставка коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна!",
@@ -220,7 +221,7 @@ i18n.use(initReactI18next)
                     'deliveryMeestMail_line5': "Зверніть увагу! Замовлення зберігається на складі транспортної компанії не більше 5 робочих днів, після вичерпання цього терміну відправляється назад. Отримати замовлення може лише людина, вказана у транспортній декларації як отримувач. При собі необхідно мати документ, що засвідчує особу.",
                     'deliveryMeestMail_line6': "Будь ласка, обов'язково перевірте посилку при отриманні у присутності представника компанії Meest ПОШТА. У разі, якщо ви помітили пошкодження посилки або недостачу будь-яких позицій, ви можете відмовитися від посилки, склавши з представником компанії відповідний акт. Один екземпляр, будь ласка, залиште у себе, другий - візьме представник компанії-перевізника.",
                     'deliveryMeestMail_line7': "Замовлення з доставкою через  «Meest ПОШТА» приймаються згідно графіка роботи перевізника. Графік роботи компанії  «Meest ПОШТА» ви можете знайти на її офіційному сайті. Також ви маєте можливість прослідкувати місце знаходження вашого замовлення за допомогою спеціального сервісу  «Meest ПОШТА».",
-                
+
                     // DeliveryByCourierInUkraine
                     'deliveryByCourierInUkraine_line0': "Кур’єром по Україні (інші перевізники)",
                     'deliveryByCourierInUkraine_line1': "У зв'язку з підвищенням тарифів перевізниками ми змушені трохи підняти ліміт для безкоштовної доставки. Доставка кур'єрською службою компаній-перевізників в міста України при сумі замовлення до 849 грн коштує всього 39 грн, при сумі замовлення понад 849 грн — доставка безкоштовна! ",
@@ -254,9 +255,9 @@ i18n.use(initReactI18next)
                     'delivery.search': 'Введіть ваше місто',
                     'delivery.weMakeYouHappy': 'Робимо вас щасливими. Безкоштовно',
                     'delivery.enterTheName': 'Введіть назву вашого населеного пункту, і ми запропонуємо варіанти доставки вашого щастя',
-        
+
                     'register.birthdate': 'Дата народження',
-        }
+                }
             },
 
             en: {
@@ -293,6 +294,7 @@ i18n.use(initReactI18next)
                     'header.aboutUs': 'About us',
                     'header.paymentAndDelivery': 'Payment and delivery',
                     'header.novelty': 'Novelty',
+                    'header.wishlist': 'Wishlist',
 
                     'common.button.moreDetails': 'More details',
                     'common.button.moreProducts': 'More products',
@@ -439,7 +441,7 @@ i18n.use(initReactI18next)
                     'deliveryPickup_line2': "Orders placed on working days before 4:00 a.m. in Kyiv usually may be delayed due to an air alarm. Please, in this case, allow us a little extra time to ship the order after the alarm is over. Before visiting us, wait for the notification that the parcel has arrived at our point of delivery of orders. on the same day",
                     'deliveryPickup_line3': "The order is stored at the pick-up point for 3 working days, after which the order is sent back.",
                     'deliveryPickup_line4': "Please note: if you choose to pay in cash, you will not be able to use a payment card at the pick-up point. In this case, it is only possible to pay for the order in cash. You can pay with a payment card when placing an order on the website. When paying by card, the recipient specified in the order will have to show an identity document.",
-                    
+
                     // DeliveryNewPost
                     'deliveryNewPost_line0': 'New post',
                     'deliveryNewPost_line1': "For orders up to UAH 849, delivery costs only UAH 39, for orders over UAH 849, delivery is free!",
@@ -453,7 +455,7 @@ i18n.use(initReactI18next)
                     'deliveryNewPost_line9': "Pickup",
                     'deliveryNewPost_line10': "The order is stored in the warehouse of the transport company for no more than 4 working days, after which it is sent back. When paying by card on the website, the recipient specified in the order must show an identity document or the recipient's barcode in the Nova Poshta application (for orders up to UAH 5,000). ",
                     'deliveryNewPost_line11': "Please be sure to check the parcel when you receive it at the «New Post» branch. In the event that you notice damage to the parcel or lack of any items, you can refuse the parcel by drawing up an appropriate document with a representative of the 'New Post' company. Please keep one copy, the representative of the carrier company will take the second.",
-                
+
                     // DeliveryUkrPoshta
                     'deliveryUkrPoshta_line0': "Ukrposhta",
                     'deliveryUkrPoshta_line1': "Special rates! ",
@@ -463,7 +465,7 @@ i18n.use(initReactI18next)
                     'deliveryUkrPoshta_line5': "The order is stored in the warehouse of the department for 5 days, starting from the 6th day, a fee of UAH 3 is deducted. 80 kopecks for each subsequent day of storage. You pay for these services!",
                     'deliveryUkrPoshta_line6': "Please be sure to check the package upon receipt in the presence of a representative of the Ukrposhta company. If you notice that the parcel is damaged or any items are missing, you can refuse the parcel by drawing up an appropriate document with the company representative. Please keep one copy, the other will be taken by a representative of the Ukrposhta company.",
                     'deliveryUkrPoshta_line7': "Only the person specified in the transport declaration as the recipient can receive the order. You must have an identity document with you.",
-                
+
                     // DeliveryMeestMail
                     'deliveryMeestMail_line0': "Meest MAIL (Pick-up)",
                     'deliveryMeestMail_line1': "For orders up to UAH 849, delivery costs only UAH 39, for orders over UAH 849, delivery is free!",
@@ -473,7 +475,7 @@ i18n.use(initReactI18next)
                     'deliveryMeestMail_line5': "Pay attention! The order is stored in the warehouse of the transport company for no more than 5 working days, after which it is sent back. Only the person specified in the transport declaration as the recipient can receive the order. You must have an identity document with you.",
                     'deliveryMeestMail_line6': "Please be sure to check the package upon receipt in the presence of a representative of the Meest POST company. If you notice that the parcel is damaged or any items are missing, you can refuse the parcel by drawing up an appropriate document with the company representative. Please keep one copy, the representative of the carrier company will take the second.",
                     'deliveryMeestMail_line7': "Orders with delivery through «Meest POSHTA» are accepted according to the carrier's work schedule. You can find the working schedule of the «Meest POSHTA» company on its official website. You also have the opportunity to track the location of your order using the special «Meest POSHTA» service.",
-                
+
                     // DeliveryByCourierInUkraine
                     'deliveryByCourierInUkraine_line0': "By courier in Ukraine (other carriers)",
                     'deliveryByCourierInUkraine_line1': "In connection with the increase in tariffs by carriers, we are forced to slightly raise the limit for free delivery. Delivery by courier service of carrier companies to cities of Ukraine for orders up to UAH 849 costs only UAH 39, for orders over UAH 849 — delivery is free! ",
@@ -507,9 +509,9 @@ i18n.use(initReactI18next)
                     'delivery.search': 'Enter your city',
                     'delivery.weMakeYouHappy': 'We make you happy. Free',
                     'delivery.enterTheName': 'Enter the name of your locality, and we will offer options for the delivery of your happiness',
-        
+
                     'register.birthdate': 'Date of birth',
-        }
+                }
             }
         },
         lng: 'uk', // мова за замовчуванням
@@ -517,6 +519,7 @@ i18n.use(initReactI18next)
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },
-    });
+    })
+    .catch(console.error);
 
 export default i18n;

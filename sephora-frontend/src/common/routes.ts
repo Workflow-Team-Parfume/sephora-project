@@ -36,6 +36,7 @@ const routes = {
     adminProductsList: '/admin/products',
     createProducts: '/admin/products/create',
 
+    wishlist: '/wishlist',
 
     picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
 

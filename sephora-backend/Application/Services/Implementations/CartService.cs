@@ -33,7 +33,7 @@ public class CartService(
         string userId = GetUserIdOrThrow(user);
         var spec = new CartItems.GetByUserId(userId);
 
-        var count = await cartRepository.CountBySpec(spec);
+        long count = await cartRepository.CountBySpec(spec);
         var list = await cartRepository
             .GetRangeBySpec(spec, pageNumber, pageSize, orderBy, selectBy)
             .ProjectTo<CartDto>(mapper.ConfigurationProvider).ToListAsync();

@@ -62,12 +62,21 @@ public class FavoritesService(
         }
     }
 
-    public IQueryable<LightProductDto> Get(ClaimsPrincipal user)
+    public async Task<IEnumerable<LightProductDto>> Get(ClaimsPrincipal user)
     {
-        var userId = GetUserIdOrThrow(user);
-        return favoritesRepository.GetListBySpec(
-            new Favorites.GetByUser(userId)
-        ).Select(x => x.Product).ProjectTo<LightProductDto>(mapper.ConfigurationProvider);
+        string userId = GetUserIdOrThrow(user);
+        var list = await favoritesRepository.GetListBySpec(
+                new Favorites.GetByUser(userId)
+            ).Select(x => x.Product)
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        // Mark all products as favorites
+        // (they are in favorites list by definition of the query)
+        foreach (var p in list)
+            p.IsFavorite = true;
+        
+        return list;
     }
 
     public async Task<PagedListInfo<LightProductDto>> Get(
@@ -79,9 +88,10 @@ public class FavoritesService(
     )
     {
         var userId = GetUserIdOrThrow(user);
-        var count = await favoritesRepository.GetListBySpec(
+        long count = await favoritesRepository.GetListBySpec(
             new Favorites.GetByUser(userId)
         ).LongCountAsync();
+        
         var list = await favoritesRepository.GetRangeBySpec(
                 new Favorites.GetByUser(userId),
                 pageNumber,
@@ -92,6 +102,11 @@ public class FavoritesService(
             .Select(x => x.Product)
             .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
             .ToListAsync();
+
+        // Mark all products as favorites
+        // (they are in favorites list by definition of the query)
+        foreach (var p in list)
+            p.IsFavorite = true;
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

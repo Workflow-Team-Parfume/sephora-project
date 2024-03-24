@@ -139,7 +139,7 @@ public class ProductService(
         ClaimsPrincipal? user = null
     )
     {
-        var count = await productRepo.CountBySpec(selectBy);
+        long count = await productRepo.CountBySpec(selectBy);
         var list = await productRepo
             .GetRange(pageNumber, pageSize, orderBy, selectBy)
             .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)

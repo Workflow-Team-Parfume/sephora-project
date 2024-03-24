@@ -15,6 +15,8 @@ public class LightProductDto
     public decimal AverageRating { get; set; }
 
     public IEnumerable<AmountDto> Volumes { get; set; } = [];
+    
+    public IEnumerable<LightProductPieceDto> Pieces { get; set; } = [];
 
     public DateTime CreatedAt { get; set; }
 

@@ -133,6 +133,16 @@ public class ApplicationProfile : Profile
                 dest => dest.Milliliters,
                 opt => opt.MapFrom(src => src.ProductPiece.Amount!.Milliliters)
             )
+            .ForMember(
+                dest => dest.ProductImage,
+                opt => opt.MapFrom(src =>
+                    PictureDto.GetUrl(
+                        src.ProductPiece.ProductPictures.First().PicturePath,
+                        3,
+                        EnvName == "Development"
+                    )
+                )
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();

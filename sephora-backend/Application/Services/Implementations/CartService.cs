@@ -43,7 +43,8 @@ public class CartService(
 
     public async Task<CartDto?> GetById(long id)
     {
-        CartItem? entry = await cartRepository.GetById(id);
+        CartItem? entry = await cartRepository
+            .GetById(new CartItems.GetById(id));
         return entry is null ? null : mapper.Map<CartDto>(entry);
     }
 

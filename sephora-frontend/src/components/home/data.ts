@@ -35,9 +35,9 @@ import ProductPieceDto from "../../models/piece/ProductPieceDto.ts";
 import ProductDto from "../../models/product/ProductDto.ts";
 import PictureDto from "../../models/picture/PictureDto.ts";
 import routes from "../../common/routes.ts";
-import { IFilter } from "./filters/types.ts";
+import {IFilter} from "./filters/types.ts";
 
-const placeholderPic : PictureDto = {
+const placeholderPic: PictureDto = {
     name: 'placeholder',
     url: routes.picPlaceholder,
     urlLg: routes.picPlaceholder,
@@ -273,7 +273,7 @@ export const orders = ([
         date: new Date('3.02.2024'),
         status: OrderStatus.DELIVERED,
         deliveryId: 1,
-        products: [orderProducts[1],orderProducts[2]]
+        products: [orderProducts[1], orderProducts[2]]
     },
 ])
 
@@ -693,7 +693,7 @@ export const especiallyForYou = ([
     },
 ])
 
-export const Filters:IFilter[] = ([
+export const Filters: IFilter[] = ([
     {
         nameUa: 'Група товару',
         nameEn: 'Product group',
@@ -701,7 +701,7 @@ export const Filters:IFilter[] = ([
             {nameUa: 'Крем для обличчя', nameEn: 'Cream for face'},
             {nameUa: 'Маска для обличчя', nameEn: 'Mask for face'},
             {nameUa: 'Пінка для вмивання', nameEn: 'Foam for washing'},
-            {nameUa: 'Сироватка для обличчя',nameEn: 'Serum for face'},
+            {nameUa: 'Сироватка для обличчя', nameEn: 'Serum for face'},
             {nameUa: 'Тонік для обличчя', nameEn: 'Face toner'},
             {nameUa: 'BB-крем', nameEn: 'BB cream'},
             {nameUa: 'CC-крем', nameEn: 'CC cream'},
@@ -731,7 +731,7 @@ export const Filters:IFilter[] = ([
             {nameUa: '750 – 1000 грн', nameEn: '750 - 1000 UAH'},
             {nameUa: '1000 – 5000 грн', nameEn: '1000 - 5000 UAH'},
             {nameUa: 'Більше 5000 грн', nameEn: 'More than 5000 UAH'}]
-    },{
+    }, {
         nameUa: 'Вік',
         nameEn: 'Age',
         filters: [
@@ -740,7 +740,7 @@ export const Filters:IFilter[] = ([
             {nameUa: '30+', nameEn: '30+'},
             {nameUa: '40+', nameEn: '40+'},
             {nameUa: '50+', nameEn: '50+'}]
-    },{
+    }, {
         nameUa: 'Класифікація',
         nameEn: 'Classification',
         filters: [
@@ -753,7 +753,7 @@ export const Filters:IFilter[] = ([
             {nameUa: 'Натуральна', nameEn: 'Natural'},
             {nameUa: 'Органічна', nameEn: 'Organic'},
             {nameUa: 'Професійна', nameEn: 'Professional'}]
-    },{
+    }, {
         nameUa: 'Тип шкіри',
         nameEn: 'Skin type',
         filters: [
@@ -763,7 +763,7 @@ export const Filters:IFilter[] = ([
             {nameUa: 'Нормальна', nameEn: 'Normal'},
             {nameUa: 'Суха', nameEn: 'Dry'},
             {nameUa: 'Чутлива', nameEn: 'Sensitive'}]
-    },{
+    }, {
         nameUa: 'Форма',
         nameEn: 'Form',
         filters: [
@@ -796,7 +796,7 @@ export const Filters:IFilter[] = ([
     },
 ])
 
-export const BottlePageFilters = [Filters[0],Filters[2],Filters[3],Filters[4],Filters[7],]
+export const BottlePageFilters = [Filters[0], Filters[2], Filters[3], Filters[4], Filters[7],]
 export const BottlePageFilter = ({
     nameUa: 'Бренди',
     nameEn: 'Brands',
@@ -829,11 +829,11 @@ export const BottlePageFilter = ({
         {nameUa: 'Creed Aventus', nameEn: 'Creed Aventus'},
         {nameUa: 'Etat Libre d\'Orange Frustration', nameEn: 'Etat Libre d\'Orange Frustration'},
         {nameUa: 'Ex Nihilo Atlas Fever', nameEn: 'Ex Nihilo Atlas Fever'},
-        {nameUa: 'Fig Infusion', nameEn:'Fig Infusion'},
+        {nameUa: 'Fig Infusion', nameEn: 'Fig Infusion'},
         {nameUa: 'Oud Satin Mood', nameEn: 'Oud Satin Mood'},
-        {nameUa: 'Santal 33',  nameEn: 'Santal 33'}]
+        {nameUa: 'Santal 33', nameEn: 'Santal 33'}]
 })
-export const FullSizedPageFilters = [Filters[0],Filters[2],Filters[3],Filters[4],Filters[7],]
+export const FullSizedPageFilters = [Filters[0], Filters[2], Filters[3], Filters[4], Filters[7],]
 
 export const FullSizedPageFilter = ({
     nameUa: 'Бренди',
@@ -867,7 +867,7 @@ export const FullSizedPageFilter = ({
         {nameUa: 'LA MARTINA', nameEn: 'LA MARTINA'}],
 })
 
-export const CarePageFilters = [Filters[0],Filters[1],Filters[2],Filters[3],Filters[4],Filters[5],Filters[6],Filters[7],]
+export const CarePageFilters = [Filters[0], Filters[1], Filters[2], Filters[3], Filters[4], Filters[5], Filters[6], Filters[7],]
 
 export const CarePageFilter = ({
     nameUa: 'Догляд за шкірою',
@@ -885,7 +885,7 @@ export const CarePageFilter = ({
         {nameUa: 'Міні розміри', nameEn: 'Mini sizes'}],
 })
 
-export const NovelitiesPageFilters = [Filters[0],Filters[1],Filters[2],Filters[3],Filters[4],Filters[5],Filters[6],Filters[7],]
+export const NovelitiesPageFilters = [Filters[0], Filters[1], Filters[2], Filters[3], Filters[4], Filters[5], Filters[6], Filters[7],]
 
 export const NovelitiesPageFilter = ({
     nameUa: 'Новинки',

@@ -93,9 +93,16 @@ public class CartService(
                 "This user doesn't owns this record"
             );
 
+        if (dto.Quantity < 1)
+        {
+            await cartRepository.Delete(entity.Id);
+            await cartRepository.Save();
+            return;
+        }
+
         mapper.Map(dto, entity);
         entity.ProductPiece = null!;
-
+        
         await cartRepository.Update(entity);
         await cartRepository.Save();
     }

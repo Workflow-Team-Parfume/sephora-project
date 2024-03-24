@@ -20,14 +20,10 @@ public class PieceService(
         if (user is null)
             return list;
 
-        var favorites = await favService.Get(user)
-            .Select(x => x.Id)
-            .ToListAsync();
-        return list.Select(x =>
-        {
-            x.Product.IsFavorite = favorites.Contains(x.Id);
-            return x;
-        });
+        foreach (var piece in list)
+            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Id);
+
+        return list;
     }
 
     public async Task<PagedListInfo<LightProductPieceDto>> Get(
@@ -38,7 +34,7 @@ public class PieceService(
         ClaimsPrincipal? user = null
     )
     {
-        var count = await repo.CountBySpec(selectBy);
+        long count = await repo.CountBySpec(selectBy);
         var list = await repo
             .GetRange(pageNumber, pageSize, orderBy, selectBy)
             .ProjectTo<LightProductPieceDto>(mapper.ConfigurationProvider)
@@ -47,12 +43,8 @@ public class PieceService(
         if (user is null)
             return PagedListInfo.Create(list, pageNumber, pageSize, count);
 
-        var favorites = await favService.Get(user)
-            .Select(x => x.Id)
-            .ToListAsync();
-
         foreach (var piece in list)
-            piece.Product.IsFavorite = favorites.Contains(piece.Id);
+            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Id);
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

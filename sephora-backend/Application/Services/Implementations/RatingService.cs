@@ -55,7 +55,7 @@ public class RatingService(
         string? selectBy = null
     )
     {
-        var count = await repository.CountBySpec(selectBy);
+        long count = await repository.CountBySpec(selectBy);
         var list = await repository
             .GetRange(pageNumber, pageSize)
             .ProjectTo<RatingDto>(mapper.ConfigurationProvider)

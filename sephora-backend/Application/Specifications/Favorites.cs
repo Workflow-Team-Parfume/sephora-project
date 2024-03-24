@@ -8,9 +8,10 @@ public static class Favorites
         {
             Query.Where(x =>
                     x.UserId == userId &&
-                    x.ProductId == productId
-                )
-                .Include(x => x.Product);
+                    x.ProductId == productId &&
+                    x.IsActive)
+                .Include(x => x.Product)
+                .ThenInclude(p => p.ProductPieces);
         }
     }
 
@@ -18,8 +19,11 @@ public static class Favorites
     {
         public GetByProduct(long productId)
         {
-            Query.Where(x => x.ProductId == productId)
-                .Include(x => x.Product);
+            Query.Where(x =>
+                    x.ProductId == productId &&
+                    x.IsActive)
+                .Include(x => x.Product)
+                .ThenInclude(p => p.ProductPieces);
         }
     }
 
@@ -27,8 +31,11 @@ public static class Favorites
     {
         public GetByUser(string userId)
         {
-            Query.Where(x => x.UserId == userId)
-                .Include(x => x.Product);
+            Query.Where(x =>
+                    x.UserId == userId &&
+                    x.IsActive)
+                .Include(x => x.Product)
+                .ThenInclude(p => p.ProductPieces);
         }
     }
 }

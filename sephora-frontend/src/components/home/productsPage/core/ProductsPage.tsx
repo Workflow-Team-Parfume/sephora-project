@@ -19,13 +19,13 @@ import {IFilter} from "../../filters/types.ts";
 import React, {useEffect, useState} from "react";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './productsPage.scss'
-import ProductPieceDto from "../../../../models/piece/ProductPieceDto.ts";
 import http_common from "../../../../http_common.ts";
 import PagedList from "../../../../models/pagedlist/PagedList.ts";
 import SortingOrder, {Directions, Orders} from "./SortingOrder.ts";
 import routes from "../../../../common/routes.ts";
 import i18n from "../../../../i18n/i18n.ts";
 import "./productsPage.scss";
+import ProductDto from "../../../../models/product/ProductDto.ts";
 
 const itemsPerPage = 9;
 
@@ -47,7 +47,7 @@ const ProductsPage: React.FC<{
           navigateLink
       }) => {
     const {t} = useTranslation();
-    const [products, setProducts] = useState<PagedList<ProductPieceDto>>();
+    const [products, setProducts] = useState<PagedList<ProductDto>>();
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -187,7 +187,7 @@ const ProductsPage: React.FC<{
                                 <Grid container spacing={2}>
                                     {products?.items.map((piece, i) => (
                                         <Grid key={i} item xs={12} sm={6} lg={4}>
-                                            <Product piece={piece}/>
+                                            <Product product={piece}/>
                                         </Grid>
                                     ))}
                                 </Grid>

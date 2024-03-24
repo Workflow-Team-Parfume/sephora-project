@@ -36,6 +36,7 @@ import React from "react";
 import Search from "./components/home/search/Search.tsx";
 import ProductListPage from "./components/admin/product/ProductListPage.tsx";
 import ProductCreatePage from "./components/admin/product/ProductCreatePage.tsx";
+import Wishlist from "./components/home/profile/wishlist/Wishlist.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
@@ -80,6 +81,8 @@ function App() {
                     <Route path={routes.aboutUs} element={<AboutUs/>}/>
 
                     <Route path={routes.search} element={<Search/>}/>
+
+                    <Route path={routes.wishlist} element={<Wishlist/>}/>
 
                     <Route path="*" element={<NotFound/>}/>
                 </Route>

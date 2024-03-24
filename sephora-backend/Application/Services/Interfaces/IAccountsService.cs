@@ -37,12 +37,12 @@ public interface IAccountsService
      * <see cref="PagedListInfo{T}"/> of users.
      * </returns>
      */
-    async Task<PagedListInfo<GetUserDto>> Get(
+    Task<PagedListInfo<GetUserDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>
@@ -56,7 +56,7 @@ public interface IAccountsService
      * </returns>
      */
     Task<GetUserDto> Get(string id);
-    
+
     /**
      * <summary>
      * Commit a login.
@@ -66,7 +66,7 @@ public interface IAccountsService
      * </param>
      */
     Task<LoginResponseDto> Login(LoginDto dto);
-    
+
     /**
      * <summary>
      * Commit a Google authentication.
@@ -76,7 +76,7 @@ public interface IAccountsService
      * </param>
      */
     Task<LoginResponseDto> GoogleAuth(string token);
-    
+
     /**
      * <summary>
      * Register a new user.
@@ -86,14 +86,14 @@ public interface IAccountsService
      * </param>
      */
     Task Register(RegisterDto dto);
-    
+
     /**
      * <summary>
      * Log out the user.
      * </summary>
      */
     Task Logout();
-    
+
     /**
      * <summary>
      * Delete a user by ID.
@@ -103,7 +103,7 @@ public interface IAccountsService
      * </param>
      */
     Task Delete(string id);
-    
+
     /**
      * <summary>
      * Edit a user by ID.
@@ -116,7 +116,7 @@ public interface IAccountsService
      * </param>
      */
     Task Edit(string userId, EditUserDto userDto);
-    
+
     /**
      * <summary>
      * Check if a user exists by username.
@@ -129,7 +129,7 @@ public interface IAccountsService
      * </returns>
      */
     Task<bool> CheckUsernameExists(string userName);
-    
+
     /**
      * <summary>
      * Check if a user exists by the email.

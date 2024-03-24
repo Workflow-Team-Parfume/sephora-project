@@ -22,6 +22,25 @@ public class CartService(
             .ProjectTo<CartDto>(mapper.ConfigurationProvider);
     }
 
+    public async Task<PagedListInfo<CartDto>> Get(
+        ClaimsPrincipal user,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        string userId = GetUserIdOrThrow(user);
+        var spec = new CartItems.GetByUserId(userId);
+
+        var count = await cartRepository.CountBySpec(spec);
+        var list = await cartRepository
+            .GetRangeBySpec(spec, pageNumber, pageSize, orderBy, selectBy)
+            .ProjectTo<CartDto>(mapper.ConfigurationProvider).ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<CartDto?> GetById(long id)
     {
         CartItem? entry = await cartRepository.GetById(id);
@@ -31,8 +50,16 @@ public class CartService(
     public async Task Create(CreateCartDto cartDto, ClaimsPrincipal user)
     {
         string userId = GetUserIdOrThrow(user);
+        CartItem? dbEntry = await cartRepository.GetItemBySpec(
+            new CartItems.GetByUserAndPiece(
+                userId,
+                cartDto.ProductPieceId
+            ));
 
-        CartItem dbEntry = mapper.Map<CartItem>(cartDto);
+        if (dbEntry is not null)
+            return; // the item already exists
+
+        dbEntry = mapper.Map<CartItem>(cartDto);
         dbEntry.UserId = userId;
 
         await cartRepository.Insert(dbEntry);
@@ -43,8 +70,9 @@ public class CartService(
     {
         CartItem? entity = await cartRepository.GetById(id);
         if (entity is null)
-            throw new KeyNotFoundException(
-                "The cart item with the specified ID was not found"
+            throw new HttpException(
+                "The cart item with the specified ID was not found",
+                HttpStatusCode.NotFound
             );
         if (entity.UserId != GetUserIdOrThrow(user))
             throw new UnauthorizedAccessException(
@@ -55,7 +83,7 @@ public class CartService(
         await cartRepository.Save();
     }
 
-    public async Task Update(CartDto dto, ClaimsPrincipal user)
+    public async Task Update(UpdateCartDto dto, ClaimsPrincipal user)
     {
         var entity = await cartRepository.GetById(dto.Id);
         string userId = GetUserIdOrThrow(user);
@@ -65,6 +93,7 @@ public class CartService(
             );
 
         mapper.Map(dto, entity);
+        entity.ProductPiece = null!;
 
         await cartRepository.Update(entity);
         await cartRepository.Save();

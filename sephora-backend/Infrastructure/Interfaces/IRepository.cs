@@ -18,6 +18,69 @@ public interface IRepository<TEntity> where TEntity : class
      * </returns>
      */
     IQueryable<TEntity> GetAll();
+    
+    /**
+     * <summary>
+     * Get the number of entities.
+     * </summary>
+     * <returns>
+     * The number of entities.
+     * </returns>
+     */
+    Task<long> Count();
+    
+    /**
+     * <summary>
+     * Get the number of entities by a specification.
+     * </summary>
+     * <param name="specification">
+     * The specification to apply.
+     * </param>
+     * <returns>
+     * The number of entities.
+     * </returns>
+     */
+    Task<long> CountBySpec(ISpecification<TEntity> specification);
+    
+    /**
+     * <summary>
+     * Get the number of entities by a specification.
+     * </summary>
+     * <param name="selectBy">
+     * The criteria to select the entities.
+     * </param>
+     * <returns>
+     * The number of entities.
+     * </returns>
+     */
+    Task<long> CountBySpec(string? selectBy = null);
+
+    /**
+     * <summary>
+     * Get a range of entities.
+     * </summary>
+     * <param name="pageNumber">
+     * The page number to get the entities from.
+     * </param>
+     * <param name="pageSize">
+     * The size of the page.
+     * </param>
+     * <param name="orderBy">
+     * The ordering of the entities.
+     * </param>
+     * <param name="selectBy">
+     * The criteria to select the entities.
+     * </param>
+     * <returns>
+     * The entities.
+     * </returns>
+     */
+    IQueryable<TEntity> GetRange(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    );
 
     /**
      * <summary>
@@ -84,7 +147,7 @@ public interface IRepository<TEntity> where TEntity : class
      * </returns>
      */
     Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification);
-    
+
     /**
      * <summary>
      * Get entities by a specification.
@@ -100,6 +163,37 @@ public interface IRepository<TEntity> where TEntity : class
 
     /**
      * <summary>
+     * Get a paged list of entities by a specification.
+     * </summary>
+     * <param name="specification">
+     * The specification to apply.
+     * </param>
+     * <param name="pageNumber">
+     * The page number.
+     * </param>
+     * <param name="pageSize">
+     * The page size.
+     * </param>
+     * <param name="orderBy">
+     * The ordering of the entities.
+     * </param>
+     * <param name="selectBy">
+     * The criteria to select the entities.
+     * </param>
+     * <returns>
+     * The entities that match the specification.
+     * </returns>
+     */
+    IQueryable<TEntity> GetRangeBySpec(
+        ISpecification<TEntity> specification,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    );
+
+    /**
+     * <summary>
      * Delete entities by a specification.
      * </summary>
      * <param name="specification">
@@ -110,7 +204,7 @@ public interface IRepository<TEntity> where TEntity : class
      * </returns>
      */
     Task<int> DeleteBySpec(ISpecification<TEntity> specification);
-    
+
     /**
      * <summary>
      * Save the changes to the database.

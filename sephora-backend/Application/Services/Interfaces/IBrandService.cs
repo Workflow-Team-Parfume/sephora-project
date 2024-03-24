@@ -37,12 +37,12 @@ public interface IBrandService
      * <see cref="PagedListInfo{T}"/> of brands.
      * </returns>
      */
-    async Task<PagedListInfo<BrandDto>> Get(
+    Task<PagedListInfo<BrandDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>
@@ -56,7 +56,7 @@ public interface IBrandService
      * </returns>
      */
     Task<BrandDto?> GetById(int id);
-    
+
     /**
      * <summary>
      * Create a new brand.
@@ -66,7 +66,7 @@ public interface IBrandService
      * </param>
      */
     Task Create(CreateBrandDto brandDto);
-    
+
     /**
      * <summary>
      * Updates a brand.
@@ -76,7 +76,7 @@ public interface IBrandService
      * </param>
      */
     Task Edit(BrandDto brandDto);
-    
+
     /**
      * <summary>
      * Deletes a brand.

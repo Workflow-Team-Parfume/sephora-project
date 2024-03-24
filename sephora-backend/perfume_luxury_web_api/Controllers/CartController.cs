@@ -34,7 +34,7 @@ public class CartController(ICartService cartService) : ControllerBase
     }
     
     [HttpPut, Authorize]
-    public async Task<IActionResult> Update([FromBody] CartDto cartItem)
+    public async Task<IActionResult> Update([FromBody] UpdateCartDto cartItem)
     {
         if (!ModelState.IsValid) 
             throw new ArgumentException("The model is not valid.");

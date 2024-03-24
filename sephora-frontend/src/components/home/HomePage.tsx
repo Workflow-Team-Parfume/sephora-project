@@ -37,7 +37,6 @@ const HomePage = () => {
         {name: t('recCategories.face'), link: routes.care},
     ])
 
-    // TODO: Move links to constants file
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner banners={mainBanner}/>

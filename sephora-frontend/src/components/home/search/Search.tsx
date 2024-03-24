@@ -12,12 +12,10 @@ const Search: React.FC = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
 
-    // TODO: commit search logic here
     const [params] = useSearchParams();
     const q = params.get('q'), link = routes.api.search + q;
-    if (typeof q === "undefined" || q === null || q.trim().length === 0) {
+    if (typeof q === "undefined" || q === null || q.trim().length === 0)
         navigate('/');
-    }
 
     const [products, setProducts] = useState<PagedList<ProductDto>>();
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +25,7 @@ const Search: React.FC = () => {
             `${link}&size=10&page=${currentPage}`
         )
             .then(r => setProducts(r.data))
-            .catch(e => console.error(e));
+            .catch(console.error);
     }, [currentPage, link]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {

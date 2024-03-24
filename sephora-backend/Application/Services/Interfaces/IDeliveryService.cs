@@ -37,12 +37,12 @@ public interface IDeliveryService
      * <see cref="PagedListInfo{T}"/> of deliveries.
      * </returns>
      */
-    async Task<PagedListInfo<DeliveryDto>> Get(
+    Task<PagedListInfo<DeliveryDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>

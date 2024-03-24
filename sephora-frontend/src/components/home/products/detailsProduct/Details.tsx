@@ -34,6 +34,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../../store/store.ts";
 import changeFavStatus from "../ChangeFavStatus.ts";
 import CreateCartItem from "../../../../models/Cart/CreateCartItem.ts";
+import CartItem from "../../../../models/Cart/CartItem.ts";
 
 const Details: React.FC = () => {
     const {id} = useParams();
@@ -73,7 +74,7 @@ const Details: React.FC = () => {
                 setProduct(resp.data);
                 changePiece(pieceId, resp.data);
             })
-            .catch(e => console.error(e));
+            .catch(console.error);
 
         http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
             .then(resp => setReviews(resp.data))
@@ -102,22 +103,43 @@ const Details: React.FC = () => {
             const inCart = (await http_common.get<boolean>(`cart/contains/${id}`)).data;
             if (inCart) {
                 http_common.delete(`cart/${id}`)
-                    .catch(e => console.error(e))
+                    .catch(console.error)
             } else {
                 http_common.post(`cart`, item)
                     // TODO: add toast/other notification
-                    .catch(e => console.error(e))
+                    .catch(console.error)
             }
         } else {
-            const cart = JSON.parse(localStorage.getItem("cart") ?? "undefined")
-                ?? EmptyPagedList;
+            const cart = localStorage.cart
+                ? JSON.parse(localStorage.cart)
+                : EmptyPagedList;
 
-            if (cart.items.includes(pieceId))
+            if (cart.items.find((i: CartItem) => i.productPieceId === pieceId))
                 cart.items.splice(cart.items.indexOf(pieceId), 1);
-            else
-                cart.items.push(pieceId);
+            else {
+                const item: CartItem = {
+                    id: 0,
+                    productId: product?.id ?? 0,
+                    productPieceId: pieceId,
+                    productName: product?.name ?? "",
+                    productDescriptionEn: product?.descriptionEn ?? "",
+                    productDescriptionUa: product?.descriptionUa ?? "",
+                    productImage: product?.pieces[0].pictures[0].url
+                        ?? routes.picPlaceholder,
+                    brandName: product?.brand.name ?? "",
+                    categoryNameEn: product?.category.nameEn ?? "",
+                    categoryNameUa: product?.category.nameUa ?? "",
+                    quantity: 1,
+                    milliliters: currentPiece()?.milliliters ?? 0,
+                    price: currentPiece()?.price ?? 0,
+                    discount: 0,
+                    tax: 0,
+                    total: currentPiece()?.price ?? 0
+                }
+                cart.items.push(item);
+            }
 
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.cart = JSON.stringify(cart);
         }
     }
 

@@ -14,4 +14,20 @@ public static class CartItems
                 .Include(x => x.ProductPiece.Amount);
         }
     }
+
+    public class GetByUserAndPiece : Specification<CartItem>
+    {
+        public GetByUserAndPiece(string userId, long pieceId)
+        {
+            Query
+                .Where(x =>
+                    x.UserId == userId
+                    && x.ProductPiece.Id == pieceId
+                )
+                .Include(x => x.User)
+                .Include(x => x.ProductPiece)
+                .Include(x => x.ProductPiece.Product)
+                .Include(x => x.ProductPiece.Amount);
+        }
+    }
 }

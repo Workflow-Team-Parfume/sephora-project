@@ -62,6 +62,24 @@ public class FavoritesService(
         }
     }
 
-    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal user)
+    public async Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal user)
         => (await productService.Get(user)).Where(x => x.IsFavorite);
+
+    public async Task<PagedListInfo<LightProductDto>> Get(
+        ClaimsPrincipal user, 
+        int pageNumber, 
+        int pageSize, 
+        string? orderBy = null, 
+        string? selectBy = null
+        )
+    {
+        var products = await productService.Get(user);
+        var count = await products.LongCountAsync();
+        var list = products
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
 }

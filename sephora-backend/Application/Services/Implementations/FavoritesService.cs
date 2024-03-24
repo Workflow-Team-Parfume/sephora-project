@@ -4,7 +4,7 @@ public class FavoritesService(
     UserManager<UserEntity> userManager,
     IRepository<ProductEntity> productRepository,
     IRepository<Favorite> favoritesRepository,
-    IProductService productService
+    IMapper mapper
 ) : IFavoritesService
 {
     private string GetUserIdOrThrow(ClaimsPrincipal user)
@@ -56,29 +56,42 @@ public class FavoritesService(
                 new Favorites.Get(userId, productId)
             ))?.IsActive ?? false;
         }
-        catch (UnauthorizedAccessException)
+        catch
         {
             return false;
         }
     }
 
-    public async Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal user)
-        => (await productService.Get(user)).Where(x => x.IsFavorite);
+    public IQueryable<LightProductDto> Get(ClaimsPrincipal user)
+    {
+        var userId = GetUserIdOrThrow(user);
+        return favoritesRepository.GetListBySpec(
+            new Favorites.GetByUser(userId)
+        ).Select(x => x.Product).ProjectTo<LightProductDto>(mapper.ConfigurationProvider);
+    }
 
     public async Task<PagedListInfo<LightProductDto>> Get(
-        ClaimsPrincipal user, 
-        int pageNumber, 
-        int pageSize, 
-        string? orderBy = null, 
+        ClaimsPrincipal user,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
         string? selectBy = null
-        )
+    )
     {
-        var products = await productService.Get(user);
-        var count = await products.LongCountAsync();
-        var list = products
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
+        var userId = GetUserIdOrThrow(user);
+        var count = await favoritesRepository.GetListBySpec(
+            new Favorites.GetByUser(userId)
+        ).LongCountAsync();
+        var list = await favoritesRepository.GetRangeBySpec(
+                new Favorites.GetByUser(userId),
+                pageNumber,
+                pageSize,
+                orderBy,
+                selectBy
+            )
+            .Select(x => x.Product)
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

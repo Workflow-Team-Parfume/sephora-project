@@ -6,7 +6,29 @@ public static class Favorites
     {
         public Get(string userId, long productId)
         {
-            Query.Where(x => x.UserId == userId && x.ProductId == productId);
+            Query.Where(x =>
+                    x.UserId == userId &&
+                    x.ProductId == productId
+                )
+                .Include(x => x.Product);
+        }
+    }
+
+    public class GetByProduct : Specification<Favorite>
+    {
+        public GetByProduct(long productId)
+        {
+            Query.Where(x => x.ProductId == productId)
+                .Include(x => x.Product);
+        }
+    }
+
+    public class GetByUser : Specification<Favorite>
+    {
+        public GetByUser(string userId)
+        {
+            Query.Where(x => x.UserId == userId)
+                .Include(x => x.Product);
         }
     }
 }

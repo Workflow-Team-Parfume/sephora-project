@@ -46,9 +46,9 @@ const routes = {
         products: '/products?',
         pieces: '/pieces?',
         popularity: '/products?&sort=AverageRating desc',
-        care: '/products?filter=category.nameEn = "Care"',
-        bottled: '/products?filter=isBottledParfume = true',
-        full_sized: '/products?filter=isBottledParfume = false',
+        care: '/products?filter=category.nameEn.ToLower().Trim().Contains("Care")',
+        bottled: '/products?',
+        full_sized: '/products?',
         search: '/search?q=',
     }
 }

@@ -48,14 +48,14 @@ const Details: React.FC = () => {
     const [click, setClick] = useState("description");
     const [pieceId, setPieceId] = useState<number>(
         Number(params.get("piece"))
-        ?? product?.pieces[0].id
+        ?? product?.pieces[0]?.id
         ?? 0
     );
 
     const currentPiece = () => product?.pieces.find(p => p.id === pieceId);
     const changePiece = useCallback((pId: number, curProduct: ProductDto) => {
         setPieceId(pId);
-        setParams({piece: pId.toString()});
+        setParams({piece: pId?.toString()});
         setImage(curProduct.pieces.find(p => p.id === pId)?.pictures[0]);
 
         navigate(`/details/${id}?piece=${pId}`);
@@ -67,15 +67,18 @@ const Details: React.FC = () => {
             .then(resp => {
                 const pathId = Number(params.get("piece"));
                 const pieceIds = resp.data.pieces.map(p => p.id);
-                console.log(pieceIds)
-                console.info(resp.data)
                 const pieceId = pieceIds.includes(pathId)
                     ? pathId
-                    : resp.data.pieces[0].id;
+                    : resp.data.pieces[0]?.id;
 
-                setProduct(resp.data);
-                setIsFavorite(resp.data.isFavorite);
-                changePiece(pieceId, resp.data);
+                if (!pieceId) {
+                    console.error("No pieces found for the product")
+                    navigate('/404');
+                } else {
+                    setProduct(resp.data);
+                    setIsFavorite(resp.data.isFavorite);
+                    changePiece(pieceId, resp.data);
+                }
             })
             .catch(console.error);
 
@@ -87,7 +90,6 @@ const Details: React.FC = () => {
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
-
 
     const handleFavClick = () => {
         changeFavStatus(product?.id ?? 0, isAuthed)

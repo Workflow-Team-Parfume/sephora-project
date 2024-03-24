@@ -40,8 +40,6 @@ export function Basket() {
             try {
                 const r = await http_common.get<PagedList<CartItem>>("/cart");
                 setProducts(r.data)
-
-                console.log(r.data)
             } catch (e) {
                 console.error(e);
             }

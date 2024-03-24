@@ -60,6 +60,7 @@ const Details: React.FC = () => {
 
         navigate(`/details/${id}?piece=${pId}`);
     }
+    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     useEffect(() => {
         http_common.get<ProductDto>(`products/${id}`)
@@ -77,14 +78,12 @@ const Details: React.FC = () => {
 
         http_common.get<PagedList<RatingDto>>(`rating/product/${id}`)
             .then(resp => setReviews(resp.data))
-            .catch(console.error);
-    }, [id]);
+            .catch(e => console.error(e));
+    }, [id, isFavorite]);
 
     const [image, setImage] = useState<PictureDto | undefined>(
         currentPiece()?.pictures[0]
     );
-
-    const [isFavorite, setIsFavorite] = useState<boolean>(product?.isFavorite ?? false);
 
     const handleFavClick = () => {
         // TODO: add toast/other notification

@@ -25,8 +25,8 @@ const Products: React.FC<{
                 setList(r.data)
                 setProducts([...products, ...r.data.items])
             })
-            .catch(console.error);
-    }, [link, page]);
+            .catch(e => console.error(e));
+    }, [link]);
 
     return (
         <Container

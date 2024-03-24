@@ -172,8 +172,8 @@ const Details: React.FC = () => {
                             className="characteristic">
                             {
                                 i18n.language === "en"
-                                    ? characteristic.descriptionEn
-                                    : characteristic.descriptionUa
+                                    ? characteristic.valueEn
+                                    : characteristic.valueUa
                             }
                         </Typography>
                     </Stack>

@@ -25,13 +25,13 @@ const Wishlist = () => {
                 }
             }
             setProducts(data);
-            console.info(data);
         }).catch(console.error);
     }, [currentPage]);
 
-    const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
-        setCurrentPage(page);
-    };
+    const handlePageChange = (
+        _event: React.ChangeEvent<unknown>,
+        page: number
+    ) => setCurrentPage(page);
 
     return products
         ? (

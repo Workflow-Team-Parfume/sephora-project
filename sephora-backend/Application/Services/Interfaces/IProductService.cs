@@ -41,7 +41,7 @@ public interface IProductService
      * <summary>Creates a new product</summary>
      * <param name="createProductDto">The product to create</param>
      */
-    Task Create(CreateProductDto createProductDto);
+    Task<ProductDto> Create(CreateProductDto createProductDto);
     
     /**
      * <summary>Edits the product</summary>

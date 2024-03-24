@@ -25,8 +25,8 @@ public class ProductsController(IProductService productService) : Controller
         if (!ModelState.IsValid)
             throw new ArgumentException("The model is not valid.");
 
-        await productService.Create(product);
-        return Ok();
+        var productdto = await productService.Create(product);
+        return Ok(productdto);
     }
 
     [HttpDelete("{id:long}"), Authorize(Roles = "SudoAdmin,Admin")]

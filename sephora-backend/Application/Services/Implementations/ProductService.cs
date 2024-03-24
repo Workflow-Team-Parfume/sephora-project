@@ -25,7 +25,7 @@ public class ProductService(
         return favorite?.IsActive ?? false;
     }
 
-    public async Task Create(CreateProductDto createProductDto)
+    public async Task<ProductDto> Create(CreateProductDto createProductDto)
     {
         var entity = mapper.Map<ProductEntity>(createProductDto);
         await productRepo.Insert(entity);
@@ -34,6 +34,7 @@ public class ProductService(
         // index the product
         entity = await productRepo.GetItemBySpec(new Products.GetById(entity.Id));
         searchService.Index(entity!);
+        return mapper.Map<ProductDto>(entity);
     }
 
     public async Task Delete(long id)
@@ -47,9 +48,9 @@ public class ProductService(
             );
 
         // delete pieces directly so the files are also cleaned up
-        var pieces = product.ProductPieces;
+        var pieces = product.ProductPieces.ToList();
         foreach (var piece in pieces)
-            await pieceService.Delete(mapper.Map<ProductPiece>(piece).Id);
+            await pieceService.Delete(piece.Id);
 
         foreach (var c in product.Characteristics)
             await charRepo.Delete(c);

@@ -21,7 +21,7 @@ public class PieceService(
             return list;
 
         foreach (var piece in list)
-            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Id);
+            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Product.Id);
 
         return list;
     }
@@ -44,7 +44,7 @@ public class PieceService(
             return PagedListInfo.Create(list, pageNumber, pageSize, count);
 
         foreach (var piece in list)
-            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Id);
+            piece.Product.IsFavorite = await favService.IsFavorite(user, piece.Product.Id);
 
         return PagedListInfo.Create(list, pageNumber, pageSize, count);
     }

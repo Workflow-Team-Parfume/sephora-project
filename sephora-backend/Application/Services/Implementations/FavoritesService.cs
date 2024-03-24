@@ -51,10 +51,11 @@ public class FavoritesService(
 
         try
         {
-            var userId = GetUserIdOrThrow(user);
-            return await favoritesRepository.GetItemBySpec(
+            string userId = GetUserIdOrThrow(user);
+            Favorite? fav = await favoritesRepository.GetItemBySpec(
                 new Favorites.Find(userId, productId)
-            ) is not null;
+            );
+            return fav is not null;
         }
         catch
         {

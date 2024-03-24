@@ -47,9 +47,9 @@ public class ProductService(
             );
 
         // delete pieces directly so the files are also cleaned up
-        var pieces = product.ProductPieces;
+        var pieces = product.ProductPieces.ToList();
         foreach (var piece in pieces)
-            await pieceService.Delete(mapper.Map<ProductPiece>(piece).Id);
+            await pieceService.Delete(piece.Id);
 
         foreach (var c in product.Characteristics)
             await charRepo.Delete(c);

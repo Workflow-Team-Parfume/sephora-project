@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {Link, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import http_common from "../../../../http_common.ts";
 
 import ProductDto from "../../../../models/product/ProductDto.ts";
@@ -198,9 +198,15 @@ const Details: React.FC = () => {
                     direction='row'
                     spacing={4}
                     sx={{height: '66px'}}>
-                    <img alt="nova poshta" src={novaPoshta}/>
-                    <img alt="ukr poshta" src={ukrPoshta}/>
-                    <img style={{height: '60px'}} alt="meest" src={meest}/>
+                    <Link to={routes.deliveryNewPost}>
+                        <img alt="nova poshta" src={novaPoshta}/>
+                    </Link>
+                    <Link to={routes.deliveryUkrPoshta}>
+                        <img alt="ukr poshta" src={ukrPoshta}/>
+                    </Link>
+                    <Link to={routes.deliveryMeestMail}>
+                        <img style={{height: '60px'}} alt="meest" src={meest}/>
+                    </Link>
                 </Stack>
             </Stack>
         }

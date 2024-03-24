@@ -17,12 +17,13 @@ const Products: React.FC<{
 
     const [products, setProducts] = React.useState<ProductPieceDto[]>([]);
 
+    // TODO: paging
     useEffect(() => {
         http_common.get(`${link}&page=${1}&size=${pageSize}`)
             .then(r => {
                 setProducts([...products, ...r.data.items])
             })
-            .catch(e => console.error(e));
+            .catch(console.error);
     }, [link]);
 
     return (

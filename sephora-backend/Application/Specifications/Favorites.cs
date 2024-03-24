@@ -8,6 +8,19 @@ public static class Favorites
         {
             Query.Where(x =>
                     x.UserId == userId &&
+                    x.ProductId == productId
+                )
+                .Include(x => x.Product)
+                .ThenInclude(p => p.ProductPieces);
+        }
+    }
+
+    public class Find : Specification<Favorite>
+    {
+        public Find(string userId, long productId)
+        {
+            Query.Where(x =>
+                    x.UserId == userId &&
                     x.ProductId == productId &&
                     x.IsActive)
                 .Include(x => x.Product)

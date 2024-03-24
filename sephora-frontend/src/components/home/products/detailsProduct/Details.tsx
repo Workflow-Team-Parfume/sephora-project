@@ -85,7 +85,7 @@ const Details: React.FC = () => {
         currentPiece()?.pictures[0]
     );
 
-    
+
     const handleFavClick = () => {
         // TODO: add toast/other notification
 

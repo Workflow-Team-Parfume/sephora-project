@@ -35,7 +35,7 @@ const Wishlist = () => {
 
     return products
         ? (
-            <Stack className="wishlist" style={{justifyContent: "center", margin: "7rem 10%"}}>
+            <Stack className="wishlist" style={{justifyContent: "center", margin: "7rem 10% 2rem 10%"}}>
                 {products?.items?.length > 0
                     ? (
                         <Stack justifyContent="center">

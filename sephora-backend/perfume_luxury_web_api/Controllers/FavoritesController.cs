@@ -18,7 +18,7 @@ public class FavoritesController(
 
     [HttpGet("all")]
     public async Task<IActionResult> Get()
-        => Ok(await favoritesService.Get(User));
+        => Ok(await favoritesService.Get(User).ToListAsync());
     
     [HttpGet]
     public async Task<IActionResult> GetPaged(

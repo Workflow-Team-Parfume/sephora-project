@@ -8,7 +8,7 @@ public class PiecesController(
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-        var items = await pieceService.Get().ToListAsync();
+        var items = await pieceService.Get(User);
         return Ok(items);
     }
 
@@ -20,13 +20,13 @@ public class PiecesController(
         [FromQuery] string? filter = null
     )
     {
-        var items = await pieceService.Get(page, size, sort, filter);
+        var items = await pieceService.Get(page, size, sort, filter, User);
         return Ok(items);
     }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)
-        => Ok(await pieceService.GetById(id));
+        => Ok(await pieceService.GetById(id, User));
 
     [HttpPost, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Create(

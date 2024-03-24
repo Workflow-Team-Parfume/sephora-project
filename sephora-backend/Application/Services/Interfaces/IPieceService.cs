@@ -11,11 +11,14 @@ public interface IPieceService
      * <summary>
      * Get all product pieces.
      * </summary>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * Query of all product pieces.
      * </returns>
      */
-    IQueryable<LightProductPieceDto> Get();
+    Task<IEnumerable<LightProductPieceDto>> Get(ClaimsPrincipal? user = null);
 
     /**
      * <summary>
@@ -33,6 +36,9 @@ public interface IPieceService
      * <param name="selectBy">
      * The criteria to select the product pieces.
      * </param>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * <see cref="PagedListInfo{T}"/> of product pieces.
      * </returns>
@@ -41,7 +47,8 @@ public interface IPieceService
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null
+        string? selectBy = null,
+        ClaimsPrincipal? user = null
     );
 
     /**
@@ -51,11 +58,14 @@ public interface IPieceService
      * <param name="id">
      * The product piece ID.
      * </param>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * The <see cref="ProductPieceDto"/> with specified ID.
      * </returns>
      */
-    Task<ProductPieceDto?> GetById(long id);
+    Task<ProductPieceDto?> GetById(long id, ClaimsPrincipal? user = null);
 
     /**
      * <summary>

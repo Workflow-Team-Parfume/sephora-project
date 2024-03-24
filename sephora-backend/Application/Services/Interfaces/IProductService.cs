@@ -11,7 +11,7 @@ public interface IProductService
      * <summary>Gets the products</summary>
      * <param name="user">The user to map the favorites</param>
      */
-    Task<IQueryable<LightProductDto>> Get(ClaimsPrincipal? user = null);
+    Task<IEnumerable<LightProductDto>> Get(ClaimsPrincipal? user = null);
 
     /**
      * <summary>Gets the products</summary>

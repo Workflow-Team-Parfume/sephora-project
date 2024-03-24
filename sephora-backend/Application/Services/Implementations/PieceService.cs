@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore.DynamicLinq;
+using HttpException = CleanArchitecture.Application.Helpers.HttpException;
 
 namespace CleanArchitecture.Application.Services.Implementations;
 
@@ -47,28 +47,35 @@ public class PieceService(
 
     public async Task Edit(EditProductPieceDto pieceDto)
     {
+        // get the entity
+        var entity = await repository.GetById(pieceDto.Id);
+        if (entity is null)
+            throw new HttpException(
+                "Product piece not found",
+                HttpStatusCode.NotFound
+            );
+
         // update entity
-        var entity = mapper.Map<ProductPiece>(pieceDto);
+        mapper.Map(pieceDto, entity);
         await repository.Update(entity);
         await repository.Save();
+    }
 
-        // update its pictures
-
-        // delete unnecessary pictures
-        var picsToDelete = pieceDto.DeletePhotos.Select(
-            x => prodPicRepo.GetById(x).Result
+    public async Task DeletePictures(DeletePiecePicturesDto dto)
+    {
+        var picsToDelete = dto.PictureNames.Select(x =>
+            prodPicRepo.GetItemBySpec(
+                new ProductPictures.GetByPath(x)
+            ).Result
         );
         await DeletePictures(picsToDelete);
-
-        // add new pictures
-        await SavePictures(pieceDto.NewPhotos, entity.Id);
     }
 
     public async Task Delete(long id)
     {
         // detach pictures
         var pictures = await prodPicRepo.GetListBySpec(
-            new ProductPictures.GetPicsByPieceId(id)
+            new ProductPictures.GetByPieceId(id)
         ).ToListAsync();
         await DeletePictures(pictures);
 
@@ -93,7 +100,7 @@ public class PieceService(
         await prodPicRepo.Save();
     }
 
-    private async Task SavePictures(
+    public async Task SavePictures(
         IEnumerable<IFormFile> formPictures,
         long ownerId
     )

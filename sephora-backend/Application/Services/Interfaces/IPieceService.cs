@@ -38,10 +38,10 @@ public interface IPieceService
      * </returns>
      */
     Task<PagedListInfo<LightProductPieceDto>> Get(
-     int pageNumber,
-     int pageSize,
-     string? orderBy = null,
-     string? selectBy = null
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
     );
 
     /**
@@ -56,7 +56,7 @@ public interface IPieceService
      * </returns>
      */
     Task<ProductPieceDto?> GetById(long id);
-    
+
     /**
      * <summary>
      * Create a product piece.
@@ -66,7 +66,7 @@ public interface IPieceService
      * </param>
      */
     Task Create(CreateProductPieceDto pieceDto);
-    
+
     /**
      * <summary>
      * Edit a product piece.
@@ -76,7 +76,33 @@ public interface IPieceService
      * </param>
      */
     Task Edit(EditProductPieceDto pieceDto);
-    
+
+    /**
+     * <summary>
+     * Add pictures to a product piece.
+     * </summary>
+     * <param name="formPictures">
+     * The pictures to add.
+     * </param>
+     * <param name="ownerId">
+     * The product piece ID.
+     * </param>
+     */
+    Task SavePictures(
+        IEnumerable<IFormFile> formPictures,
+        long ownerId
+    );
+
+    /**
+     * <summary>
+     * Delete pictures from a product piece.
+     * </summary>
+     * <param name="dto">
+     * The DTO with pictures to delete.
+     * </param>
+     */
+    Task DeletePictures(DeletePiecePicturesDto dto);
+
     /**
      * <summary>
      * Delete a product piece.

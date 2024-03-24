@@ -39,6 +39,24 @@ public class PiecesController(
         await pieceService.Create(dto);
         return Ok();
     }
+    
+    [HttpPost("add-pictures"), Authorize(Roles = "SudoAdmin,Admin")]
+    public async Task<IActionResult> AddPictures(
+        [FromForm] AddPiecePicturesDto dto
+    )
+    {
+        await pieceService.SavePictures(dto.Pictures, dto.PieceId);
+        return Ok();
+    }
+    
+    [HttpPost("delete-pictures"), Authorize(Roles="SudoAdmin,Admin")]
+    public async Task<IActionResult> DeletePictures(
+        [FromBody] DeletePiecePicturesDto dto
+    )
+    {
+        await pieceService.DeletePictures(dto);
+        return Ok();
+    }
 
     [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Update(

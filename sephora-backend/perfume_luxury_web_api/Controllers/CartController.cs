@@ -21,7 +21,7 @@ public class CartController(ICartService cartService) : ControllerBase
     
     [HttpGet("contains/{id:long}"), Authorize]
     public async Task<IActionResult> Contains([FromRoute] long id)
-        => Ok(await cartService.GetById(id) != null);
+        => Ok(await cartService.Exists(id));
 
     [HttpPost, Authorize]
     public async Task<IActionResult> Add([FromBody] CreateCartDto cartItem)

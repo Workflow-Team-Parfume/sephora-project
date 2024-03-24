@@ -48,6 +48,9 @@ public class CartService(
         return entry is null ? null : mapper.Map<CartDto>(entry);
     }
 
+    public async Task<bool> Exists(long id)
+        => await cartRepository.Exists(id);
+
     public async Task Create(CreateCartDto cartDto, ClaimsPrincipal user)
     {
         string userId = GetUserIdOrThrow(user);

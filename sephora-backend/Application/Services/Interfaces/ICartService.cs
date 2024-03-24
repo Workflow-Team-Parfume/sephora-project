@@ -34,6 +34,13 @@ public interface ICartService
      * <returns>The cart item with the specified ID</returns>
      */
     Task<CartDto?> GetById(long id);
+    
+    /**
+     * <summary>Checks if the cart item with the specified ID exists</summary>
+     * <param name="id">The ID of the cart item</param>
+     * <returns>True if the cart item exists, false otherwise</returns>
+     */
+    Task<bool> Exists(long id);
 
     /**
      * <summary>Creates a new cart item</summary>

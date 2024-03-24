@@ -127,7 +127,9 @@ const Product: React.FC<{ product: ProductDto }>
                             </FormControl>
                             : <></>
                         }
-                        <Button fullWidth className="butBuy">{t('details.buy')}</Button>
+                        <Button fullWidth className="butBuy">
+                            {t('details.buy')}
+                        </Button>
                     </Stack>
                 </Stack>
             )}

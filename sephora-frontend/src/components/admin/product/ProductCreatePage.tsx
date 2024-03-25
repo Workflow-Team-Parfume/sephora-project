@@ -76,7 +76,6 @@ const CreateProductPage = () => {
             "isBottledParfume",
             piece.isBottledParfume.toString()
           );
-          console.log(piece.productPictures);
           for (let i = 0; i < piece.productPictures.length; i++) {
             formData.append(`productPictures[${i}]`, piece.productPictures[i]);
           }

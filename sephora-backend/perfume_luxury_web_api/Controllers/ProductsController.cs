@@ -5,7 +5,7 @@ public class ProductsController(IProductService productService) : Controller
 {
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
-        => Ok(await (await productService.Get()).ToListAsync());
+        => Ok(await productService.Get(User));
 
     [HttpGet]
     public async Task<IActionResult> GetPaged(
@@ -13,7 +13,7 @@ public class ProductsController(IProductService productService) : Controller
         [FromQuery] int size = 10,
         [FromQuery] string? sort = null,
         [FromQuery] string? filter = null
-    ) => Ok(await productService.Get(page, size, sort, filter));
+    ) => Ok(await productService.Get(page, size, sort, filter, User));
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Get([FromRoute] long id)

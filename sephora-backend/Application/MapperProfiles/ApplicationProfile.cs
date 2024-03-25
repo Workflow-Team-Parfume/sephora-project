@@ -34,6 +34,11 @@ public class ApplicationProfile : Profile
             );
         CreateMap<CreateProductDto, ProductEntity>();
         CreateMap<EditProductDto, ProductEntity>();
+        CreateMap<ProductEntity, LightProductDto>()
+            .ForMember(
+                dest => dest.Pieces,
+                opts => opts.MapFrom(src => src.ProductPieces.Take(1))
+            );
 
         CreateMap<CreateProductPieceDto, ProductPiece>()
             .ForMember(dest => dest.ProductPictures, opt => opt.Ignore());
@@ -47,6 +52,15 @@ public class ApplicationProfile : Profile
                 opts => opts.MapFrom(src => src.ProductPictures)
             );
         CreateMap<EditProductPieceDto, ProductPiece>();
+        CreateMap<ProductPiece, LightProductPieceDto>()
+            .ForMember(
+                dest => dest.Milliliters,
+                opts => opts.MapFrom(src => src.Amount!.Milliliters)
+            )
+            .ForMember(
+                dest => dest.Pictures,
+                opts => opts.MapFrom(src => src.ProductPictures)
+            );
 
         CreateMap<Order, OrderDto>();
         CreateMap<OrderItem, OrderItemDto>();
@@ -119,9 +133,20 @@ public class ApplicationProfile : Profile
                 dest => dest.Milliliters,
                 opt => opt.MapFrom(src => src.ProductPiece.Amount!.Milliliters)
             )
+            .ForMember(
+                dest => dest.ProductImage,
+                opt => opt.MapFrom(src =>
+                    PictureDto.GetUrl(
+                        src.ProductPiece.ProductPictures.First().PicturePath,
+                        3,
+                        EnvName == "Development"
+                    )
+                )
+            )
             .ReverseMap();
 
         CreateMap<CreateCartDto, CartItem>();
+        CreateMap<UpdateCartDto, CartItem>();
 
         CreateMap<CreateDeliveryDto, DeliveryEntity>();
         CreateMap<DeliveryEntity, DeliveryDto>()

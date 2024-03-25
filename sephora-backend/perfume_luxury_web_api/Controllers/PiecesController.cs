@@ -8,9 +8,7 @@ public class PiecesController(
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-        var items = await pieceService.Get().ToListAsync();
-        foreach (var i in items)
-            i.Product.Pieces = [];
+        var items = await pieceService.Get(User);
         return Ok(items);
     }
 
@@ -22,15 +20,13 @@ public class PiecesController(
         [FromQuery] string? filter = null
     )
     {
-        var items = await pieceService.Get(page, size, sort, filter);
-        foreach (var i in items.Items)
-            i.Product.Pieces = [];
+        var items = await pieceService.Get(page, size, sort, filter, User);
         return Ok(items);
     }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> GetById(long id)
-        => Ok(await pieceService.GetById(id));
+        => Ok(await pieceService.GetById(id, User));
 
     [HttpPost, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Create(
@@ -43,10 +39,28 @@ public class PiecesController(
         await pieceService.Create(dto);
         return Ok();
     }
+    
+    [HttpPost("add-pictures"), Authorize(Roles = "SudoAdmin,Admin")]
+    public async Task<IActionResult> AddPictures(
+        [FromForm] AddPiecePicturesDto dto
+    )
+    {
+        await pieceService.SavePictures(dto.Pictures, dto.PieceId);
+        return Ok();
+    }
+    
+    [HttpPost("delete-pictures"), Authorize(Roles="SudoAdmin,Admin")]
+    public async Task<IActionResult> DeletePictures(
+        [FromBody] DeletePiecePicturesDto dto
+    )
+    {
+        await pieceService.DeletePictures(dto);
+        return Ok();
+    }
 
     [HttpPut, Authorize(Roles = "SudoAdmin,Admin")]
     public async Task<IActionResult> Update(
-        [FromBody] EditProductPieceDto dto
+        [FromForm] EditProductPieceDto dto
     )
     {
         if (!ModelState.IsValid) 

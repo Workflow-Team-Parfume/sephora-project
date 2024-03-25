@@ -22,11 +22,12 @@ const Order = () => {
         if (isAuth) {
             http_common.get<PagedList<CartItem>>("/cart")
                 .then(r => setPieces(r.data))
-                .catch(e => console.log(e));
+                .catch(console.error);
         } else {
             setPieces(
-                JSON.parse(localStorage.getItem("cart")!)
-                ?? EmptyPagedList
+                localStorage.cart
+                    ? JSON.parse(localStorage.cart)
+                    : EmptyPagedList
             );
         }
     }, [setPieces, isAuth]);
@@ -77,10 +78,10 @@ const Order = () => {
                     </Grid>
 
                     <Grid item sm={12} lg={6}>
-                        {isAuth ?
-                            <OrderDelivery/>
-                            :
-                            <OrderBuyer/>
+                        {
+                            isAuth
+                                ? <OrderDelivery/>
+                                : <OrderBuyer/>
                         }
                     </Grid>
                 </Grid>

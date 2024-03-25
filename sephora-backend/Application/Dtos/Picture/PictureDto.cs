@@ -22,4 +22,7 @@ public class PictureDto(string name, bool isDevelopment = false)
         = $"{Domain(isDevelopment)}/{name}?size={SizesPaths[3]}";
     public string UrlXs { get; } 
         = $"{Domain(isDevelopment)}/{name}?size={SizesPaths[4]}";
+    
+    public static string GetUrl(string name, int size, bool isDevelopment = true)
+        => $"{Domain(isDevelopment)}/{name}?size={SizesPaths[size]}";
 }

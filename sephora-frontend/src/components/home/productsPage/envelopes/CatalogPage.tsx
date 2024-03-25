@@ -12,7 +12,7 @@ const CatalogPage: React.FC = () => {
         title={t('header.catalogue')}
         filters={CarePageFilters}
         mainFilter={CarePageFilter}
-        link={routes.api.pieces}
+        link={routes.api.products}
         navigateLink={routes.products}/>;
 };
 

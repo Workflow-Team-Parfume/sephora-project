@@ -63,6 +63,19 @@
         background: #FFF;
         padding: 10px;
     }
+    .hoverBox{
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+        padding: -10px;
+        transition: transform 0.3s;
+        transform: translateY(90%);
+    }
+    
+    .hoverBox.show {
+        transform: translateY(100%);
+    }
 }
 .new{
     padding: 4px;

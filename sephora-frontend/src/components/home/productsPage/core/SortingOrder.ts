@@ -10,7 +10,7 @@ export const Orders: SortingOrder[] = [
     },
     {
         key: 'sortBy.popularity',
-        value: 'product.AverageRating'
+        value: 'AverageRating'
     },
     {
         key: 'sortBy.date',

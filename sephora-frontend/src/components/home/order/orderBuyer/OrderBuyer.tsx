@@ -1,26 +1,37 @@
-import {Button, FormControl, IconButton, InputAdornment, Link, OutlinedInput, Stack, Tab, Tabs, TextField} from "@mui/material";
+import {
+    Button,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    Link,
+    OutlinedInput,
+    Stack,
+    Tab,
+    Tabs,
+    TextField
+} from "@mui/material";
 import "./orderBuyer.scss";
 import {useTranslation} from "react-i18next";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import React, {ChangeEvent, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import textFieldStyle from '../../../../common/textFieldStyle';
 import a11yProps from "../../../common/tabPanel/a11yProps";
 import CustomTabPanel from "../../../common/tabPanel/CustomTabPanel";
 import tabsStyle from "../../../common/tabPanel/tabsStyle";
-    
+
 const OrderBuyer = () => {
-    const {t} = useTranslation();    
+    const {t} = useTranslation();
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const [value, setValue] = useState(0);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setValue(newValue); event;
-    };
-
+    const handleChange = (
+        _event: React.SyntheticEvent,
+        newValue: number
+    ) => setValue(newValue);
 
     const [name, setName] = useState<string>('');
     const [surname, setSurname] = useState<string>('');
@@ -53,14 +64,14 @@ const OrderBuyer = () => {
 
     const handleFurtherClick = () => {
         if (name && surname && phone) {
-           navigate('/');
+            navigate('/');
         } else {
             setNameError(name ? '' : 'Це поле обов\'язкове');
             setSurnameError(surname ? '' : 'Це поле обов\'язкове');
             setPhoneError(phone ? '' : 'Це поле обов\'язкове');
         }
     };
-    
+
     const handleSingInClick = () => {
         navigate('/');
     }
@@ -71,7 +82,7 @@ const OrderBuyer = () => {
             <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="buyer" 
+                aria-label="buyer"
                 sx={{
                     "& .MuiTabs-indicator": {
                         display: 'none'
@@ -79,53 +90,53 @@ const OrderBuyer = () => {
                     marginBottom: '60px'
                 }}
             >
-                <Tab label={t('order.newBuyer')} 
-                    sx={{ ...tabsStyle }}
-                    {...a11yProps(0)}/>
+                <Tab label={t('order.newBuyer')}
+                     sx={{...tabsStyle}}
+                     {...a11yProps(0)}/>
                 <Tab label={t('order.regularCustomer')}
-                    sx={{ ...tabsStyle }} 
-                    {...a11yProps(1)}/>
+                     sx={{...tabsStyle}}
+                     {...a11yProps(1)}/>
             </Tabs>
 
             <CustomTabPanel value={value} index={0}>
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
                         <TextField
-                            sx={{ ...textFieldStyle }} 
-                            placeholder={t('name')+'*'}
+                            sx={{...textFieldStyle}}
+                            placeholder={t('name') + '*'}
                             required
-                            id="newBuyer-name"                                    
+                            id="newBuyer-name"
                             value={name}
                             onChange={handleNameChange}
                             error={!!nameError}
                             helperText={nameError}
                         />
                         <TextField
-                            sx={{ ...textFieldStyle }} 
-                            placeholder={t('surname')+'*'}
+                            sx={{...textFieldStyle}}
+                            placeholder={t('surname') + '*'}
                             required
-                            id="newBuyer-surname"                                    
+                            id="newBuyer-surname"
                             value={surname}
                             onChange={handleSurnameChange}
                             error={!!surnameError}
                             helperText={surnameError}
                         />
                         <TextField
-                            sx={{ ...textFieldStyle }} 
-                            placeholder={t('phone')+'*'}
+                            sx={{...textFieldStyle}}
+                            placeholder={t('phone') + '*'}
                             required
-                            id="newBuyer-phone"                
+                            id="newBuyer-phone"
                             value={phone}
                             onChange={handlePhoneChange}
                             error={!!phoneError}
                             helperText={phoneError}
                         />
                         <TextField
-                            sx={{ ...textFieldStyle }} 
+                            sx={{...textFieldStyle}}
                             placeholder={t('email')}
                             id="newBuyer-email"
                             value={email}
-                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}      
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                         />
 
                         <Button onClick={handleFurtherClick} className="button">{t('order.further')}</Button>
@@ -141,19 +152,18 @@ const OrderBuyer = () => {
                 <Stack alignItems='center'>
                     <Stack direction='column' spacing={2} minWidth='400px'>
                         <FormControl
-                            sx={{ ...textFieldStyle }} 
-                            variant="outlined"
-                        >
+                            sx={{...textFieldStyle}}
+                            variant="outlined">
                             <OutlinedInput
                                 value={email}
                                 placeholder={t('email')}
                                 id="order-email"
                                 type={'text'}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}    
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                             />
                         </FormControl>
-                        <FormControl 
-                            sx={{ ...textFieldStyle }} 
+                        <FormControl
+                            sx={{...textFieldStyle}}
                             variant="outlined"
                         >
                             <OutlinedInput
@@ -161,17 +171,17 @@ const OrderBuyer = () => {
                                 id="order-password"
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
-                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}    
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                                 endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                        </IconButton>
+                                    </InputAdornment>
                                 }
                             />
                         </FormControl>

@@ -22,7 +22,7 @@ import {jwtDecode} from "jwt-decode";
 import "./LoginPage.scss";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import FacebookIcon from "@mui/icons-material/Facebook";
+// import FacebookIcon from "@mui/icons-material/Facebook";
 import {PasswordRecovery} from "../../common/password_recovery/PasswordRecovery";
 import {useTranslation} from "react-i18next";
 import {GoogleLogin} from "@react-oauth/google";
@@ -108,7 +108,7 @@ const LoginPage = () => {
             const {data} = result;
 
             const token = data.token;
-            localStorage.setItem("token", token);
+            localStorage.token = token;
             const user = jwtDecode(token) as IUser;
 
             dispatch({
@@ -236,7 +236,7 @@ const LoginPage = () => {
                                         handleClose();
                                     }}
                                     onError={() => console.error("Google One Tap login error")}/>
-                                <Button
+                                {/* <Button
                                     id="buttonGoogleFacebook"
                                     variant="outlined"
                                     startIcon={
@@ -244,7 +244,7 @@ const LoginPage = () => {
                                     }
                                 >
                                     Facebook
-                                </Button>
+                                </Button> */}
                             </Box>
                             <Box
                                 sx={{

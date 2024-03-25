@@ -48,13 +48,29 @@ public class RatingService(
     public IQueryable<RatingDto> Get()
         => repository.GetAll().ProjectTo<RatingDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<RatingDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        long count = await repository.CountBySpec(selectBy);
+        var list = await repository
+            .GetRange(pageNumber, pageSize)
+            .ProjectTo<RatingDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<RatingDto?> GetById(long id)
         => mapper.Map<RatingDto?>(await repository.GetById(id));
 
     public async Task Create(CreateRatingDto createRatingDto, ClaimsPrincipal user)
     {
         CheckRating(createRatingDto.Rate);
-        
+
         var rating = mapper.Map<Rating>(createRatingDto);
         rating.UserId = GetUserIdOrThrow(user);
 
@@ -66,7 +82,7 @@ public class RatingService(
     public async Task Edit(EditRatingDto editRatingDto, ClaimsPrincipal user)
     {
         CheckRating(editRatingDto.Rate);
-        
+
         var rating = await repository.GetById(editRatingDto.Id);
         ThrowIfUserIsNotOwner(rating, user);
 

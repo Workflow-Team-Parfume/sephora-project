@@ -18,13 +18,13 @@ const routes = {
 
     search: '/search',
 
-    deliveryMain: '/deliveryMain',
-    deliveryFreeLuxuryHub: '/deliveryFreeLuxuryHub',
-    deliveryPickup: '/deliveryPickup',
-    deliveryNewPost: '/deliveryNewPost',
-    deliveryUkrPoshta: '/deliveryUkrPoshta',
-    deliveryMeestMail: '/deliveryMeestMail',
-    deliveryByCourierInUkraine: '/deliveryByCourierInUkraine',
+    deliveryMain: '/delivery',
+    deliveryFreeLuxuryHub: '/delivery/courier',
+    deliveryPickup: '/delivery/pickup',
+    deliveryNewPost: '/delivery/novaposhta',
+    deliveryUkrPoshta: '/delivery/ukrposhta',
+    deliveryMeestMail: '/delivery/meest',
+    deliveryByCourierInUkraine: '/delivery/courier-ua',
 
     aboutUs: '/about',
 
@@ -36,17 +36,19 @@ const routes = {
     adminProductsList: '/admin/products',
     createProducts: '/admin/products/create',
 
+    wishlist: '/wishlist',
 
     picPlaceholder: 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg',
 
     api: {
-        novelties: '/pieces?filter=createdAt > DateTime.UtcNow.AddDays(-14)',
-        dateOrdered: '/pieces?sort=createdAt desc',
+        novelties: '/products?filter=createdAt > DateTime.UtcNow.AddDays(-14)',
+        dateOrdered: '/products?sort=createdAt desc',
+        products: '/products?',
         pieces: '/pieces?',
-        popularity: '/pieces?&sort=product.AverageRating desc',
-        care: '/pieces?filter=product.category.nameEn = "Care"',
-        bottled: '/pieces?filter=isBottledParfume = true',
-        full_sized: '/pieces?filter=isBottledParfume = false',
+        popularity: '/products?&sort=AverageRating desc',
+        care: '/products?filter=category.nameEn.ToLower().Trim().Contains("Care")',
+        bottled: '/products?',
+        full_sized: '/products?',
         search: '/search?q=',
     }
 }

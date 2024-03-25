@@ -4,7 +4,7 @@ public class FavoritesService(
     UserManager<UserEntity> userManager,
     IRepository<ProductEntity> productRepository,
     IRepository<Favorite> favoritesRepository,
-    IProductService productService
+    IMapper mapper
 ) : IFavoritesService
 {
     private string GetUserIdOrThrow(ClaimsPrincipal user)
@@ -16,8 +16,8 @@ public class FavoritesService(
     public async Task ChangeFavoriteStatus(ClaimsPrincipal user, long productId)
     {
         var userId = GetUserIdOrThrow(user);
-        var product = await productRepository.GetById(productId);
-        if (product is null)
+        bool exists = await productRepository.Exists(productId);
+        if (!exists)
             throw new ArgumentException(
                 $"Product with the id={{{productId}}} is not found"
             );
@@ -51,17 +51,64 @@ public class FavoritesService(
 
         try
         {
-            var userId = GetUserIdOrThrow(user);
-            return (await favoritesRepository.GetItemBySpec(
-                new Favorites.Get(userId, productId)
-            ))?.IsActive ?? false;
+            string userId = GetUserIdOrThrow(user);
+            Favorite? fav = await favoritesRepository.GetItemBySpec(
+                new Favorites.Find(userId, productId)
+            );
+            return fav is not null;
         }
-        catch (UnauthorizedAccessException)
+        catch
         {
             return false;
         }
     }
 
-    public async Task<IQueryable<ProductDto>> Get(ClaimsPrincipal user)
-        => (await productService.Get(user)).Where(x => x.IsFavorite);
+    public async Task<IEnumerable<LightProductDto>> Get(ClaimsPrincipal user)
+    {
+        string userId = GetUserIdOrThrow(user);
+        var list = await favoritesRepository.GetListBySpec(
+                new Favorites.GetByUser(userId)
+            ).Select(x => x.Product)
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        // Mark all products as favorites
+        // (they are in favorites list by definition of the query)
+        foreach (var p in list)
+            p.IsFavorite = true;
+        
+        return list;
+    }
+
+    public async Task<PagedListInfo<LightProductDto>> Get(
+        ClaimsPrincipal user,
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        var userId = GetUserIdOrThrow(user);
+        long count = await favoritesRepository.GetListBySpec(
+            new Favorites.GetByUser(userId)
+        ).LongCountAsync();
+        
+        var list = await favoritesRepository.GetRangeBySpec(
+                new Favorites.GetByUser(userId),
+                pageNumber,
+                pageSize,
+                orderBy,
+                selectBy
+            )
+            .Select(x => x.Product)
+            .ProjectTo<LightProductDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        // Mark all products as favorites
+        // (they are in favorites list by definition of the query)
+        foreach (var p in list)
+            p.IsFavorite = true;
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
 }

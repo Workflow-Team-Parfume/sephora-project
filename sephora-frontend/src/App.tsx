@@ -36,17 +36,15 @@ import React from "react";
 import Search from "./components/home/search/Search.tsx";
 import ProductListPage from "./components/admin/product/ProductListPage.tsx";
 import ProductCreatePage from "./components/admin/product/ProductCreatePage.tsx";
+import Wishlist from "./components/home/profile/wishlist/Wishlist.tsx";
 
 function App() {
     // const { user, isAuth } = useSelector((store: any) => store.auth as IAuthUser);
     React.useEffect(() => {
-        const selectedLanguage = localStorage.getItem("selectedLanguage");
-        i18n.changeLanguage(selectedLanguage == null ? "uk" : selectedLanguage)
+        const selectedLanguage = localStorage.selectedLanguage ?? "uk";
+        i18n.changeLanguage(selectedLanguage)
+            .then(() => localStorage.selectedLanguage = selectedLanguage)
             .catch((e) => console.error(e));
-        localStorage.setItem(
-            "selectedLanguage",
-            selectedLanguage == null ? "uk" : selectedLanguage
-        );
     }, []);
     return (
         <>
@@ -83,6 +81,8 @@ function App() {
                     <Route path={routes.aboutUs} element={<AboutUs/>}/>
 
                     <Route path={routes.search} element={<Search/>}/>
+
+                    <Route path={routes.wishlist} element={<Wishlist/>}/>
 
                     <Route path="*" element={<NotFound/>}/>
                 </Route>

@@ -16,7 +16,6 @@ import http_common from "../../../http_common.ts";
 import CategoryDto from "../../../models/category/CategoryDto.ts";
 import BrandDto from "../../../models/brand/BrandDto.ts";
 import CreateProductPieceDto from "../../../models/piece/CreateProductPieceDto.ts";
-//import onChangeFileHandler from "../category/fileHnd.ts";
 import AmountDto from "../../../models/amount/AmountDto.ts";
 import CreateProductPieceForm from "../productPiece/ProductPieceCreate.tsx";
 

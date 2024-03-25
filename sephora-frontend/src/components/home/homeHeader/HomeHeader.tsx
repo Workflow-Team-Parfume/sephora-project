@@ -25,8 +25,8 @@ const HomeHeader = () => {
 
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language)
-            .catch(e => console.error(e));
-        localStorage.setItem('selectedLanguage', language);
+            .catch(console.error);
+        localStorage.selectedLanguage = language;
     };
 
     // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -151,7 +151,12 @@ const HomeHeader = () => {
                     <Button href={routes.products} disableTouchRipple>
                         {t("header.catalogue")}
                     </Button>
-                    <Button href={routes.aboutUs} disableTouchRipple>{t("header.aboutUs")}</Button>
+                    <Button href={routes.wishlist} disableTouchRipple>
+                        {t("header.wishlist")}
+                    </Button>
+                    <Button href={routes.aboutUs} disableTouchRipple>
+                        {t("header.aboutUs")}
+                    </Button>
                     <Button href={routes.deliveryMain} disableTouchRipple>
                         {t("header.paymentAndDelivery")}
                     </Button>

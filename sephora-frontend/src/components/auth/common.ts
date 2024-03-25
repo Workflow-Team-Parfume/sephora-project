@@ -3,7 +3,35 @@ import {AuthUserActionType, IGoogleUser, IUser} from "./types.ts";
 import {jwtDecode} from "jwt-decode";
 import http_common from "../../http_common.ts";
 
-function GrabInfo() {
+// check if anything is in the local storage (cart, wishlist, etc.)
+// and if so, send it to the server
+async function PostLocalStorage() {
+    if (localStorage.cart) {
+        const cart = JSON.parse(localStorage.cart);
+        for (const item of cart.items) {
+            try {
+                await http_common.post("/cart", item);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        localStorage.removeItem("cart");
+    }
+
+    if (localStorage.favorites) {
+        const favorites = JSON.parse(localStorage.favorites);
+        for (const id of favorites) {
+            try {
+                await http_common.put(`/favorites/${id}`);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        localStorage.removeItem("favorites");
+    }
+}
+
+async function GrabInfo() {
     const gToken = localStorage.gtoken,
         token = localStorage.token;
 
@@ -16,10 +44,15 @@ function GrabInfo() {
             return;
         }
 
-        if (!token)
-            http_common.post("account/auth/google", gToken)
-                .then(r => localStorage.token = r.data.token);
-
+        if (!token) {
+            try {
+                const response = await http_common.post('account/auth/google', gToken);
+                localStorage.token = response.data.token;
+                await PostLocalStorage();
+            } catch (e) {
+                console.error(e);
+            }
+        }
 
         store.dispatch({
             type: AuthUserActionType.LOGIN_GOOGLE_USER,
@@ -45,6 +78,8 @@ function GrabInfo() {
                 roles: user.roles,
             },
         });
+
+        await PostLocalStorage();
     }
 }
 

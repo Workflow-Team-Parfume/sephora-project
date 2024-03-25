@@ -11,11 +11,14 @@ public interface IPieceService
      * <summary>
      * Get all product pieces.
      * </summary>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * Query of all product pieces.
      * </returns>
      */
-    IQueryable<ProductPieceDto> Get();
+    Task<IEnumerable<LightProductPieceDto>> Get(ClaimsPrincipal? user = null);
 
     /**
      * <summary>
@@ -33,16 +36,20 @@ public interface IPieceService
      * <param name="selectBy">
      * The criteria to select the product pieces.
      * </param>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * <see cref="PagedListInfo{T}"/> of product pieces.
      * </returns>
      */
-    async Task<PagedListInfo<ProductPieceDto>> Get(
+    Task<PagedListInfo<LightProductPieceDto>> Get(
         int pageNumber,
         int pageSize,
         string? orderBy = null,
-        string? selectBy = null
-    ) => await Get().ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+        string? selectBy = null,
+        ClaimsPrincipal? user = null
+    );
 
     /**
      * <summary>
@@ -51,12 +58,15 @@ public interface IPieceService
      * <param name="id">
      * The product piece ID.
      * </param>
+     * <param name="user">
+     * The user to check if the product is in favorites.
+     * </param>
      * <returns>
      * The <see cref="ProductPieceDto"/> with specified ID.
      * </returns>
      */
-    Task<ProductPieceDto?> GetById(long id);
-    
+    Task<ProductPieceDto?> GetById(long id, ClaimsPrincipal? user = null);
+
     /**
      * <summary>
      * Create a product piece.
@@ -66,7 +76,7 @@ public interface IPieceService
      * </param>
      */
     Task Create(CreateProductPieceDto pieceDto);
-    
+
     /**
      * <summary>
      * Edit a product piece.
@@ -76,7 +86,33 @@ public interface IPieceService
      * </param>
      */
     Task Edit(EditProductPieceDto pieceDto);
-    
+
+    /**
+     * <summary>
+     * Add pictures to a product piece.
+     * </summary>
+     * <param name="formPictures">
+     * The pictures to add.
+     * </param>
+     * <param name="ownerId">
+     * The product piece ID.
+     * </param>
+     */
+    Task SavePictures(
+        IEnumerable<IFormFile> formPictures,
+        long ownerId
+    );
+
+    /**
+     * <summary>
+     * Delete pictures from a product piece.
+     * </summary>
+     * <param name="dto">
+     * The DTO with pictures to delete.
+     * </param>
+     */
+    Task DeletePictures(DeletePiecePicturesDto dto);
+
     /**
      * <summary>
      * Delete a product piece.

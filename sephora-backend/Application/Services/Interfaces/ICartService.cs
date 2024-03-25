@@ -20,14 +20,13 @@ public interface ICartService
      * The cart items of the specified user in the specified range
      * </returns>
      */
-    async Task<PagedListInfo<CartDto>> Get(
+    Task<PagedListInfo<CartDto>> Get(
         ClaimsPrincipal user,
         int pageNumber,
         int pageSize,
         string? orderBy = null,
         string? selectBy = null
-    ) => await Get(user)
-        .ToPagedListInfoAsync(pageNumber, pageSize, orderBy, selectBy);
+    );
 
     /**
      * <summary>Get the cart item by its ID</summary>
@@ -35,6 +34,13 @@ public interface ICartService
      * <returns>The cart item with the specified ID</returns>
      */
     Task<CartDto?> GetById(long id);
+    
+    /**
+     * <summary>Checks if the cart item with the specified ID exists</summary>
+     * <param name="id">The ID of the cart item</param>
+     * <returns>True if the cart item exists, false otherwise</returns>
+     */
+    Task<bool> Exists(long id);
 
     /**
      * <summary>Creates a new cart item</summary>
@@ -48,7 +54,7 @@ public interface ICartService
      * <param name="dto">The cart item to update</param>
      * <param name="user">The owner of a cart item</param>
      */
-    public Task Update(CartDto dto, ClaimsPrincipal user);
+    public Task Update(UpdateCartDto dto, ClaimsPrincipal user);
 
     /**
      * <summary>Edits the specified cart item</summary>

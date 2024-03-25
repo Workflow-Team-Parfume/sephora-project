@@ -38,10 +38,8 @@ const ProductListPage = () => {
   };
 
   useEffect(() => {
-    http_common.get<ProductDto[]>("/products/all").then((resp) => {
-      console.log("Products", resp.data);
-      setProducts(resp.data);
-    });
+    http_common.get<ProductDto[]>("/products/all")
+        .then((resp) => setProducts(resp.data));
   }, []);
 
   const onClickDelete = async (id: number) => {
@@ -49,7 +47,7 @@ const ProductListPage = () => {
       await http_common.delete(`/product/${id}`);
       setProducts(products.filter((x) => x.id !== id));
     } catch {
-      console.log("Error deleting product");
+      console.error("Error deleting product");
     }
   };
 

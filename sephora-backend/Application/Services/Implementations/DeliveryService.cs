@@ -9,6 +9,22 @@ public class DeliveryService(
         => deliveryRepository.GetAll()
             .ProjectTo<DeliveryDto>(mapper.ConfigurationProvider);
 
+    public async Task<PagedListInfo<DeliveryDto>> Get(
+        int pageNumber,
+        int pageSize,
+        string? orderBy = null,
+        string? selectBy = null
+    )
+    {
+        long count = await deliveryRepository.CountBySpec(selectBy);
+        var list = await deliveryRepository
+            .GetRange(pageNumber, pageSize)
+            .ProjectTo<DeliveryDto>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return PagedListInfo.Create(list, pageNumber, pageSize, count);
+    }
+
     public async Task<DeliveryDto?> GetById(long id)
     {
         DeliveryEntity? entity = await deliveryRepository.GetById(id);

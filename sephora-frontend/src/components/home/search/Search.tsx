@@ -12,12 +12,10 @@ const Search: React.FC = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
 
-    // TODO: commit search logic here
     const [params] = useSearchParams();
     const q = params.get('q'), link = routes.api.search + q;
-    if (typeof q === "undefined" || q === null || q.trim().length === 0) {
+    if (typeof q === "undefined" || q === null || q.trim().length === 0)
         navigate('/');
-    }
 
     const [products, setProducts] = useState<PagedList<ProductDto>>();
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +25,7 @@ const Search: React.FC = () => {
             `${link}&size=10&page=${currentPage}`
         )
             .then(r => setProducts(r.data))
-            .catch(e => console.error(e));
+            .catch(console.error);
     }, [currentPage, link]);
 
     const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
@@ -73,10 +71,11 @@ const Search: React.FC = () => {
                         <Container sx={{pt: 3, pb: 4, m: 0}} style={{maxWidth: "100%"}}>
                             <Grid container spacing={2}>
                                 {products?.items?.map((product, i) =>
-                                    product.pieces && product.pieces.length > 0 &&
+                                    product.pieces?.length > 0 &&
                                     <Grid key={i} item xs={12} sm={6} lg={4}>
-                                        <Product piece={{...product.pieces[0], product: product}}/>
-                                    </Grid>)}
+                                        <Product product={product}/>
+                                    </Grid>
+                                )}
                             </Grid>
                         </Container>
                         <Stack sx={{margin: '40px', alignItems: 'center'}}>

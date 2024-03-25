@@ -31,26 +31,28 @@ import routes from "../../common/routes.ts";
 const HomePage = () => {
     const {t} = useTranslation();
     const recCategories = ([
-        {name: t('recCategories.showerAndBath'), link: ""},
-        {name: t('recCategories.accessories'), link: ""},
-        {name: t('recCategories.vitamins'), link: ""},
-        {name: t('recCategories.face'), link: ""},
+        {name: t('recCategories.showerAndBath'), link: routes.care},
+        {name: t('recCategories.accessories'), link: routes.products},
+        {name: t('recCategories.vitamins'), link: routes.products},
+        {name: t('recCategories.face'), link: routes.care},
     ])
 
-    // TODO: Move links to constants file
     return (
         <Container style={{padding: '0', maxWidth: '100%'}}>
             <MainBanner banners={mainBanner}/>
             <Stack spacing={19} style={{margin: '0 10%'}}>
                 <Products title={t('header.novelty')}
                     link={routes.api.dateOrdered}
+                    linkBut={routes.novelties}
                 />
                 <Products title={t('common.title.popular')}
                     link={routes.api.popularity}
+                    linkBut={routes.novelties}
                 />
                 <Banner banner={Banner1} color="#688F74"/>
                 <Products title={t('common.title.perfumes')}
-                    link={routes.api.pieces}
+                    link={routes.api.products}
+                    linkBut={routes.full_sized}
                 />
                 <Banner banner={Banner2} color="#820000" isLeft={true}/>
                 <RecCategories

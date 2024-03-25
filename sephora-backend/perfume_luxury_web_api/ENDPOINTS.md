@@ -332,6 +332,18 @@
         * SudoAdmin & mod only
         * Delete piece by id
         * Returns: 200 OK
+* **/add-pictures**
+    * ***POST***
+        * SudoAdmin & mod only
+        * Add pictures to piece
+        * Request body: AddPicturesToPieceDto
+        * Returns: 200 OK
+* **/delete-pictures**
+    * ***POST***
+        * SudoAdmin & mod only
+        * Delete pictures from piece
+        * Request body: DeletePicturesFromPieceDto
+        * Returns: 200 OK
 
 **[⬆ Back to PiecesController](#piecescontroller)**  
 **[⬆ Back to Table of Contents](#table-of-contents)**

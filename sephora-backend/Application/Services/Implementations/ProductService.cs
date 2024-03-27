@@ -25,7 +25,7 @@ public class ProductService(
         return favorite?.IsActive ?? false;
     }
 
-    public async Task Create(CreateProductDto createProductDto)
+    public async Task<ProductDto> Create(CreateProductDto createProductDto)
     {
         var entity = mapper.Map<ProductEntity>(createProductDto);
         await productRepo.Insert(entity);
@@ -34,6 +34,7 @@ public class ProductService(
         // index the product
         entity = await productRepo.GetItemBySpec(new Products.GetById(entity.Id));
         searchService.Index(entity!);
+        return mapper.Map<ProductDto>(entity);
     }
 
     public async Task Delete(long id)
